@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/animal-idle/static/css/main.70349b94.css",
-    "main.js": "/animal-idle/static/js/main.ab453713.js",
+    "main.js": "/animal-idle/static/js/main.a3c7d3f5.js",
     "static/js/787.21f4a9f4.chunk.js": "/animal-idle/static/js/787.21f4a9f4.chunk.js",
     "index.html": "/animal-idle/index.html",
     "main.70349b94.css.map": "/animal-idle/static/css/main.70349b94.css.map",
-    "main.ab453713.js.map": "/animal-idle/static/js/main.ab453713.js.map",
+    "main.a3c7d3f5.js.map": "/animal-idle/static/js/main.a3c7d3f5.js.map",
     "787.21f4a9f4.chunk.js.map": "/animal-idle/static/js/787.21f4a9f4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.70349b94.css",
-    "static/js/main.ab453713.js"
+    "static/js/main.a3c7d3f5.js"
   ]
 }
