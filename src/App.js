@@ -51,7 +51,7 @@ function init({ stage, screen, ticker }) {
   logo.position.set(screen.width / 2, (screen.height * 43) / 100);
   root.addChild(logo);
 
-  const text = new Text("Edit src/App.ts and save to reload.", {
+  const text = new Text("Eat a shit fucking bastard.", {
     fontSize: 34,
     fill: 0xffffff,
   });
