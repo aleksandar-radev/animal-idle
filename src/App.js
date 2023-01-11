@@ -1,15 +1,15 @@
-import './App.css';
-import db from './api/api.js';
+import "./App.css";
+import Store from "./Store";
+import React from "react";
+import Random from "./components/Random";
 
-console.log(db.getData())
-
-
-function App() {
+function App () {
   return (
-    <div className="App">
-      a
-    
-    </div>
+    <>
+    <Store>
+      <Random/>
+    </Store>
+    </>
   );
 }
 

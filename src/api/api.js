@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase } from "firebase/database";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAMS1UbAUbXbyalJh4argrqWYSgg2Rrkqg",
@@ -18,15 +19,8 @@ const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 const database = getDatabase(app);
 
-const repo = {
-  getData: () => {
-    const starCountRef = ref(database, 'totalVisits');
-    let value;
-    onValue(starCountRef, async (snapshot) => {
-      value = await snapshot.val();
-    });
-    return value;
-  }
+const Api = () => {
+  return database;
 }
 
-export default repo;
+export default Api;
