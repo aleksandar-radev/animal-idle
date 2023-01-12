@@ -23,7 +23,7 @@ const Random = () => {
 
     return (
         <>
-            <p onClick={addCount} className="Random">total clicks: {clicks} XXXXXXXXXXXX</p>
+            <p onClick={addCount} className="Random">total clicks: {clicks} AAAAAAA</p>
         </>
     )
 }
