@@ -2,32 +2,28 @@ import React, { useEffect, useState } from 'react';
 // import { Context } from '../Store';
 // import Random2 from "./Random2";
 import { ref, onValue, set } from "firebase/database";
-import database from "../api/Api";
+import api from "../api/Api";
+import "./Random.scss";
 
 const Random = () => {
     // const [state, setState] = useContext(Context)
     const [clicks, setClicks] = useState(undefined)
 
-    
+
     useEffect(() => {
-        const starCountRef = ref(database(), 'totalVisits');
-        onValue(starCountRef, (snapshot) => {
-            const data = snapshot.val();
-            setClicks(data)
-            console.log('changeState')
-        });
+        api().getTotalClicks(setClicks);
     }, []);
 
     const addCount = () => {
-        console.log('asdasds')
+        console.log('add')
         if (!clicks) return;
-        set(ref(database(), 'totalVisits'), clicks + 1);
+        set(ref(api().database, 'totalVisits'), clicks + 1);
 
     }
 
     return (
         <>
-            <p onClick={addCount}>total clicks: {clicks}</p>
+            <p onClick={addCount} className="Random">total clicks: {clicks}</p>
         </>
     )
 }

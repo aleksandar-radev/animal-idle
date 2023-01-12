@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database";
+import { ref, onValue, set } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -20,7 +21,19 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 const Api = () => {
-  return database;
+
+  const getTotalClicks = (callbackSetter) => {
+    onValue(ref(database, 'totalVisits'), (snapshot) => {
+      const data = snapshot.val();
+      console.log('getClicks')
+      callbackSetter(data)
+    });
+  }
+
+  return {
+    getTotalClicks,
+    database
+  };
 }
 
 export default Api;
