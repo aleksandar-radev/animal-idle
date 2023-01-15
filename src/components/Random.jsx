@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { Context } from '../Store';
-// import Random2 from "./Random2";
 import { ref, onValue, set } from "firebase/database";
 import api from "../api/Api";
 import "./Random.scss";
@@ -15,7 +13,6 @@ const Random = () => {
     }, []);
 
     const addCount = () => {
-        console.log('add')
         if (!clicks) return;
         set(ref(api().database, 'totalVisits'), clicks + 1);
 
@@ -23,7 +20,7 @@ const Random = () => {
 
     return (
         <>
-            <p onClick={addCount} className="Random">total clicks: {clicks} AAAAAAA</p>
+            <button onClick={addCount} className="Random">total clicks: {clicks} Okayyy xD</button>
         </>
     )
 }

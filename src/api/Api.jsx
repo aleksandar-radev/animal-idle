@@ -25,7 +25,6 @@ const Api = () => {
   const getTotalClicks = (callbackSetter) => {
     onValue(ref(database, 'totalVisits'), (snapshot) => {
       const data = snapshot.val();
-      console.log('getClicks')
       callbackSetter(data)
     });
   }
