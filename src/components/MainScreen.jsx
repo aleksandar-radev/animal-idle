@@ -20,7 +20,9 @@ const MainScreen = () => {
 
   return (
     <div className={'MainScreen'}>
-      <button onClick={addCount} className="Random">Add clicks</button>
+      <div onClick={addCount} className="MainScreen-button">
+        Add clicks
+      </div>
     </div>
   )
 }
