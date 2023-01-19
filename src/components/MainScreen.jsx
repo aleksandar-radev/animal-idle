@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ref, set } from "firebase/database";
 import api from "../api/Api";
 import "./MainScreen.scss";
+import FightScreen from './FightScreen';
 
 
 const MainScreen = () => {
@@ -20,9 +21,11 @@ const MainScreen = () => {
 
   return (
     <div className={'MainScreen'}>
-      <div onClick={addCount} className="MainScreen-button">
+      {/* <div onClick={addCount} className="MainScreen-button">
         Add clicks
-      </div>
+      </div> */}
+      <FightScreen></FightScreen>
+
     </div>
   )
 }

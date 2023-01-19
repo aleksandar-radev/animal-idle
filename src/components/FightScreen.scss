@@ -1,0 +1,37 @@
+@import "../constants/variables.scss";
+
+.FightScreen {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 50% 20% 30%;
+  text-align: center;
+  align-items: center;
+
+  & > div {
+    background-color: aquamarine;
+    border-radius: 50%;
+    height: 100%;
+  }
+
+  &-self {
+  }
+
+  &-self_res {
+    grid-row: 2;
+  }
+
+  &-enemy {
+  }
+
+  &-enemy-res {
+  }
+
+  &-log {
+    grid-row: 1 / span 2;
+  }
+
+  &-skills {
+    grid-column: 1 / span 3;
+  }
+}
