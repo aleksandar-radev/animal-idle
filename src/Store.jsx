@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // import database from "./api/Api";
 
 const initialState = {
+  activeTab: '',
   name: "asdx",
   email: "asdf@abv.bg",
   hero: {

@@ -3,4 +3,8 @@
 .MainMenu {
   font-size: pix(30);
   background-color: red;
+
+  & > div {
+    user-select: none;
+  }
 }
