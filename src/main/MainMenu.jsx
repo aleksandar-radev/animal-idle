@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import "./MainMenu.scss"
-import { Context } from '../Store'
+import { Context } from '../api/Store'
 
 
 const MainMenu = () => {
@@ -13,8 +13,9 @@ const MainMenu = () => {
 
   return (
     <div className={'MainMenu'}>
-      <div onClick={() => changeView('shop')}>Shop</div>
+      <div onClick={() => changeView('character')}>Hero</div>
       <div onClick={() => changeView('fight')}>Fight</div>
+      <div onClick={() => changeView('shop')}>shop</div>
     </div>
   )
 }

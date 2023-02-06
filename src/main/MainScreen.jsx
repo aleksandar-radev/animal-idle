@@ -2,9 +2,10 @@ import React, { useEffect, useState, useContext } from 'react';
 import { ref, set } from "firebase/database";
 import api from "../api/Api";
 import "./MainScreen.scss";
-import FightScreen from './FightScreen';
-import Shop from './Shop';
-import { Context } from '../Store'
+import CharacterScreen from '../tabs/hero/CharacterScreen';
+import FightScreen from '../tabs/fight/FightScreen';
+import Shop from '../tabs/shop/Shop';
+import { Context } from '../api/Store'
 
 
 const MainScreen = () => {
@@ -27,8 +28,10 @@ const MainScreen = () => {
         return <FightScreen />
       case 'shop':
         return <Shop />
+      case 'character':
+        return <CharacterScreen />
       default:
-        return <Shop />
+        return <CharacterScreen />
     }
   }
 

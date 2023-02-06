@@ -10,7 +10,7 @@ const SkillsBar = (props) => {
   }
 
   const firstRowSkills = allSkills.slice(0, 10)
-  const SecondRowSkills = allSkills.slice(10)
+  const secondRowSkills = allSkills.slice(10)
 
   return (
     <>
@@ -18,9 +18,11 @@ const SkillsBar = (props) => {
         <div className={"SkillsBar-row"}>
           {firstRowSkills}
         </div>
-        <div className={"SkillsBar-row"}>
-          {SecondRowSkills}
-        </div>
+        {secondRowSkills.length > 0 &&
+          <div className={"SkillsBar-row"}>
+            {secondRowSkills}
+          </div>
+        }
       </div>
     </>
   )

@@ -1,7 +1,7 @@
 import "./App.scss";
-import Store from "./Store";
+import Store from "./api/Store";
 import React, { useEffect } from "react";
-import Container from "./components/Container";
+import Container from "./main/Container";
 
 function App () {
   useEffect(() => {

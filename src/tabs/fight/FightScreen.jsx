@@ -1,8 +1,8 @@
 import React from 'react'
-import CharacterAvatar from './CharacterAvatar'
-import CharacterResources from './CharacterResources'
-import FightLog from './FightLog'
-import SkillsBar from './SkillsBar'
+import CharacterAvatar from '../../components/CharacterAvatar'
+import CharacterResources from '../../components/CharacterResources'
+import FightLog from '../../components/FightLog'
+import SkillsBar from '../../components/SkillsBar'
 import './FightScreen.scss';
 
 const FightScreen = () => {

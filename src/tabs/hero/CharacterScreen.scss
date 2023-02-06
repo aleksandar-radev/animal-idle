@@ -1,0 +1,13 @@
+@import "../../constants/variables.scss";
+
+.CharacterScreen {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 10% 90%;
+    height: 100%;
+
+    & > div {
+        background-color: darkgoldenrod;
+        border-radius: 50%;
+    }
+}
