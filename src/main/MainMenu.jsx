@@ -13,7 +13,7 @@ const MainMenu = () => {
 
   return (
     <div className={'MainMenu'}>
-      <div onClick={() => changeView('character')}>Hero</div>
+      <div onClick={() => changeView('character')}>Character</div>
       <div onClick={() => changeView('fight')}>Fight</div>
       <div onClick={() => changeView('shop')}>shop</div>
     </div>

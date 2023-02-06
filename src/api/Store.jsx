@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 const initialState = {
   activeTab: '',
+  activeCharacterScreenMenuTab: '',
   name: "asdx",
   email: "asdf@abv.bg",
   hero: {

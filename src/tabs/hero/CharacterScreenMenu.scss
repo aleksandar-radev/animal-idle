@@ -1,17 +1,17 @@
-@import "../constants/variables.scss";
+@import "../../constants/variables.scss";
 
 .CharacterScreenMenu {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-around;
   gap: pix(7);
-  
+  grid-column: 1 / span 2;
+
   &-row {
-      gap: pix(25);
-      display: flex;
-      
-      & > div {
+    gap: pix(25);
+    display: flex;
+
+    & > div {
       display: flex;
       justify-content: center;
       align-items: center;
