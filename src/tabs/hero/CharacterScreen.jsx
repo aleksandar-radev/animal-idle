@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import './CharacterScreen.scss';
 import CharacterScreenMenu from './CharacterScreenMenu';
 import CharacterAvatar from '../../components/CharacterAvatar';
@@ -8,7 +8,7 @@ import CharacterSkills from '../../components/CharacterSkills';
 import { Context } from '../../api/Store'
 
 const CharacterScreen = () => {
-  const [store, setStore] = useContext(Context);
+  const [store] = useContext(Context);
 
 
   const activeTab = () => {
