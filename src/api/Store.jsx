@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// import { ref, onValue } from "firebase/database";
-// import database from "./api/Api";
+import PropTypes from 'prop-types';
 
 const initialState = {
   activeTab: '',
@@ -20,6 +19,10 @@ const Store = ({ children }) => {
   const [state, setState] = useState(initialState);
 
   return <Context.Provider value={[state, setState]}>{children}</Context.Provider>;
+};
+
+Store.propTypes = {
+  children: PropTypes.any,
 };
 
 export default Store;
