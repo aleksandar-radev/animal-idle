@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const CharacterAvatar = (props) => {
-  return (
-    <div className={props.className}>CharacterAvatar</div>
-  )
-}
+  return <div className={props.className}>CharacterAvatar</div>;
+};
 
-export default CharacterAvatar
+export default CharacterAvatar;

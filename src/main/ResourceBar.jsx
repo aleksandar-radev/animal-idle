@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import './ResourceBar.scss'
-import api from "../api/Api";
+import React, { useState, useEffect } from 'react';
+import './ResourceBar.scss';
+import api from '../api/Api';
 
 const ResourceBar = () => {
-  const [clicks, setClicks] = useState(undefined)
-
+  const [clicks, setClicks] = useState(undefined);
 
   useEffect(() => {
     api().getTotalClicks(setClicks);
   }, []);
 
-
   return (
     <div className={'ResourceBar'}>
-      <div className="Random">
-        clicks: {clicks}
-      </div>
+      <div className="Random">clicks: {clicks}</div>
     </div>
-  )
-}
+  );
+};
 
-export default ResourceBar
+export default ResourceBar;

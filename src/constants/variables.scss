@@ -1,7 +1,5 @@
-
 $pixelWidth: var(--pixelWidth);
 $pixelHeight: calc(var(--pixelWidth) / 2.1);
-
 
 @function pix($base) {
   $result: calc(var(--pixelWidth) * $base / 1000);

@@ -1,16 +1,16 @@
-import "./App.scss";
-import Store from "./api/Store";
-import React, { useEffect } from "react";
-import Container from "./main/Container";
+import './App.scss';
+import Store from './api/Store';
+import React, { useEffect } from 'react';
+import Container from './main/Container';
 
-function App () {
+function App() {
   useEffect(() => {
-    function setScale () {
-      document.documentElement.style.setProperty("--pixelWidth", `${window.innerWidth - 50}px`);
+    function setScale() {
+      document.documentElement.style.setProperty('--pixelWidth', `${window.innerWidth - 50}px`);
     }
-    window.addEventListener("resize", setScale);
+    window.addEventListener('resize', setScale);
     setScale();
-  }, [])
+  }, []);
 
   return (
     <>

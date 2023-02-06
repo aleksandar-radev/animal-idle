@@ -1,7 +1,7 @@
-import React from 'react'
-import HealthBar from './HealthBar'
-import ManaBar from './ManaBar'
-import './CharacterResources.scss'
+import React from 'react';
+import HealthBar from './HealthBar';
+import ManaBar from './ManaBar';
+import './CharacterResources.scss';
 
 const CharacterResources = (props) => {
   return (
@@ -10,11 +10,11 @@ const CharacterResources = (props) => {
 
       {props.isSelf ? <ManaBar></ManaBar> : null}
     </div>
-  )
-}
+  );
+};
 
 CharacterResources.defaultProps = {
   isSelf: false,
-}
+};
 
-export default CharacterResources
+export default CharacterResources;

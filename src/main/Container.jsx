@@ -1,8 +1,8 @@
-import React from 'react'
-import MainMenu from './MainMenu'
-import './Container.scss'
-import ResourceBar from './ResourceBar'
-import MainScreen from './MainScreen'
+import React from 'react';
+import MainMenu from './MainMenu';
+import './Container.scss';
+import ResourceBar from './ResourceBar';
+import MainScreen from './MainScreen';
 
 const Container = () => {
   return (
@@ -11,7 +11,7 @@ const Container = () => {
       <MainMenu></MainMenu>
       <MainScreen></MainScreen>
     </div>
-  )
-}
+  );
+};
 
-export default Container
+export default Container;

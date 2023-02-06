@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const CharacterItems = () => {
-    return (
-        <div className='CharacterItems'>CharacterItems</div>
-    )
-}
+  return <div className="CharacterItems">CharacterItems</div>;
+};
 
-export default CharacterItems
+export default CharacterItems;

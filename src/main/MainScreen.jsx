@@ -1,17 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { ref, set } from "firebase/database";
-import api from "../api/Api";
-import "./MainScreen.scss";
+import { ref, set } from 'firebase/database';
+import api from '../api/Api';
+import './MainScreen.scss';
 import CharacterScreen from '../tabs/hero/CharacterScreen';
 import FightScreen from '../tabs/fight/FightScreen';
 import Shop from '../tabs/shop/Shop';
-import { Context } from '../api/Store'
-
+import { Context } from '../api/Store';
 
 const MainScreen = () => {
-  const [clicks, setClicks] = useState(undefined)
+  const [clicks, setClicks] = useState(undefined);
   const [store, setStore] = useContext(Context);
-
 
   useEffect(() => {
     api().getTotalClicks(setClicks);
@@ -25,15 +23,15 @@ const MainScreen = () => {
   const activeTab = () => {
     switch (store.activeTab) {
       case 'fight':
-        return <FightScreen />
+        return <FightScreen />;
       case 'shop':
-        return <Shop />
+        return <Shop />;
       case 'character':
-        return <CharacterScreen />
+        return <CharacterScreen />;
       default:
-        return <CharacterScreen />
+        return <CharacterScreen />;
     }
-  }
+  };
 
   return (
     <div className={'MainScreen'}>
@@ -41,9 +39,8 @@ const MainScreen = () => {
         Add clicks
       </div> */}
       {activeTab()}
-
     </div>
-  )
-}
+  );
+};
 
-export default MainScreen
+export default MainScreen;

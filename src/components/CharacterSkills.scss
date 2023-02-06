@@ -1,12 +1,12 @@
-@import "../../constants/variables.scss";
+@import '../../constants/variables.scss';
 
 .CharacterSkills {
-    display: grid;
-    grid-template-columns: 30% 70%;
-    grid-template-rows: 10% 90%;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 10% 90%;
 
-    & > div {
-        background-color: darkgoldenrod;
-        border-radius: 50%;
-    }
+  & > div {
+    background-color: darkgoldenrod;
+    border-radius: 50%;
+  }
 }

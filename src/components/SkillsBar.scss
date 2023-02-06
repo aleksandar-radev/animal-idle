@@ -1,4 +1,4 @@
-@import "../constants/variables.scss";
+@import '../constants/variables.scss';
 
 .SkillsBar {
   display: flex;
@@ -6,12 +6,12 @@
   justify-content: center;
   flex-direction: column;
   gap: pix(7);
-  
+
   &-row {
-      gap: pix(25);
-      display: flex;
-      
-      & > div {
+    gap: pix(25);
+    display: flex;
+
+    & > div {
       display: flex;
       justify-content: center;
       align-items: center;
