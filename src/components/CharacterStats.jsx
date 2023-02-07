@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const CharacterStats = () => {
-    return (
-        <div className='CharacterStats'>CharacterStats</div>
-    )
-}
+  return <div className="CharacterStats">CharacterStats</div>;
+};
 
-export default CharacterStats
+export default CharacterStats;
