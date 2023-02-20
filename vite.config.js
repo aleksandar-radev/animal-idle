@@ -3,5 +3,8 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   base: "/animal-idle/",
-  plugins: [react()]
+  plugins: [react()],
+  define: {
+    'process.env': process.env
+  }
 })
