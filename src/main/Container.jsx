@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import MainMenu from './MainMenu';
 import './Container.scss';
 import ResourceBar from './ResourceBar';
@@ -8,16 +8,28 @@ import { AuthRepo } from '../api/AuthRepo';
 import { useNavigate } from 'react-router-dom';
 
 const Container = () => {
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const isAuthenticated = async () => {
-    const session = await AuthRepo.getSession();
-    return !!session.user;
+  useEffect(() => {
+    (async () => {
+      const session = await AuthRepo.getSession();
+      if (!session?.user) {
+        navigate('/login');
+        return;
+      }
+      setUser(session.user);
+    })();
+  }, []);
+
+  const isAuthenticated = () => {
+    return !!user;
   };
 
-  const logUser = async () => {
+  const getCurrentUser = async () => {
     const session = await AuthRepo.getSession();
-    console.log(session.user);
+    setUser(session.user);
+    return session.user;
   };
   const logout = async () => {
     await AuthRepo.signOut();
@@ -30,10 +42,11 @@ const Container = () => {
   };
   return (
     <div className={'Container'}>
-      <button onClick={logUser}>getUser</button>
+      <button onClick={getCurrentUser}>getUser</button>
       <button onClick={logout}>logout</button>
       <button onClick={reg}>register</button>
       <button onClick={login}>login</button>
+
       {isAuthenticated() ? (
         <div className="Container-auth">
           <ResourceBar></ResourceBar>

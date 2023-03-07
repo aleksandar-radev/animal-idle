@@ -1,24 +1,31 @@
 import { useState } from 'react';
 import { AuthRepo } from '../api/AuthRepo';
 import './LoginScreen.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginScreen() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       setLoading(true);
-      const { error } = AuthRepo.signInWithPassword(email, password);
-      console.log(error);
+      const { error } = await AuthRepo.signInWithPassword(email, password);
+      if (error) throw new Error(error);
+      navigate('/');
     } catch (error) {
       alert(error.error_description || error.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const register = () => {
+    navigate('/register');
   };
 
   return (
@@ -44,6 +51,7 @@ export default function LoginScreen() {
             <button className="button block" aria-live="polite">
               Log in
             </button>
+            Don&apos;t have an account ? Sign up <button onClick={register}>HERE</button>
           </form>
         </>
       )}

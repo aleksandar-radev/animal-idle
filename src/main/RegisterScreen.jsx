@@ -34,7 +34,6 @@ export default function RegisterScreen() {
         'Creating an account...'
       ) : (
         <>
-          <button onClick={login}>login</button>
           <form onSubmit={handleSignUp}>
             <label htmlFor="email">Email</label>
             <input
@@ -52,6 +51,7 @@ export default function RegisterScreen() {
             <button className="button block" aria-live="polite">
               Register
             </button>
+            Already have an account ? Sign in <button onClick={login}>HERE</button>
           </form>
         </>
       )}
