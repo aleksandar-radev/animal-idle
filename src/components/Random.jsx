@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { ref, onValue, set } from 'firebase/database';
-import api from '../api/Api';
+import React, { useEffect, useState, useContext } from 'react';
 import './Random.scss';
+import { Context } from '../api/Store';
 
 const Random = () => {
-  // const [state, setState] = useContext(Context)
+  const [store, setStore] = useContext(Context);
   const [clicks, setClicks] = useState(undefined);
 
-  useEffect(() => {
-    api().getTotalClicks(setClicks);
-  }, []);
+  useEffect(() => {}, []);
 
-  const addCount = () => {
-    if (!clicks) return;
-    set(ref(api().database, 'totalVisits'), clicks + 1);
-  };
+  const addCount = () => {};
 
   return (
     <>

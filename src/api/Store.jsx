@@ -4,13 +4,7 @@ import PropTypes from 'prop-types';
 const initialState = {
   activeTab: '',
   activeCharacterScreenMenuTab: '',
-  name: 'asdx',
-  email: 'asdf@abv.bg',
-  hero: {
-    name: 'Johnny',
-    age: 1,
-    action: () => this.age++,
-  },
+  isRegister: false,
 };
 
 export const Context = React.createContext();

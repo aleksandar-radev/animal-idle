@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { ref, set } from 'firebase/database';
 import api from '../api/Api';
 import './MainScreen.scss';
 import CharacterScreen from '../tabs/hero/CharacterScreen';
