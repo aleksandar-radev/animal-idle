@@ -2,6 +2,12 @@ import './App.scss';
 import Store from './api/Store';
 import React, { useEffect } from 'react';
 import Container from './main/Container';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
 
 function App() {
   useEffect(() => {
@@ -12,12 +18,20 @@ function App() {
     setScale();
   }, []);
 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Container />}>
+        <Route path="/dashboard" element={<Container />} />
+      </Route>,
+    ),
+  );
+
   return (
-    <>
+    <React.StrictMode>
       <Store>
-        <Container></Container>
+        <RouterProvider router={router} />
       </Store>
-    </>
+    </React.StrictMode>
   );
 }
 
