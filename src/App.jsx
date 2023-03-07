@@ -8,6 +8,8 @@ import {
   Route,
   RouterProvider,
 } from 'react-router-dom';
+import LoginScreen from './main/LoginScreen';
+import RegisterScreen from './main/RegisterScreen';
 
 function App() {
   useEffect(() => {
@@ -20,9 +22,11 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Container />}>
-        <Route path="/dashboard" element={<Container />} />
-      </Route>,
+      <>
+        <Route path="/" element={<Container />} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/register" element={<RegisterScreen />} />
+      </>,
     ),
   );
 

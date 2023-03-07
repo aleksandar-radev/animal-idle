@@ -5,9 +5,16 @@ import ResourceBar from './ResourceBar';
 import MainScreen from './MainScreen';
 import LoginScreen from './LoginScreen';
 import { AuthRepo } from '../api/AuthRepo';
+import { useNavigate } from 'react-router-dom';
 
 const Container = () => {
-  let isAuthenticated = false;
+  const navigate = useNavigate();
+
+  const isAuthenticated = async () => {
+    const user = await AuthRepo.getUser();
+    console.log(user);
+    return user;
+  };
 
   const logUser = async () => {
     const user = await AuthRepo.getUser();
@@ -16,11 +23,19 @@ const Container = () => {
   const logout = async () => {
     await AuthRepo.signOut();
   };
+  const reg = () => {
+    navigate('/register');
+  };
+  const login = () => {
+    navigate('/login');
+  };
   return (
     <div className={'Container'}>
       <button onClick={logUser}>getUser</button>
       <button onClick={logout}>logout</button>
-      {isAuthenticated ? (
+      <button onClick={reg}>register</button>
+      <button onClick={login}>login</button>
+      {isAuthenticated() ? (
         <div className="Container-auth">
           <ResourceBar></ResourceBar>
           <MainMenu></MainMenu>
