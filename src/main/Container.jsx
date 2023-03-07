@@ -11,14 +11,13 @@ const Container = () => {
   const navigate = useNavigate();
 
   const isAuthenticated = async () => {
-    const user = await AuthRepo.getUser();
-    console.log(user);
-    return user;
+    const session = await AuthRepo.getSession();
+    return !!session.user;
   };
 
   const logUser = async () => {
-    const user = await AuthRepo.getUser();
-    console.log(user);
+    const session = await AuthRepo.getSession();
+    console.log(session.user);
   };
   const logout = async () => {
     await AuthRepo.signOut();

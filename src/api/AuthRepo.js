@@ -3,18 +3,17 @@ import api from './Api.js';
 export const AuthRepo = {
 
   getSession: async () => {
-    const session = await api.auth.getSession();
+    const { data: session } = await api.auth.getSession();
 
     return session;
   },
 
+  // use sparcely
   getUser: async () => {
     const { data: { user }, error } = await api.auth.getUser();
-
     if (error) {
-      throw new Error('Error while logging in');
+      throw new Error('No user is logged in');
     }
-
     return user;
   },
 
@@ -25,9 +24,6 @@ export const AuthRepo = {
     });
 
     if (error) {
-      console.log(email);
-      console.log(password);
-      console.log(error);
       throw new Error('Error while logging in');
     }
 
