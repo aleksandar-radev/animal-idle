@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import api from '../api/Api';
 import './MainScreen.scss';
 import CharacterScreen from '../tabs/hero/CharacterScreen';
 import FightScreen from '../tabs/fight/FightScreen';
@@ -7,12 +6,9 @@ import Shop from '../tabs/shop/Shop';
 import { Context } from '../api/Store';
 
 const MainScreen = () => {
-  const [clicks, setClicks] = useState(undefined);
   const [store, setStore] = useContext(Context);
 
-  useEffect(() => {
-    api().getTotalClicks(setClicks);
-  }, []);
+  useEffect(() => {}, []);
 
   // const addCount = () => {
   //   if (!clicks) return;
