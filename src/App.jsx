@@ -1,6 +1,6 @@
 import './App.scss';
 import Store from './api/Store';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Container from './main/Container';
 import {
   createBrowserRouter,
@@ -31,11 +31,9 @@ function App() {
   );
 
   return (
-    <React.StrictMode>
-      <Store>
-        <RouterProvider router={router} />
-      </Store>
-    </React.StrictMode>
+    <Store>
+      <RouterProvider router={router} />
+    </Store>
   );
 }
 
