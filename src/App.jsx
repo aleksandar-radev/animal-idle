@@ -28,6 +28,9 @@ function App() {
         <Route path="/register" element={<RegisterScreen />} />
       </>,
     ),
+    {
+      basename: '/animal-idle',
+    },
   );
 
   return (
