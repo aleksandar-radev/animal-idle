@@ -33,27 +33,37 @@ export default function LoginScreen() {
       {loading ? (
         'Logging in...'
       ) : (
-        <>
-          <form onSubmit={handleLogin}>
-            <label htmlFor="email">Email</label>
+        <div className="LoginScreen">
+          <form onSubmit={handleLogin} className="LoginScreen-form">
+            <label htmlFor="email" className="LoginScreen-form-label">
+              Email
+            </label>
             <input
               type="email"
               placeholder="Your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="LoginScreen-form-input"
             />
+            <label htmlFor="email" className="LoginScreen-form-label">
+              Password
+            </label>
             <input
               type="password"
               placeholder="Your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="LoginScreen-form-input"
             />
-            <button className="button block" aria-live="polite">
+            <button className="LoginScreen-form-button" aria-live="polite">
               Log in
             </button>
-            Don&apos;t have an account ? Sign up <button onClick={register}>HERE</button>
+            Don&apos;t have an account ? Sign up{' '}
+            <button onClick={register} className="LoginScreen-form-button">
+              HERE
+            </button>
           </form>
-        </>
+        </div>
       )}
     </>
   );
