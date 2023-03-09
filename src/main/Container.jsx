@@ -26,28 +26,8 @@ const Container = () => {
     return !!user;
   };
 
-  const getCurrentUser = async () => {
-    const session = await AuthRepo.getSession();
-    setUser(session.user);
-    return session.user;
-  };
-  const logout = async () => {
-    navigate('/login');
-    await AuthRepo.signOut();
-  };
-  const reg = () => {
-    navigate('/register');
-  };
-  const login = () => {
-    navigate('/login');
-  };
   return (
     <div className={'Container'}>
-      <button onClick={getCurrentUser}>getUser</button>
-      <button onClick={logout}>logout</button>
-      <button onClick={reg}>register</button>
-      <button onClick={login}>login</button>
-
       {isAuthenticated() ? (
         <div className="Container-auth">
           <ResourceBar></ResourceBar>

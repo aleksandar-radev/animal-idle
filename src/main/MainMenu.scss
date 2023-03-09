@@ -7,4 +7,9 @@
   & > div {
     user-select: none;
   }
+
+  &-logout {
+    position: fixed;
+    bottom: 0;
+  }
 }
