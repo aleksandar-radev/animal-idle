@@ -32,6 +32,7 @@ const Container = () => {
     return session.user;
   };
   const logout = async () => {
+    navigate('/login');
     await AuthRepo.signOut();
   };
   const reg = () => {
