@@ -2,13 +2,14 @@
 
 .LoginScreen {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   &-form {
     display: flex;
     flex-direction: column;
     width: pix(300);
-    margin: pix(20) auto;
+    margin: pix(10) auto;
     padding: pix(10);
 
     &-title {
@@ -35,12 +36,18 @@
       font-size: pix(20);
     }
 
+    &-error {
+      font-size: pix(20);
+      color: red;
+    }
+
     &-button {
       display: block;
       width: 100%;
       height: pix(40);
       padding: pix(10);
       font-size: pix(15);
+      margin: pix(10) 0;
       background-color: #007bff;
       border: pix(1) solid #ccc;
       color: white;
@@ -50,15 +57,13 @@
         background-color: #0069d9;
       }
     }
+  }
+  &-message {
+    font-size: pix(18);
 
-    &-message {
-      margin-top: pix(10);
-      font-size: pix(18);
-
-      &-button {
-        color: blue;
-        cursor: pointer;
-      }
+    &-button {
+      color: blue;
+      cursor: pointer;
     }
   }
 }

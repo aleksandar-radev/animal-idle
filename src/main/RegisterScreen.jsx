@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
 import './RegisterScreen.scss';
+import { passwordRegex } from '../constants/jsVariables.js';
 
 export default function RegisterScreen() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
@@ -14,11 +17,14 @@ export default function RegisterScreen() {
 
     try {
       setLoading(true);
+      if (password !== confirmPassword) {
+        throw new Error('Passwords do not match');
+      }
       const { error } = await AuthRepo.signUp(email, password);
       if (error) throw error;
       navigate('/');
     } catch (error) {
-      alert(error.error_description || error.message);
+      setErrorMessage(error.message);
     } finally {
       setLoading(false);
     }
@@ -36,44 +42,43 @@ export default function RegisterScreen() {
         <div className="RegisterScreen">
           <form onSubmit={handleSignUp} className="RegisterScreen-form">
             <div className="RegisterScreen-form-title">Register</div>
-            <label htmlFor="email" className="RegisterScreen-form-label">
-              Email
-            </label>
+            <label className="RegisterScreen-form-label">Email</label>
             <input
               type="email"
               placeholder="Your email"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
               className="RegisterScreen-form-input"
             />
-            <label htmlFor="email" className="RegisterScreen-form-label">
-              Password
-            </label>
+            <label className="RegisterScreen-form-label">Password</label>
             <input
               type="password"
               placeholder="Your password"
               value={password}
+              pattern={passwordRegex}
+              title="Must contain at least 6 characters"
+              required
               onChange={(e) => setPassword(e.target.value)}
               className="RegisterScreen-form-input"
             />
-            <label htmlFor="email" className="RegisterScreen-form-label">
-              Confirm Password
-            </label>
+            <label className="RegisterScreen-form-label">Confirm Password</label>
             <input
               type="password"
-              placeholder="Your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               className="RegisterScreen-form-input"
             />
+            {errorMessage && <span className="RegisterScreen-form-error">{errorMessage}</span>}
             <button className="RegisterScreen-form-button">Register</button>
-            <div className="RegisterScreen-form-message">
-              Already have an account ? Sign in{' '}
-              <span onClick={goToLogin} className="RegisterScreen-form-message-button">
-                HERE
-              </span>
-            </div>
           </form>
+          <div className="RegisterScreen-message">
+            Already have an account ? Sign in{' '}
+            <span onClick={goToLogin} className="RegisterScreen-message-button">
+              HERE
+            </span>
+          </div>
         </div>
       )}
     </>

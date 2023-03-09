@@ -18,16 +18,18 @@ export const AuthRepo = {
   },
 
   signInWithPassword: async (email, password) => {
-    const { data, error } = await api.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) {
-      throw new Error('Error while logging in');
+    try {
+      const { data, error } = await api.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+      if (error) {
+        throw new Error('Wrong email/password');
+      }
+      return data;
+    } catch (error) {
+      throw new Error(error);
     }
-
-    return data;
   },
   signUp: async (email, password) => {
     const { data, error } = await api.auth.signUp({

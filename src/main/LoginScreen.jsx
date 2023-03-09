@@ -7,6 +7,7 @@ export default function LoginScreen() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -18,7 +19,7 @@ export default function LoginScreen() {
       if (error) throw new Error(error);
       navigate('/');
     } catch (error) {
-      alert(error.error_description || error.message);
+      setErrorMessage(error.message);
     } finally {
       setLoading(false);
     }
@@ -36,34 +37,33 @@ export default function LoginScreen() {
         <div className="LoginScreen">
           <form onSubmit={handleLogin} className="LoginScreen-form">
             <div className="LoginScreen-form-title">Login</div>
-            <label htmlFor="email" className="LoginScreen-form-label">
-              Email
-            </label>
+            <label className="LoginScreen-form-label">Email</label>
             <input
               type="email"
               placeholder="Your email"
               value={email}
+              required
               onChange={(e) => setEmail(e.target.value)}
               className="LoginScreen-form-input"
             />
-            <label htmlFor="email" className="LoginScreen-form-label">
-              Password
-            </label>
+            <label className="LoginScreen-form-label">Password</label>
             <input
               type="password"
               placeholder="Your password"
               value={password}
+              required
               onChange={(e) => setPassword(e.target.value)}
               className="LoginScreen-form-input"
             />
+            {errorMessage && <span className="RegisterScreen-form-error">{errorMessage}</span>}
             <button className="LoginScreen-form-button">Log in</button>
-            <div className="LoginScreen-form-message">
-              Don&apos;t have an account ? Sign up{' '}
-              <span onClick={goToRegister} className="LoginScreen-form-message-button">
-                HERE
-              </span>
-            </div>
           </form>
+          <div className="LoginScreen-message">
+            Don&apos;t have an account ? Sign up{' '}
+            <span onClick={goToRegister} className="LoginScreen-message-button">
+              HERE
+            </span>
+          </div>
         </div>
       )}
     </>
