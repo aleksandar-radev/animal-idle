@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
 import './LoginScreen.scss';
-import { useNavigate } from 'react-router-dom';
 
 export default function LoginScreen() {
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ export default function LoginScreen() {
     }
   };
 
-  const register = () => {
+  const goToRegister = () => {
     navigate('/register');
   };
 
@@ -35,6 +35,7 @@ export default function LoginScreen() {
       ) : (
         <div className="LoginScreen">
           <form onSubmit={handleLogin} className="LoginScreen-form">
+            <div className="LoginScreen-form-title">Login</div>
             <label htmlFor="email" className="LoginScreen-form-label">
               Email
             </label>
@@ -55,13 +56,13 @@ export default function LoginScreen() {
               onChange={(e) => setPassword(e.target.value)}
               className="LoginScreen-form-input"
             />
-            <button className="LoginScreen-form-button" aria-live="polite">
-              Log in
-            </button>
-            Don&apos;t have an account ? Sign up{' '}
-            <button onClick={register} className="LoginScreen-form-button">
-              HERE
-            </button>
+            <button className="LoginScreen-form-button">Log in</button>
+            <div className="LoginScreen-form-message">
+              Don&apos;t have an account ? Sign up{' '}
+              <span onClick={goToRegister} className="LoginScreen-form-message-button">
+                HERE
+              </span>
+            </div>
           </form>
         </div>
       )}
