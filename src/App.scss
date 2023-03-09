@@ -1,5 +1,8 @@
 @import './constants/variables.scss';
 
+* {
+  font-family: 'Almendra SC';
+}
 body {
   background-color: black;
   height: 100vh;
