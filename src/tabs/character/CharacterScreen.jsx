@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Context } from '../../api/Store';
+import { State } from '../../api/Store';
 import {
   CHARACTER_SCREEN_ITEMS_TAB,
   CHARACTER_SCREEN_SKILLS_TAB,
@@ -13,7 +13,7 @@ import './CharacterScreen.scss';
 import CharacterScreenMenu from './CharacterScreenMenu';
 
 const CharacterScreen = () => {
-  const [store] = useContext(Context);
+  const [store] = useContext(State);
 
   const activeTab = () => {
     switch (store.activeCharacterScreenTab) {

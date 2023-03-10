@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
-import { Context } from '../api/Store';
+import { State } from '../api/Store';
 import {
   MAIN_SCREEN_CHARACTER_TAB,
   MAIN_SCREEN_FIGHT_TAB,
@@ -10,7 +10,7 @@ import {
 import './MainMenu.scss';
 
 const MainMenu = () => {
-  const [store, setStore] = useContext(Context);
+  const [store, setStore] = useContext(State);
   const navigate = useNavigate();
 
   const changeView = (view) => {

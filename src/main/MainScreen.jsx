@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Context } from '../api/Store';
+import { State } from '../api/Store';
 import {
   MAIN_SCREEN_CHARACTER_TAB,
   MAIN_SCREEN_FIGHT_TAB,
@@ -11,7 +11,7 @@ import Shop from '../tabs/shop/Shop';
 import './MainScreen.scss';
 
 const MainScreen = () => {
-  const [store] = useContext(Context);
+  const [store] = useContext(State);
 
   useEffect(() => {}, []);
 

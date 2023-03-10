@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Context } from '../../api/Store';
+import { State } from '../../api/Store';
 import {
   CHARACTER_SCREEN_ITEMS_TAB,
   CHARACTER_SCREEN_SKILLS_TAB,
@@ -8,7 +8,7 @@ import {
 import './CharacterScreenMenu.scss';
 
 const CharacterScreenMenu = () => {
-  const [store, setStore] = useContext(Context);
+  const [store, setStore] = useContext(State);
 
   const changeView = (view) => {
     setStore({ ...store, activeCharacterScreenTab: view });
