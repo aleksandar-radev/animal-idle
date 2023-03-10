@@ -1,41 +1,34 @@
-import React, { useEffect, useState, useContext } from 'react';
-import './MainScreen.scss';
-import CharacterScreen from '../tabs/hero/CharacterScreen';
+import React, { useContext, useEffect } from 'react';
+import { Context } from '../api/Store';
+import {
+  MAIN_SCREEN_CHARACTER_TAB,
+  MAIN_SCREEN_FIGHT_TAB,
+  MAIN_SCREEN_SHOP_TAB,
+} from '../api/tabs';
+import CharacterScreen from '../tabs/character/CharacterScreen';
 import FightScreen from '../tabs/fight/FightScreen';
 import Shop from '../tabs/shop/Shop';
-import { Context } from '../api/Store';
+import './MainScreen.scss';
 
 const MainScreen = () => {
-  const [store, setStore] = useContext(Context);
+  const [store] = useContext(Context);
 
   useEffect(() => {}, []);
 
-  // const addCount = () => {
-  //   if (!clicks) return;
-  //   set(ref(api().database, 'totalVisits'), clicks + 1);
-  // }
-
   const activeTab = () => {
-    switch (store.activeTab) {
-      case 'fight':
+    switch (store.activeMainScreenTab) {
+      case MAIN_SCREEN_FIGHT_TAB:
         return <FightScreen />;
-      case 'shop':
+      case MAIN_SCREEN_SHOP_TAB:
         return <Shop />;
-      case 'character':
+      case MAIN_SCREEN_CHARACTER_TAB:
         return <CharacterScreen />;
       default:
         return <CharacterScreen />;
     }
   };
 
-  return (
-    <div className={'MainScreen'}>
-      {/* <div onClick={addCount} className="MainScreen-button">
-        Add clicks
-      </div> */}
-      {activeTab()}
-    </div>
-  );
+  return <div className={'MainScreen'}>{activeTab()}</div>;
 };
 
 export default MainScreen;

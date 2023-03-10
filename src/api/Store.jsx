@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { CHARACTER_SCREEN_STATS_TAB, MAIN_SCREEN_CHARACTER_TAB } from './tabs';
 
 const initialState = {
-  activeTab: '',
-  activeCharacterScreenMenuTab: '',
-  isRegister: false,
+  activeMainScreenTab: MAIN_SCREEN_CHARACTER_TAB,
+  activeCharacterScreenTab: CHARACTER_SCREEN_STATS_TAB,
 };
 
 export const Context = React.createContext();

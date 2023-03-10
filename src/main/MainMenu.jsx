@@ -1,15 +1,20 @@
 import React, { useContext } from 'react';
-import './MainMenu.scss';
-import { Context } from '../api/Store';
-import { AuthRepo } from '../api/AuthRepo';
 import { useNavigate } from 'react-router-dom';
+import { AuthRepo } from '../api/AuthRepo';
+import { Context } from '../api/Store';
+import {
+  MAIN_SCREEN_CHARACTER_TAB,
+  MAIN_SCREEN_FIGHT_TAB,
+  MAIN_SCREEN_SHOP_TAB,
+} from '../api/tabs';
+import './MainMenu.scss';
 
 const MainMenu = () => {
   const [store, setStore] = useContext(Context);
   const navigate = useNavigate();
 
   const changeView = (view) => {
-    setStore({ ...store, activeTab: view });
+    setStore({ ...store, activeMainScreenTab: view });
   };
   const logout = async () => {
     navigate('/login');
@@ -18,9 +23,9 @@ const MainMenu = () => {
 
   return (
     <div className={'MainMenu'}>
-      <div onClick={() => changeView('character')}>Character</div>
-      <div onClick={() => changeView('fight')}>Fight</div>
-      <div onClick={() => changeView('shop')}>shop</div>
+      <div onClick={() => changeView(MAIN_SCREEN_CHARACTER_TAB)}>Character</div>
+      <div onClick={() => changeView(MAIN_SCREEN_FIGHT_TAB)}>Fight</div>
+      <div onClick={() => changeView(MAIN_SCREEN_SHOP_TAB)}>shop</div>
       <div className="MainMenu-logout" onClick={logout}>
         Logout
       </div>
