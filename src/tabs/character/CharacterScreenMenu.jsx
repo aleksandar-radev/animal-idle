@@ -6,7 +6,7 @@ const CharacterScreenMenu = () => {
   const [store, setStore] = useContext(Context);
 
   const changeView = (view) => {
-    setStore({ ...store, activeCharacaterScreenTab: view });
+    setStore({ ...store, activeCharacterScreenTab: view });
   };
 
   return (

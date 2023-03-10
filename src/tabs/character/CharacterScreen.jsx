@@ -1,23 +1,25 @@
 import React, { useContext } from 'react';
-import './CharacterScreen.scss';
-import CharacterScreenMenu from './CharacterScreenMenu';
+import { Context } from '../../api/Store';
 import CharacterAvatar from '../../components/CharacterAvatar';
-import CharacterStats from '../../components/CharacterStats';
 import CharacterItems from '../../components/CharacterItems';
 import CharacterSkills from '../../components/CharacterSkills';
-import { Context } from '../../api/Store';
+import CharacterStats from '../../components/CharacterStats';
+import './CharacterScreen.scss';
+import CharacterScreenMenu from './CharacterScreenMenu';
 
 const CharacterScreen = () => {
   const [store] = useContext(Context);
 
   const activeTab = () => {
-    switch (store.activeCharacaterScreenTab) {
+    switch (store.activeCharacterScreenTab) {
+      case 'stats':
+        return <CharacterStats />;
       case 'items':
         return <CharacterItems />;
       case 'skills':
         return <CharacterSkills />;
       default:
-        return <CharacterStats />;
+        return '';
     }
   };
 
