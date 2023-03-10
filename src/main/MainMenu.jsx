@@ -23,10 +23,16 @@ const MainMenu = () => {
 
   return (
     <div className={'MainMenu'}>
-      <div onClick={() => changeView(MAIN_SCREEN_CHARACTER_TAB)}>Character</div>
-      <div onClick={() => changeView(MAIN_SCREEN_FIGHT_TAB)}>Fight</div>
-      <div onClick={() => changeView(MAIN_SCREEN_SHOP_TAB)}>shop</div>
-      <div className="MainMenu-logout" onClick={logout}>
+      <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_CHARACTER_TAB)}>
+        Character
+      </div>
+      <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_FIGHT_TAB)}>
+        Fight
+      </div>
+      <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_SHOP_TAB)}>
+        Shop
+      </div>
+      <div className="MainMenu-tab MainMenu-logout" onClick={logout}>
         Logout
       </div>
     </div>
