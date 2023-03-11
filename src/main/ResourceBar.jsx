@@ -14,20 +14,19 @@ const ResourceBar = () => {
       const user = await AuthRepo.getUser();
       const res = await ResourcesRepo.getResources(user.id);
 
-      console.log(res);
       setResources(res);
     })();
   }, []);
 
-  const addGold = async () => {
-    const res = await ResourcesRepo.updateResources(resources);
-    console.log(res);
-    setResources(res);
+  const addGold = async (amount) => {
+    const newAmount = resources.gold + amount;
+    setResources({ ...resources, gold: newAmount });
+    await ResourcesRepo.updateResources(resources, { gold: newAmount });
   };
   return (
     <div className={'ResourceBar'}>
       <div className="Random">Gold: {resources?.gold}</div>
-      <button onClick={addGold}>Add Gold</button>
+      <button onClick={() => addGold(1)}>Add Gold</button>
     </div>
   );
 };

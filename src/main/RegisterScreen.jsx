@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
-import './RegisterScreen.scss';
+import { ResourcesRepo } from '../api/ResourcesRepo';
 import { passwordRegex } from '../constants/jsVariables.js';
+import './RegisterScreen.scss';
 
 export default function RegisterScreen() {
   const [loading, setLoading] = useState(false);
@@ -20,8 +21,10 @@ export default function RegisterScreen() {
       if (password !== confirmPassword) {
         throw new Error('Passwords do not match');
       }
-      const { error } = await AuthRepo.signUp(email, password);
-      if (error) throw error;
+      const data = await AuthRepo.signUp(email, password);
+
+      await ResourcesRepo.insertResources(data.user);
+
       navigate('/');
     } catch (error) {
       setErrorMessage(error.message);

@@ -23,13 +23,31 @@ export const ResourcesRepo = {
     return resources;
   },
 
-  updateResources: async (resources) => {
+  updateResources: async (resources, values) => {
     const { data, error } = await api
       .from('resources')
-      .update({ gold: resources.gold + 1 })
+      .update(values)
       .eq('user_id', resources.user_id)
       .select()
       .maybeSingle();
+
+    if (error) {
+      throw new Error('Unable to update resources')
+    }
+
+    return data;
+  },
+
+  insertResources: async (user) => {
+    const { data, error } = await api
+      .from('resources')
+      .insert([
+        { user_id: user.id },
+      ]);
+
+    if (error) {
+      throw new Error(error)
+    }
 
     return data;
   },
