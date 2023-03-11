@@ -16,7 +16,7 @@ const MainScreen = () => {
   useEffect(() => {}, []);
 
   const activeTab = () => {
-    switch (store.activeMainScreenTab) {
+    switch (store.tabs.activeMainScreenTab) {
       case MAIN_SCREEN_FIGHT_TAB:
         return <FightScreen />;
       case MAIN_SCREEN_SHOP_TAB:

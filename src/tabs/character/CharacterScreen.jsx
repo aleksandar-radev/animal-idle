@@ -16,7 +16,7 @@ const CharacterScreen = () => {
   const [store] = useContext(State);
 
   const activeTab = () => {
-    switch (store.activeCharacterScreenTab) {
+    switch (store.tabs.activeCharacterScreenTab) {
       case CHARACTER_SCREEN_STATS_TAB:
         return <CharacterStats />;
       case CHARACTER_SCREEN_ITEMS_TAB:

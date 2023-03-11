@@ -14,7 +14,7 @@ const MainMenu = () => {
   const navigate = useNavigate();
 
   const changeView = (view) => {
-    setStore({ ...store, activeMainScreenTab: view });
+    setStore({ ...store, tabs: { ...store.tabs, activeMainScreenTab: view } });
   };
   const logout = async () => {
     navigate('/login');
