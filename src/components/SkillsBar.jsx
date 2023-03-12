@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import { SkillsRepo } from '../api/SkillsRepo';
+import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 
 const SkillsBar = (props) => {

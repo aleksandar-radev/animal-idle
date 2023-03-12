@@ -1,11 +1,15 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import PropTypes from '../externalLibraries/propTypes';
 import { CHARACTER_SCREEN_STATS_TAB, MAIN_SCREEN_CHARACTER_TAB } from './tabs';
 
 const initialState = {
   tabs: {
     activeMainScreenTab: MAIN_SCREEN_CHARACTER_TAB,
     activeCharacterScreenTab: CHARACTER_SCREEN_STATS_TAB,
+  },
+  enemy: {
+    totalHealth: 100,
+    currentHealth: 100,
   },
 };
 

@@ -9,12 +9,12 @@ const FightScreen = () => {
   return (
     <div className={'FightScreen'}>
       <CharacterAvatar className={'FightScreen-self'}></CharacterAvatar>
-      <CharacterResources className={'FightScreen-self_res'} isSelf={true}></CharacterResources>
+      <CharacterResources className={'FightScreen-self-res'} isSelf={true}></CharacterResources>
 
       <FightLog className={'FightScreen-log'}></FightLog>
 
       <CharacterAvatar className={'FightScreen-enemy'}></CharacterAvatar>
-      <CharacterResources className={'FightScreen-enemy_res'}></CharacterResources>
+      <CharacterResources className={'FightScreen-enemy-res'}></CharacterResources>
 
       <SkillsBar className={'FightScreen-skills'}></SkillsBar>
     </div>
