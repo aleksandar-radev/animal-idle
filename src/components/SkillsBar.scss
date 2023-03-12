@@ -11,13 +11,36 @@
     gap: pix(25);
     display: flex;
 
-    & > div {
+    &-item {
       display: flex;
       justify-content: center;
       align-items: center;
       width: pix(50);
       height: pix(50);
       outline: 1px solid coral;
+      user-select: none;
+      position: relative;
+      border-radius: 10%;
+      overflow: hidden;
+      cursor: pointer;
+
+      &.disabled {
+        pointer-events: none;
+      }
+
+      &::before {
+        content: '';
+        background: conic-gradient(
+          rgba(0, 0, 0, 0.7) var(--time-left),
+          rgba(0, 0, 0, 0.1) var(--time-left)
+        );
+        position: absolute;
+        opacity: 0.8;
+        top: 0;
+        left: 0p;
+        height: 100%;
+        width: 100%;
+      }
     }
   }
 }
