@@ -6,15 +6,17 @@ import {
   MAIN_SCREEN_CHARACTER_TAB,
   MAIN_SCREEN_FIGHT_TAB,
   MAIN_SCREEN_SHOP_TAB,
-} from '../api/tabs';
+} from '../constants/tabs';
 import './MainMenu.scss';
 
 const MainMenu = () => {
   const [store, setStore] = useContext(State);
+
   const navigate = useNavigate();
 
   const changeView = (view) => {
-    setStore({ ...store, tabs: { ...store.tabs, activeMainScreenTab: view } });
+    store.tabs.setActiveMainScreenTab(view);
+    setStore({ ...store });
   };
   const logout = async () => {
     navigate('/login');

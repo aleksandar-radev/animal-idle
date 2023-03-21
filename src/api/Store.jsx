@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from '../externalLibraries/propTypes';
-import { CHARACTER_SCREEN_STATS_TAB, MAIN_SCREEN_CHARACTER_TAB } from './tabs';
+import enemy from './stateModels/enemy';
+import tabs from './stateModels/tabs';
 
 const initialState = {
-  tabs: {
-    activeMainScreenTab: MAIN_SCREEN_CHARACTER_TAB,
-    activeCharacterScreenTab: CHARACTER_SCREEN_STATS_TAB,
-  },
-  enemy: {
-    totalHealth: 100,
-    currentHealth: 100,
-  },
+  tabs,
+  enemy,
 };
 
 export const State = React.createContext();

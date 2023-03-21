@@ -4,14 +4,15 @@ import {
   CHARACTER_SCREEN_ITEMS_TAB,
   CHARACTER_SCREEN_SKILLS_TAB,
   CHARACTER_SCREEN_STATS_TAB,
-} from '../../api/tabs';
+} from '../../constants/tabs';
 import './CharacterScreenMenu.scss';
 
 const CharacterScreenMenu = () => {
   const [store, setStore] = useContext(State);
 
   const changeView = (view) => {
-    setStore({ ...store, tabs: { ...store.tabs, activeCharacterScreenTab: view } });
+    store.tabs.setActiveCharacterScreenTab(view);
+    setStore({ ...store });
   };
 
   return (

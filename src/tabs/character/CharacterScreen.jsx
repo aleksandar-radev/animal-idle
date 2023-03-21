@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import { State } from '../../api/Store';
-import {
-  CHARACTER_SCREEN_ITEMS_TAB,
-  CHARACTER_SCREEN_SKILLS_TAB,
-  CHARACTER_SCREEN_STATS_TAB,
-} from '../../api/tabs';
 import CharacterAvatar from '../../components/CharacterAvatar';
 import CharacterItems from '../../components/CharacterItems';
 import CharacterSkills from '../../components/CharacterSkills';
 import CharacterStats from '../../components/CharacterStats';
+import {
+  CHARACTER_SCREEN_ITEMS_TAB,
+  CHARACTER_SCREEN_SKILLS_TAB,
+  CHARACTER_SCREEN_STATS_TAB,
+} from '../../constants/tabs';
 import './CharacterScreen.scss';
 import CharacterScreenMenu from './CharacterScreenMenu';
 

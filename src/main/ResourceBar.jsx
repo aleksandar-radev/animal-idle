@@ -1,31 +1,31 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthRepo } from '../api/AuthRepo';
-import { ResourcesRepo } from '../api/ResourcesRepo';
+import { CurrenciesRepo } from '../api/CurrenciesRepo';
 import { State } from '../api/Store';
 
 import './ResourceBar.scss';
 
 const ResourceBar = () => {
-  const [resources, setResources] = useState(undefined);
   const [state] = useContext(State);
+  const [currencies, setCurrencies] = useState(undefined);
 
   useEffect(() => {
     (async () => {
       const user = await AuthRepo.getUser();
-      const res = await ResourcesRepo.getResources(user.id);
+      const res = await CurrenciesRepo.getCurrencies(user.id);
 
-      setResources(res);
+      setCurrencies(res);
     })();
   }, []);
 
   const addGold = async (amount) => {
-    const newAmount = resources.gold + amount;
-    setResources({ ...resources, gold: newAmount });
-    await ResourcesRepo.updateResources(resources, { gold: newAmount });
+    const newAmount = currencies.gold + amount;
+    setCurrencies({ ...currencies, gold: newAmount });
+    await CurrenciesRepo.updateCurrencies(currencies, { gold: newAmount });
   };
   return (
     <div className={'ResourceBar'}>
-      <div className="Random">Gold: {resources?.gold}</div>
+      <div className="Random">Gold: {currencies?.gold}</div>
       <button onClick={() => addGold(1)}>Add Gold</button>
     </div>
   );

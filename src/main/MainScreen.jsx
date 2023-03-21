@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { State } from '../api/Store';
 import {
   MAIN_SCREEN_CHARACTER_TAB,
   MAIN_SCREEN_FIGHT_TAB,
   MAIN_SCREEN_SHOP_TAB,
-} from '../api/tabs';
+} from '../constants/tabs';
 import CharacterScreen from '../tabs/character/CharacterScreen';
 import FightScreen from '../tabs/fight/FightScreen';
 import Shop from '../tabs/shop/Shop';
@@ -12,8 +12,6 @@ import './MainScreen.scss';
 
 const MainScreen = () => {
   const [store] = useContext(State);
-
-  useEffect(() => {}, []);
 
   const activeTab = () => {
     switch (store.tabs.activeMainScreenTab) {

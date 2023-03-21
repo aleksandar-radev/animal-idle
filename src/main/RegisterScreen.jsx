@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
-import { ResourcesRepo } from '../api/ResourcesRepo';
+import { CurrenciesRepo } from '../api/CurrenciesRepo';
 import { passwordRegex } from '../constants/jsVariables.js';
 import './RegisterScreen.scss';
 
@@ -23,7 +23,7 @@ export default function RegisterScreen() {
       }
       const data = await AuthRepo.signUp(email, password);
 
-      await ResourcesRepo.insertResources(data.user);
+      await CurrenciesRepo.insertCurrencies(data.user);
 
       navigate('/');
     } catch (error) {

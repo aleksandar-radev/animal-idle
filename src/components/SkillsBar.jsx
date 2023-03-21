@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { SkillsRepo } from '../api/SkillsRepo';
+import { State } from '../api/Store';
 import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 
 const SkillsBar = (props) => {
+  const [store, setStore] = useContext(State);
   const [skills, setSkills] = useState([]);
   const skillShouldStop = useRef(false);
 
@@ -60,6 +62,8 @@ const SkillsBar = (props) => {
         target.classList.remove('disabled');
         // add skill function
         console.log('ATACK');
+        store.enemy.takeDamage(10);
+        setStore({ ...store });
       }
     };
     requestAnimationFrame(animateCooldown);
