@@ -7,8 +7,8 @@ const HealthBar = (props) => {
 };
 
 HealthBar.propTypes = {
-  currentHealth: PropTypes.any,
-  totalHealth: PropTypes.any,
+  currentHealth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  totalHealth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default HealthBar;

@@ -60,8 +60,7 @@ const SkillsBar = (props) => {
         target.textContent = skill.name;
         target.style.removeProperty('--time-left');
         target.classList.remove('disabled');
-        // add skill function
-        console.log('ATACK');
+
         store.enemy.takeDamage(10);
         setStore({ ...store });
       }
