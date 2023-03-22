@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from '../externalLibraries/propTypes';
-import character from './stateModels/character';
-import enemy from './stateModels/enemy';
-import tabs from './stateModels/tabs';
+import character from '../models/character';
+import enemy from '../models/enemy';
+import tabs from '../models/tabs';
 
 const initialState = {
   tabs,

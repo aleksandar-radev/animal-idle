@@ -1,4 +1,4 @@
-import { CHARACTER_SCREEN_STATS_TAB, MAIN_SCREEN_CHARACTER_TAB } from "../../constants/tabs";
+import { CHARACTER_SCREEN_STATS_TAB, MAIN_SCREEN_CHARACTER_TAB } from "../constants/tabs";
 
 
 const tabs = {
