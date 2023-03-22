@@ -7,18 +7,20 @@ import './SkillsBar.scss';
 const SkillsBar = (props) => {
   const [store, setStore] = useContext(State);
   const [skills, setSkills] = useState([]);
+  const [domSkills, setDomSkills] = useState([]);
   const skillShouldStop = useRef(false);
 
   useEffect(() => {
-    (async () => {
-      let skillsData = await SkillsRepo.getSkills();
-      setSkills(skillsData);
-    })();
+    fetchSkills(setSkills);
     skillShouldStop.current = false;
     return () => {
       skillShouldStop.current = true;
     };
   }, []);
+
+  useEffect(() => {
+    fillDomSkills(skills, setDomSkills, activateSkill);
+  }, [skills]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
@@ -31,16 +33,14 @@ const SkillsBar = (props) => {
     const keyId = String.fromCharCode(e.which);
     let skill = skills.find((s) => s.id == keyId);
     if (!skill) return;
-    const target = document.querySelector(`[data-skill='${skill.name}']`);
+    const target = document.querySelector(`[data-skill='${skill.id}']`);
     if (target.classList.contains('disabled')) return;
     activateSkill({ target });
   };
 
   const activateSkill = (event) => {
     const { target } = event;
-    const skill = skills.find((skill) => skill.name === target.dataset.skill);
-
-    if (!target.classList.contains('SkillsBar-row-item') || !skill) return;
+    const skill = skills.find((skill) => +skill.id === +target.dataset.skill);
 
     target.classList.add('disabled');
     let startTime = null;
@@ -68,30 +68,13 @@ const SkillsBar = (props) => {
     requestAnimationFrame(animateCooldown);
   };
 
-  const getRowSkills = (start, end) => {
-    if (!skills.length) return;
-    let skillsRow = [];
-    for (let i = start; i < end; i++) {
-      let skillName = skills[i]?.name || '';
-      skillsRow.push(
-        <div className="SkillsBar-row-item" data-skill={skillName} key={i}>
-          {skillName}
-        </div>,
-      );
-    }
-
-    return skillsRow;
-  };
-
   return (
     <>
       <div className={['SkillsBar', props.className].join(' ')}>
-        <div className={'SkillsBar-row'} onClick={activateSkill}>
-          {getRowSkills(0, 10)}
-        </div>
-        {skills.length > 9 && (
+        <div className={'SkillsBar-row'}>{domSkills.slice(0, 10)}</div>
+        {skills.length > 10 && (
           <div className={'SkillsBar-row'} onClick={activateSkill}>
-            {getRowSkills(10, 20)}
+            {domSkills.slice(10, 20)}
           </div>
         )}
       </div>
@@ -104,3 +87,22 @@ SkillsBar.propTypes = {
 };
 
 export default SkillsBar;
+
+async function fetchSkills(setSkills) {
+  let skillsData = await SkillsRepo.getSkills();
+  setSkills(skillsData);
+}
+
+function fillDomSkills(skills, setDomSkills, activateSkill) {
+  if (!skills.length) return;
+
+  let newDomSkills = [];
+  for (let i = 0; i < 20; i++) {
+    newDomSkills.push(
+      <div className="SkillsBar-row-item a" data-skill={i + 1} key={i} onClick={activateSkill}>
+        {skills[i]?.name || ''}
+      </div>,
+    );
+  }
+  setDomSkills(newDomSkills);
+}
