@@ -1,15 +1,15 @@
-import './App.scss';
-import Store from './api/Store';
 import { useEffect } from 'react';
-import Container from './main/Container';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import LoginScreen from './main/LoginScreen';
-import RegisterScreen from './main/RegisterScreen';
+import Store from './api/Store';
+import './App.scss';
+import Container from './screens/Container';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 function App() {
   useEffect(() => {
