@@ -61,7 +61,7 @@ const SkillsBar = (props) => {
         target.style.removeProperty('--time-left');
         target.classList.remove('disabled');
 
-        store.enemy.takeDamage(10);
+        store.character.skills[skill.name](store);
         setStore({ ...store });
       }
     };
@@ -72,11 +72,7 @@ const SkillsBar = (props) => {
     <>
       <div className={['SkillsBar', props.className].join(' ')}>
         <div className={'SkillsBar-row'}>{domSkills.slice(0, 10)}</div>
-        {skills.length > 10 && (
-          <div className={'SkillsBar-row'} onClick={activateSkill}>
-            {domSkills.slice(10, 20)}
-          </div>
-        )}
+        {skills.length > 10 && <div className={'SkillsBar-row'}>{domSkills.slice(10, 20)}</div>}
       </div>
     </>
   );
