@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { State } from '../../api/Store';
 import CharacterAvatar from '../../components/CharacterAvatar';
 import CharacterResources from '../../components/CharacterResources';
@@ -8,14 +8,24 @@ import './FightScreen.scss';
 
 const FightScreen = () => {
   const [store, setStore] = useContext(State);
+  const fightShouldStop = useRef(false);
+
   useEffect(() => {
     startFight();
+  }, []);
+
+  useEffect(() => {
+    fightShouldStop.current = false;
+    return () => {
+      fightShouldStop.current = true;
+    };
   }, []);
 
   function startFight() {
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
+      if (fightShouldStop.current) return;
       if (!startTime) {
         startTime = timestamp;
       }

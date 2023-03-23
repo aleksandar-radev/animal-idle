@@ -41,19 +41,24 @@ const SkillsBar = (props) => {
   const activateSkill = (event) => {
     const { target } = event;
     const skill = skills.find((skill) => +skill.id === +target.dataset.skill);
+    if (!skill) return;
 
     target.classList.add('disabled');
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
       if (skillShouldStop.current) return;
+
       if (!startTime) {
         startTime = timestamp;
       }
+
       let elapsedTime = timestamp - startTime;
       const passedTime = (elapsedTime / skill.cooldown) * 100;
+
       target.style.setProperty('--time-left', `${passedTime}%`);
       target.textContent = ((skill.cooldown - elapsedTime) / 1000).toFixed(2);
+
       if (elapsedTime < skill.cooldown) {
         requestAnimationFrame(animateCooldown);
       } else {
