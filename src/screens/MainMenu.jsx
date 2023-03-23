@@ -10,13 +10,12 @@ import {
 import './MainMenu.scss';
 
 const MainMenu = () => {
-  const [store, setStore] = useContext(State);
+  const [store] = useContext(State);
 
   const navigate = useNavigate();
 
   const changeView = (view) => {
     store.tabs.setActiveMainScreenTab(view);
-    setStore({ ...store });
   };
   const logout = async () => {
     navigate('/login');

@@ -8,11 +8,10 @@ import {
 import './CharacterScreenMenu.scss';
 
 const CharacterScreenMenu = () => {
-  const [store, setStore] = useContext(State);
+  const [store] = useContext(State);
 
   const changeView = (view) => {
     store.tabs.setActiveCharacterScreenTab(view);
-    setStore({ ...store });
   };
 
   return (

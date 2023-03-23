@@ -7,7 +7,7 @@ import SkillsBar from '../../components/SkillsBar';
 import './FightScreen.scss';
 
 const FightScreen = () => {
-  const [store, setStore] = useContext(State);
+  const [store] = useContext(State);
   const fightShouldStop = useRef(false);
 
   useEffect(() => {
@@ -32,8 +32,7 @@ const FightScreen = () => {
       if (timestamp - startTime < 2000) {
         requestAnimationFrame(animateCooldown);
       } else {
-        store.character.currentHealth -= 1;
-        setStore({ ...store });
+        store.character.takeDamage();
         startFight();
       }
     };

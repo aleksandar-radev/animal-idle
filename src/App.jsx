@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import Store from './api/Store';
 import './App.scss';
+import ModelManager from './models/ModelManager';
 import Container from './screens/Container';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <Store>
+      <ModelManager></ModelManager>
       <RouterProvider router={router} />
     </Store>
   );

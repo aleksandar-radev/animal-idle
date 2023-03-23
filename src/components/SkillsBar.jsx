@@ -5,7 +5,7 @@ import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 
 const SkillsBar = (props) => {
-  const [store, setStore] = useContext(State);
+  const [store] = useContext(State);
   const [skills, setSkills] = useState([]);
   const [domSkills, setDomSkills] = useState([]);
   const skillShouldStop = useRef(false);
@@ -66,8 +66,7 @@ const SkillsBar = (props) => {
         target.style.removeProperty('--time-left');
         target.classList.remove('disabled');
 
-        store.character.skills[skill.name](store);
-        setStore({ ...store });
+        store.character.skills[skill.name]();
       }
     };
     requestAnimationFrame(animateCooldown);
