@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
-import { CurrenciesRepo } from '../api/CurrenciesRepo';
 import { passwordRegex } from '../constants/jsVariables.js';
 import './RegisterScreen.scss';
 
@@ -22,8 +21,6 @@ export default function RegisterScreen() {
         throw new Error('Passwords do not match');
       }
       const data = await AuthRepo.signUp(email, password);
-
-      await CurrenciesRepo.insertCurrencies(data.user);
 
       navigate('/');
     } catch (error) {

@@ -1,17 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { SkillsRepo } from '../api/SkillsRepo';
 import { State } from '../api/Store';
 import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 
 const SkillsBar = (props) => {
   const [store] = useContext(State);
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState(store.character.skills);
   const [domSkills, setDomSkills] = useState([]);
   const skillShouldStop = useRef(false);
 
   useEffect(() => {
-    fetchSkills(setSkills);
     skillShouldStop.current = false;
     return () => {
       skillShouldStop.current = true;
@@ -33,14 +31,15 @@ const SkillsBar = (props) => {
     const keyId = String.fromCharCode(e.which);
     let skill = skills.find((s) => s.id == keyId);
     if (!skill) return;
-    const target = document.querySelector(`[data-skill='${skill.id}']`);
+    const target = document.querySelector(`[data-skill='${skill.name}']`);
     if (target.classList.contains('disabled')) return;
     activateSkill({ target });
   };
 
   const activateSkill = (event) => {
     const { target } = event;
-    const skill = skills.find((skill) => +skill.id === +target.dataset.skill);
+    const skill = skills.find((skill) => skill.name === target.dataset.skill);
+    console.log(skills);
     if (!skill) return;
 
     target.classList.add('disabled');
@@ -66,7 +65,7 @@ const SkillsBar = (props) => {
         target.style.removeProperty('--time-left');
         target.classList.remove('disabled');
 
-        store.character.skills[skill.name]();
+        store.character.skills[skill.name].cast();
       }
     };
     requestAnimationFrame(animateCooldown);
@@ -88,18 +87,17 @@ SkillsBar.propTypes = {
 
 export default SkillsBar;
 
-async function fetchSkills(setSkills) {
-  let skillsData = await SkillsRepo.getSkills();
-  setSkills(skillsData);
-}
-
 function fillDomSkills(skills, setDomSkills, activateSkill) {
   if (!skills.length) return;
 
   let newDomSkills = [];
   for (let i = 0; i < 20; i++) {
     newDomSkills.push(
-      <div className="SkillsBar-row-item a" data-skill={i + 1} key={i} onClick={activateSkill}>
+      <div
+        className="SkillsBar-row-item a"
+        data-skill={skills[i]?.name}
+        key={i}
+        onClick={activateSkill}>
         {skills[i]?.name || ''}
       </div>,
     );
