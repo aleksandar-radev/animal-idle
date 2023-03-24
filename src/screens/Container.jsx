@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import MainMenu from './MainMenu';
-import './Container.scss';
-import ResourceBar from './ResourceBar';
-import MainScreen from './MainScreen';
-import LoginScreen from './LoginScreen';
-import { AuthRepo } from '../api/AuthRepo';
 import { useNavigate } from 'react-router-dom';
+import { AuthRepo } from '../api/AuthRepo';
+import ModelManager from '../models/modelManager';
+import './Container.scss';
+import LoginScreen from './LoginScreen';
+import MainMenu from './MainMenu';
+import MainScreen from './MainScreen';
+import ResourceBar from './ResourceBar';
 
 const Container = () => {
   const [user, setUser] = useState(null);
@@ -28,6 +29,7 @@ const Container = () => {
 
   return (
     <div className={'Container'}>
+      <ModelManager></ModelManager>
       {isAuthenticated() ? (
         <div className="Container-auth">
           <ResourceBar></ResourceBar>
