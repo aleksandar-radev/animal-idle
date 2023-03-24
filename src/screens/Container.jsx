@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
 import ModelManager from '../models/modelManager';
 import './Container.scss';
+import CurrenciesBar from './CurrenciesBar';
 import LoginScreen from './LoginScreen';
 import MainMenu from './MainMenu';
 import MainScreen from './MainScreen';
-import ResourceBar from './ResourceBar';
 
 const Container = () => {
   const [user, setUser] = useState(null);
@@ -32,7 +32,7 @@ const Container = () => {
       <ModelManager></ModelManager>
       {isAuthenticated() ? (
         <div className="Container-auth">
-          <ResourceBar></ResourceBar>
+          <CurrenciesBar></CurrenciesBar>
           <MainMenu></MainMenu>
           <MainScreen></MainScreen>
         </div>

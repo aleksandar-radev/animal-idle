@@ -3,9 +3,9 @@ import { AuthRepo } from '../api/AuthRepo';
 import { CurrenciesRepo } from '../api/CurrenciesRepo';
 import { State } from '../api/Store';
 
-import './ResourceBar.scss';
+import './CurrenciesBar.scss';
 
-const ResourceBar = () => {
+const CurrenciesBar = () => {
   const [state] = useContext(State);
   const [currencies, setCurrencies] = useState(undefined);
 
@@ -24,11 +24,11 @@ const ResourceBar = () => {
     await CurrenciesRepo.updateCurrencies(currencies, { gold: newAmount });
   };
   return (
-    <div className={'ResourceBar'}>
+    <div className={'CurrenciesBar'}>
       <div className="Random">Gold: {currencies?.gold}</div>
       <button onClick={() => addGold(1)}>Add Gold</button>
     </div>
   );
 };
 
-export default ResourceBar;
+export default CurrenciesBar;
