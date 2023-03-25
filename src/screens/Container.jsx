@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
-import ModelManager from '../models/modelManager';
+import DataManager from '../models/DataManager';
 import './Container.scss';
 import CurrenciesBar from './CurrenciesBar';
 import LoginScreen from './LoginScreen';
@@ -29,7 +29,7 @@ const Container = () => {
 
   return (
     <div className={'Container'}>
-      <ModelManager></ModelManager>
+      <DataManager></DataManager>
       {isAuthenticated() ? (
         <div className="Container-auth">
           <CurrenciesBar></CurrenciesBar>

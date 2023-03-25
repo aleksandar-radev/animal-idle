@@ -5,10 +5,30 @@ import './SkillsBar.scss';
 
 const SkillsBar = (props) => {
   const [store] = useContext(State);
-  const [skills, setSkills] = useState(store.character.skills);
+  const [skills] = useState(store.character.skills);
   const [domSkills, setDomSkills] = useState([]);
   const skillShouldStop = useRef(false);
 
+  useEffect(() => {
+    const newDomSkills = [];
+
+    for (let id = 1; id < 20; id++) {
+      const skill = store.character.getSkillById(id);
+
+      newDomSkills.push(
+        <div
+          className="SkillsBar-row-item"
+          data-skill={skill?.name}
+          key={skill?.name || id}
+          onClick={activateSkill}>
+          {skill?.name || ''}
+        </div>,
+      );
+    }
+    setDomSkills(newDomSkills);
+  }, [store.character.skills, store.character.skillsMap]);
+
+  // stop skill if on another screen
   useEffect(() => {
     skillShouldStop.current = false;
     return () => {
@@ -16,10 +36,19 @@ const SkillsBar = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    fillDomSkills(skills, setDomSkills, activateSkill);
-  }, [skills]);
+  const handleKeyPress = (e) => {
+    const keyId = String.fromCharCode(e.which);
+    let skill = store.character.getSkillById(keyId);
+    console.log(skill);
+    if (!skill) return;
+    const target = document.querySelector(`[data-skill='${skill.name}']`);
+    console.log(target);
+    console.log(skill.name);
+    if (target.classList.contains('disabled')) return;
+    activateSkill({ target });
+  };
 
+  //handle key press events
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
     return () => {
@@ -27,19 +56,11 @@ const SkillsBar = (props) => {
     };
   }, [skills]);
 
-  const handleKeyPress = (e) => {
-    const keyId = String.fromCharCode(e.which);
-    let skill = skills.find((s) => s.id == keyId);
-    if (!skill) return;
-    const target = document.querySelector(`[data-skill='${skill.name}']`);
-    if (target.classList.contains('disabled')) return;
-    activateSkill({ target });
-  };
-
   const activateSkill = (event) => {
     const { target } = event;
-    const skill = skills.find((skill) => skill.name === target.dataset.skill);
-    console.log(skills);
+    const skillName = target.dataset.skill;
+    const skill = skills[skillName];
+
     if (!skill) return;
 
     target.classList.add('disabled');
@@ -86,21 +107,3 @@ SkillsBar.propTypes = {
 };
 
 export default SkillsBar;
-
-function fillDomSkills(skills, setDomSkills, activateSkill) {
-  if (!skills.length) return;
-
-  let newDomSkills = [];
-  for (let i = 0; i < 20; i++) {
-    newDomSkills.push(
-      <div
-        className="SkillsBar-row-item a"
-        data-skill={skills[i]?.name}
-        key={i}
-        onClick={activateSkill}>
-        {skills[i]?.name || ''}
-      </div>,
-    );
-  }
-  setDomSkills(newDomSkills);
-}

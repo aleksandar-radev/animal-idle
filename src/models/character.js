@@ -15,6 +15,7 @@ const Character = (store) => {
 
     skills: {
       [CHARACTER_SKILL_ATACK]: {
+        name: CHARACTER_SKILL_ATACK,
         cooldown: 2000,
         cast () {
           const damage = store.character.damage;
@@ -22,12 +23,14 @@ const Character = (store) => {
         }
       },
       [CHARACTER_SKILL_HEAL]: {
+        name: CHARACTER_SKILL_HEAL,
         cooldown: 500,
         cast () {
           store.character.currentHealth += 10;
         }
       },
       [CHARACTER_SKILL_DOUBLE_DAMAGE]: {
+        name: CHARACTER_SKILL_DOUBLE_DAMAGE,
         cooldown: 2000,
         cast () {
           const damage = store.character.damage * 2;
@@ -36,6 +39,17 @@ const Character = (store) => {
 
       },
     },
+
+    skillsMap: {
+      '1': CHARACTER_SKILL_ATACK,
+      '2': CHARACTER_SKILL_HEAL,
+      '3': CHARACTER_SKILL_DOUBLE_DAMAGE,
+    },
+
+    getSkillById (id) {
+      const mapping = this.skillsMap[id];
+      return this.skills[mapping];
+    }
   };
 };
 

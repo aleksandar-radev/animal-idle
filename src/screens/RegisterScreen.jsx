@@ -20,7 +20,7 @@ export default function RegisterScreen() {
       if (password !== confirmPassword) {
         throw new Error('Passwords do not match');
       }
-      const data = await AuthRepo.signUp(email, password);
+      await AuthRepo.signUp(email, password);
 
       navigate('/');
     } catch (error) {
