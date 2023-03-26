@@ -1,7 +1,6 @@
 import api from './Api.js';
 
 export const AuthRepo = {
-
   getUser: async () => {
     const { data } = await api.auth.getSession();
 
@@ -23,7 +22,10 @@ export const AuthRepo = {
    * @returns {Object} user
    */
   updateUserInfo: async () => {
-    const { data: { user }, error } = await api.auth.getUser();
+    const {
+      data: { user },
+      error,
+    } = await api.auth.getUser();
     if (error) {
       throw new Error('No user is logged in');
     }

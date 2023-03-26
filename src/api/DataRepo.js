@@ -2,9 +2,7 @@ import crypt from '../externalLibraries/encrypt';
 import api from './Api.js';
 
 export const DataRepo = {
-
   getDataById: async (id) => {
-
     let { data, error } = await api
       .from('data')
       .select('*')
@@ -42,7 +40,7 @@ export const DataRepo = {
     const { data, error } = await api
       .from('data')
       .update({ data: encryptedData })
-      .eq('user_id', id)
+      .eq('user_id', id);
 
     if (error) {
       throw new Error(error);

@@ -1,45 +1,44 @@
-import { ENEMY_TYPE_BERSERKER, ENEMY_TYPE_SORCERESS } from "../constants/gameVariables";
+import { ENEMY_TYPE_BERSERKER, ENEMY_TYPE_SORCERESS } from '../constants/gameVariables';
 
 // eslint-disable-next-line no-unused-vars
 const Enemy = (store) => {
-
   return {
     renderChanges: 0,
     current: null,
-    renderChange () {
+    renderChange() {
       this.renderChanges++;
       if (this.renderChanges > 1e99) {
         this.renderChanges = 0;
       }
     },
-    resetEnemy () {
+    resetEnemy() {
       this.current = null;
     },
-    getRandomEnemy () {
+    getRandomEnemy() {
       const keys = Object.keys(this.enemyTypes);
       const randomKey = keys[Math.floor(Math.random() * keys.length)];
 
       return this.getEnemyByKey(randomKey);
     },
-    getEnemyByKey (key) {
+    getEnemyByKey(key) {
       return {
         ...this.enemyMethods(),
-        ...this.enemyTypes[key]
-      }
+        ...this.enemyTypes[key],
+      };
     },
-    enemyMethods () {
+    enemyMethods() {
       return {
-        takeDamage (amount) {
+        takeDamage(amount) {
           if (this.currentHealth - amount <= 0) {
-            this.currentHealth = 0
-            store.character.currencies['asd']
+            this.currentHealth = 0;
+            store.character.currencies['asd'];
             store.enemy.current = store.enemy.getRandomEnemy();
           } else {
             this.currentHealth -= amount;
           }
           store.enemy.renderChange();
         },
-      }
+      };
     },
     enemyTypes: {
       [ENEMY_TYPE_BERSERKER]: {
@@ -54,10 +53,9 @@ const Enemy = (store) => {
         currentHealth: 60,
         totalHealth: 60,
         damage: 32,
-        atackSpeed: 4000
-      }
-
-    }
+        atackSpeed: 4000,
+      },
+    },
   };
 };
 
