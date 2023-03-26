@@ -6,7 +6,7 @@ import {
   MAIN_SCREEN_CHARACTER_TAB,
   MAIN_SCREEN_FIGHT_TAB,
   MAIN_SCREEN_SHOP_TAB,
-} from '../constants/tabs';
+} from '../constants/gameVariables';
 import './MainMenu.scss';
 
 const MainMenu = () => {

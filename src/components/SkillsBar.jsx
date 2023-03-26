@@ -39,11 +39,10 @@ const SkillsBar = (props) => {
   const handleKeyPress = (e) => {
     const keyId = String.fromCharCode(e.which);
     let skill = store.character.getSkillById(keyId);
-    console.log(skill);
+
     if (!skill) return;
     const target = document.querySelector(`[data-skill='${skill.name}']`);
-    console.log(target);
-    console.log(skill.name);
+
     if (target.classList.contains('disabled')) return;
     activateSkill({ target });
   };

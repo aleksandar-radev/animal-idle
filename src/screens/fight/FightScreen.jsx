@@ -11,6 +11,10 @@ const FightScreen = () => {
   const fightShouldStop = useRef(false);
 
   useEffect(() => {
+    if (!store.enemy.current) {
+      const randomEnemy = store.enemy.getRandomEnemy();
+      store.enemy.current = randomEnemy;
+    }
     startFight();
   }, []);
 
@@ -29,7 +33,7 @@ const FightScreen = () => {
       if (!startTime) {
         startTime = timestamp;
       }
-      if (timestamp - startTime < 2000) {
+      if (timestamp - startTime < store.enemy.current.atackSpeed) {
         requestAnimationFrame(animateCooldown);
       } else {
         store.character.takeDamage();

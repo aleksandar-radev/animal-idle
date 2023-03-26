@@ -4,7 +4,7 @@ import {
   MAIN_SCREEN_CHARACTER_TAB,
   MAIN_SCREEN_FIGHT_TAB,
   MAIN_SCREEN_SHOP_TAB,
-} from '../constants/tabs';
+} from '../constants/gameVariables';
 import CharacterScreen from './character/CharacterScreen';
 import FightScreen from './fight/FightScreen';
 import './MainScreen.scss';

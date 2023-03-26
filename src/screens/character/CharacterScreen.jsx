@@ -8,7 +8,7 @@ import {
   CHARACTER_SCREEN_ITEMS_TAB,
   CHARACTER_SCREEN_SKILLS_TAB,
   CHARACTER_SCREEN_STATS_TAB,
-} from '../../constants/tabs';
+} from '../../constants/gameVariables';
 import './CharacterScreen.scss';
 import CharacterScreenMenu from './CharacterScreenMenu';
 

@@ -1,7 +1,6 @@
-import { CHARACTER_SKILL_ATACK, CHARACTER_SKILL_DOUBLE_DAMAGE, CHARACTER_SKILL_HEAL } from '../constants/characterSkillNames';
+import { CHARACTER_SKILL_ATACK, CHARACTER_SKILL_DOUBLE_DAMAGE, CHARACTER_SKILL_HEAL } from '../constants/gameVariables';
 
 const Character = (store) => {
-
   return {
     currentHealth: 55,
     totalHealth: 100,
@@ -10,7 +9,18 @@ const Character = (store) => {
     damage: 5,
 
     takeDamage () {
-      this.currentHealth -= 1;
+      this.currentHealth -= store.enemy.current.damage;
+    },
+
+    currencies: {
+      [CHARACTER_SKILL_ATACK]: {
+        name: CHARACTER_SKILL_ATACK,
+        cooldown: 2000,
+        cast () {
+          const damage = store.character.damage;
+          store.enemy.current.takeDamage(damage);
+        }
+      },
     },
 
     skills: {
@@ -19,7 +29,7 @@ const Character = (store) => {
         cooldown: 2000,
         cast () {
           const damage = store.character.damage;
-          store.enemy.takeDamage(damage);
+          store.enemy.current.takeDamage(damage);
         }
       },
       [CHARACTER_SKILL_HEAL]: {
@@ -34,7 +44,7 @@ const Character = (store) => {
         cooldown: 2000,
         cast () {
           const damage = store.character.damage * 2;
-          store.enemy.takeDamage(damage);
+          store.enemy.current.takeDamage(damage);
         }
 
       },

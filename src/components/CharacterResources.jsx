@@ -7,7 +7,6 @@ import ManaBar from './ManaBar';
 
 const CharacterResources = (props) => {
   const [store] = useContext(State);
-  const [enemy] = useState(store.enemy);
   const [character] = useState(store.character);
 
   return (
@@ -21,7 +20,9 @@ const CharacterResources = (props) => {
           <ManaBar currentMana={character.currentMana} totalMana={character.totalMana}></ManaBar>
         </>
       ) : (
-        <HealthBar currentHealth={enemy.currentHealth} totalHealth={enemy.totalHealth}></HealthBar>
+        <HealthBar
+          currentHealth={store.enemy.current?.currentHealth}
+          totalHealth={store.enemy.current?.totalHealth}></HealthBar>
       )}
     </div>
   );
