@@ -21,12 +21,11 @@ const DataManager = () => {
     },
   };
 
-  // TODO: add requestAnimationFrame for 1 min, which should save data to db
   useEffect(() => {
-    window.addEventListener('beforeunload', async () => {
+    setInterval(async () => {
       const user = await AuthRepo.getUser();
-      await DataRepo.updateDataById(user.id, store.data);
-    });
+      DataRepo.updateDataById(user.id, store.data);
+    }, 60 * 1000);
   }, []);
 
   useEffect(() => {

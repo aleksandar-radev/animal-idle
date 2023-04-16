@@ -1,7 +1,42 @@
 @import '../constants/variables.scss';
 
 .CurrenciesBar {
+  display: flex;
   font-size: pix(20);
   background-color: blanchedalmond;
   grid-column: 1 / span 2;
+
+  &-save {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    padding: pix(8);
+    user-select: none;
+    height: 100%;
+
+    &-button {
+      cursor: pointer;
+      height: pix(35);
+    }
+
+    &-loading {
+      cursor: crosshair;
+      border: pix(5) solid rgba(0, 0, 0, 0.1);
+      border-top: pix(5) solid #333;
+      border-radius: 50%;
+      width: pix(25);
+      height: pix(25);
+      animation: spin 1s linear infinite;
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
 }
