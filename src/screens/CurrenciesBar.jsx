@@ -1,22 +1,22 @@
-import React, { useContext, useState } from 'react';
-import { AuthRepo } from '../api/AuthRepo';
-import { DataRepo } from '../api/DataRepo';
+import React, { useContext } from 'react';
 import { State } from '../api/Store';
+import { CHARACTER_CURRENCY_GOLD } from '../constants/gameVariables';
 
 import './CurrenciesBar.scss';
 
 const CurrenciesBar = () => {
   const [store] = useContext(State);
-  const [gold, setGold] = useState(0);
 
   const addGold = async (amount) => {
-    const user = await AuthRepo.getUser();
-    DataRepo.updateDataById(user.id, { ...store });
-    setGold(gold + amount);
+    store.character.addCurrency(CHARACTER_CURRENCY_GOLD, amount);
+  };
+
+  const getGold = () => {
+    return store.character?.getCurrency([CHARACTER_CURRENCY_GOLD]);
   };
   return (
     <div className={'CurrenciesBar'}>
-      <div className="Random">Gold: {gold}</div>
+      <div className="Random">Gold: {getGold()}</div>
       <button onClick={() => addGold(1)}>Add Gold</button>
     </div>
   );

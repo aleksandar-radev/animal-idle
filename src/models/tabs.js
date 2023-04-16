@@ -5,9 +5,11 @@ const Tabs = (store) => {
   return {
     activeMainScreenTab: MAIN_SCREEN_CHARACTER_TAB,
     activeCharacterScreenTab: CHARACTER_SCREEN_STATS_TAB,
+
     setActiveMainScreenTab(tab) {
       this.activeMainScreenTab = tab;
     },
+
     setActiveCharacterScreenTab(tab) {
       this.activeCharacterScreenTab = tab;
     },

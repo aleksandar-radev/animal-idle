@@ -14,15 +14,17 @@ const CharacterResources = (props) => {
       {props.isSelf ? (
         <>
           <HealthBar
-            currentHealth={character.currentHealth}
-            totalHealth={character.totalHealth}></HealthBar>
+            currentHealth={character.getCurrentHealth()}
+            totalHealth={character.getTotalHealth()}></HealthBar>
 
-          <ManaBar currentMana={character.currentMana} totalMana={character.totalMana}></ManaBar>
+          <ManaBar
+            currentMana={character.getCurrentMana()}
+            totalMana={character.getTotalMana()}></ManaBar>
         </>
       ) : (
         <HealthBar
           currentHealth={store.enemy.current?.currentHealth}
-          totalHealth={store.enemy.current?.totalHealth}></HealthBar>
+          totalHealth={store.enemy.current?.baseHealth}></HealthBar>
       )}
     </div>
   );

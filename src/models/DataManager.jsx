@@ -2,7 +2,9 @@ import { useContext, useEffect, useRef } from 'react';
 import { AuthRepo } from '../api/AuthRepo';
 import { DataRepo } from '../api/DataRepo';
 import { State } from '../api/Store';
+import { mergeObjectsRecursive } from '../helpers/functions';
 import Character from './character';
+import Data from './data';
 import Enemy from './enemy';
 import Tabs from './tabs';
 
@@ -19,6 +21,14 @@ const DataManager = () => {
     },
   };
 
+  // TODO: add requestAnimationFrame for 1 min, which should save data to db
+  useEffect(() => {
+    window.addEventListener('beforeunload', async () => {
+      const user = await AuthRepo.getUser();
+      await DataRepo.updateDataById(user.id, store.data);
+    });
+  }, []);
+
   useEffect(() => {
     if (effectCount.current > 0) return;
     effectCount.current++;
@@ -31,9 +41,17 @@ const DataManager = () => {
         data = await DataRepo.insertDataById(user.id, {});
       }
 
-      store.tabs = new Proxy({ ...Tabs(store), ...data.tabs }, handler);
+      // data has to be first, because others are evaluated based on it
+
+      store.data = new Proxy(mergeObjectsRecursive(Data(), data), handler);
+
+      store.tabs = new Proxy({ ...Tabs(store) }, handler);
+
       store.character = new Proxy({ ...Character(store) }, handler);
+      store.character.reset();
+
       store.enemy = new Proxy({ ...Enemy(store) }, handler);
+      store.enemy.reset();
 
       setStore({ ...store });
     })();

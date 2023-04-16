@@ -39,8 +39,9 @@ export const DataRepo = {
 
     const { data, error } = await api
       .from('data')
-      .update({ data: encryptedData })
-      .eq('user_id', id);
+      .update([{ data: encryptedData }])
+      .eq('user_id', id)
+      .select('*');
 
     if (error) {
       throw new Error(error);

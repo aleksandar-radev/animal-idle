@@ -9,6 +9,7 @@ const SkillsBar = (props) => {
   const [domSkills, setDomSkills] = useState([]);
   const skillShouldStop = useRef(false);
 
+  // render DOM skills
   useEffect(() => {
     const newDomSkills = [];
 

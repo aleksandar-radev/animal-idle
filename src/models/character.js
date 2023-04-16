@@ -6,25 +6,73 @@ import {
 
 const Character = (store) => {
   return {
-    currentHealth: 55,
-    totalHealth: 100,
-    currentMana: 100,
+    currentHealth: 0,
+    baseHealth: 100,
+    currentMana: 0,
     totalMana: 100,
     damage: 5,
+
+    reset() {
+      this.currentHealth = this.getTotalHealth();
+      this.currentMana = this.getTotalMana();
+    },
+
+    // Health
+    getCurrentHealth() {
+      return this.currentHealth;
+    },
+
+    getTotalHealth() {
+      let health = this.baseHealth;
+      health += store.data.character.bonusHealthFlat;
+      health *= store.data.character.bonusHealthPercent;
+      return health;
+    },
+
+    // Mana
+    getCurrentMana() {
+      return this.currentMana;
+    },
+    getTotalMana() {
+      let mana = this.totalMana;
+      mana += store.data.character.bonusManaFlat;
+      mana *= store.data.character.bonusManaPercent;
+      return mana;
+    },
+
+    // Damage
+    getDamage() {
+      let damage = this.damage;
+      damage += store.data.character.bonusDamageFlat;
+      damage *= store.data.character.bonusDamagePercent;
+      return damage;
+    },
+
+    renderChanges: 0,
+    renderChange() {
+      this.renderChanges++;
+      if (this.renderChanges > 1e99) {
+        this.renderChanges = 0;
+      }
+    },
 
     takeDamage() {
       this.currentHealth -= store.enemy.current.damage;
     },
 
-    currencies: {
-      [CHARACTER_SKILL_ATACK]: {
-        name: CHARACTER_SKILL_ATACK,
-        cooldown: 2000,
-        cast() {
-          const damage = store.character.damage;
-          store.enemy.current.takeDamage(damage);
-        },
-      },
+    addCurrency(currency, amount) {
+      store.data.currencies[currency] += amount;
+      // this.renderChange();
+    },
+
+    getCurrency(currency) {
+      return store.data.currencies[currency];
+      // this.renderChange();
+    },
+
+    removeCurrency(currency, amount) {
+      this.currencies[currency] -= amount;
+      this.renderChange();
     },
 
     skills: {
@@ -47,20 +95,14 @@ const Character = (store) => {
         name: CHARACTER_SKILL_DOUBLE_DAMAGE,
         cooldown: 2000,
         cast() {
-          const damage = store.character.damage * 2;
+          const damage = store.character.damage * 10;
           store.enemy.current.takeDamage(damage);
         },
       },
     },
 
-    skillsMap: {
-      1: CHARACTER_SKILL_ATACK,
-      2: CHARACTER_SKILL_HEAL,
-      3: CHARACTER_SKILL_DOUBLE_DAMAGE,
-    },
-
     getSkillById(id) {
-      const mapping = this.skillsMap[id];
+      const mapping = store.data.skills.map[id];
       return this.skills[mapping];
     },
   };
