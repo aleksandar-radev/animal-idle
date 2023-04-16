@@ -24,8 +24,7 @@ const Character = (store) => {
 
     getTotalHealth() {
       let health = this.baseHealth;
-      health += store.data.character.bonusHealthFlat;
-      health *= store.data.character.bonusHealthPercent;
+      // TODO: add bonuses
       return health;
     },
 
@@ -35,16 +34,14 @@ const Character = (store) => {
     },
     getTotalMana() {
       let mana = this.totalMana;
-      mana += store.data.character.bonusManaFlat;
-      mana *= store.data.character.bonusManaPercent;
+      // TODO: add bonuses
       return mana;
     },
 
     // Damage
     getDamage() {
       let damage = this.damage;
-      damage += store.data.character.bonusDamageFlat;
-      damage *= store.data.character.bonusDamagePercent;
+      // TODO: add bonuses
       return damage;
     },
 

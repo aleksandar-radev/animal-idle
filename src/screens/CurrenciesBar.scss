@@ -13,11 +13,10 @@
     right: 0;
     padding: pix(8);
     user-select: none;
-    height: 100%;
 
     &-button {
       cursor: pointer;
-      height: pix(35);
+      height: pix(32);
     }
 
     &-loading {

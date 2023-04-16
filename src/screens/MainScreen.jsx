@@ -5,10 +5,10 @@ import {
   MAIN_SCREEN_FIGHT_TAB,
   MAIN_SCREEN_SHOP_TAB,
 } from '../constants/gameVariables';
+import './MainScreen.scss';
 import CharacterScreen from './character/CharacterScreen';
 import FightScreen from './fight/FightScreen';
-import './MainScreen.scss';
-import Shop from './shop/Shop';
+import Shop from './shop/ShopScreen';
 
 const MainScreen = () => {
   const [store] = useContext(State);

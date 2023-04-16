@@ -17,6 +17,7 @@ const MainMenu = () => {
   const changeView = (view) => {
     store.tabs.setActiveMainScreenTab(view);
   };
+
   const logout = async () => {
     navigate('/login');
     await AuthRepo.signOut();
