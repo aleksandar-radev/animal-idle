@@ -22,8 +22,9 @@ const CurrenciesBar = () => {
   };
 
   const getGold = () => {
-    return store.character?.getCurrency([CHARACTER_CURRENCY_GOLD]);
+    return store.data?.currencies[CHARACTER_CURRENCY_GOLD].value;
   };
+
   return (
     <div className={'CurrenciesBar'}>
       <div className="Random">Gold: {getGold()}</div>

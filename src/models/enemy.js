@@ -40,7 +40,7 @@ const Enemy = (store) => {
         takeDamage(amount) {
           if (this.currentHealth - amount <= 0) {
             this.currentHealth = 0;
-            store.data.currencies[CHARACTER_CURRENCY_GOLD]++;
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].add(1);
             store.enemy.current = store.enemy.getRandomEnemy();
           } else {
             this.currentHealth -= amount;

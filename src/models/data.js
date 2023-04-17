@@ -7,12 +7,34 @@ import {
   SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT,
 } from '../constants/gameVariables';
 
-const Data = () => {
+const Data = (store) => {
   return {
     character: {},
+    renderChanges: 0,
+    renderChange() {
+      this.renderChanges++;
+      if (this.renderChanges > 1e99) {
+        this.renderChanges = 0;
+      }
+    },
 
     currencies: {
-      [CHARACTER_CURRENCY_GOLD]: 1,
+      [CHARACTER_CURRENCY_GOLD]: {
+        value: 0,
+        add: function (amount) {
+          if (isNaN(amount)) {
+            return;
+          }
+
+          this.value += +amount;
+        },
+        remove: function (amount) {
+          if (isNaN(amount)) {
+            return;
+          }
+          this.value -= +amount;
+        },
+      },
     },
 
     skills: {
@@ -39,6 +61,24 @@ const Data = () => {
       [SHOP_UPGRADES_ATACK]: {
         [SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT]: {
           level: 0,
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
         },
       },
     },

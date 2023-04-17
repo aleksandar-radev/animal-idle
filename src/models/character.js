@@ -2,6 +2,8 @@ import {
   CHARACTER_SKILL_ATACK,
   CHARACTER_SKILL_DOUBLE_DAMAGE,
   CHARACTER_SKILL_HEAL,
+  SHOP_UPGRADES_ATACK,
+  SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT,
 } from '../constants/gameVariables';
 
 const Character = (store) => {
@@ -41,7 +43,9 @@ const Character = (store) => {
     // Damage
     getDamage() {
       let damage = this.damage;
-      // TODO: add bonuses
+      damage +=
+        store.data.upgrades[SHOP_UPGRADES_ATACK][SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT].getBonus();
+
       return damage;
     },
 
@@ -57,27 +61,12 @@ const Character = (store) => {
       this.currentHealth -= store.enemy.current.damage;
     },
 
-    addCurrency(currency, amount) {
-      store.data.currencies[currency] += amount;
-      // this.renderChange();
-    },
-
-    getCurrency(currency) {
-      return store.data.currencies[currency];
-      // this.renderChange();
-    },
-
-    removeCurrency(currency, amount) {
-      this.currencies[currency] -= amount;
-      this.renderChange();
-    },
-
     skills: {
       [CHARACTER_SKILL_ATACK]: {
         name: CHARACTER_SKILL_ATACK,
-        cooldown: 2000,
+        cooldown: 500,
         cast() {
-          const damage = store.character.damage;
+          const damage = store.character.getDamage();
           store.enemy.current.takeDamage(damage);
         },
       },
@@ -92,7 +81,7 @@ const Character = (store) => {
         name: CHARACTER_SKILL_DOUBLE_DAMAGE,
         cooldown: 2000,
         cast() {
-          const damage = store.character.damage * 10;
+          const damage = store.character.getDamage() * 2;
           store.enemy.current.takeDamage(damage);
         },
       },

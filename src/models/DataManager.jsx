@@ -42,7 +42,7 @@ const DataManager = () => {
 
       // data has to be first, because others are evaluated based on it
 
-      store.data = new Proxy(mergeObjectsRecursive(Data(), data), handler);
+      store.data = new Proxy(mergeObjectsRecursive(Data(store), data), handler);
 
       store.tabs = new Proxy({ ...Tabs(store) }, handler);
 

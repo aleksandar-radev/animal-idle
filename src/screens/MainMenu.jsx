@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
+import { DataRepo } from '../api/DataRepo';
 import { State } from '../api/Store';
 import {
   MAIN_SCREEN_CHARACTER_TAB,
@@ -22,6 +23,10 @@ const MainMenu = () => {
     navigate('/login');
     await AuthRepo.signOut();
   };
+  const resetProgress = async () => {
+    const user = await AuthRepo.getUser();
+    await DataRepo.updateDataById(user.id, {});
+  };
 
   return (
     <div className={'MainMenu'}>
@@ -33,6 +38,9 @@ const MainMenu = () => {
       </div>
       <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_SHOP_TAB)}>
         Shop
+      </div>
+      <div className="MainMenu-tab" onClick={resetProgress}>
+        Reset Progress
       </div>
       <div className="MainMenu-tab MainMenu-logout" onClick={logout}>
         Logout
