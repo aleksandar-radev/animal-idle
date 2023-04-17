@@ -11,10 +11,6 @@ const FightScreen = () => {
   const fightShouldStop = useRef(false);
 
   useEffect(() => {
-    if (!store.enemy.current) {
-      const randomEnemy = store.enemy.getRandomEnemy();
-      store.enemy.current = randomEnemy;
-    }
     startFight();
   }, []);
 
@@ -29,6 +25,11 @@ const FightScreen = () => {
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
+      if (!store.enemy.current) {
+        const randomEnemy = store.enemy.getRandomEnemy();
+        store.enemy.current = randomEnemy;
+      }
+
       if (fightShouldStop.current) return;
       if (!startTime) {
         startTime = timestamp;

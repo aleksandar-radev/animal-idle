@@ -12,6 +12,9 @@
 # production
 /dist
 
+# extensions
+/.safurai
+
 # misc
 .DS_Store
 .env.local

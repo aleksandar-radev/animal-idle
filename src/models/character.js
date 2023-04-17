@@ -6,6 +6,7 @@ import {
   SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT,
 } from '../constants/gameVariables';
 
+// NOTHING HERE IS PERSISTED. ALL RESETS ON REFRESH
 const Character = (store) => {
   return {
     currentHealth: 0,
@@ -59,6 +60,11 @@ const Character = (store) => {
 
     takeDamage() {
       this.currentHealth -= store.enemy.current.damage;
+
+      if (this.currentHealth <= 0) {
+        this.reset();
+        store.enemy.reset();
+      }
     },
 
     skills: {
@@ -74,7 +80,12 @@ const Character = (store) => {
         name: CHARACTER_SKILL_HEAL,
         cooldown: 500,
         cast() {
-          store.character.currentHealth += 10;
+          const newCurrent = store.character.currentHealth + store.character.getTotalHealth() / 10;
+          if (newCurrent >= store.character.getTotalHealth()) {
+            store.character.currentHealth = store.character.getTotalHealth();
+          } else {
+            store.character.currentHealth = newCurrent;
+          }
         },
       },
       [CHARACTER_SKILL_DOUBLE_DAMAGE]: {
