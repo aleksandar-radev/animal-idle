@@ -20,7 +20,6 @@ const Character = (store) => {
       this.currentMana = this.getTotalMana();
     },
 
-    // Health
     getCurrentHealth() {
       return this.currentHealth;
     },
@@ -92,6 +91,7 @@ const Character = (store) => {
         name: CHARACTER_SKILL_DOUBLE_DAMAGE,
         cooldown: 2000,
         cast() {
+          store.character.currentMana -= 10;
           const damage = store.character.getDamage() * 2;
           store.enemy.current.takeDamage(damage);
         },
