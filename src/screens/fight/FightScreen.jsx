@@ -22,6 +22,7 @@ const FightScreen = () => {
   }, []);
 
   function startFight() {
+    // TODO: add a death screen, during which no fighting will happen
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
@@ -37,7 +38,7 @@ const FightScreen = () => {
       if (timestamp - startTime < store.enemy.current.atackSpeed) {
         requestAnimationFrame(animateCooldown);
       } else {
-        store.character.takeDamage();
+        store.character.takeDamage(store.enemy.current.damage);
         startFight();
       }
     };

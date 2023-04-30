@@ -6,6 +6,7 @@ import './ManaBar.scss';
 const ManaBar = (props) => {
   const [store] = useContext(State);
   const shouldStopRegen = useRef(false);
+  const percentage = (props.currentMana / props.totalMana) * 100;
 
   useEffect(() => {
     shouldStopRegen.current = false;
@@ -29,14 +30,20 @@ const ManaBar = (props) => {
       if (timestamp - startTime < 2000) {
         requestAnimationFrame(animateCooldown);
       } else {
-        store.character.currentMana++;
+        store.character.updateMana(1);
         regenMana();
       }
     };
     requestAnimationFrame(animateCooldown);
   }
 
-  return <div className={'ManaBar'}>{`${props.currentMana} / ${props.totalMana}`}</div>;
+  return (
+    <div
+      style={{
+        backgroundImage: `linear-gradient(to right, blue ${percentage}%, white ${percentage}%)`,
+      }}
+      className={'ManaBar'}>{`${props.currentMana} / ${props.totalMana}`}</div>
+  );
 };
 
 ManaBar.propTypes = {

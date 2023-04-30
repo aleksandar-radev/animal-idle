@@ -57,8 +57,8 @@ const Character = (store) => {
       }
     },
 
-    takeDamage() {
-      this.currentHealth -= store.enemy.current.damage;
+    takeDamage(damage) {
+      this.currentHealth -= damage;
 
       if (this.currentHealth <= 0) {
         this.reset();
@@ -66,10 +66,31 @@ const Character = (store) => {
       }
     },
 
+    updateHealth(bonus) {
+      const newCurrent = store.character.currentHealth + bonus;
+      if (newCurrent >= store.character.getTotalHealth()) {
+        store.character.currentHealth = store.character.getTotalHealth();
+      } else if (newCurrent < 0) {
+        throw new Error('Unable to remove mana');
+      } else {
+        store.character.currentHealth = newCurrent;
+      }
+    },
+
+    updateMana(bonus) {
+      const newCurrent = store.character.currentMana + bonus;
+      if (newCurrent >= store.character.getTotalMana()) {
+        store.character.currentMana = store.character.getTotalMana();
+      } else {
+        store.character.currentMana = newCurrent;
+      }
+    },
+
     skills: {
       [CHARACTER_SKILL_ATACK]: {
         name: CHARACTER_SKILL_ATACK,
         cooldown: 500,
+        manaCost: 0,
         cast() {
           const damage = store.character.getDamage();
           store.enemy.current.takeDamage(damage);
@@ -77,21 +98,18 @@ const Character = (store) => {
       },
       [CHARACTER_SKILL_HEAL]: {
         name: CHARACTER_SKILL_HEAL,
-        cooldown: 500,
+        cooldown: 1000,
+        manaCost: 0,
         cast() {
-          const newCurrent = store.character.currentHealth + store.character.getTotalHealth() / 10;
-          if (newCurrent >= store.character.getTotalHealth()) {
-            store.character.currentHealth = store.character.getTotalHealth();
-          } else {
-            store.character.currentHealth = newCurrent;
-          }
+          const bonus = store.character.getTotalHealth() / 10;
+          store.character.updateHealth(bonus);
         },
       },
       [CHARACTER_SKILL_DOUBLE_DAMAGE]: {
         name: CHARACTER_SKILL_DOUBLE_DAMAGE,
-        cooldown: 2000,
+        cooldown: 500,
+        manaCost: 10,
         cast() {
-          store.character.currentMana -= 10;
           const damage = store.character.getDamage() * 2;
           store.enemy.current.takeDamage(damage);
         },

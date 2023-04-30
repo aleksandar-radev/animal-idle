@@ -37,13 +37,13 @@ const Enemy = (store) => {
 
     enemyMethods() {
       return {
-        takeDamage(amount) {
-          if (this.currentHealth - amount <= 0) {
+        takeDamage(damage) {
+          if (this.currentHealth - damage <= 0) {
             this.currentHealth = 0;
             store.data.currencies[CHARACTER_CURRENCY_GOLD].add(1);
             store.enemy.current = store.enemy.getRandomEnemy();
           } else {
-            this.currentHealth -= amount;
+            this.currentHealth -= damage;
           }
           store.enemy.renderChange();
         },
