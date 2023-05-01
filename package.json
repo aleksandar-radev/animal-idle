@@ -4,7 +4,6 @@
   "private": true,
   "homepage": "https://aleksandar-radev.github.io/animal-idle",
   "scripts": {
-    "predeploy": "yarn run build",
     "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build"
