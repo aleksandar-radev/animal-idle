@@ -5,7 +5,6 @@ import './SkillsBar.scss';
 
 const SkillsBar = (props) => {
   const [store] = useContext(State);
-  const [skills] = useState(store.character.skills);
   const [domSkills, setDomSkills] = useState([]);
   const skillShouldStop = useRef(false);
 
@@ -27,7 +26,7 @@ const SkillsBar = (props) => {
       );
     }
     setDomSkills(newDomSkills);
-  }, [store.character.skills, store.character.skillsMap]);
+  }, [store.character.skills]);
 
   // stop skill if on another screen
   useEffect(() => {
@@ -44,7 +43,7 @@ const SkillsBar = (props) => {
     if (!skill) return;
     const target = document.querySelector(`[data-skill='${skill.name}']`);
 
-    if (target.classList.contains('disabled')) return;
+    if (target.classList.contains('cooldown')) return;
     activateSkill({ target });
   };
 
@@ -54,16 +53,18 @@ const SkillsBar = (props) => {
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
     };
-  }, [skills]);
+  }, [store.character.skills]);
 
   const activateSkill = (event) => {
     const { target } = event;
     const skillName = target.dataset.skill;
-    const skill = skills[skillName];
+    const skill = store.character.skills[skillName];
 
-    if (!skill) return;
+    if (!skill || store.character.getCurrentMana() < skill.manaCost) return;
 
-    target.classList.add('disabled');
+    store.character.updateMana(-skill.manaCost);
+    target.classList.add('cooldown');
+
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
@@ -84,7 +85,7 @@ const SkillsBar = (props) => {
       } else {
         target.textContent = skill.name;
         target.style.removeProperty('--time-left');
-        target.classList.remove('disabled');
+        target.classList.remove('cooldown');
 
         store.character.skills[skill.name].cast();
       }
@@ -96,7 +97,9 @@ const SkillsBar = (props) => {
     <>
       <div className={['SkillsBar', props.className].join(' ')}>
         <div className={'SkillsBar-row'}>{domSkills.slice(0, 10)}</div>
-        {skills.length > 10 && <div className={'SkillsBar-row'}>{domSkills.slice(10, 20)}</div>}
+        {store.character.skills.length > 10 && (
+          <div className={'SkillsBar-row'}>{domSkills.slice(10, 20)}</div>
+        )}
       </div>
     </>
   );

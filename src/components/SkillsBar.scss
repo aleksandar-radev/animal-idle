@@ -26,6 +26,11 @@
 
       &.disabled {
         pointer-events: none;
+        background-color: green;
+      }
+
+      &.cooldown {
+        pointer-events: none;
       }
 
       &::before {
