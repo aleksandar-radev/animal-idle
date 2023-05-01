@@ -3,21 +3,25 @@ import { State } from '../api/Store';
 import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 
-const SkillsBar = (props) => {
+const SkillsBar = ({ className }) => {
   const [store] = useContext(State);
-  const [domSkills, setDomSkills] = useState([]);
+  const [activeSkills, setActiveSkills] = useState({});
   const skillShouldStop = useRef(false);
+  const skillsPerRow = 10;
+  const totalSkillRows = 2;
 
-  // render DOM skills
-  useEffect(() => {
+  const renderDomSkills = () => {
     const newDomSkills = [];
-
-    for (let id = 1; id < 20; id++) {
+    for (let id = 1; id < skillsPerRow * totalSkillRows; id++) {
       const skill = store.character.getSkillById(id);
 
       newDomSkills.push(
         <div
-          className="SkillsBar-row-item"
+          className={`
+            SkillsBar-row-item 
+            ${activeSkills[skill?.name] ? 'cooldown' : ''}
+            ${skill?.manaCost > store.character.getCurrentMana() ? 'disabled' : ''}
+          `}
           data-skill={skill?.name}
           key={skill?.name || id}
           onClick={activateSkill}>
@@ -25,8 +29,8 @@ const SkillsBar = (props) => {
         </div>,
       );
     }
-    setDomSkills(newDomSkills);
-  }, [store.character.skills]);
+    return newDomSkills;
+  };
 
   // stop skill if on another screen
   useEffect(() => {
@@ -38,7 +42,7 @@ const SkillsBar = (props) => {
 
   const handleKeyPress = (e) => {
     const keyId = String.fromCharCode(e.which);
-    let skill = store.character.getSkillById(keyId);
+    const skill = store.character.getSkillById(keyId);
 
     if (!skill) return;
     const target = document.querySelector(`[data-skill='${skill.name}']`);
@@ -63,7 +67,8 @@ const SkillsBar = (props) => {
     if (!skill || store.character.getCurrentMana() < skill.manaCost) return;
 
     store.character.updateMana(-skill.manaCost);
-    target.classList.add('cooldown');
+
+    setActiveSkills((prev) => ({ ...prev, [skillName]: true }));
 
     let startTime = null;
 
@@ -85,9 +90,9 @@ const SkillsBar = (props) => {
       } else {
         target.textContent = skill.name;
         target.style.removeProperty('--time-left');
-        target.classList.remove('cooldown');
+        setActiveSkills((prev) => ({ ...prev, [skillName]: false }));
 
-        store.character.skills[skill.name].cast();
+        skill.cast();
       }
     };
     requestAnimationFrame(animateCooldown);
@@ -95,10 +100,12 @@ const SkillsBar = (props) => {
 
   return (
     <>
-      <div className={['SkillsBar', props.className].join(' ')}>
-        <div className={'SkillsBar-row'}>{domSkills.slice(0, 10)}</div>
-        {store.character.skills.length > 10 && (
-          <div className={'SkillsBar-row'}>{domSkills.slice(10, 20)}</div>
+      <div className={['SkillsBar', className].join(' ')}>
+        <div className={'SkillsBar-row'}>{renderDomSkills().slice(0, skillsPerRow)}</div>
+        {store.character.skills.length > skillsPerRow && (
+          <div className={'SkillsBar-row'}>
+            {renderDomSkills().slice(skillsPerRow, skillsPerRow * totalSkillRows)}
+          </div>
         )}
       </div>
     </>
