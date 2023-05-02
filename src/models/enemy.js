@@ -39,13 +39,16 @@ const Enemy = (store) => {
       return {
         takeDamage(damage) {
           if (this.currentHealth - damage <= 0) {
-            this.currentHealth = 0;
-            store.data.currencies[CHARACTER_CURRENCY_GOLD].add(1);
-            store.enemy.current = store.enemy.getRandomEnemy();
+            this.die();
           } else {
             this.currentHealth -= damage;
           }
           store.enemy.renderChange();
+        },
+        die() {
+          this.currentHealth = 0;
+          store.data.currencies[CHARACTER_CURRENCY_GOLD].add(1);
+          store.enemy.current = store.enemy.getRandomEnemy();
         },
       };
     },
@@ -62,7 +65,7 @@ const Enemy = (store) => {
         name: ENEMY_TYPE_SORCERESS,
         currentHealth: 60,
         baseHealth: 60,
-        damage: 32,
+        damage: 15,
         atackSpeed: 4000,
       },
     },

@@ -1,6 +1,7 @@
 {
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
+  "window.title": "Animal IDLE",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.organizeImports": true
