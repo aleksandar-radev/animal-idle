@@ -22,10 +22,21 @@ const DataManager = () => {
   };
 
   useEffect(() => {
-    setInterval(async () => {
-      const user = await AuthRepo.getUser();
-      DataRepo.updateDataById(user.id, store.data);
-    }, 60 * 1000);
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === 'visible') {
+        const user = await AuthRepo.getUser();
+        DataRepo.updateDataById(user.id, store.data);
+      }
+    };
+
+    setInterval(handleVisibilityChange, 60 * 1000);
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      clearInterval(handleVisibilityChange);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, []);
 
   useEffect(() => {
