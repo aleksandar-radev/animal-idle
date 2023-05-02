@@ -10,7 +10,7 @@ import {
 const Character = (store) => {
   return {
     currentHealth: 0,
-    baseHealth: 100,
+    totalHealth: 100,
     currentMana: 0,
     totalMana: 100,
     damage: 5,
@@ -25,7 +25,7 @@ const Character = (store) => {
     },
 
     getTotalHealth() {
-      let health = this.baseHealth;
+      let health = this.totalHealth;
       // TODO: add bonuses
       return health;
     },

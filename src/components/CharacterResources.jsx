@@ -24,7 +24,7 @@ const CharacterResources = (props) => {
       ) : (
         <HealthBar
           currentHealth={store.enemy.current?.currentHealth}
-          totalHealth={store.enemy.current?.baseHealth}></HealthBar>
+          totalHealth={store.enemy.current?.totalHealth}></HealthBar>
       )}
     </div>
   );

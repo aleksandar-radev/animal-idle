@@ -57,14 +57,14 @@ const Enemy = (store) => {
       [ENEMY_TYPE_BERSERKER]: {
         name: ENEMY_TYPE_BERSERKER,
         currentHealth: 100,
-        baseHealth: 100,
+        totalHealth: 100,
         damage: 5,
         atackSpeed: 3000,
       },
       [ENEMY_TYPE_SORCERESS]: {
         name: ENEMY_TYPE_SORCERESS,
         currentHealth: 60,
-        baseHealth: 60,
+        totalHealth: 60,
         damage: 15,
         atackSpeed: 4000,
       },
