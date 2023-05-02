@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { State } from '../api/Store';
-import goldIcon from '../assets/gold.png';
-import swordIcon from '../assets/sword.png';
-import { SHOP_UPGRADES_ATACK } from '../constants/gameVariables';
-import { en } from '../constants/translations';
+import { useContext } from 'react';
+import { State } from '../../api/Store';
+import goldIcon from '../../assets/gold.png';
+import swordIcon from '../../assets/sword.png';
+import { SHOP_UPGRADES_ATACK } from '../../constants/gameVariables';
+import { en } from '../../constants/translations';
 import './ShopUpgradesAtack.scss';
 
 const ShopUpgradesAtack = () => {

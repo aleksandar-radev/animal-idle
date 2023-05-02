@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { State } from '../../api/Store';
-import CharacterAvatar from '../../components/CharacterAvatar';
-import CharacterItems from '../../components/CharacterItems';
-import CharacterSkills from '../../components/CharacterSkills';
-import CharacterStats from '../../components/CharacterStats';
+import CharacterAvatar from '../../components/character/CharacterAvatar';
+import CharacterItems from '../../components/character/CharacterItems';
+import CharacterSkills from '../../components/character/CharacterSkills';
+import CharacterStats from '../../components/character/CharacterStats';
 import {
   CHARACTER_SCREEN_ITEMS_TAB,
   CHARACTER_SCREEN_SKILLS_TAB,

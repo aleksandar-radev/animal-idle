@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { State } from '../api/Store';
+import { useContext } from 'react';
+import { State } from '../../api/Store';
 
 const CharacterStats = () => {
   const [store] = useContext(State);

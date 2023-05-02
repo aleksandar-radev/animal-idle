@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { State } from '../../api/Store';
-import ShopUpgradesAtack from '../../components/ShopUpgradesAtack';
+import ShopUpgradesAtack from '../../components/shop/ShopUpgradesAtack';
 import {
   SHOP_SCREEN_ATACK_TAB,
   SHOP_SCREEN_DEFENSE_TAB,

@@ -1,8 +1,7 @@
-import React from 'react';
 import PropTypes from '../externalLibraries/propTypes';
 
-const FightLog = (props) => {
-  return <div className={props.className}>FightLog</div>;
+const FightLog = ({ className }) => {
+  return <div className={className}>FightLog</div>;
 };
 
 FightLog.propTypes = {

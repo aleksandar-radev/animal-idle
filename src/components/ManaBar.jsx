@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { State } from '../api/Store';
 import PropTypes from '../externalLibraries/propTypes';
 import './ManaBar.scss';
 
-const ManaBar = (props) => {
+const ManaBar = ({ currentMana, totalMana }) => {
   const [store] = useContext(State);
   const shouldStopRegen = useRef(false);
-  const percentage = (props.currentMana / props.totalMana) * 100;
+  const percentage = (currentMana / totalMana) * 100;
 
   useEffect(() => {
     shouldStopRegen.current = false;
@@ -42,7 +42,7 @@ const ManaBar = (props) => {
       style={{
         backgroundImage: `linear-gradient(to right, blue ${percentage}%, white ${percentage}%)`,
       }}
-      className={'ManaBar'}>{`${props.currentMana} / ${props.totalMana}`}</div>
+      className={'ManaBar'}>{`${currentMana} / ${totalMana}`}</div>
   );
 };
 

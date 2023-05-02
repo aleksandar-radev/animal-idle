@@ -1,7 +1,11 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { State } from '../../api/Store';
 import FightLog from '../../components/FightLog';
 import SkillsBar from '../../components/SkillsBar';
+import CharacterAvatar from '../../components/character/CharacterAvatar';
+import CharacterResources from '../../components/character/CharacterResources';
+import EnemyAvatar from '../../components/enemy/EnemyAvatar';
+import EnemyResources from '../../components/enemy/EnemyResources';
 import './FightScreen.scss';
 
 const FightScreen = () => {
@@ -46,7 +50,7 @@ const FightScreen = () => {
   return (
     <div className={'FightScreen'}>
       <CharacterAvatar className={'FightScreen-self'}></CharacterAvatar>
-      <CharacterResources className={'FightScreen-self-res'} isSelf={true}></CharacterResources>
+      <CharacterResources className={'FightScreen-self-res'}></CharacterResources>
 
       <FightLog className={'FightScreen-log'}></FightLog>
 
