@@ -1,5 +1,6 @@
 import {
   CHARACTER_SKILL_ATACK,
+  CHARACTER_SKILL_AUTO_CAST,
   CHARACTER_SKILL_DOUBLE_DAMAGE,
   CHARACTER_SKILL_HEAL,
   SHOP_UPGRADES_ATACK,
@@ -113,6 +114,12 @@ const Character = (store) => {
           const damage = store.character.getDamage() * 2;
           store.enemy.current.takeDamage(damage);
         },
+      },
+      [CHARACTER_SKILL_AUTO_CAST]: {
+        name: CHARACTER_SKILL_AUTO_CAST,
+        cooldown: 10000,
+        manaCost: 5,
+        cast() {},
       },
     },
 

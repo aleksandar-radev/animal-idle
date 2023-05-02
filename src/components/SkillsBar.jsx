@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { State } from '../api/Store';
+import { CHARACTER_SKILL_AUTO_CAST } from '../constants/gameVariables';
 import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 
@@ -9,6 +10,41 @@ const SkillsBar = ({ className }) => {
   const skillShouldStop = useRef(false);
   const skillsPerRow = 10;
   const totalSkillRows = 2;
+
+  // Stop skill if on another screen
+  useEffect(() => {
+    skillShouldStop.current = false;
+    return () => {
+      skillShouldStop.current = true;
+    };
+  }, []);
+
+  // Handle key press events
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
+  // Auto cast
+  useEffect(() => {
+    if (activeSkills[CHARACTER_SKILL_AUTO_CAST]) {
+      Object.keys(store.character.skills).forEach((skillName) => {
+        const target = document.querySelector(`[data-skill='${skillName}']`);
+        activateSkill({ target });
+      });
+    }
+  }, [activeSkills]);
+
+  const handleKeyPress = (e) => {
+    const keyId = String.fromCharCode(e.which);
+    const skill = store.character.getSkillById(keyId);
+
+    if (!skill) return;
+    const target = document.querySelector(`[data-skill='${skill.name}']`);
+    activateSkill({ target });
+  };
 
   const renderDomSkills = () => {
     const newDomSkills = [];
@@ -25,45 +61,19 @@ const SkillsBar = ({ className }) => {
           data-skill={skill?.name}
           key={skill?.name || id}
           onClick={activateSkill}>
-          {skill?.name || ''}
+          <p>{skill?.name || ''}</p>
         </div>,
       );
     }
     return newDomSkills;
   };
 
-  // stop skill if on another screen
-  useEffect(() => {
-    skillShouldStop.current = false;
-    return () => {
-      skillShouldStop.current = true;
-    };
-  }, []);
-
-  const handleKeyPress = (e) => {
-    const keyId = String.fromCharCode(e.which);
-    const skill = store.character.getSkillById(keyId);
-
-    if (!skill) return;
-    const target = document.querySelector(`[data-skill='${skill.name}']`);
-
-    if (target.classList.contains('cooldown')) return;
-    activateSkill({ target });
-  };
-
-  //handle key press events
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyPress);
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress);
-    };
-  }, [store.character.skills]);
-
   const activateSkill = (event) => {
     const { target } = event;
     const skillName = target.dataset.skill;
     const skill = store.character.skills[skillName];
 
+    if (target.classList.contains('cooldown')) return;
     if (!skill || store.character.getCurrentMana() < skill.manaCost) return;
 
     store.character.updateMana(-skill.manaCost);

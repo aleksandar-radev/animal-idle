@@ -2,6 +2,7 @@
 export const CHARACTER_SKILL_ATACK = 'atack';
 export const CHARACTER_SKILL_HEAL = 'heal';
 export const CHARACTER_SKILL_DOUBLE_DAMAGE = 'double-damage';
+export const CHARACTER_SKILL_AUTO_CAST = 'auto-cast';
 
 // ENEMY TYPES
 export const ENEMY_TYPE_SORCERESS = 'sorceress';

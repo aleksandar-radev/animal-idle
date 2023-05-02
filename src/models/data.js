@@ -1,6 +1,7 @@
 import {
   CHARACTER_CURRENCY_GOLD,
   CHARACTER_SKILL_ATACK,
+  CHARACTER_SKILL_AUTO_CAST,
   CHARACTER_SKILL_DOUBLE_DAMAGE,
   CHARACTER_SKILL_HEAL,
   SHOP_UPGRADES_ATACK,
@@ -53,10 +54,15 @@ const Data = (store) => {
         name: CHARACTER_SKILL_DOUBLE_DAMAGE,
         cooldownReductionFlat: 0,
       },
+      [CHARACTER_SKILL_AUTO_CAST]: {
+        name: CHARACTER_SKILL_AUTO_CAST,
+        cooldownReductionFlat: 0,
+      },
       map: {
         1: CHARACTER_SKILL_ATACK,
         2: CHARACTER_SKILL_HEAL,
         3: CHARACTER_SKILL_DOUBLE_DAMAGE,
+        4: CHARACTER_SKILL_AUTO_CAST,
       },
     },
 
