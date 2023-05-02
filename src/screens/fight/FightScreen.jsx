@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { State } from '../../api/Store';
-import CharacterAvatar from '../../components/CharacterAvatar';
-import CharacterResources from '../../components/CharacterResources';
 import FightLog from '../../components/FightLog';
 import SkillsBar from '../../components/SkillsBar';
 import './FightScreen.scss';
@@ -52,8 +50,8 @@ const FightScreen = () => {
 
       <FightLog className={'FightScreen-log'}></FightLog>
 
-      <CharacterAvatar className={'FightScreen-enemy'}></CharacterAvatar>
-      <CharacterResources className={'FightScreen-enemy-res'}></CharacterResources>
+      <EnemyAvatar className={'FightScreen-enemy'}></EnemyAvatar>
+      <EnemyResources className={'FightScreen-enemy-res'}></EnemyResources>
 
       <SkillsBar className={'FightScreen-skills'}></SkillsBar>
     </div>

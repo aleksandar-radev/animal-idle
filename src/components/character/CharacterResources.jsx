@@ -5,13 +5,13 @@ import './CharacterResources.scss';
 import HealthBar from './HealthBar';
 import ManaBar from './ManaBar';
 
-const CharacterResources = (props) => {
+const CharacterResources = ({ className, isSelf }) => {
   const [store] = useContext(State);
   const [character] = useState(store.character);
 
   return (
-    <div className={['CharacterResources', props.className].join(' ')}>
-      {props.isSelf ? (
+    <div className={['CharacterResources', className].join(' ')}>
+      {isSelf ? (
         <>
           <HealthBar
             currentHealth={character.getCurrentHealth()}
@@ -23,8 +23,8 @@ const CharacterResources = (props) => {
         </>
       ) : (
         <HealthBar
-          currentHealth={store.enemy.current?.currentHealth}
-          totalHealth={store.enemy.current?.totalHealth}></HealthBar>
+          currentHealth={store.enemy.current?.getCurrentHealth()}
+          totalHealth={store.enemy.current?.getTotalHealth()}></HealthBar>
       )}
     </div>
   );
