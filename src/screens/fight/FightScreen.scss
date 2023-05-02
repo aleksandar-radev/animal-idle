@@ -9,12 +9,11 @@
   align-items: center;
 
   & > div {
-    background-color: aquamarine;
-    border-radius: 50%;
     height: 100%;
   }
 
   &-self {
+    background-color: aquamarine;
   }
 
   &-self-res {
@@ -32,6 +31,7 @@
   }
 
   &-skills {
+    background-color: aquamarine;
     grid-column: 1 / span 3;
   }
 }
