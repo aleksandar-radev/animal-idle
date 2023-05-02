@@ -10,6 +10,9 @@ import {
 const Data = (store) => {
   return {
     character: {},
+    enemy: {
+      level: 0,
+    },
     renderChanges: 0,
     renderChange() {
       this.renderChanges++;

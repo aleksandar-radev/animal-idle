@@ -13,7 +13,7 @@ const Character = (store) => {
     totalHealth: 100,
     currentMana: 0,
     totalMana: 100,
-    damage: 5,
+    damage: 15,
 
     reset() {
       this.currentHealth = this.getTotalHealth();

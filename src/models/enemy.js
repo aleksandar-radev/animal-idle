@@ -37,6 +37,17 @@ const Enemy = (store) => {
 
     enemyMethods() {
       return {
+        getCurrentHealth() {
+          if (!this.currentHealth) {
+            this.currentHealth = this.getTotalHealth();
+          }
+          return this.currentHealth;
+        },
+        getTotalHealth() {
+          let health = this.totalHealth;
+          health += Math.ceil((health * store.data.enemy.level) / 100);
+          return health;
+        },
         takeDamage(damage) {
           if (this.currentHealth - damage <= 0) {
             this.die();
@@ -46,8 +57,9 @@ const Enemy = (store) => {
           store.enemy.renderChange();
         },
         die() {
-          this.currentHealth = 0;
+          this.currentHealth = null;
           store.data.currencies[CHARACTER_CURRENCY_GOLD].add(1);
+          store.data.enemy.level++;
           store.enemy.current = store.enemy.getRandomEnemy();
         },
       };
@@ -56,14 +68,14 @@ const Enemy = (store) => {
     enemyTypes: {
       [ENEMY_TYPE_BERSERKER]: {
         name: ENEMY_TYPE_BERSERKER,
-        currentHealth: 100,
+        currentHealth: null,
         totalHealth: 100,
         damage: 5,
         atackSpeed: 3000,
       },
       [ENEMY_TYPE_SORCERESS]: {
         name: ENEMY_TYPE_SORCERESS,
-        currentHealth: 60,
+        currentHealth: null,
         totalHealth: 60,
         damage: 15,
         atackSpeed: 4000,
