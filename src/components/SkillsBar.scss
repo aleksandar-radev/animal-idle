@@ -35,14 +35,12 @@
 
       &::before {
         content: '';
-        background: conic-gradient(
-          rgba(0, 0, 0, 0.7) var(--time-left),
-          rgba(0, 0, 0, 0.1) var(--time-left)
-        );
+        background: conic-gradient(rgba(0, 0, 0, 0.7) var(--time-left),
+            rgba(0, 0, 0, 0.1) var(--time-left));
         position: absolute;
         opacity: 0.8;
         top: 0;
-        left: 0p;
+        left: 0;
         height: 100%;
         width: 100%;
       }

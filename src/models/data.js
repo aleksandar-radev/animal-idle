@@ -1,3 +1,5 @@
+import swingIcon from '../../assets/swing.png';
+import swordIcon from '../assets/sword.png';
 import {
   CHARACTER_CURRENCY_GOLD,
   CHARACTER_SKILL_ATACK,
@@ -6,6 +8,7 @@ import {
   CHARACTER_SKILL_HEAL,
   SHOP_UPGRADES_ATACK,
   SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT,
+  SHOP_UPGRADES_ATACK_BONUS_SPEED,
 } from '../constants/gameVariables';
 
 const Data = (store) => {
@@ -70,11 +73,39 @@ const Data = (store) => {
       [SHOP_UPGRADES_ATACK]: {
         [SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT]: {
           level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
           getBonus: function () {
             return this.level * 1;
           },
           getCost: function () {
             return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+
+        [SHOP_UPGRADES_ATACK_BONUS_SPEED]: {
+          level: 0,
+          getImgUrl: function () {
+            return swingIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 10;
           },
           buy: function () {
             const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];

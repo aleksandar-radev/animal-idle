@@ -1,7 +1,9 @@
 import {
   CHARACTER_CURRENCY_GOLD,
-  ENEMY_TYPE_BERSERKER,
+  ENEMY_TYPE_BARBARIAN,
   ENEMY_TYPE_SORCERESS,
+  ENEMY_TYPE_ASSASSIN,
+  ENEMY_TYPE_WARRIOR,
 } from '../constants/gameVariables';
 
 // eslint-disable-next-line no-unused-vars
@@ -24,7 +26,7 @@ const Enemy = (store) => {
     getRandomEnemy() {
       const keys = Object.keys(this.enemyTypes);
       const randomKey = keys[Math.floor(Math.random() * keys.length)];
-
+  
       return this.getEnemyByKey(randomKey);
     },
 
@@ -48,6 +50,11 @@ const Enemy = (store) => {
           health += Math.ceil((health * store.data.enemy.level) / 100);
           return health;
         },
+        getTotalDamage() {
+          let damage = this.damage;
+          damage += Math.ceil((damage * store.data.enemy.level) / 100);
+          return damage;
+        },
         takeDamage(damage) {
           if (this.currentHealth - damage <= 0) {
             this.die();
@@ -66,8 +73,8 @@ const Enemy = (store) => {
     },
 
     enemyTypes: {
-      [ENEMY_TYPE_BERSERKER]: {
-        name: ENEMY_TYPE_BERSERKER,
+      [ENEMY_TYPE_BARBARIAN]: {
+        name: ENEMY_TYPE_BARBARIAN,
         currentHealth: null,
         totalHealth: 100,
         damage: 5,
@@ -77,7 +84,21 @@ const Enemy = (store) => {
         name: ENEMY_TYPE_SORCERESS,
         currentHealth: null,
         totalHealth: 60,
-        damage: 15,
+        damage: 20,
+        atackSpeed: 4000,
+      },
+      [ENEMY_TYPE_ASSASSIN]: {
+        name: ENEMY_TYPE_ASSASSIN,
+        currentHealth: null,
+        totalHealth: 80,
+        damage: 10,
+        atackSpeed: 2000,
+      },
+      [ENEMY_TYPE_WARRIOR]: {
+        name: ENEMY_TYPE_WARRIOR,
+        currentHealth: null,
+        totalHealth: 150,
+        damage: 5,
         atackSpeed: 4000,
       },
     },

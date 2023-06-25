@@ -5,9 +5,10 @@ export const CHARACTER_SKILL_DOUBLE_DAMAGE = 'double-damage';
 export const CHARACTER_SKILL_AUTO_CAST = 'auto-cast';
 
 // ENEMY TYPES
+export const ENEMY_TYPE_BARBARIAN = 'barbarian';
 export const ENEMY_TYPE_SORCERESS = 'sorceress';
-export const ENEMY_TYPE_BERSERKER = 'berserker';
-export const ENEMY_TYPE_RANGER = 'ranger';
+export const ENEMY_TYPE_ASSASSIN = 'assassin';
+export const ENEMY_TYPE_WARRIOR = 'warrior';
 
 // TABS
 export const MAIN_SCREEN_CHARACTER_TAB = 'character';
@@ -32,3 +33,4 @@ export const SHOP_UPGRADES_UTILITY = 'utility';
 
 // ATACK UPGRADES
 export const SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT = 'bonus-damage-flat';
+export const SHOP_UPGRADES_ATACK_BONUS_SPEED = 'attack-speed';

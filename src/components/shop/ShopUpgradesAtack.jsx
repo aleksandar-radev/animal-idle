@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { State } from '../../api/Store';
 import goldIcon from '../../assets/gold.png';
-import swordIcon from '../../assets/sword.png';
 import { SHOP_UPGRADES_ATACK } from '../../constants/gameVariables';
 import { en } from '../../constants/translations';
 import './ShopUpgradesAtack.scss';
@@ -21,7 +20,7 @@ const ShopUpgradesAtack = () => {
         return (
           <div className="ShopUpgradesAtack" key={upgradeKey}>
             <div className="ShopUpgradesAtack-icon">
-              <img src={swordIcon} />
+              <img src={upgrade.getImgUrl()} />
             </div>
 
             <div className="ShopUpgradesAtack-info">
