@@ -7,6 +7,7 @@ import Character from './character';
 import Data from './data';
 import Enemy from './enemy';
 import Tabs from './tabs';
+import { loadAssets } from './assetsLoader';
 
 const DataManager = () => {
   const [store, setStore] = useContext(State);
@@ -42,6 +43,8 @@ const DataManager = () => {
   useEffect(() => {
     if (effectCount.current > 0) return;
     effectCount.current++;
+    store.assets = {};
+    loadAssets(store);
 
     (async () => {
       const user = await AuthRepo.getUser();
