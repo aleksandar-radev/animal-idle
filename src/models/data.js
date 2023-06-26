@@ -1,4 +1,4 @@
-import swingIcon from '../../assets/swing.png';
+import swingIcon from '../assets/swing.png';
 import swordIcon from '../assets/sword.png';
 import {
   CHARACTER_CURRENCY_GOLD,
@@ -18,7 +18,7 @@ const Data = (store) => {
       level: 0,
     },
     renderChanges: 0,
-    renderChange() {
+    renderChange () {
       this.renderChanges++;
       if (this.renderChanges > 1e99) {
         this.renderChanges = 0;
