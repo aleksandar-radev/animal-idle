@@ -1,10 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { State } from '../api/Store';
-import {
-  ATTACK_SKILL_IMG,
-  CHARACTER_SKILL_AUTO_CAST,
-  ENEMY_TYPE_BARBARIAN,
-} from '../constants/gameVariables';
+import { CHARACTER_SKILL_AUTO_CAST } from '../constants/gameVariables';
 import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 
@@ -54,6 +50,7 @@ const SkillsBar = ({ className }) => {
     const newDomSkills = [];
     for (let id = 1; id < skillsPerRow * totalSkillRows; id++) {
       const skill = store.character.getSkillById(id);
+      const img = store.assets[skill?.name];
 
       newDomSkills.push(
         <div
@@ -63,12 +60,14 @@ const SkillsBar = ({ className }) => {
             ${skill?.manaCost > store.character.getCurrentMana() ? 'disabled' : ''}
           `}
           style={{
-            backgroundImage: `url(${store.assets[ATTACK_SKILL_IMG]})`,
+            backgroundImage: `url(${store.assets[skill?.name]})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
           }}
           data-skill={skill?.name}
           key={skill?.name || id}
           onClick={activateSkill}>
-          <p>{skill?.name || ''}</p>
+          <p>{!img ? skill?.name : ''}</p>
         </div>,
       );
     }
@@ -100,12 +99,12 @@ const SkillsBar = ({ className }) => {
       const passedTime = (elapsedTime / skill.cooldown) * 100;
 
       target.style.setProperty('--time-left', `${passedTime}%`);
-      target.textContent = ((skill.cooldown - elapsedTime) / 1000).toFixed(2);
+      // target.textContent = ((skill.cooldown - elapsedTime) / 1000).toFixed(2);
 
       if (elapsedTime < skill.cooldown) {
         requestAnimationFrame(animateCooldown);
       } else {
-        target.textContent = skill.name;
+        // target.textContent = skill.name;
         target.style.removeProperty('--time-left');
         setActiveSkills((prev) => ({ ...prev, [skillName]: false }));
       }
