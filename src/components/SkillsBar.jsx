@@ -81,7 +81,7 @@ const SkillsBar = ({ className }) => {
     setActiveSkills((prev) => ({ ...prev, [skillName]: true }));
 
     let startTime = null;
-
+    skill.cast();
     const animateCooldown = (timestamp) => {
       if (skillShouldStop.current) return;
 
@@ -102,7 +102,6 @@ const SkillsBar = ({ className }) => {
         target.style.removeProperty('--time-left');
         setActiveSkills((prev) => ({ ...prev, [skillName]: false }));
 
-        skill.cast();
       }
     };
     requestAnimationFrame(animateCooldown);

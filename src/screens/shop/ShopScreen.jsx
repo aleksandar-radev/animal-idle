@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { State } from '../../api/Store';
 import ShopUpgradesAtack from '../../components/shop/ShopUpgradesAtack';
+import ShopUpgradesDefence from '../../components/shop/ShopUpgradesDefence';
+import ShopUpgradesUtility from '../../components/shop/ShopUpgradesUtility';
 import {
   SHOP_SCREEN_ATACK_TAB,
   SHOP_SCREEN_DEFENSE_TAB,
@@ -20,9 +22,9 @@ const Shop = () => {
       case SHOP_SCREEN_ATACK_TAB:
         return <ShopUpgradesAtack />;
       case SHOP_SCREEN_DEFENSE_TAB:
-        return '';
+        return <ShopUpgradesDefence />;
       case SHOP_SCREEN_UTILITY_TAB:
-        return '';
+        return <ShopUpgradesUtility />;
       default:
         return <ShopUpgradesAtack />;
     }

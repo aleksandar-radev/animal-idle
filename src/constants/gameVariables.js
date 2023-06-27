@@ -3,6 +3,8 @@ export const CHARACTER_SKILL_ATACK = 'atack';
 export const CHARACTER_SKILL_HEAL = 'heal';
 export const CHARACTER_SKILL_DOUBLE_DAMAGE = 'double-damage';
 export const CHARACTER_SKILL_AUTO_CAST = 'auto-cast';
+export const CHARACTER_SKILL_BACKSTAB = 'backstab';
+export const CHARACTER_SKILL_ASCEND = 'ascend';
 
 // ENEMY TYPES
 export const ENEMY_TYPE_BARBARIAN = 'barbarian';
@@ -28,9 +30,13 @@ export const CHARACTER_CURRENCY_GOLD = 'gold';
 
 // UPGRADES
 export const SHOP_UPGRADES_ATACK = 'atack';
-export const SHOP_UPGRADES_DEFENSE = 'defense';
+export const SHOP_UPGRADES_DEFENCE = 'defence';
 export const SHOP_UPGRADES_UTILITY = 'utility';
 
 // ATACK UPGRADES
 export const SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT = 'bonus-damage-flat';
 export const SHOP_UPGRADES_ATACK_BONUS_SPEED = 'attack-speed';
+
+// DEFENCE UPGRADES
+export const SHOP_UPGRADES_DEFENCE_BONUS_HEALTH = 'bonus-health';
+export const SHOP_UPGRADES_DEFENCE_BONUS_DEFENCE = 'bonus-defence';

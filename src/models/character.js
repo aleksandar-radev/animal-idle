@@ -1,6 +1,8 @@
 import {
   CHARACTER_SKILL_ATACK,
   CHARACTER_SKILL_AUTO_CAST,
+  CHARACTER_SKILL_ASCEND,
+  CHARACTER_SKILL_BACKSTAB,
   CHARACTER_SKILL_DOUBLE_DAMAGE,
   CHARACTER_SKILL_HEAL,
   SHOP_UPGRADES_ATACK,
@@ -120,6 +122,23 @@ const Character = (store) => {
         cooldown: 10000,
         manaCost: 5,
         cast() {},
+      },
+      [CHARACTER_SKILL_BACKSTAB]: {
+        name: CHARACTER_SKILL_BACKSTAB,
+        cooldown: 4000,
+        manaCost: 5,
+        cast() {
+          const damage = store.character.getDamage() * 2;
+          store.enemy.current.takeDamage(damage);
+        },
+      },
+      [CHARACTER_SKILL_ASCEND]: {
+        name: CHARACTER_SKILL_ASCEND,
+        cooldown: 0,
+        manaCost: 0,
+        cast() {
+          // rebirth
+        },
       },
     },
 
