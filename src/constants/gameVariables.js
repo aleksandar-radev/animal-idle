@@ -22,7 +22,7 @@ export const CHARACTER_SCREEN_SKILLS_TAB = 'skills';
 export const CHARACTER_SCREEN_ITEMS_TAB = 'items';
 
 export const SHOP_SCREEN_ATACK_TAB = 'atack';
-export const SHOP_SCREEN_DEFENSE_TAB = 'defense';
+export const SHOP_SCREEN_DEFENCE_TAB = 'defence';
 export const SHOP_SCREEN_UTILITY_TAB = 'utility';
 
 // CURRENCIES

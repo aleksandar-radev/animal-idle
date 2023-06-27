@@ -5,7 +5,7 @@ import ShopUpgradesDefence from '../../components/shop/ShopUpgradesDefence';
 import ShopUpgradesUtility from '../../components/shop/ShopUpgradesUtility';
 import {
   SHOP_SCREEN_ATACK_TAB,
-  SHOP_SCREEN_DEFENSE_TAB,
+  SHOP_SCREEN_DEFENCE_TAB,
   SHOP_SCREEN_UTILITY_TAB,
 } from '../../constants/gameVariables';
 import './ShopScreen.scss';
@@ -21,7 +21,7 @@ const Shop = () => {
     switch (store?.tabs?.activeCharacterScreenTab) {
       case SHOP_SCREEN_ATACK_TAB:
         return <ShopUpgradesAtack />;
-      case SHOP_SCREEN_DEFENSE_TAB:
+      case SHOP_SCREEN_DEFENCE_TAB:
         return <ShopUpgradesDefence />;
       case SHOP_SCREEN_UTILITY_TAB:
         return <ShopUpgradesUtility />;
@@ -36,7 +36,7 @@ const Shop = () => {
         <div className="ShopScreen-tabs-tab" onClick={() => changeView(SHOP_SCREEN_ATACK_TAB)}>
           Atack
         </div>
-        <div className="ShopScreen-tabs-tab" onClick={() => changeView(SHOP_SCREEN_DEFENSE_TAB)}>
+        <div className="ShopScreen-tabs-tab" onClick={() => changeView(SHOP_SCREEN_DEFENCE_TAB)}>
           Defence
         </div>
         <div className="ShopScreen-tabs-tab" onClick={() => changeView(SHOP_SCREEN_UTILITY_TAB)}>
