@@ -2,15 +2,15 @@ import swingIcon from '../assets/swing.png';
 import swordIcon from '../assets/sword.png';
 import {
   CHARACTER_CURRENCY_GOLD,
-  CHARACTER_SKILL_ATACK,
+  CHARACTER_SKILL_ATTACK,
   CHARACTER_SKILL_AUTO_CAST,
   CHARACTER_SKILL_ASCEND,
   CHARACTER_SKILL_BACKSTAB,
   CHARACTER_SKILL_DOUBLE_DAMAGE,
   CHARACTER_SKILL_HEAL,
-  SHOP_UPGRADES_ATACK,
-  SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT,
-  SHOP_UPGRADES_ATACK_BONUS_SPEED,
+  SHOP_UPGRADES_ATTACK,
+  SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT,
+  SHOP_UPGRADES_ATTACK_BONUS_SPEED,
   SHOP_UPGRADES_DEFENCE_BONUS_HEALTH,
   SHOP_UPGRADES_DEFENCE,
 } from '../constants/gameVariables';
@@ -22,7 +22,7 @@ const Data = (store) => {
       level: 0,
     },
     renderChanges: 0,
-    renderChange () {
+    renderChange() {
       this.renderChanges++;
       if (this.renderChanges > 1e99) {
         this.renderChanges = 0;
@@ -49,8 +49,8 @@ const Data = (store) => {
     },
 
     skills: {
-      [CHARACTER_SKILL_ATACK]: {
-        name: CHARACTER_SKILL_ATACK,
+      [CHARACTER_SKILL_ATTACK]: {
+        name: CHARACTER_SKILL_ATTACK,
         cooldownReductionFlat: 0,
       },
       [CHARACTER_SKILL_HEAL]: {
@@ -74,7 +74,7 @@ const Data = (store) => {
         cooldownReductionFlat: 0,
       },
       map: {
-        1: CHARACTER_SKILL_ATACK,
+        1: CHARACTER_SKILL_ATTACK,
         2: CHARACTER_SKILL_HEAL,
         3: CHARACTER_SKILL_DOUBLE_DAMAGE,
         4: CHARACTER_SKILL_AUTO_CAST,
@@ -84,8 +84,8 @@ const Data = (store) => {
     },
 
     upgrades: {
-      [SHOP_UPGRADES_ATACK]: {
-        [SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT]: {
+      [SHOP_UPGRADES_ATTACK]: {
+        [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT]: {
           level: 0,
           getImgUrl: function () {
             return swordIcon;
@@ -110,7 +110,7 @@ const Data = (store) => {
           },
         },
 
-        [SHOP_UPGRADES_ATACK_BONUS_SPEED]: {
+        [SHOP_UPGRADES_ATTACK_BONUS_SPEED]: {
           level: 0,
           getImgUrl: function () {
             return swingIcon;

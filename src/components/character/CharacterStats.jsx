@@ -3,10 +3,10 @@ import { State } from '../../api/Store';
 
 const CharacterStats = () => {
   const [store] = useContext(State);
-  const atack = store.character.getDamage();
+  const attack = store.character.getDamage();
   return (
     <div className="CharacterStats">
-      <div> Atack: {atack}</div>
+      <div> Attack: {attack}</div>
     </div>
   );
 };

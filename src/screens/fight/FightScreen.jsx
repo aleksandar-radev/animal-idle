@@ -37,7 +37,7 @@ const FightScreen = () => {
       if (!startTime) {
         startTime = timestamp;
       }
-      if (timestamp - startTime < store.enemy.current.atackSpeed) {
+      if (timestamp - startTime < store.enemy.current.attackSpeed) {
         requestAnimationFrame(animateCooldown);
       } else {
         store.character.takeDamage(store.enemy.current.getTotalDamage());

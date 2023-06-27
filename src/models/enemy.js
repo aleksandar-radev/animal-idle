@@ -26,7 +26,7 @@ const Enemy = (store) => {
     getRandomEnemy() {
       const keys = Object.keys(this.enemyTypes);
       const randomKey = keys[Math.floor(Math.random() * keys.length)];
-  
+
       return this.getEnemyByKey(randomKey);
     },
 
@@ -78,28 +78,28 @@ const Enemy = (store) => {
         currentHealth: null,
         totalHealth: 100,
         damage: 5,
-        atackSpeed: 3000,
+        attackSpeed: 3000,
       },
       [ENEMY_TYPE_SORCERESS]: {
         name: ENEMY_TYPE_SORCERESS,
         currentHealth: null,
         totalHealth: 60,
         damage: 20,
-        atackSpeed: 4000,
+        attackSpeed: 4000,
       },
       [ENEMY_TYPE_ASSASSIN]: {
         name: ENEMY_TYPE_ASSASSIN,
         currentHealth: null,
         totalHealth: 80,
         damage: 10,
-        atackSpeed: 2000,
+        attackSpeed: 2000,
       },
       [ENEMY_TYPE_WARRIOR]: {
         name: ENEMY_TYPE_WARRIOR,
         currentHealth: null,
         totalHealth: 150,
         damage: 5,
-        atackSpeed: 4000,
+        attackSpeed: 4000,
       },
     },
   };

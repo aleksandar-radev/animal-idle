@@ -1,29 +1,29 @@
 import { useContext } from 'react';
 import { State } from '../../api/Store';
 import goldIcon from '../../assets/gold.png';
-import { SHOP_UPGRADES_ATACK } from '../../constants/gameVariables';
+import { SHOP_UPGRADES_ATTACK } from '../../constants/gameVariables';
 import { en } from '../../constants/translations';
-import './ShopUpgradesAtack.scss';
+import './ShopUpgradesAttack.scss';
 
-const ShopUpgradesAtack = () => {
+const ShopUpgradesAttack = () => {
   const [store] = useContext(State);
-  const upgradesKeys = Object.keys(store.data.upgrades[SHOP_UPGRADES_ATACK]);
+  const upgradesKeys = Object.keys(store.data.upgrades[SHOP_UPGRADES_ATTACK]);
 
   return (
     <>
       {upgradesKeys.map((upgradeKey) => {
-        const upgrade = store.data.upgrades[SHOP_UPGRADES_ATACK][upgradeKey];
+        const upgrade = store.data.upgrades[SHOP_UPGRADES_ATTACK][upgradeKey];
         const upgradeKeyDescription = upgradeKey + '-description';
         const bonus = upgrade.getBonus();
         const description = en[upgradeKeyDescription](bonus);
 
         return (
-          <div className="ShopUpgradesAtack" key={upgradeKey}>
-            <div className="ShopUpgradesAtack-icon">
+          <div className="ShopUpgradesAttack" key={upgradeKey}>
+            <div className="ShopUpgradesAttack-icon">
               <img src={upgrade.getImgUrl()} />
             </div>
 
-            <div className="ShopUpgradesAtack-info">
+            <div className="ShopUpgradesAttack-info">
               <div>
                 {en[upgradeKey]} (Lv. {upgrade.level})
               </div>
@@ -31,7 +31,7 @@ const ShopUpgradesAtack = () => {
             </div>
 
             <div
-              className="ShopUpgradesAtack-button"
+              className="ShopUpgradesAttack-button"
               onClick={() => {
                 upgrade.buy();
               }}>
@@ -48,4 +48,4 @@ const ShopUpgradesAtack = () => {
   );
 };
 
-export default ShopUpgradesAtack;
+export default ShopUpgradesAttack;

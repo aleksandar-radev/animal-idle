@@ -1,6 +1,10 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { State } from '../api/Store';
-import { CHARACTER_SKILL_AUTO_CAST } from '../constants/gameVariables';
+import {
+  ATTACK_SKILL_IMG,
+  CHARACTER_SKILL_AUTO_CAST,
+  ENEMY_TYPE_BARBARIAN,
+} from '../constants/gameVariables';
 import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 
@@ -58,6 +62,9 @@ const SkillsBar = ({ className }) => {
             ${activeSkills[skill?.name] ? 'cooldown' : ''}
             ${skill?.manaCost > store.character.getCurrentMana() ? 'disabled' : ''}
           `}
+          style={{
+            backgroundImage: `url(${store.assets[ATTACK_SKILL_IMG]})`,
+          }}
           data-skill={skill?.name}
           key={skill?.name || id}
           onClick={activateSkill}>
@@ -101,7 +108,6 @@ const SkillsBar = ({ className }) => {
         target.textContent = skill.name;
         target.style.removeProperty('--time-left');
         setActiveSkills((prev) => ({ ...prev, [skillName]: false }));
-
       }
     };
     requestAnimationFrame(animateCooldown);

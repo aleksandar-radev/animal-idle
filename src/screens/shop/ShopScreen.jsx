@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { State } from '../../api/Store';
-import ShopUpgradesAtack from '../../components/shop/ShopUpgradesAtack';
+import ShopUpgradesAttack from '../../components/shop/ShopUpgradesAttack';
 import ShopUpgradesDefence from '../../components/shop/ShopUpgradesDefence';
 import ShopUpgradesUtility from '../../components/shop/ShopUpgradesUtility';
 import {
-  SHOP_SCREEN_ATACK_TAB,
+  SHOP_SCREEN_ATTACK_TAB,
   SHOP_SCREEN_DEFENCE_TAB,
   SHOP_SCREEN_UTILITY_TAB,
 } from '../../constants/gameVariables';
@@ -19,22 +19,22 @@ const Shop = () => {
 
   const activeTab = () => {
     switch (store?.tabs?.activeCharacterScreenTab) {
-      case SHOP_SCREEN_ATACK_TAB:
-        return <ShopUpgradesAtack />;
+      case SHOP_SCREEN_ATTACK_TAB:
+        return <ShopUpgradesAttack />;
       case SHOP_SCREEN_DEFENCE_TAB:
         return <ShopUpgradesDefence />;
       case SHOP_SCREEN_UTILITY_TAB:
         return <ShopUpgradesUtility />;
       default:
-        return <ShopUpgradesAtack />;
+        return <ShopUpgradesAttack />;
     }
   };
 
   return (
     <div className="ShopScreen">
       <div className="ShopScreen-tabs">
-        <div className="ShopScreen-tabs-tab" onClick={() => changeView(SHOP_SCREEN_ATACK_TAB)}>
-          Atack
+        <div className="ShopScreen-tabs-tab" onClick={() => changeView(SHOP_SCREEN_ATTACK_TAB)}>
+          Attack
         </div>
         <div className="ShopScreen-tabs-tab" onClick={() => changeView(SHOP_SCREEN_DEFENCE_TAB)}>
           Defence

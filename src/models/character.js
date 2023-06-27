@@ -1,12 +1,12 @@
 import {
-  CHARACTER_SKILL_ATACK,
+  CHARACTER_SKILL_ATTACK,
   CHARACTER_SKILL_AUTO_CAST,
   CHARACTER_SKILL_ASCEND,
   CHARACTER_SKILL_BACKSTAB,
   CHARACTER_SKILL_DOUBLE_DAMAGE,
   CHARACTER_SKILL_HEAL,
-  SHOP_UPGRADES_ATACK,
-  SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT,
+  SHOP_UPGRADES_ATTACK,
+  SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT,
 } from '../constants/gameVariables';
 
 // NOTHING HERE IS PERSISTED. ALL RESETS ON REFRESH
@@ -47,7 +47,9 @@ const Character = (store) => {
     getDamage() {
       let damage = this.damage;
       damage +=
-        store.data.upgrades[SHOP_UPGRADES_ATACK][SHOP_UPGRADES_ATACK_BONUS_DAMAGE_FLAT].getBonus();
+        store.data.upgrades[SHOP_UPGRADES_ATTACK][
+          SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT
+        ].getBonus();
 
       return damage;
     },
@@ -90,8 +92,8 @@ const Character = (store) => {
     },
 
     skills: {
-      [CHARACTER_SKILL_ATACK]: {
-        name: CHARACTER_SKILL_ATACK,
+      [CHARACTER_SKILL_ATTACK]: {
+        name: CHARACTER_SKILL_ATTACK,
         cooldown: 500,
         manaCost: 0,
         cast() {

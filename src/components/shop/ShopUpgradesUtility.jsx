@@ -1,18 +1,18 @@
 import { useContext } from 'react';
 import { State } from '../../api/Store';
 import goldIcon from '../../assets/gold.png';
-import { SHOP_UPGRADES_ATACK } from '../../constants/gameVariables';
+import { SHOP_UPGRADES_ATTACK } from '../../constants/gameVariables';
 import { en } from '../../constants/translations';
 import './ShopUpgradesUtility.scss';
 
 const ShopUpgradesUtility = () => {
   const [store] = useContext(State);
-  const upgradesKeys = Object.keys(store.data.upgrades[SHOP_UPGRADES_ATACK]);
+  const upgradesKeys = Object.keys(store.data.upgrades[SHOP_UPGRADES_ATTACK]);
 
   return (
     <>
       {upgradesKeys.map((upgradeKey) => {
-        const upgrade = store.data.upgrades[SHOP_UPGRADES_ATACK][upgradeKey];
+        const upgrade = store.data.upgrades[SHOP_UPGRADES_ATTACK][upgradeKey];
         const upgradeKeyDescription = upgradeKey + '-description';
         const bonus = upgrade.getBonus();
         const description = en[upgradeKeyDescription](bonus);
