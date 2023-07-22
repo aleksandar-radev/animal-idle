@@ -7,6 +7,8 @@ import {
   MAIN_SCREEN_CHARACTER_TAB,
   MAIN_SCREEN_FIGHT_TAB,
   MAIN_SCREEN_SHOP_TAB,
+  MAIN_SCREEN_LEADERBOARD_TAB,
+  MAIN_SCREEN_ADMIN_TAB,
 } from '../constants/gameVariables';
 import './MainMenu.scss';
 
@@ -38,6 +40,12 @@ const MainMenu = () => {
       </div>
       <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_SHOP_TAB)}>
         Shop
+      </div>
+      <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_LEADERBOARD_TAB)}>
+        Leaderboard
+      </div>
+      <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_ADMIN_TAB)}>
+        Admin
       </div>
       <div className="MainMenu-tab" onClick={resetProgress}>
         Reset Progress

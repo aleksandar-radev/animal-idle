@@ -16,6 +16,8 @@ export const ENEMY_TYPE_WARRIOR = 'warrior';
 export const MAIN_SCREEN_CHARACTER_TAB = 'character';
 export const MAIN_SCREEN_FIGHT_TAB = 'fight';
 export const MAIN_SCREEN_SHOP_TAB = 'shop';
+export const MAIN_SCREEN_LEADERBOARD_TAB = 'leaderboard';
+export const MAIN_SCREEN_ADMIN_TAB = 'admin';
 
 export const CHARACTER_SCREEN_STATS_TAB = 'stats';
 export const CHARACTER_SCREEN_SKILLS_TAB = 'skills';

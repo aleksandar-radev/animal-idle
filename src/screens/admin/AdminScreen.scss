@@ -1,0 +1,28 @@
+@import '../../constants/variables.scss';
+
+.AdminScreen {
+  overflow: auto;
+  height: pix(428);
+
+  & .item {
+    padding: pix(20);
+  }
+
+  & textarea {
+    font: unset;
+    height: pix(200);
+    width: 60%;
+    overflow: auto;
+    background-color: azure;
+    resize: none;
+  }
+
+  & .save {
+    padding: pix(10);
+    background-color: rgb(130, 219, 130);
+  }
+  & .save:hover {
+    background-color: rgb(71, 216, 71);
+    cursor: pointer;
+  }
+}

@@ -122,7 +122,7 @@ const Character = (store) => {
       [CHARACTER_SKILL_AUTO_CAST]: {
         name: CHARACTER_SKILL_AUTO_CAST,
         cooldown: 10000,
-        manaCost: 5,
+        manaCost: 0,
         cast() {},
       },
       [CHARACTER_SKILL_BACKSTAB]: {
