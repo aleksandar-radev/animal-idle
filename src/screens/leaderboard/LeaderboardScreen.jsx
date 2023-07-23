@@ -7,7 +7,6 @@ const LeaderboardScreen = () => {
 
   useEffect(() => {
     DataRepo.getAllScores().then((data) => {
-      console.log(data);
       setAllData(data);
     });
   }, []);
@@ -24,7 +23,6 @@ const LeaderboardScreen = () => {
         </thead>
         <tbody>
           {allData.map((data, i) => {
-            console.log(data);
             return (
               <tr key={data.user_id}>
                 <td>{i + 1}</td>
