@@ -8,8 +8,6 @@ const UserDataDisplay = (item) => {
     DataRepo.updateDataById(item.user, JSON.parse(areaVal.current.value));
   };
 
-  console.log(item);
-
   return (
     <>
       <div key={item.user} className="item">

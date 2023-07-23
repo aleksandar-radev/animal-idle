@@ -3,7 +3,7 @@ import api from './Api.js';
 
 export const DataRepo = {
   getAllData: async () => {
-    let { data, error } = await api.from('data').select('*').order('user_id', 'asc');
+    let { data, error } = await api.from('animal_idle_data').select('*').order('user_id', 'asc');
 
     if (error) {
       throw new Error(error);
@@ -18,7 +18,7 @@ export const DataRepo = {
 
   getDataById: async (id) => {
     let { data, error } = await api
-      .from('data')
+      .from('animal_idle_data')
       .select('*')
       .eq('user_id', id)
       .limit(1)
@@ -40,7 +40,7 @@ export const DataRepo = {
     const encryptedData = crypt.encrypt(JSON.stringify(newData));
 
     const { data, error } = await api
-      .from('data')
+      .from('animal_idle_data')
       .insert([{ data: encryptedData, user_id: id }])
       .select('*');
 
@@ -59,7 +59,7 @@ export const DataRepo = {
     const encryptedData = crypt.encrypt(JSON.stringify(newData));
 
     const { data, error } = await api
-      .from('data')
+      .from('animal_idle_data')
       .update([{ data: encryptedData }])
       .eq('user_id', id)
       .select('*');
@@ -70,6 +70,24 @@ export const DataRepo = {
       .update([{ enemy_level: enemyLevel }])
       .eq('user_id', id)
       .select('*');
+
+    if (error) {
+      throw new Error(error);
+    }
+
+    return data;
+  },
+
+  getAllScores: async () => {
+    let { data, error } = await api
+      .from('animal_idle_score')
+      .select(
+        `*, 
+        animal_idle_users (
+        user_email
+      )`,
+      )
+      .order('enemy_level', 'desc');
 
     if (error) {
       throw new Error(error);
