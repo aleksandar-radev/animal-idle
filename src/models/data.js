@@ -17,6 +17,7 @@ import {
 
 const Data = (store) => {
   return {
+    language: 'en',
     character: {},
     enemy: {
       level: 0,

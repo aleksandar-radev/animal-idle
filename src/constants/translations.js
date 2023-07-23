@@ -10,6 +10,12 @@ export const en = {
   [SHOP_UPGRADES_ATTACK_BONUS_SPEED]: 'Attack Speed',
   [SHOP_UPGRADES_ATTACK_BONUS_SPEED + '-description']: (amount) =>
     `Increases your speed by ${amount}`,
+  rank: 'Rank',
 };
 
 export const es = {};
+
+export const translations = {
+  en,
+  es,
+};

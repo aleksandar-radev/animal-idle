@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import './LeaderboardScreen.scss';
 import { DataRepo } from '../../api/DataRepo';
+import useTranslations from '../../hooks/useTranslations';
 
 const LeaderboardScreen = () => {
   const [allData, setAllData] = useState([]);
+  const t = useTranslations();
 
   useEffect(() => {
     DataRepo.getAllScores().then((data) => {
@@ -16,7 +18,7 @@ const LeaderboardScreen = () => {
       <table>
         <thead>
           <tr>
-            <th>Rank</th>
+            <th>{t.rank}</th>
             <th>User</th>
             <th>Score</th>
           </tr>
