@@ -5,12 +5,11 @@
   font-size: pix(20);
   background-color: blanchedalmond;
   grid-column: 1 / span 2;
+  justify-content: space-between;
 
   &-save {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    right: 0;
     padding: pix(8);
     user-select: none;
 

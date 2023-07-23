@@ -14,6 +14,7 @@ import RegisterScreen from './screens/RegisterScreen';
 function App() {
   useEffect(() => {
     function setScale() {
+      // let aspectRatio = window.innerWidth / window.innerHeight;
       document.documentElement.style.setProperty('--pixelWidth', `${window.innerWidth - 50}px`);
     }
     window.addEventListener('resize', setScale);

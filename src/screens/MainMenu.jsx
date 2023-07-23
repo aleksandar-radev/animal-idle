@@ -50,7 +50,7 @@ const MainMenu = () => {
       <div className="MainMenu-tab" onClick={resetProgress}>
         Reset Progress
       </div>
-      <div className="MainMenu-tab MainMenu-logout" onClick={logout}>
+      <div className="MainMenu-tab" onClick={logout}>
         Logout
       </div>
     </div>

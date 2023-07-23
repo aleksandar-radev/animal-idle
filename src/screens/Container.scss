@@ -1,6 +1,10 @@
 @import '../constants/variables.scss';
 
 .Container {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
   &-auth {
     height: 100%;
     display: grid;
