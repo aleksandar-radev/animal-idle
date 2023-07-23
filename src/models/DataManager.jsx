@@ -51,7 +51,8 @@ const DataManager = () => {
       let data = await DataRepo.getDataById(user.id);
 
       if (!data) {
-        data = await DataRepo.insertDataById(user.id, {});
+        await DataRepo.insertDataById(user.id, {});
+        data = {};
       }
 
       // data has to be first, because others are evaluated based on it
