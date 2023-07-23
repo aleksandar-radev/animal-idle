@@ -8,7 +8,6 @@ const AdminScreen = () => {
 
   useEffect(() => {
     DataRepo.getAllData().then((data) => {
-      console.log(data);
       setAllData(data);
     });
   }, []);

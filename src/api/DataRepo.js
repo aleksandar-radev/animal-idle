@@ -36,7 +36,7 @@ export const DataRepo = {
   },
 
   insertDataById: async (id, newData = {}) => {
-    const enemyLevel = newData.enemy.level;
+    const enemyLevel = newData?.enemy?.level || 0;
     const encryptedData = crypt.encrypt(JSON.stringify(newData));
 
     const { data, error } = await api
@@ -55,7 +55,7 @@ export const DataRepo = {
   },
 
   updateDataById: async (id, newData = {}) => {
-    const enemyLevel = newData.enemy.level;
+    const enemyLevel = newData?.enemy?.level || 0;
     const encryptedData = crypt.encrypt(JSON.stringify(newData));
 
     const { data, error } = await api
@@ -83,11 +83,11 @@ export const DataRepo = {
       .from('animal_idle_score')
       .select(
         `*, 
-        animal_idle_users (
+        users (
         user_email
       )`,
       )
-      .order('enemy_level', 'desc');
+      .order('enemy_level', { ascending: false });
 
     if (error) {
       throw new Error(error);

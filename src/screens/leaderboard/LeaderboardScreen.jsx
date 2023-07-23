@@ -28,7 +28,7 @@ const LeaderboardScreen = () => {
             return (
               <tr key={data.user_id}>
                 <td>{i + 1}</td>
-                <td>{data.animal_idle_users.user_email}</td>
+                <td>{data.users.user_email}</td>
                 <td>{data.enemy_level}</td>
               </tr>
             );
