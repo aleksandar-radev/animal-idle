@@ -6,6 +6,7 @@
   "scripts": {
     "deploy": "vite build --mode production && gh-pages -d dist",
     "dev": "vite",
+    "prod": "vite --mode production",
     "build": "vite build"
   },
   "dependencies": {
