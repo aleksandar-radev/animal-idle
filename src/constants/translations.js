@@ -19,6 +19,7 @@ export const en = {
   'double-damage': 'Double Damage',
   'auto-cast': 'Auto Cast',
   backstab: 'Backstab',
+  attackSpeed: 'Attack Speed',
 };
 
 export const es = {};

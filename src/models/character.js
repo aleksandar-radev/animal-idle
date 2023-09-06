@@ -17,12 +17,14 @@ const Character = (store) => {
     currentMana: 0,
     totalMana: 100,
     damage: 15,
+    attackSpeed: 0.0,
 
     getAllStats() {
       return {
         totalHealth: this.getTotalHealth(),
         totalMana: this.getTotalMana(),
         damage: this.getDamage(),
+        attackSpeed: this.getAttackSpeed(),
       };
     },
 
@@ -60,6 +62,11 @@ const Character = (store) => {
         ].getBonus();
 
       return damage;
+    },
+
+    // Attack speed
+    getAttackSpeed() {
+      return this.attackSpeed;
     },
 
     renderChanges: 0,
