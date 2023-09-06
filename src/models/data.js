@@ -15,6 +15,7 @@ import {
   SHOP_UPGRADES_DEFENCE,
 } from '../constants/gameVariables';
 
+// Do not delete anything from here, only add
 const Data = (store) => {
   return {
     language: 'en',
