@@ -14,11 +14,11 @@ const Shop = () => {
   const [store] = useContext(State);
 
   const changeView = (view) => {
-    store.tabs.setActiveCharacterScreenTab(view);
+    store.tabs.setActiveShopScreenTab(view);
   };
 
   const activeTab = () => {
-    switch (store?.tabs?.activeCharacterScreenTab) {
+    switch (store?.tabs?.activeShopScreenTab) {
       case SHOP_SCREEN_ATTACK_TAB:
         return <ShopUpgradesAttack />;
       case SHOP_SCREEN_DEFENCE_TAB:
