@@ -11,6 +11,14 @@ export const en = {
   [SHOP_UPGRADES_ATTACK_BONUS_SPEED + '-description']: (amount) =>
     `Increases your speed by ${amount}`,
   rank: 'Rank',
+  totalHealth: 'Health',
+  totalMana: 'Mana',
+  damage: 'Damage',
+  attack: 'Attack',
+  heal: 'Heal',
+  'double-damage': 'Double Damage',
+  'auto-cast': 'Auto Cast',
+  backstab: 'Backstab',
 };
 
 export const es = {};

@@ -3,9 +3,13 @@ import { State } from '../api/Store';
 import { CHARACTER_SKILL_AUTO_CAST } from '../constants/gameVariables';
 import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
+import { Tooltip } from '@mui/material';
+import SkillTooltip from './SkillTooltip';
+import useTranslations from '../hooks/useTranslations';
 
 const SkillsBar = ({ className }) => {
   const [store] = useContext(State);
+  const t = useTranslations();
   const [activeSkills, setActiveSkills] = useState({});
   const skillShouldStop = useRef(false);
   const skillsPerRow = 10;
@@ -50,25 +54,32 @@ const SkillsBar = ({ className }) => {
     const newDomSkills = [];
     for (let id = 1; id < skillsPerRow * totalSkillRows; id++) {
       const skill = store.character.getSkillById(id);
+      const skillName = t[skill?.name] || skill?.name;
       const img = store.assets[skill?.name];
 
+      let classes = [
+        'SkillsBar-row-item',
+        activeSkills[skill?.name] ? 'cooldown' : '',
+        skill?.manaCost > store.character.getCurrentMana() ? 'disabled' : '',
+      ];
+
       newDomSkills.push(
-        <div
-          className={`
-            SkillsBar-row-item 
-            ${activeSkills[skill?.name] ? 'cooldown' : ''}
-            ${skill?.manaCost > store.character.getCurrentMana() ? 'disabled' : ''}
-          `}
-          style={{
-            backgroundImage: `url(${store.assets[skill?.name]})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-          }}
-          data-skill={skill?.name}
-          key={skill?.name || id}
-          onClick={activateSkill}>
-          <p>{!img ? skill?.name : ''}</p>
-        </div>,
+        <Tooltip
+          placement="top"
+          title={<SkillTooltip name={skillName} cooldown={skill?.cooldown / 1000} />}
+          key={skill?.name || id}>
+          <div
+            className={classes.join(' ')}
+            style={{
+              backgroundImage: `url(${store.assets[skill?.name]})`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+            }}
+            data-skill={skill?.name}
+            onClick={activateSkill}>
+            {!img ? <p>{skillName}</p> : ''}
+          </div>
+        </Tooltip>,
       );
     }
     return newDomSkills;
@@ -99,12 +110,10 @@ const SkillsBar = ({ className }) => {
       const passedTime = (elapsedTime / skill.cooldown) * 100;
 
       target.style.setProperty('--time-left', `${passedTime}%`);
-      // target.textContent = ((skill.cooldown - elapsedTime) / 1000).toFixed(2);
 
       if (elapsedTime < skill.cooldown) {
         requestAnimationFrame(animateCooldown);
       } else {
-        // target.textContent = skill.name;
         target.style.removeProperty('--time-left');
         setActiveSkills((prev) => ({ ...prev, [skillName]: false }));
       }
