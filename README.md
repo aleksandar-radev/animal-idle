@@ -11,3 +11,7 @@ Builds the app for production to the `dist` folder.
 ### `yarn deploy`
 
 builds and deploys the `dist` folder. **PRODUCTION**
+
+### `npx supabase start`
+
+starts local development database (docker must be started)
