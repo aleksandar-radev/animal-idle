@@ -28,7 +28,7 @@ export const DataRepo = {
       throw new Error(error);
     }
 
-    if (!data) return;
+    if (!data || !data.data) return;
 
     const decryptedData = crypt.decrypt(data.data);
 
