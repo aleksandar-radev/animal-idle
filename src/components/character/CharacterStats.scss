@@ -1,12 +1,25 @@
 @import '../../constants/variables.scss';
 
 .CharacterStats {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 10% 90%;
+  display: flex;
+  font-size: pix(10);
+  .panel {
+    display: flex;
+    width: 49%;
+    height: 99%;
+    background-color: green;
+    flex-direction: column;
 
-  & > div {
-    background-color: darkgoldenrod;
-    border-radius: 50%;
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      padding: pix(5) pix(10);
+      border-bottom: 1px solid black;
+      height: pix(10);
+    }
+  }
+
+  .left {
+    border-right: pix(1) solid black;
   }
 }

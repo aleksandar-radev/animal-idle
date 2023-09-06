@@ -18,6 +18,14 @@ const Character = (store) => {
     totalMana: 100,
     damage: 15,
 
+    getAllStats() {
+      return {
+        totalHealth: this.getTotalHealth(),
+        totalMana: this.getTotalMana(),
+        damage: this.getDamage(),
+      };
+    },
+
     reset() {
       this.currentHealth = this.getTotalHealth();
       this.currentMana = this.getTotalMana();
