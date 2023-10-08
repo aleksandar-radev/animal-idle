@@ -10,6 +10,7 @@ const Settings = (store) => {
     activeMainScreenTab: MAIN_SCREEN_CHARACTER_TAB,
     activeCharacterScreenTab: CHARACTER_SCREEN_STATS_TAB,
     activeShopScreenTab: SHOP_SCREEN_ATTACK_TAB,
+    activeCharacter: null,
 
     setActiveMainScreenTab(tab) {
       this.activeMainScreenTab = tab;
@@ -21,6 +22,10 @@ const Settings = (store) => {
 
     setActiveShopScreenTab(tab) {
       this.activeShopScreenTab = tab;
+    },
+
+    setActiveCharacter(character) {
+      this.activeCharacter = character;
     },
   };
 };

@@ -20,13 +20,13 @@ const MainMenu = () => {
   useEffect(() => {
     const getUser = async () => {
       const user = await AuthRepo.getUser();
-      console.log(user);
       setCurrentUser(user);
     };
     getUser();
   }, []);
 
   const changeView = (view) => {
+    store.settings.setActiveCharacter(null);
     store.settings.setActiveMainScreenTab(view);
   };
 

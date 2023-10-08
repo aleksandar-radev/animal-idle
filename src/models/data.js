@@ -26,7 +26,13 @@ import {
 const Data = (store) => {
   return {
     language: 'en',
-    character: {},
+    characters: {
+      map: {
+        1: CHARACTER_TYPE_BARBARIAN,
+        2: CHARACTER_TYPE_SORCERESS,
+        3: CHARACTER_TYPE_DRUID,
+      },
+    },
     enemy: {
       level: 0,
       maxLevel: 0,

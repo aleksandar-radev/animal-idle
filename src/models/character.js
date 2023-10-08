@@ -12,6 +12,8 @@ import {
   SHOP_UPGRADES_ATTACK_CRIT_DAMAGE,
   SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE,
   CHARACTER_TYPE_BARBARIAN,
+  CHARACTER_TYPE_SORCERESS,
+  CHARACTER_TYPE_DRUID,
 } from '../constants/gameVariables';
 import { getRandomNumber } from '../helpers/functions';
 
@@ -22,6 +24,14 @@ const Character = (store) => {
       [CHARACTER_TYPE_BARBARIAN]: {
         name: 'Barbarian',
         type: CHARACTER_TYPE_BARBARIAN,
+      },
+      [CHARACTER_TYPE_SORCERESS]: {
+        name: 'Sorceress',
+        type: CHARACTER_TYPE_SORCERESS,
+      },
+      [CHARACTER_TYPE_DRUID]: {
+        name: 'Druid',
+        type: CHARACTER_TYPE_DRUID,
       },
     },
     currentHealth: 0,

@@ -17,6 +17,11 @@
     cursor: pointer;
   }
 
+  & div:first-child {
+    background-color: red;
+    width: 30%;
+  }
+
   .active {
     background-color: rgba($color: rgb(125, 210, 231), $alpha: 0.8);
     // background-color: red;
