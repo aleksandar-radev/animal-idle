@@ -16,6 +16,7 @@
       border: pix(2) solid black;
       border-radius: pix(10);
       margin: pix(10);
+      cursor: pointer;
 
       &.active {
         background-color: rgba($color: rgb(125, 210, 231), $alpha: 0.8);

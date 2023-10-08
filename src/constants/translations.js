@@ -5,9 +5,11 @@ import {
   SHOP_UPGRADES_ATTACK_CRIT_CHANCE,
   SHOP_UPGRADES_ATTACK_CRIT_DAMAGE,
   SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE,
+  SHOP_UPGRADES_DEFENSE_BONUS_HEALTH,
 } from './gameVariables';
 
 export const en = {
+  // Attack
   [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT]: 'Bonus Flat Damage',
   [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT + '-description']: (amount) =>
     `Increases your damage by ${amount}`,
@@ -26,6 +28,11 @@ export const en = {
   [SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE]: 'Double Damage Chance',
   [SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE + '-description']: (amount) =>
     `Increases your chance to deal double damage by ${amount}`,
+
+  // Defense
+  [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH]: 'Bonus Health',
+  [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH + '-description']: (amount) =>
+    `Increases your health by ${amount}`,
   rank: 'Rank',
   totalHealth: 'Health',
   totalMana: 'Mana',
