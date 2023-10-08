@@ -1,0 +1,13 @@
+@import '../../constants/variables.scss';
+
+.SettingsScreen {
+  & .button {
+    font-size: pix(22);
+    padding: pix(0) pix(10);
+    margin: pix(10) 0;
+    user-select: none;
+    cursor: pointer;
+    border-radius: pix(10);
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}

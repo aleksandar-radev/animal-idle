@@ -9,12 +9,18 @@
   border-radius: pix(50);
   // background-color: red;
 
-  &-tab {
+  & .tab {
+    padding: pix(0) pix(10);
     margin: pix(10) 0;
     user-select: none;
     cursor: pointer;
+    border-radius: pix(10);
     &:hover {
       opacity: 0.5;
+    }
+    &.active {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6);
     }
   }
 }

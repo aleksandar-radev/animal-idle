@@ -8,6 +8,7 @@ import {
   MAIN_SCREEN_FIGHT_TAB,
   MAIN_SCREEN_SHOP_TAB,
   MAIN_SCREEN_LEADERBOARD_TAB,
+  MAIN_SCREEN_SETTINGS_TAB,
   MAIN_SCREEN_ADMIN_TAB,
 } from '../constants/gameVariables';
 import './MainMenu.scss';
@@ -25,46 +26,48 @@ const MainMenu = () => {
     getUser();
   }, []);
 
-  const navigate = useNavigate();
-
   const changeView = (view) => {
     store.settings.setActiveMainScreenTab(view);
   };
 
-  const logout = async () => {
-    navigate('/login');
-    await AuthRepo.signOut();
-  };
-  const resetProgress = async () => {
-    const user = await AuthRepo.getUser();
-    await DataRepo.updateDataById(user.id, {});
+  const isActiveTab = (tab) => {
+    return store?.settings?.activeMainScreenTab === tab;
   };
 
   return (
     <div className={'MainMenu'}>
-      <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_CHARACTER_TAB)}>
+      <div
+        className={`tab ${isActiveTab(MAIN_SCREEN_CHARACTER_TAB) && 'active'}`}
+        onClick={() => changeView(MAIN_SCREEN_CHARACTER_TAB)}>
         Character
       </div>
-      <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_FIGHT_TAB)}>
+      <div
+        className={`tab ${isActiveTab(MAIN_SCREEN_FIGHT_TAB) && 'active'}`}
+        onClick={() => changeView(MAIN_SCREEN_FIGHT_TAB)}>
         Fight
       </div>
-      <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_SHOP_TAB)}>
+      <div
+        className={`tab ${isActiveTab(MAIN_SCREEN_SHOP_TAB) && 'active'}`}
+        onClick={() => changeView(MAIN_SCREEN_SHOP_TAB)}>
         Shop
       </div>
-      <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_LEADERBOARD_TAB)}>
+      <div
+        className={`tab ${isActiveTab(MAIN_SCREEN_LEADERBOARD_TAB) && 'active'}`}
+        onClick={() => changeView(MAIN_SCREEN_LEADERBOARD_TAB)}>
         Leaderboard
       </div>
+      <div
+        className={`tab ${isActiveTab(MAIN_SCREEN_SETTINGS_TAB) && 'active'}`}
+        onClick={() => changeView(MAIN_SCREEN_SETTINGS_TAB)}>
+        Settings
+      </div>
       {currentUser?.role === 'service_role' && (
-        <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_ADMIN_TAB)}>
+        <div
+          className={`tab ${isActiveTab(MAIN_SCREEN_ADMIN_TAB) && 'active'}`}
+          onClick={() => changeView(MAIN_SCREEN_ADMIN_TAB)}>
           Admin
         </div>
       )}
-      <div className="MainMenu-tab" onClick={resetProgress}>
-        Reset Progress
-      </div>
-      <div className="MainMenu-tab" onClick={logout}>
-        Logout
-      </div>
     </div>
   );
 };
