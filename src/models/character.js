@@ -31,7 +31,7 @@ const Character = (store) => {
       return {
         totalHealth: this.getTotalHealth(),
         totalMana: this.getTotalMana(),
-        damage: this.getDamage(),
+        damage: this.getBaseDamage(),
         attackSpeed: this.getAttackSpeed(),
         critChance: this.getCritChance(),
         critDamage: this.getCritDamage(),
