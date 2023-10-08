@@ -3,7 +3,8 @@
 .CurrenciesBar {
   display: flex;
   font-size: pix(20);
-  background-color: blanchedalmond;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.1);
   grid-column: 1 / span 2;
   justify-content: space-between;
 

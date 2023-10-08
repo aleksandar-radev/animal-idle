@@ -3,7 +3,10 @@ import api from './Api.js';
 
 export const DataRepo = {
   getAllData: async () => {
-    let { data, error } = await api.from('animal_idle_data').select('*').order('user_id', 'asc');
+    let { data, error } = await api
+      .from('animal_idle_data')
+      .select('*, users (*)')
+      .order('user_id', 'asc');
 
     if (error) {
       throw new Error(error);
@@ -12,7 +15,10 @@ export const DataRepo = {
     if (!data) return;
 
     return data.map((d) => {
-      return { user: d.user_id, data: crypt.decrypt(d.data) };
+      return {
+        user: { email: d.users.user_email, id: d.users.user_id },
+        data: crypt.decrypt(d.data),
+      };
     });
   },
 

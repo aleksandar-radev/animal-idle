@@ -15,7 +15,8 @@ const AdminScreen = () => {
   return (
     <div className={'AdminScreen'}>
       {allData.map((item) => {
-        return <UserDataDisplay key={item.user} {...item}></UserDataDisplay>;
+        console.log(item);
+        return <UserDataDisplay key={item.user.id} {...item}></UserDataDisplay>;
       })}
     </div>
   );

@@ -4,7 +4,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: Blue;
   width: 90%;
   height: pix(30);
+  border-radius: pix(10);
+  font-size: pix(10);
+  font-weight: 600;
 }

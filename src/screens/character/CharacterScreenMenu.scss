@@ -14,9 +14,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   .active {
-    background-color: red;
+    background-color: rgba($color: rgb(125, 210, 231), $alpha: 0.8);
+    // background-color: red;
   }
 }

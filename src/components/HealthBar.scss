@@ -4,7 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: green;
   width: 90%;
   height: pix(30);
+  border-radius: pix(10);
+  margin-bottom: pix(3);
+  font-size: pix(10);
+  font-weight: 600;
 }

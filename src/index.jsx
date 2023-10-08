@@ -4,11 +4,17 @@ import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+if (process.env.NODE_ENV === 'production') {
+  console.log = () => {};
+  console.error = () => {};
+  console.debug = () => {};
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <React.StrictMode>
-  <App />,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <App />,
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

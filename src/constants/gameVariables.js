@@ -37,7 +37,11 @@ export const SHOP_UPGRADES_UTILITY = 'utility';
 
 // ATTACK UPGRADES
 export const SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT = 'bonus-damage-flat';
+export const SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT = 'bonus-damage-percent';
+export const SHOP_UPGRADES_ATTACK_CRIT_CHANCE = 'crit-chance';
+export const SHOP_UPGRADES_ATTACK_CRIT_DAMAGE = 'crit-damage';
 export const SHOP_UPGRADES_ATTACK_BONUS_SPEED = 'attack-speed';
+export const SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE = 'double-damage-chance';
 
 // DEFENCE UPGRADES
 export const SHOP_UPGRADES_DEFENCE_BONUS_HEALTH = 'bonus-health';

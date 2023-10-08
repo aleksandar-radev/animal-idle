@@ -7,7 +7,12 @@ import {
   CHARACTER_SKILL_HEAL,
   SHOP_UPGRADES_ATTACK,
   SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT,
+  SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT,
+  SHOP_UPGRADES_ATTACK_CRIT_CHANCE,
+  SHOP_UPGRADES_ATTACK_CRIT_DAMAGE,
+  SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE,
 } from '../constants/gameVariables';
+import { getRandomNumber } from '../helpers/functions';
 
 // NOTHING HERE IS PERSISTED. ALL RESETS ON REFRESH
 const Character = (store) => {
@@ -17,7 +22,10 @@ const Character = (store) => {
     currentMana: 0,
     totalMana: 100,
     damage: 15,
-    attackSpeed: 0.0,
+    attackSpeed: 0,
+    critChance: 1,
+    critDamage: 0,
+    doubleDamageChance: 0,
 
     getAllStats() {
       return {
@@ -25,6 +33,9 @@ const Character = (store) => {
         totalMana: this.getTotalMana(),
         damage: this.getDamage(),
         attackSpeed: this.getAttackSpeed(),
+        critChance: this.getCritChance(),
+        critDamage: this.getCritDamage(),
+        doubleDamageChance: this.getDoubleDamageChance(),
       };
     },
 
@@ -53,20 +64,81 @@ const Character = (store) => {
       return mana;
     },
 
-    // Damage
-    getDamage() {
+    getBaseDamage() {
       let damage = this.damage;
+
+      // add flat damage
       damage +=
         store.data.upgrades[SHOP_UPGRADES_ATTACK][
           SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT
         ].getBonus();
 
+      // add percent damage
+      damage *=
+        1 +
+        store.data.upgrades[SHOP_UPGRADES_ATTACK][
+          SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT
+        ].getBonus() /
+          100;
+
       return damage;
     },
 
-    // Attack speed
+    getDamage() {
+      let damage = this.damage;
+
+      // add flat damage
+      damage +=
+        store.data.upgrades[SHOP_UPGRADES_ATTACK][
+          SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT
+        ].getBonus();
+
+      // add percent damage
+      damage +=
+        (store.data.upgrades[SHOP_UPGRADES_ATTACK][
+          SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT
+        ].getBonus() /
+          100) *
+        damage;
+
+      // CRIT
+      if (getRandomNumber(1, 100) < this.getCritChance()) {
+        damage *= 1 + this.getCritDamage() / 100;
+      }
+
+      // DOUBLE DAMAGE
+      if (getRandomNumber(1, 100) < this.getDoubleDamageChance()) {
+        damage *= 2;
+      }
+
+      return damage;
+    },
+
     getAttackSpeed() {
       return this.attackSpeed;
+    },
+
+    getCritChance() {
+      return (
+        this.critChance +
+        store.data.upgrades[SHOP_UPGRADES_ATTACK][SHOP_UPGRADES_ATTACK_CRIT_CHANCE].getBonus()
+      );
+    },
+
+    getDoubleDamageChance() {
+      return (
+        this.doubleDamageChance +
+        store.data.upgrades[SHOP_UPGRADES_ATTACK][
+          SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE
+        ].getBonus()
+      );
+    },
+
+    getCritDamage() {
+      return (
+        this.critDamage +
+        store.data.upgrades[SHOP_UPGRADES_ATTACK][SHOP_UPGRADES_ATTACK_CRIT_DAMAGE].getBonus()
+      );
     },
 
     renderChanges: 0,
@@ -112,7 +184,7 @@ const Character = (store) => {
         cooldown: 500,
         manaCost: 0,
         cast() {
-          const damage = store.character.getDamage();
+          let damage = store.character.getDamage();
           store.enemy.current.takeDamage(damage);
         },
       },

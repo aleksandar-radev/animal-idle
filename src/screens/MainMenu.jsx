@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
 import { DataRepo } from '../api/DataRepo';
@@ -14,6 +14,16 @@ import './MainMenu.scss';
 
 const MainMenu = () => {
   const [store] = useContext(State);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await AuthRepo.getUser();
+      console.log(user);
+      setCurrentUser(user);
+    };
+    getUser();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -44,9 +54,11 @@ const MainMenu = () => {
       <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_LEADERBOARD_TAB)}>
         Leaderboard
       </div>
-      <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_ADMIN_TAB)}>
-        Admin
-      </div>
+      {currentUser?.role === 'service_role' && (
+        <div className="MainMenu-tab" onClick={() => changeView(MAIN_SCREEN_ADMIN_TAB)}>
+          Admin
+        </div>
+      )}
       <div className="MainMenu-tab" onClick={resetProgress}>
         Reset Progress
       </div>

@@ -40,7 +40,7 @@ const ManaBar = ({ currentMana, totalMana }) => {
   return (
     <div
       style={{
-        backgroundImage: `linear-gradient(to right, blue ${percentage}%, white ${percentage}%)`,
+        backgroundImage: `linear-gradient(to right, rgba(50, 50, 255, 0.8) ${percentage}%, rgba(255, 255, 255, 0.5) ${percentage}%)`,
       }}
       className={'ManaBar'}>{`${currentMana} / ${totalMana}`}</div>
   );

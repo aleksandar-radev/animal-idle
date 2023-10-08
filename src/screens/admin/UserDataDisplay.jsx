@@ -5,13 +5,13 @@ const UserDataDisplay = (item) => {
   const areaVal = useRef();
 
   const handleSave = () => {
-    DataRepo.updateDataById(item.user, JSON.parse(areaVal.current.value));
+    DataRepo.updateDataById(item.user.id, JSON.parse(areaVal.current.value));
   };
 
   return (
     <>
       <div key={item.user} className="item">
-        <p>{item.user}</p>
+        <p>{item.user.email}</p>
         <textarea ref={areaVal} defaultValue={JSON.stringify(item.data, null, 4)}></textarea>
         <button className="save" onClick={handleSave}>
           Save
