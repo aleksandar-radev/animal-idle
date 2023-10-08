@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { DataRepo } from '../../api/DataRepo';
+import './UserDataDisplay.scss';
 
 const UserDataDisplay = (item) => {
   const areaVal = useRef();
@@ -10,8 +11,10 @@ const UserDataDisplay = (item) => {
 
   return (
     <>
-      <div key={item.user} className="item">
-        <p>{item.user.email}</p>
+      <div key={item.user} className="UserDataDisplay">
+        <p>
+          <mark>{item.user.email}</mark>
+        </p>
         <textarea ref={areaVal} defaultValue={JSON.stringify(item.data, null, 4)}></textarea>
         <button className="save" onClick={handleSave}>
           Save
