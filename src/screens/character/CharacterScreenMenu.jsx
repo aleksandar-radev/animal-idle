@@ -11,11 +11,11 @@ const CharacterScreenMenu = () => {
   const [store] = useContext(State);
 
   const changeView = (view) => {
-    store.tabs.setActiveCharacterScreenTab(view);
+    store.settings.setActiveCharacterScreenTab(view);
   };
 
   const isActiveTab = (tab) => {
-    return store?.tabs?.activeCharacterScreenTab === tab;
+    return store?.settings?.activeCharacterScreenTab === tab;
   };
 
   return (

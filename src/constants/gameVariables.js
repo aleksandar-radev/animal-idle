@@ -12,7 +12,7 @@ export const ENEMY_TYPE_SORCERESS = 'sorceress';
 export const ENEMY_TYPE_ASSASSIN = 'assassin';
 export const ENEMY_TYPE_WARRIOR = 'warrior';
 
-// TABS
+// SETTINGS
 export const MAIN_SCREEN_CHARACTER_TAB = 'character';
 export const MAIN_SCREEN_FIGHT_TAB = 'fight';
 export const MAIN_SCREEN_SHOP_TAB = 'shop';

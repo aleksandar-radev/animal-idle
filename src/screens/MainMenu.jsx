@@ -28,7 +28,7 @@ const MainMenu = () => {
   const navigate = useNavigate();
 
   const changeView = (view) => {
-    store.tabs.setActiveMainScreenTab(view);
+    store.settings.setActiveMainScreenTab(view);
   };
 
   const logout = async () => {

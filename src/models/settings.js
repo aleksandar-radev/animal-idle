@@ -5,7 +5,7 @@ import {
 } from '../constants/gameVariables';
 
 // eslint-disable-next-line no-unused-vars
-const Tabs = (store) => {
+const Settings = (store) => {
   return {
     activeMainScreenTab: MAIN_SCREEN_CHARACTER_TAB,
     activeCharacterScreenTab: CHARACTER_SCREEN_STATS_TAB,
@@ -25,4 +25,4 @@ const Tabs = (store) => {
   };
 };
 
-export default Tabs;
+export default Settings;

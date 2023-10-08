@@ -18,7 +18,7 @@ const MainScreen = () => {
   const [store] = useContext(State);
 
   const activeTab = () => {
-    switch (store?.tabs?.activeMainScreenTab) {
+    switch (store?.settings?.activeMainScreenTab) {
       case MAIN_SCREEN_FIGHT_TAB:
         return <FightScreen />;
       case MAIN_SCREEN_SHOP_TAB:

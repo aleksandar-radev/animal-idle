@@ -6,7 +6,7 @@ import { mergeObjectsRecursive } from '../helpers/functions';
 import Character from './character';
 import Data from './data';
 import Enemy from './enemy';
-import Tabs from './tabs';
+import Settings from './settings';
 import { loadAssets } from './assetsLoader';
 
 const DataManager = () => {
@@ -59,7 +59,7 @@ const DataManager = () => {
 
       store.data = new Proxy(mergeObjectsRecursive(Data(store), data), handler);
 
-      store.tabs = new Proxy({ ...Tabs(store) }, handler);
+      store.settings = new Proxy({ ...Settings(store) }, handler);
 
       store.character = new Proxy({ ...Character(store) }, handler);
       store.character.reset();
