@@ -5,11 +5,13 @@
 
   & table {
     width: 100%;
+    background-color: rgba($color: #ffffff, $alpha: 0.6);
+    border-radius: pix(10);
   }
 
   & th,
   td {
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     text-align: center;
     vertical-align: middle;
   }

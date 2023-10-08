@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { State } from '../../api/Store';
 import ShopUpgradesAttack from '../../components/shop/ShopUpgradesAttack';
-import ShopUpgradesDefence from '../../components/shop/ShopUpgradesDefence';
+import ShopUpgradesDefense from '../../components/shop/ShopUpgradesDefense';
 import ShopUpgradesUtility from '../../components/shop/ShopUpgradesUtility';
 import {
   SHOP_SCREEN_ATTACK_TAB,
-  SHOP_SCREEN_DEFENCE_TAB,
+  SHOP_SCREEN_DEFENSE_TAB,
   SHOP_SCREEN_UTILITY_TAB,
 } from '../../constants/gameVariables';
 import './ShopScreen.scss';
@@ -21,8 +21,8 @@ const Shop = () => {
     switch (store?.tabs?.activeShopScreenTab) {
       case SHOP_SCREEN_ATTACK_TAB:
         return <ShopUpgradesAttack />;
-      case SHOP_SCREEN_DEFENCE_TAB:
-        return <ShopUpgradesDefence />;
+      case SHOP_SCREEN_DEFENSE_TAB:
+        return <ShopUpgradesDefense />;
       case SHOP_SCREEN_UTILITY_TAB:
         return <ShopUpgradesUtility />;
       default:
@@ -30,21 +30,31 @@ const Shop = () => {
     }
   };
 
+  const isActiveTab = (tab) => {
+    return store?.tabs?.activeShopScreenTab === tab;
+  };
+
   return (
     <div className="ShopScreen">
-      <div className="ShopScreen-tabs">
-        <div className="ShopScreen-tabs-tab" onClick={() => changeView(SHOP_SCREEN_ATTACK_TAB)}>
+      <div className="tabs">
+        <div
+          className={`tab ${isActiveTab(SHOP_SCREEN_ATTACK_TAB) && 'active'}`}
+          onClick={() => changeView(SHOP_SCREEN_ATTACK_TAB)}>
           Attack
         </div>
-        <div className="ShopScreen-tabs-tab" onClick={() => changeView(SHOP_SCREEN_DEFENCE_TAB)}>
-          Defence
+        <div
+          className={`tab ${isActiveTab(SHOP_SCREEN_DEFENSE_TAB) && 'active'}`}
+          onClick={() => changeView(SHOP_SCREEN_DEFENSE_TAB)}>
+          Defense
         </div>
-        <div className="ShopScreen-tabs-tab" onClick={() => changeView(SHOP_SCREEN_UTILITY_TAB)}>
+        <div
+          className={`tab ${isActiveTab(SHOP_SCREEN_UTILITY_TAB) && 'active'}`}
+          onClick={() => changeView(SHOP_SCREEN_UTILITY_TAB)}>
           Utility
         </div>
       </div>
 
-      <div className="ShopScreen-upgrades">{activeTab()}</div>
+      <div className="upgrades">{activeTab()}</div>
     </div>
   );
 };

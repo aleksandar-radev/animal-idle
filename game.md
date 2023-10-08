@@ -14,7 +14,7 @@ Attack Speed: reduces cooldown of basic `Attack` skill.
 
 Double Damage Chance: increases chance to deal double damage.
 
-### Defence
+### Defense
 
 Flat Damage Reduction: Reduces damage taken by flat amount
 

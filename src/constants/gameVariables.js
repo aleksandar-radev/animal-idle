@@ -24,7 +24,7 @@ export const CHARACTER_SCREEN_SKILLS_TAB = 'skills';
 export const CHARACTER_SCREEN_ITEMS_TAB = 'items';
 
 export const SHOP_SCREEN_ATTACK_TAB = 'attack';
-export const SHOP_SCREEN_DEFENCE_TAB = 'defence';
+export const SHOP_SCREEN_DEFENSE_TAB = 'defense';
 export const SHOP_SCREEN_UTILITY_TAB = 'utility';
 
 // CURRENCIES
@@ -32,7 +32,7 @@ export const CHARACTER_CURRENCY_GOLD = 'gold';
 
 // UPGRADES
 export const SHOP_UPGRADES_ATTACK = 'attack';
-export const SHOP_UPGRADES_DEFENCE = 'defence';
+export const SHOP_UPGRADES_DEFENSE = 'defense';
 export const SHOP_UPGRADES_UTILITY = 'utility';
 
 // ATTACK UPGRADES
@@ -43,9 +43,9 @@ export const SHOP_UPGRADES_ATTACK_CRIT_DAMAGE = 'crit-damage';
 export const SHOP_UPGRADES_ATTACK_BONUS_SPEED = 'attack-speed';
 export const SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE = 'double-damage-chance';
 
-// DEFENCE UPGRADES
-export const SHOP_UPGRADES_DEFENCE_BONUS_HEALTH = 'bonus-health';
-export const SHOP_UPGRADES_DEFENCE_BONUS_DEFENCE = 'bonus-defence';
+// DEFENSE UPGRADES
+export const SHOP_UPGRADES_DEFENSE_BONUS_HEALTH = 'bonus-health';
+export const SHOP_UPGRADES_DEFENSE_BONUS_DEFENSE = 'bonus-defense';
 
 // IMAGES / ASSETS
 export const BARBARIAN_AVATAR = ENEMY_TYPE_BARBARIAN;

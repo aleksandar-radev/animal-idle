@@ -5,21 +5,26 @@
   flex-direction: column;
   height: 100%;
 
-  &-tabs {
+  & .tabs {
     display: flex;
     align-items: center;
     height: 15%;
     border-bottom: pix(2) solid black;
 
-    &-tab {
+    & .tab {
       padding: pix(10);
       border: pix(2) solid black;
       border-radius: pix(10);
       margin: pix(10);
+
+      &.active {
+        background-color: rgba($color: rgb(125, 210, 231), $alpha: 0.8);
+        // background-color: red;
+      }
     }
   }
 
-  &-upgrades {
+  & .upgrades {
     height: 85%;
     overflow-y: auto;
   }
