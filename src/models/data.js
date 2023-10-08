@@ -17,6 +17,9 @@ import {
   SHOP_UPGRADES_ATTACK_CRIT_DAMAGE,
   SHOP_UPGRADES_ATTACK_CRIT_CHANCE,
   SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE,
+  CHARACTER_TYPE_BARBARIAN,
+  CHARACTER_TYPE_SORCERESS,
+  CHARACTER_TYPE_DRUID,
 } from '../constants/gameVariables';
 
 // Do not delete anything from here, only add
@@ -91,6 +94,518 @@ const Data = (store) => {
     },
 
     upgrades: {
+      [CHARACTER_TYPE_BARBARIAN]: {
+        [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_CRIT_CHANCE]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_CRIT_DAMAGE]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_BONUS_SPEED]: {
+          level: 0,
+          getImgUrl: function () {
+            return swingIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 10;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE]: {
+          level: 0,
+          getImgUrl: function () {
+            return swingIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 10;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+      },
+      [CHARACTER_TYPE_SORCERESS]: {
+        [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_CRIT_CHANCE]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_CRIT_DAMAGE]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_BONUS_SPEED]: {
+          level: 0,
+          getImgUrl: function () {
+            return swingIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 10;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE]: {
+          level: 0,
+          getImgUrl: function () {
+            return swingIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 10;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+      },
+      [CHARACTER_TYPE_DRUID]: {
+        [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_CRIT_CHANCE]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_CRIT_DAMAGE]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_BONUS_SPEED]: {
+          level: 0,
+          getImgUrl: function () {
+            return swingIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 10;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE]: {
+          level: 0,
+          getImgUrl: function () {
+            return swingIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 10;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+        [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH]: {
+          level: 0,
+          getImgUrl: function () {
+            return swordIcon;
+          },
+          getBonus: function () {
+            return this.level * 1;
+          },
+          getCost: function () {
+            return this.level * 10 + 5;
+          },
+          buy: function () {
+            const gold = store.data.currencies[CHARACTER_CURRENCY_GOLD];
+            const cost = this.getCost();
+            store.data.renderChange();
+
+            if (cost > gold.value) {
+              return;
+            }
+
+            store.data.currencies[CHARACTER_CURRENCY_GOLD].remove(cost);
+            this.level++;
+          },
+        },
+      },
+
+      // TODO: REMOVE
       [SHOP_UPGRADES_ATTACK]: {
         [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT]: {
           level: 0,
@@ -238,6 +753,7 @@ const Data = (store) => {
         },
       },
 
+      // TODO: REMOVE
       [SHOP_UPGRADES_DEFENSE]: {
         [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH]: {
           level: 0,

@@ -1,3 +1,8 @@
+// CHARACTERS
+export const CHARACTER_TYPE_BARBARIAN = 'barbarian';
+export const CHARACTER_TYPE_SORCERESS = 'sorceress';
+export const CHARACTER_TYPE_DRUID = 'druid';
+
 // SKILLS
 export const CHARACTER_SKILL_ATTACK = 'attack';
 export const CHARACTER_SKILL_HEAL = 'heal';
@@ -17,6 +22,7 @@ export const MAIN_SCREEN_CHARACTER_TAB = 'character';
 export const MAIN_SCREEN_FIGHT_TAB = 'fight';
 export const MAIN_SCREEN_SHOP_TAB = 'shop';
 export const MAIN_SCREEN_LEADERBOARD_TAB = 'leaderboard';
+export const MAIN_SCREEN_SETTINGS_TAB = 'settings';
 export const MAIN_SCREEN_ADMIN_TAB = 'admin';
 
 export const CHARACTER_SCREEN_STATS_TAB = 'stats';

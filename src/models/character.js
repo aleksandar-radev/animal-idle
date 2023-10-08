@@ -11,12 +11,19 @@ import {
   SHOP_UPGRADES_ATTACK_CRIT_CHANCE,
   SHOP_UPGRADES_ATTACK_CRIT_DAMAGE,
   SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE,
+  CHARACTER_TYPE_BARBARIAN,
 } from '../constants/gameVariables';
 import { getRandomNumber } from '../helpers/functions';
 
 // NOTHING HERE IS PERSISTED. ALL RESETS ON REFRESH
 const Character = (store) => {
   return {
+    characters: {
+      [CHARACTER_TYPE_BARBARIAN]: {
+        name: 'Barbarian',
+        type: CHARACTER_TYPE_BARBARIAN,
+      },
+    },
     currentHealth: 0,
     totalHealth: 100,
     currentMana: 0,
