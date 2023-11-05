@@ -1,5 +1,5 @@
 import {
-  CHARACTER_CURRENCY_GOLD,
+  CURRENCY_GOLD,
   ENEMY_TYPE_BARBARIAN,
   ENEMY_TYPE_SORCERESS,
   ENEMY_TYPE_ASSASSIN,
@@ -65,7 +65,7 @@ const Enemy = (store) => {
         },
         die() {
           this.currentHealth = null;
-          store.data.currencies[CHARACTER_CURRENCY_GOLD].add(1);
+          store.data.currencies[CURRENCY_GOLD].add(1);
           store.data.enemy.level++;
           store.enemy.current = store.enemy.getRandomEnemy();
         },

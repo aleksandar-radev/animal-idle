@@ -1,135 +1,59 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { State } from '../api/Store';
-import { CHARACTER_SKILL_AUTO_CAST } from '../constants/gameVariables';
 import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';
-import useTranslations from '../hooks/useTranslations';
+import useCharactersSkills from '../hooks/useCharactersSkills';
 
 const SkillsBar = ({ className }) => {
   const [store] = useContext(State);
-  const t = useTranslations();
   const [activeSkills, setActiveSkills] = useState({});
-  const skillShouldStop = useRef(false);
-  const skillsPerRow = 10;
-  const totalSkillRows = 2;
+  const { a } = useCharactersSkills();
 
-  // Stop skill if on another screen
-  useEffect(() => {
-    skillShouldStop.current = false;
-    return () => {
-      skillShouldStop.current = true;
-    };
-  }, []);
+  const getSkills = () => {
+    let allSkills = [];
+    let skills = store.characters.getActiveCharactersSkills();
 
-  // Handle key press events
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeyPress);
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress);
-    };
-  }, []);
-
-  // Auto cast
-  useEffect(() => {
-    if (activeSkills[CHARACTER_SKILL_AUTO_CAST]) {
-      Object.keys(store.character.skills).forEach((skillName) => {
-        const target = document.querySelector(`[data-skill='${skillName}']`);
-        activateSkill({ target });
+    Object.keys(skills).forEach((skill) => {
+      Object.keys(skills[skill]).forEach((skillName) => {
+        allSkills.push(skills[skill][skillName]);
       });
-    }
-  }, [activeSkills]);
+    });
 
-  const handleKeyPress = (e) => {
-    const keyId = String.fromCharCode(e.which);
-    const skill = store.character.getSkillById(keyId);
-
-    if (!skill) return;
-    const target = document.querySelector(`[data-skill='${skill.name}']`);
-    activateSkill({ target });
-  };
-
-  const renderDomSkills = () => {
-    const newDomSkills = [];
-    for (let id = 1; id < skillsPerRow * totalSkillRows; id++) {
-      const skill = store.character.getSkillById(id);
-      const skillName = t[skill?.name] || skill?.name;
-      const img = store.assets[skill?.name];
-
-      let classes = [
-        'SkillsBar-row-item',
-        activeSkills[skill?.name] ? 'cooldown' : '',
-        skill?.manaCost > store.character.getCurrentMana() ? 'disabled' : '',
-      ];
-
-      newDomSkills.push(
-        <Tooltip
-          placement="top"
-          title={<SkillTooltip name={skillName} cooldown={skill?.cooldown / 1000} />}
-          key={skill?.name || id}>
-          <div
-            className={classes.join(' ')}
-            style={{
-              backgroundImage: `url(${store.assets[skill?.name]})`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-            }}
-            data-skill={skill?.name}
-            onClick={activateSkill}>
-            {!img ? <p>{skillName}</p> : ''}
-          </div>
-        </Tooltip>,
-      );
-    }
-    return newDomSkills;
-  };
-
-  const activateSkill = (event) => {
-    const { target } = event;
-    const skillName = target.dataset.skill;
-    const skill = store.character.skills[skillName];
-
-    if (target.classList.contains('cooldown')) return;
-    if (!skill || store.character.getCurrentMana() < skill.manaCost) return;
-
-    store.character.updateMana(-skill.manaCost);
-
-    setActiveSkills((prev) => ({ ...prev, [skillName]: true }));
-
-    let startTime = null;
-    skill.cast();
-    const animateCooldown = (timestamp) => {
-      if (skillShouldStop.current) return;
-
-      if (!startTime) {
-        startTime = timestamp;
-      }
-
-      let elapsedTime = timestamp - startTime;
-      const passedTime = (elapsedTime / skill.cooldown) * 100;
-
-      target.style.setProperty('--time-left', `${passedTime}%`);
-
-      if (elapsedTime < skill.cooldown) {
-        requestAnimationFrame(animateCooldown);
-      } else {
-        target.style.removeProperty('--time-left');
-        setActiveSkills((prev) => ({ ...prev, [skillName]: false }));
-      }
-    };
-    requestAnimationFrame(animateCooldown);
+    return allSkills;
   };
 
   return (
     <>
       <div className={['SkillsBar', className].join(' ')}>
-        <div className={'SkillsBar-row'}>{renderDomSkills().slice(0, skillsPerRow)}</div>
-        {store.character.skills.length > skillsPerRow && (
-          <div className={'SkillsBar-row'}>
-            {renderDomSkills().slice(skillsPerRow, skillsPerRow * totalSkillRows)}
-          </div>
-        )}
+        <div className={'SkillsBar-row'}>
+          {getSkills().map((skill) => {
+            let classes = [
+              'SkillsBar-row-item',
+              activeSkills[skill?.name] ? 'cooldown' : '',
+              skill?.manaCost > store.characters.getCurrentMana() ? 'disabled' : '',
+            ];
+
+            return (
+              <Tooltip
+                placement="top"
+                title={<SkillTooltip name={skill.name} cooldown={skill?.cooldown / 1000} />}
+                key={skill.name}>
+                <div
+                  className={classes.join(' ')}
+                  style={{
+                    backgroundImage: `url(${store.assets[skill?.name]})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                  }}
+                  data-skill={skill?.name}
+                  // onClick={activateSkill}>
+                ></div>
+              </Tooltip>
+            );
+          })}
+        </div>
       </div>
     </>
   );

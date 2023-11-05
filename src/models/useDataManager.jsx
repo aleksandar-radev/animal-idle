@@ -1,17 +1,18 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { AuthRepo } from '../api/AuthRepo';
 import { DataRepo } from '../api/DataRepo';
 import { State } from '../api/Store';
 import { mergeObjectsRecursive } from '../helpers/functions';
-import Character from './character';
+import Characters from './characters';
 import Data from './data';
 import Enemy from './enemy';
 import Settings from './settings';
 import { loadAssets } from './assetsLoader';
 
-const DataManager = () => {
+const useDataManager = () => {
   const [store, setStore] = useContext(State);
   const effectCount = useRef(0);
+  let [isLoaded, setisLoaded] = useState(false);
 
   const handler = {
     set(target, property, value) {
@@ -61,17 +62,17 @@ const DataManager = () => {
 
       store.settings = new Proxy({ ...Settings(store) }, handler);
 
-      store.character = new Proxy({ ...Character(store) }, handler);
-      store.character.reset();
+      store.characters = new Proxy({ ...Characters(store) }, handler);
 
       store.enemy = new Proxy({ ...Enemy(store) }, handler);
       store.enemy.reset();
 
       setStore({ ...store });
+      setisLoaded(true);
     })();
   }, []);
 
-  return;
+  return isLoaded;
 };
 
-export default DataManager;
+export default useDataManager;

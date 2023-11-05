@@ -3,7 +3,7 @@ import { AuthRepo } from '../api/AuthRepo';
 import { DataRepo } from '../api/DataRepo';
 import { State } from '../api/Store';
 import saveButton from '../assets/save-button.png';
-import { CHARACTER_CURRENCY_GOLD } from '../constants/gameVariables';
+import { CURRENCY_GOLD } from '../constants/gameVariables';
 import './CurrenciesBar.scss';
 
 const CurrenciesBar = () => {
@@ -22,7 +22,7 @@ const CurrenciesBar = () => {
   };
 
   const getGold = () => {
-    return store.data?.currencies[CHARACTER_CURRENCY_GOLD].value;
+    return store.data?.currencies[CURRENCY_GOLD].value;
   };
 
   return (

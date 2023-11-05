@@ -34,7 +34,7 @@ export const SHOP_SCREEN_DEFENSE_TAB = 'defense';
 export const SHOP_SCREEN_UTILITY_TAB = 'utility';
 
 // CURRENCIES
-export const CHARACTER_CURRENCY_GOLD = 'gold';
+export const CURRENCY_GOLD = 'gold';
 
 // UPGRADES
 export const SHOP_UPGRADES_ATTACK = 'attack';
@@ -52,6 +52,9 @@ export const SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE = 'double-damage-chance';
 // DEFENSE UPGRADES
 export const SHOP_UPGRADES_DEFENSE_BONUS_HEALTH = 'bonus-health';
 export const SHOP_UPGRADES_DEFENSE_BONUS_DEFENSE = 'bonus-defense';
+
+// UTILITY UPGRADES
+export const SHOP_UPGRADES_UTILITY_BONUS_GOLD = 'bonus-gold';
 
 // IMAGES / ASSETS
 export const BARBARIAN_AVATAR = ENEMY_TYPE_BARBARIAN;

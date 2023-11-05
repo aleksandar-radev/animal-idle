@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
-import DataManager from '../models/DataManager';
+import useDataManager from '../models/useDataManager';
 import './Container.scss';
 import CurrenciesBar from './CurrenciesBar';
 import LoginScreen from './LoginScreen';
@@ -11,6 +11,7 @@ import MainScreen from './MainScreen';
 const Container = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const isLoaded = useDataManager();
 
   useEffect(() => {
     (async () => {
@@ -29,8 +30,7 @@ const Container = () => {
 
   return (
     <div className={'Container'}>
-      <DataManager></DataManager>
-      {isAuthenticated() ? (
+      {isAuthenticated() && isLoaded ? (
         <div className="Container-auth">
           <CurrenciesBar></CurrenciesBar>
           <MainMenu></MainMenu>

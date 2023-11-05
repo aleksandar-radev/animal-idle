@@ -5,7 +5,7 @@ import useTranslations from '../../hooks/useTranslations';
 
 const CharacterStats = () => {
   const [store] = useContext(State);
-  const stats = store.character.getAllStats();
+  const stats = store.characters[store.settings.activeCharacter].getAllStats();
   const t = useTranslations();
 
   return (

@@ -15,12 +15,9 @@ const CharactersList = () => {
     store.settings?.setActiveCharacter(character);
   };
 
-  const getCharacters = () => {
-    return Object.keys(store?.data?.characters?.map || []);
-  };
   const getCharacterById = (id) => {
     const mappedCharacter = store?.data?.characters?.map[id];
-    return store?.character.characters[mappedCharacter];
+    return store?.characters[mappedCharacter];
   };
 
   const handleDragStart = (e, item) => {
@@ -38,12 +35,8 @@ const CharactersList = () => {
   const handleDrop = (e, targetItem) => {
     if (!draggedItem || draggedItem.name === targetItem.name) return;
 
-    const draggedIndex = Object.entries(store.data.characters.map).find(
-      (key) => key[1] === draggedItem.type,
-    );
-    const targetIndex = Object.entries(store.data.characters.map).find(
-      (key) => key[1] === targetItem.type,
-    );
+    const draggedIndex = Object.entries(store.data.characters.map).find((key) => key[1] === draggedItem.type);
+    const targetIndex = Object.entries(store.data.characters.map).find((key) => key[1] === targetItem.type);
 
     store.data.characters.map[draggedIndex[0]] = targetItem.type;
     store.data.characters.map[targetIndex[0]] = draggedItem.type;
@@ -52,19 +45,19 @@ const CharactersList = () => {
   return (
     <div className="CharactersList">
       {!getActiveCharacter() &&
-        getCharacters().map((itemId) => {
-          const item = getCharacterById(itemId);
+        store.characters.getActiveCharacters().map((character) => {
+          const isDraggable = store.settings.areCharactersDraggable;
           return (
             <div
-              key={item.type}
+              key={character.type}
               className="item"
-              draggable
-              onClick={() => setActiveCharacter(item)}
-              onDragStart={(e) => handleDragStart(e, item)}
+              draggable={isDraggable}
+              onClick={() => setActiveCharacter(character.type)}
+              onDragStart={(e) => handleDragStart(e, character)}
               onDragEnd={handleDragEnd}
               onDragOver={handleDragOver}
-              onDrop={(e) => handleDrop(e, item)}>
-              {item.name}
+              onDrop={(e) => handleDrop(e, character)}>
+              {character.name}
             </div>
           );
         })}

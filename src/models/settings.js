@@ -11,6 +11,8 @@ const Settings = (store) => {
     activeCharacterScreenTab: CHARACTER_SCREEN_STATS_TAB,
     activeShopScreenTab: SHOP_SCREEN_ATTACK_TAB,
     activeCharacter: null,
+    areCharactersDraggable: false,
+    isFightStarted: false,
 
     setActiveMainScreenTab(tab) {
       this.activeMainScreenTab = tab;

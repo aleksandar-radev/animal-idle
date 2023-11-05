@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './SettingsScreen.scss';
 import { DataRepo } from '../../api/DataRepo';
 import useTranslations from '../../hooks/useTranslations';
@@ -7,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SettingsScreen = () => {
   const navigate = useNavigate();
+  const t = useTranslations();
 
   const logout = async () => {
     navigate('/login');
@@ -20,10 +20,10 @@ const SettingsScreen = () => {
   return (
     <div className={'SettingsScreen'}>
       <div className={`button`} onClick={resetProgress}>
-        Reset Progress
+        {t.resetProgress}
       </div>
       <div className={`button`} onClick={logout}>
-        Logout
+        {t.logout}
       </div>
     </div>
   );
