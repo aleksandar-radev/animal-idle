@@ -15,10 +15,12 @@ const BaseCharacter = (store, data) => {
     health: data.health || 100,
     mana: data.mana || 50,
     damage: data.damage || 15,
-    attackSpeed: data.attackSpeed || 0,
+    attackSpeed: data.attackSpeed || 1000,
     critChance: data.critChance || 0,
     critDamage: data.critDamage || 0,
     doubleDamageChance: data.doubleDamageChance || 0,
+
+    persistentData: store.data.characters[data.type],
 
     skills: data.skills,
 
@@ -64,7 +66,7 @@ const BaseCharacter = (store, data) => {
       return damage;
     },
 
-    getDamage() {
+    getTotalDamage() {
       let damage = this.getBaseDamage();
       // CRIT
       if (getRandomNumber(1, 100) < this.getCritChance()) {

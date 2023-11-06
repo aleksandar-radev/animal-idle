@@ -65,7 +65,7 @@ const useDataManager = () => {
       store.characters = new Proxy({ ...Characters(store) }, handler);
 
       store.enemy = new Proxy({ ...Enemy(store) }, handler);
-      store.enemy.reset();
+      // store.enemy.reset();
 
       setStore({ ...store });
       setisLoaded(true);

@@ -15,21 +15,6 @@ const Characters = (store) => {
     currentHealth: 0,
     isAlive: true,
 
-    takeDamage(damage) {
-      if (damage >= this.currentHealth) {
-        this.currentHealth = 0;
-        this.isAlive = false;
-      } else {
-        this.currentHealth -= damage;
-      }
-    },
-
-    reset() {
-      this.isAlive = true;
-      this.currentHealth = this.getTotalHealth();
-      this.currentMana = this.getTotalMana();
-    },
-
     getCurrentHealth() {
       return this.currentHealth;
     },
@@ -62,7 +47,7 @@ const Characters = (store) => {
       let totalDamage = 0;
 
       this.getActiveCharacters().forEach((char) => {
-        totalDamage += char.getDamage();
+        totalDamage += char.getTotalDamage();
       });
       return totalDamage;
     },
@@ -94,26 +79,6 @@ const Characters = (store) => {
           return this[CHARACTER_TYPE_DRUID];
         default:
           return null;
-      }
-    },
-
-    updateHealth(bonus) {
-      const newCurrent = store.character.currentHealth + bonus;
-      if (newCurrent >= store.character.getTotalHealth()) {
-        store.character.currentHealth = store.character.getTotalHealth();
-      } else if (newCurrent < 0) {
-        throw new Error('Unable to remove mana');
-      } else {
-        store.character.currentHealth = newCurrent;
-      }
-    },
-
-    updateMana(bonus) {
-      const newCurrent = store.character.currentMana + bonus;
-      if (newCurrent >= store.character.getTotalMana()) {
-        store.character.currentMana = store.character.getTotalMana();
-      } else {
-        store.character.currentMana = newCurrent;
       }
     },
   };

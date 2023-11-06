@@ -1,28 +1,37 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { State } from '../api/Store';
 
 const useCharactersAttack = () => {
   const [store] = useContext(State);
-
+  let [isAttacking, setIsAttacking] = useState(false);
   useEffect(() => {
-    if (store.settings.isFightStarted) {
-      startFight();
+    if (store.enemy.current !== null && !isAttacking) {
+      store.characters.getActiveCharacters().forEach((char) => {
+        startAttacking(char);
+      });
     }
-  }, [store.settings.isFightStarted]);
+  }, [store.enemy.current]);
 
-  function startFight() {
+  function startAttacking(char) {
+    setIsAttacking(true);
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
+      if (store.enemy.current === null) {
+        setIsAttacking(false);
+        return;
+      }
       if (!store.settings.isFightStarted) return;
       if (!startTime) {
         startTime = timestamp;
       }
-      if (timestamp - startTime < store.enemy.current.attackSpeed) {
+      if (timestamp - startTime < char.attackSpeed) {
         requestAnimationFrame(animateCooldown);
       } else {
-        store.enemy.current.takeDamage(store.characters.getTotalDamage());
-        startFight();
+        if (store.enemy.current) {
+          store.enemy.current.takeDamage(char.getTotalDamage());
+        }
+        startAttacking(char);
       }
     };
     requestAnimationFrame(animateCooldown);

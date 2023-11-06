@@ -67,7 +67,7 @@ const Enemy = (store) => {
           this.currentHealth = null;
           store.data.currencies[CURRENCY_GOLD].add(1);
           store.data.enemy.level++;
-          store.enemy.current = store.enemy.getRandomEnemy();
+          store.enemy.current = null;
         },
       };
     },

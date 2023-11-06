@@ -167,7 +167,7 @@ const Data = () => {
 
     totalDecks: 1,
     activeDeckIndex: 0,
-    decks: [[CHARACTER_TYPE_BARBARIAN], [], [], [], []],
+    decks: [[CHARACTER_TYPE_BARBARIAN, CHARACTER_TYPE_SORCERESS], [], [], [], []],
 
     charactersMap: {
       1: CHARACTER_TYPE_BARBARIAN,

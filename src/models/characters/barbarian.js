@@ -6,7 +6,8 @@ const Barbarian = (store) => {
     name: 'Barbarian',
     type: CHARACTER_TYPE_BARBARIAN,
     health: 200,
-    damage: 20,
+    damage: 70,
+    attackSpeed: 5000,
     skills: {
       [CHARACTER_SKILL_ATTACK]: {
         name: CHARACTER_SKILL_ATTACK,
