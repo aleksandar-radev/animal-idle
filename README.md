@@ -15,3 +15,7 @@ builds and deploys the `dist` folder. **PRODUCTION**
 ### `npx supabase start`
 
 starts local development database (docker must be started)
+
+\*\*\* if there is an error, open the terminal as **Administrator**
+
+### `Make sure you add .env to new projects :)`
