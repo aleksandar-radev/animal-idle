@@ -34,7 +34,7 @@ const SkillsBar = ({ className }) => {
   // Auto cast
   useEffect(() => {
     if (activeSkills[CHARACTER_SKILL_AUTO_CAST]) {
-      Object.keys(store.character.skills).forEach((skillName) => {
+      Object.keys(store.characters.skills).forEach((skillName) => {
         const target = document.querySelector(`[data-skill='${skillName}']`);
         activateSkill({ target });
       });
@@ -43,7 +43,7 @@ const SkillsBar = ({ className }) => {
 
   const handleKeyPress = (e) => {
     const keyId = String.fromCharCode(e.which);
-    const skill = store.character.getSkillById(keyId);
+    const skill = store.characters.getSkillById(keyId);
 
     if (!skill) return;
     const target = document.querySelector(`[data-skill='${skill.name}']`);
@@ -53,14 +53,14 @@ const SkillsBar = ({ className }) => {
   const renderDomSkills = () => {
     const newDomSkills = [];
     for (let id = 1; id < skillsPerRow * totalSkillRows; id++) {
-      const skill = store.characters['barbarian'].getSkillById(id);
+      const skill = store.characterss['barbarian'].getSkillById(id);
       const skillName = t[skill?.name] || skill?.name;
       const img = store.assets[skill?.name];
 
       let classes = [
         'SkillsBar-row-item',
         activeSkills[skill?.name] ? 'cooldown' : '',
-        skill?.manaCost > store.characters['barbarian'].getCurrentMana() ? 'disabled' : '',
+        skill?.manaCost > store.characterss['barbarian'].getCurrentMana() ? 'disabled' : '',
       ];
 
       newDomSkills.push(
@@ -88,12 +88,12 @@ const SkillsBar = ({ className }) => {
   const activateSkill = (event) => {
     const { target } = event;
     const skillName = target.dataset.skill;
-    const skill = store.character.skills[skillName];
+    const skill = store.characters.skills[skillName];
 
     if (target.classList.contains('cooldown')) return;
-    if (!skill || store.character.getCurrentMana() < skill.manaCost) return;
+    if (!skill || store.characters.getCurrentMana() < skill.manaCost) return;
 
-    store.character.updateMana(-skill.manaCost);
+    store.characters.updateMana(-skill.manaCost);
 
     setActiveSkills((prev) => ({ ...prev, [skillName]: true }));
 
@@ -125,10 +125,8 @@ const SkillsBar = ({ className }) => {
     <>
       <div className={['SkillsBar', className].join(' ')}>
         <div className={'SkillsBar-row'}>{renderDomSkills().slice(0, skillsPerRow)}</div>
-        {store.character.skills.length > skillsPerRow && (
-          <div className={'SkillsBar-row'}>
-            {renderDomSkills().slice(skillsPerRow, skillsPerRow * totalSkillRows)}
-          </div>
+        {store.characters.skills.length > skillsPerRow && (
+          <div className={'SkillsBar-row'}>{renderDomSkills().slice(skillsPerRow, skillsPerRow * totalSkillRows)}</div>
         )}
       </div>
     </>

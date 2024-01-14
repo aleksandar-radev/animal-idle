@@ -14,7 +14,7 @@ const Sorceress = (store) => {
         cooldown: 1000 * 60,
         manaCost: 0,
         cast() {
-          let damage = store.character.getDamage();
+          let damage = store.characters.getDamage();
           store.enemy.current.takeDamage(damage);
         },
       },

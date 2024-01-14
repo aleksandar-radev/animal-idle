@@ -10,6 +10,7 @@ import useEnemyAttack from '../../hooks/useEnemyAttack';
 import { useContext } from 'react';
 import useInitFight from '../../hooks/useInitFight';
 import useCharactersAttack from '../../hooks/useCharactersAttack';
+import CharacterGrid from '../../components/character/CharacterGrid';
 
 const FightScreen = () => {
   const [store] = useContext(State);
@@ -21,7 +22,7 @@ const FightScreen = () => {
     <div className={'FightScreen'}>
       {store.settings.isFightStarted ? (
         <>
-          <CharacterAvatar className={'FightScreen-self'} />
+          <CharacterGrid className={'FightScreen-self'} />
           <CharacterResources className={'FightScreen-self-res'} />
           <FightLog className={'FightScreen-log'} />
           <EnemyAvatar className={'FightScreen-enemy'} />

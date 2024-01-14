@@ -7,11 +7,11 @@ import './ShopUpgradesAttack.scss';
 
 const ShopUpgradesAttack = () => {
   const [store] = useContext(State);
-  const upgradesKeys = Object.keys(store.data.upgrades[SHOP_UPGRADES_ATTACK]);
+  // const upgradesKeys = Object.keys(store.data.upgrades[SHOP_UPGRADES_ATTACK]);
 
   return (
     <>
-      {upgradesKeys.map((upgradeKey) => {
+      {/* {upgradesKeys.map((upgradeKey) => {
         const upgrade = store.data.upgrades[SHOP_UPGRADES_ATTACK][upgradeKey];
         const upgradeKeyDescription = upgradeKey + '-description';
         const bonus = upgrade.getBonus();
@@ -43,7 +43,7 @@ const ShopUpgradesAttack = () => {
             </div>
           </div>
         );
-      })}
+      })} */}
     </>
   );
 };

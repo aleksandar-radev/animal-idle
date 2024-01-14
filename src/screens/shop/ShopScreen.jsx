@@ -10,7 +10,7 @@ import {
 } from '../../constants/gameVariables';
 import './ShopScreen.scss';
 
-const Shop = () => {
+const ShopScreen = () => {
   const [store] = useContext(State);
 
   const changeView = (view) => {
@@ -59,4 +59,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default ShopScreen;

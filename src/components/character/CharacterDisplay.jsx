@@ -10,9 +10,12 @@ import CharacterItems from './CharacterItems';
 import CharacterSkills from './CharacterSkills';
 import CharacterScreenMenu from '../../screens/character/CharacterScreenMenu';
 import CharacterAvatar from './CharacterAvatar';
+import './CharacterDisplay.scss';
 
 const CharacterDisplay = () => {
   const [store] = useContext(State);
+  const characterType = store.settings?.activeCharacter;
+  const character = store.characters.getCharacterByType(characterType);
 
   const activeTab = () => {
     switch (store?.settings?.activeCharacterScreenTab) {
@@ -27,11 +30,15 @@ const CharacterDisplay = () => {
     }
   };
   return (
-    <div className="CharacterDisplay">
-      <CharacterScreenMenu></CharacterScreenMenu>
-      <CharacterAvatar></CharacterAvatar>
-      {activeTab()}
-    </div>
+    character && (
+      <div className="CharacterDisplay">
+        <CharacterScreenMenu></CharacterScreenMenu>
+        <div className="avatar">
+          <CharacterAvatar character={character}></CharacterAvatar>
+        </div>
+        {activeTab()}
+      </div>
+    )
   );
 };
 

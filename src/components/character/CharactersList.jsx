@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import './CharactersList.scss';
 import { State } from '../../api/Store';
 import CharacterDisplay from './CharacterDisplay';
+import CharacterAvatar from './CharacterAvatar';
 
 const CharactersList = () => {
   const [store] = useContext(State);
@@ -57,7 +58,7 @@ const CharactersList = () => {
               onDragEnd={handleDragEnd}
               onDragOver={handleDragOver}
               onDrop={(e) => handleDrop(e, character)}>
-              {character.name}
+              <CharacterAvatar character={character}></CharacterAvatar>
             </div>
           );
         })}

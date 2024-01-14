@@ -11,7 +11,7 @@ import {
 import './MainScreen.scss';
 import CharacterScreen from './character/CharacterScreen';
 import FightScreen from './fight/FightScreen';
-import Shop from './shop/ShopScreen';
+import ShopScreen from './shop/ShopScreen';
 import LeaderboardScreen from './leaderboard/LeaderboardScreen';
 import AdminScreen from './admin/AdminScreen';
 import SettingsScreen from './settings/SettingsScreen';
@@ -24,7 +24,7 @@ const MainScreen = () => {
       case MAIN_SCREEN_FIGHT_TAB:
         return <FightScreen />;
       case MAIN_SCREEN_SHOP_TAB:
-        return <Shop />;
+        return <ShopScreen />;
       case MAIN_SCREEN_CHARACTER_TAB:
         return <CharacterScreen />;
       case MAIN_SCREEN_LEADERBOARD_TAB:
