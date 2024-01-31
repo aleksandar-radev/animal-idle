@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import PropTypes from '../../externalLibraries/propTypes';
-import { State } from '../../api/Store';
 import './CharacterAvatar.scss';
+import useStore from '../../hooks/useStore';
 
 const CharacterAvatar = ({ className, character }) => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const avatar = store.assets[character.type];
   return (
     <div className="CharacterAvatar">

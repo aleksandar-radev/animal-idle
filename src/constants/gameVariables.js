@@ -27,6 +27,7 @@ export const MAIN_SCREEN_ADMIN_TAB = 'admin';
 
 export const CHARACTER_SCREEN_STATS_TAB = 'stats';
 export const CHARACTER_SCREEN_SKILLS_TAB = 'skills';
+export const CHARACTER_SCREEN_UPGRADES_TAB = 'upgrades';
 export const CHARACTER_SCREEN_ITEMS_TAB = 'items';
 
 export const SHOP_SCREEN_ATTACK_TAB = 'attack';

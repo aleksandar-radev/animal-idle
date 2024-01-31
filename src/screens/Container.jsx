@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthRepo } from '../api/AuthRepo';
-import useDataManager from '../models/useDataManager';
+import useDataManager from '../hooks/useDataManager';
 import './Container.scss';
 import CurrenciesBar from './CurrenciesBar';
 import LoginScreen from './LoginScreen';

@@ -1,13 +1,13 @@
-import { useContext, useState } from 'react';
-import { State } from '../api/Store';
+import { useState } from 'react';
 import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';
 import useCharactersSkills from '../hooks/useCharactersSkills';
+import useStore from '../hooks/useStore';
 
 const SkillsBar = ({ className }) => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const [activeSkills, setActiveSkills] = useState({});
   const { a } = useCharactersSkills();
 

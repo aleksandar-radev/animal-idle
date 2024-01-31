@@ -1,12 +1,11 @@
-import { useContext } from 'react';
-import { State } from '../../api/Store';
 import PropTypes from '../../externalLibraries/propTypes';
 import HealthBar from '../HealthBar';
 import ManaBar from '../ManaBar';
 import './CharacterResources.scss';
+import useStore from '../../hooks/useStore';
 
 const CharacterResources = ({ className }) => {
-  const [store] = useContext(State);
+  const { store } = useStore();
 
   return (
     <div className={['CharacterResources', className].join(' ')}>

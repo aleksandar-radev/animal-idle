@@ -1,8 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { AuthRepo } from '../api/AuthRepo';
-import { DataRepo } from '../api/DataRepo';
-import { State } from '../api/Store';
 import {
   MAIN_SCREEN_CHARACTER_TAB,
   MAIN_SCREEN_FIGHT_TAB,
@@ -12,9 +9,10 @@ import {
   MAIN_SCREEN_ADMIN_TAB,
 } from '../constants/gameVariables';
 import './MainMenu.scss';
+import useStore from '../hooks/useStore';
 
 const MainMenu = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {

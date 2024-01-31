@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { State } from '../../api/Store';
 import ShopUpgradesAttack from '../../components/shop/ShopUpgradesAttack';
 import ShopUpgradesDefense from '../../components/shop/ShopUpgradesDefense';
 import ShopUpgradesUtility from '../../components/shop/ShopUpgradesUtility';
@@ -9,9 +7,10 @@ import {
   SHOP_SCREEN_UTILITY_TAB,
 } from '../../constants/gameVariables';
 import './ShopScreen.scss';
+import useStore from '../../hooks/useStore';
 
 const ShopScreen = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
 
   const changeView = (view) => {
     store.settings.setActiveShopScreenTab(view);

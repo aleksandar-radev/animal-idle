@@ -1,6 +1,6 @@
 import useStore from './useStore';
 
-const useCharacterMethods = () => {
+const useCharacterUpgrades = (charType) => {
   const { store } = useStore();
   const chars = store.characters;
 
@@ -46,4 +46,4 @@ const useCharacterMethods = () => {
   };
 };
 
-export default useCharacterMethods;
+export default useCharacterUpgrades;

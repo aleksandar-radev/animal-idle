@@ -27,6 +27,7 @@ export const en = {
   // Defense
   [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH]: 'Bonus Health',
   [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH + '-description']: (amount) => `Increases your health by ${amount}`,
+  level: 'Level',
   rank: 'Rank',
   totalHealth: 'Total Health',
   totalMana: 'Total Mana',

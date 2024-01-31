@@ -1,10 +1,10 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import useCharacterMethods from './useCharacterMethods';
-import { State } from '../api/Store';
 import { MAIN_SCREEN_FIGHT_TAB } from '../constants/gameVariables';
+import useStore from './useStore';
 
 const useInitFight = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const { reset } = useCharacterMethods();
   let t = null;
 

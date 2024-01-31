@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { State } from '../../api/Store';
+import React from 'react';
 import {
   CHARACTER_SCREEN_ITEMS_TAB,
   CHARACTER_SCREEN_SKILLS_TAB,
+  CHARACTER_SCREEN_UPGRADES_TAB,
   CHARACTER_SCREEN_STATS_TAB,
 } from '../../constants/gameVariables';
 import CharacterStats from './CharacterStats';
@@ -11,9 +11,11 @@ import CharacterSkills from './CharacterSkills';
 import CharacterScreenMenu from '../../screens/character/CharacterScreenMenu';
 import CharacterAvatar from './CharacterAvatar';
 import './CharacterDisplay.scss';
+import CharacterUpgrades from './CharacterUpgrades';
+import useStore from '../../hooks/useStore';
 
 const CharacterDisplay = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const characterType = store.settings?.activeCharacter;
   const character = store.characters.getCharacterByType(characterType);
 
@@ -25,6 +27,8 @@ const CharacterDisplay = () => {
         return <CharacterItems />;
       case CHARACTER_SCREEN_SKILLS_TAB:
         return <CharacterSkills />;
+      case CHARACTER_SCREEN_UPGRADES_TAB:
+        return <CharacterUpgrades />;
       default:
         return '';
     }

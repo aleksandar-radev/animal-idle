@@ -1,8 +1,8 @@
-import { useContext, useEffect } from 'react';
-import { State } from '../api/Store';
+import { useEffect } from 'react';
+import useStore from './useStore';
 
 const useRegenMana = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
 
   useEffect(() => {
     regenMana();

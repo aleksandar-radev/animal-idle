@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import './CharactersList.scss';
-import { State } from '../../api/Store';
 import CharacterDisplay from './CharacterDisplay';
 import CharacterAvatar from './CharacterAvatar';
+import useStore from '../../hooks/useStore';
 
 const CharactersList = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const [draggedItem, setDraggedItem] = useState(null);
 
   const getActiveCharacter = () => {

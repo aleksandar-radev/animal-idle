@@ -1,10 +1,10 @@
-import { useContext, useEffect } from 'react';
-import { State } from '../api/Store';
+import { useEffect } from 'react';
 import useCharacterMethods from './useCharacterMethods';
+import useStore from './useStore';
 
 const useEnemyAttack = () => {
-  const [store] = useContext(State);
-  const { takeDamage: charactersTakeDamage } = useCharacterMethods();
+  const { store } = useStore();
+  const chars = useCharacterMethods();
 
   useEffect(() => {
     if (store.enemy.current === null) {
@@ -30,7 +30,7 @@ const useEnemyAttack = () => {
       if (timestamp - startTime < store.enemy.current.attackSpeed) {
         requestAnimationFrame(animateCooldown);
       } else {
-        charactersTakeDamage(store.enemy.current.getTotalDamage());
+        chars.takeDamage(store.enemy.current.getTotalDamage());
         startAttacking();
       }
     };

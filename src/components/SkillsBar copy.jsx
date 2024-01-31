@@ -1,14 +1,14 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { State } from '../api/Store';
+import { useEffect, useRef, useState } from 'react';
 import { CHARACTER_SKILL_AUTO_CAST } from '../constants/gameVariables';
 import PropTypes from '../externalLibraries/propTypes';
 import './SkillsBar.scss';
 import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';
 import useTranslations from '../hooks/useTranslations';
+import useStore from '../hooks/useStore';
 
 const SkillsBar = ({ className }) => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const t = useTranslations();
   const [activeSkills, setActiveSkills] = useState({});
   const skillShouldStop = useRef(false);

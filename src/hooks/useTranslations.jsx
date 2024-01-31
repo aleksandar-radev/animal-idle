@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import { State } from '../api/Store';
 import { translations } from '../constants/translations';
+import useStore from './useStore';
 
 const useTranslations = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
 
   return translations[store.language || 'en'];
 };

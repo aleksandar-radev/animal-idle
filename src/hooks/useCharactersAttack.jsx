@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
-import { State } from '../api/Store';
+import { useEffect, useState } from 'react';
+import useStore from './useStore';
 
 const useCharactersAttack = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   let [isAttacking, setIsAttacking] = useState(false);
   useEffect(() => {
     if (store.enemy.current !== null && !isAttacking) {

@@ -1,0 +1,13 @@
+@import '../../constants/variables.scss';
+
+.CharacterUpgrades {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  justify-content: center;
+  align-items: top;
+
+  & > div {
+    background-color: darkgoldenrod;
+    border-radius: 50%;
+  }
+}

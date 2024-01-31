@@ -26,6 +26,7 @@ const BaseCharacter = (store, data) => {
 
     getAllStats() {
       return {
+        level: this.getLevel(),
         health: this.getHealth(),
         mana: this.getMana(),
         damage: this.getBaseDamage(),
@@ -34,6 +35,14 @@ const BaseCharacter = (store, data) => {
         critDamage: this.getCritDamage(),
         doubleDamageChance: this.getDoubleDamageChance(),
       };
+    },
+
+    getLevel() {
+      return this.level;
+    },
+
+    getExperience() {
+      return this.experience;
     },
 
     getHealth() {

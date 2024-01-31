@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { State } from '../api/Store';
+import React from 'react';
 import {
   MAIN_SCREEN_CHARACTER_TAB,
   MAIN_SCREEN_FIGHT_TAB,
@@ -15,9 +14,10 @@ import ShopScreen from './shop/ShopScreen';
 import LeaderboardScreen from './leaderboard/LeaderboardScreen';
 import AdminScreen from './admin/AdminScreen';
 import SettingsScreen from './settings/SettingsScreen';
+import useStore from '../hooks/useStore';
 
 const MainScreen = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
 
   const activeTab = () => {
     switch (store?.settings?.activeMainScreenTab) {

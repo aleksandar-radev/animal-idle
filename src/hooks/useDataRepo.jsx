@@ -1,9 +1,9 @@
 import useStore from './useStore';
 
-const useCharactersSkills = () => {
+const useDataRepo = () => {
   const { store } = useStore();
 
   return {};
 };
 
-export default useCharactersSkills;
+export default useDataRepo;

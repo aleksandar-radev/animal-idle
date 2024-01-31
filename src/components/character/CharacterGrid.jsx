@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from '../../externalLibraries/propTypes';
 import './CharacterGrid.scss';
-import { State } from '../../api/Store';
 import CharacterAvatar from './CharacterAvatar';
+import useStore from '../../hooks/useStore';
 
 const CharacterGrid = ({ className }) => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const getActiveCharacters = store.characters.getActiveCharacters();
 
   return (

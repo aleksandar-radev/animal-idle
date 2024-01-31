@@ -30,6 +30,7 @@ const Data = () => {
     characters: {
       [CHARACTER_TYPE_BARBARIAN]: {
         level: 1,
+        experience: 0,
         isUnlocked: true,
         upgrades: {
           [SHOP_UPGRADES_ATTACK]: {
@@ -75,6 +76,7 @@ const Data = () => {
       },
       [CHARACTER_TYPE_SORCERESS]: {
         level: 1,
+        experience: 0,
         isUnlocked: false,
         upgrades: {
           [SHOP_UPGRADES_ATTACK]: {
@@ -120,6 +122,7 @@ const Data = () => {
       },
       [CHARACTER_TYPE_DRUID]: {
         level: 1,
+        experience: 0,
         isUnlocked: false,
         upgrades: {
           [SHOP_UPGRADES_ATTACK]: {

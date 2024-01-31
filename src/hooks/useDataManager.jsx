@@ -3,11 +3,11 @@ import { AuthRepo } from '../api/AuthRepo';
 import { DataRepo } from '../api/DataRepo';
 import { State } from '../api/Store';
 import { mergeObjectsRecursive } from '../helpers/functions';
-import Characters from './characters';
-import Data from './data';
-import Enemy from './enemy';
-import Settings from './settings';
-import { loadAssets } from './assetsLoader';
+import Characters from '../models/characters';
+import Data from '../models/data';
+import Enemy from '../models/enemy';
+import Settings from '../models/settings';
+import { loadAssets } from '../models/assetsLoader';
 
 const useDataManager = () => {
   const [store, setStore] = useContext(State);

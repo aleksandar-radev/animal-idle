@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { AuthRepo } from '../api/AuthRepo';
 import { DataRepo } from '../api/DataRepo';
-import { State } from '../api/Store';
 import saveButton from '../assets/save-button.png';
 import { CURRENCY_GOLD } from '../constants/gameVariables';
 import './CurrenciesBar.scss';
+import useStore from '../hooks/useStore';
 
 const CurrenciesBar = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const [loading, setLoading] = useState(false);
 
   const saveProgress = async () => {

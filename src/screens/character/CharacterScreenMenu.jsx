@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
-import { State } from '../../api/Store';
+import React from 'react';
 import {
   CHARACTER_SCREEN_ITEMS_TAB,
   CHARACTER_SCREEN_SKILLS_TAB,
+  CHARACTER_SCREEN_UPGRADES_TAB,
   CHARACTER_SCREEN_STATS_TAB,
   MAIN_SCREEN_CHARACTER_TAB,
 } from '../../constants/gameVariables';
 import './CharacterScreenMenu.scss';
+import useStore from '../../hooks/useStore';
 
 const CharacterScreenMenu = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
 
   const changeView = (view) => {
     store.settings.setActiveCharacterScreenTab(view);
@@ -36,6 +37,11 @@ const CharacterScreenMenu = () => {
         className={isActiveTab(CHARACTER_SCREEN_SKILLS_TAB) ? 'active' : ''}
         onClick={() => changeView(CHARACTER_SCREEN_SKILLS_TAB)}>
         Skills
+      </div>
+      <div
+        className={isActiveTab(CHARACTER_SCREEN_UPGRADES_TAB) ? 'active' : ''}
+        onClick={() => changeView(CHARACTER_SCREEN_UPGRADES_TAB)}>
+        Upgrades
       </div>
       <div
         className={isActiveTab(CHARACTER_SCREEN_ITEMS_TAB) ? 'active' : ''}

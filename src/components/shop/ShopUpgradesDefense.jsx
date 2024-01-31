@@ -1,12 +1,11 @@
-import { useContext } from 'react';
-import { State } from '../../api/Store';
 import goldIcon from '../../assets/gold.png';
 import { SHOP_UPGRADES_DEFENSE } from '../../constants/gameVariables';
 import { en } from '../../constants/translations';
 import './ShopUpgradesDefense.scss';
+import useStore from '../../hooks/useStore';
 
 const ShopUpgradesDefense = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const upgradesKeys = Object.keys(store.data.upgrades[SHOP_UPGRADES_DEFENSE]);
 
   return (

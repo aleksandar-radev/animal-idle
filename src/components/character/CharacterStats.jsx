@@ -1,10 +1,9 @@
-import { useContext } from 'react';
-import { State } from '../../api/Store';
 import './CharacterStats.scss';
 import useTranslations from '../../hooks/useTranslations';
+import useStore from '../../hooks/useStore';
 
 const CharacterStats = () => {
-  const [store] = useContext(State);
+  const { store } = useStore();
   const stats = store.characters[store.settings.activeCharacter].getAllStats();
   const t = useTranslations();
 
