@@ -27,7 +27,6 @@ export const MAIN_SCREEN_ADMIN_TAB = 'admin';
 
 export const CHARACTER_SCREEN_STATS_TAB = 'stats';
 export const CHARACTER_SCREEN_SKILLS_TAB = 'skills';
-export const CHARACTER_SCREEN_UPGRADES_TAB = 'upgrades';
 export const CHARACTER_SCREEN_ITEMS_TAB = 'items';
 
 export const SHOP_SCREEN_ATTACK_TAB = 'attack';
@@ -37,25 +36,25 @@ export const SHOP_SCREEN_UTILITY_TAB = 'utility';
 // CURRENCIES
 export const CURRENCY_GOLD = 'gold';
 
-// UPGRADES
-export const SHOP_UPGRADES_ATTACK = 'attack';
-export const SHOP_UPGRADES_DEFENSE = 'defense';
-export const SHOP_UPGRADES_UTILITY = 'utility';
+// SKILLS
+export const SKILLS_ATTACK = 'attack';
+export const SKILLS_DEFENSE = 'defense';
+export const SKILLS_UTILITY = 'utility';
 
-// ATTACK UPGRADES
-export const SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT = 'bonus-damage-flat';
-export const SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT = 'bonus-damage-percent';
-export const SHOP_UPGRADES_ATTACK_CRIT_CHANCE = 'crit-chance';
-export const SHOP_UPGRADES_ATTACK_CRIT_DAMAGE = 'crit-damage';
-export const SHOP_UPGRADES_ATTACK_BONUS_SPEED = 'attack-speed';
-export const SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE = 'double-damage-chance';
+// ATTACK SKILLS
+export const DAMAGE_FLAT = 'damage-flat';
+export const DAMAGE_PERCENT = 'damage-percent';
+export const CRIT_CHANCE = 'crit-chance';
+export const CRIT_DAMAGE = 'crit-damage';
+export const ATTACK_SPEED = 'attack-speed';
+export const DOUBLE_DAMAGE_CHANCE = 'double-damage-chance';
 
-// DEFENSE UPGRADES
-export const SHOP_UPGRADES_DEFENSE_BONUS_HEALTH = 'bonus-health';
-export const SHOP_UPGRADES_DEFENSE_BONUS_DEFENSE = 'bonus-defense';
+// DEFENSE SKILLS
+export const BONUS_HEALTH = 'bonus-health';
+export const BONUS_DEFENSE = 'bonus-defense';
 
-// UTILITY UPGRADES
-export const SHOP_UPGRADES_UTILITY_BONUS_GOLD = 'bonus-gold';
+// UTILITY SKILLS
+export const BONUS_GOLD = 'bonus-gold';
 
 // IMAGES / ASSETS
 export const BARBARIAN_AVATAR = ENEMY_TYPE_BARBARIAN;

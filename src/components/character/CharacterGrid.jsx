@@ -6,14 +6,13 @@ import useStore from '../../hooks/useStore';
 
 const CharacterGrid = ({ className }) => {
   const { store } = useStore();
-  const getActiveCharacters = store.characters.getActiveCharacters();
+  const characters = store.characters.getCharactersInActiveDeck();
 
   return (
     <div className={['CharacterGrid', className].join(' ')}>
-      {getActiveCharacters.map((character) => {
-        console.log(character);
+      {characters.map((character) => {
         return (
-          <div key={character.key} className="character">
+          <div key={character.type} className="character">
             <CharacterAvatar character={character}></CharacterAvatar>
           </div>
         );

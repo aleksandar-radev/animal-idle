@@ -6,21 +6,21 @@ import {
   CHARACTER_SKILL_BACKSTAB,
   CHARACTER_SKILL_DOUBLE_DAMAGE,
   CHARACTER_SKILL_HEAL,
-  SHOP_UPGRADES_ATTACK,
-  SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT,
-  SHOP_UPGRADES_ATTACK_BONUS_SPEED,
-  SHOP_UPGRADES_DEFENSE_BONUS_HEALTH,
-  SHOP_UPGRADES_DEFENSE,
-  SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT,
-  SHOP_UPGRADES_ATTACK_CRIT_DAMAGE,
-  SHOP_UPGRADES_ATTACK_CRIT_CHANCE,
-  SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE,
+  SKILLS_ATTACK,
+  DAMAGE_FLAT,
+  ATTACK_SPEED,
+  BONUS_HEALTH,
+  SKILLS_DEFENSE,
+  DAMAGE_PERCENT,
+  CRIT_DAMAGE,
+  CRIT_CHANCE,
+  DOUBLE_DAMAGE_CHANCE,
   CHARACTER_TYPE_BARBARIAN,
   CHARACTER_TYPE_SORCERESS,
   CHARACTER_TYPE_DRUID,
-  SHOP_UPGRADES_UTILITY,
-  SHOP_UPGRADES_DEFENSE_BONUS_DEFENSE,
-  SHOP_UPGRADES_UTILITY_BONUS_GOLD,
+  SKILLS_UTILITY,
+  BONUS_DEFENSE,
+  BONUS_GOLD,
 } from '../constants/gameVariables';
 
 // Do not delete anything from here, only add
@@ -32,45 +32,42 @@ const Data = () => {
         level: 1,
         experience: 0,
         isUnlocked: true,
-        upgrades: {
-          [SHOP_UPGRADES_ATTACK]: {
-            [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_CRIT_CHANCE]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_CRIT_DAMAGE]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_BONUS_SPEED]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE]: {
-              level: 0,
-            },
-          },
-          [SHOP_UPGRADES_DEFENSE]: {
-            [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_DEFENSE_BONUS_DEFENSE]: {
-              level: 0,
-            },
-          },
-          [SHOP_UPGRADES_UTILITY]: {
-            [SHOP_UPGRADES_UTILITY_BONUS_GOLD]: {
-              level: 0,
-            },
-          },
-        },
         skills: {
-          [CHARACTER_SKILL_ATTACK]: {
-            name: CHARACTER_SKILL_ATTACK,
-            cooldownReductionFlat: 0,
+          [SKILLS_ATTACK]: {
+            [DAMAGE_FLAT]: {
+              level: 0,
+            },
+            [DAMAGE_PERCENT]: {
+              level: 0,
+            },
+            [CRIT_CHANCE]: {
+              level: 0,
+            },
+            [CRIT_DAMAGE]: {
+              level: 0,
+            },
+            [ATTACK_SPEED]: {
+              level: 0,
+            },
+            [DOUBLE_DAMAGE_CHANCE]: {
+              level: 0,
+            },
+          },
+          [SKILLS_DEFENSE]: {
+            [BONUS_HEALTH]: {
+              level: 0,
+            },
+            [BONUS_DEFENSE]: {
+              level: 0,
+            },
+          },
+          [SKILLS_UTILITY]: {
+            [BONUS_GOLD]: {
+              level: 0,
+            },
+            [CHARACTER_SKILL_ATTACK]: {
+              cooldownReductionFlat: 0,
+            },
           },
         },
       },
@@ -78,45 +75,42 @@ const Data = () => {
         level: 1,
         experience: 0,
         isUnlocked: false,
-        upgrades: {
-          [SHOP_UPGRADES_ATTACK]: {
-            [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_CRIT_CHANCE]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_CRIT_DAMAGE]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_BONUS_SPEED]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE]: {
-              level: 0,
-            },
-          },
-          [SHOP_UPGRADES_DEFENSE]: {
-            [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_DEFENSE_BONUS_DEFENSE]: {
-              level: 0,
-            },
-          },
-          [SHOP_UPGRADES_UTILITY]: {
-            [SHOP_UPGRADES_UTILITY_BONUS_GOLD]: {
-              level: 0,
-            },
-          },
-        },
         skills: {
-          [CHARACTER_SKILL_ATTACK]: {
-            name: CHARACTER_SKILL_ATTACK,
-            cooldownReductionFlat: 0,
+          [SKILLS_ATTACK]: {
+            [DAMAGE_FLAT]: {
+              level: 0,
+            },
+            [DAMAGE_PERCENT]: {
+              level: 0,
+            },
+            [CRIT_CHANCE]: {
+              level: 0,
+            },
+            [CRIT_DAMAGE]: {
+              level: 0,
+            },
+            [ATTACK_SPEED]: {
+              level: 0,
+            },
+            [DOUBLE_DAMAGE_CHANCE]: {
+              level: 0,
+            },
+          },
+          [SKILLS_DEFENSE]: {
+            [BONUS_HEALTH]: {
+              level: 0,
+            },
+            [BONUS_DEFENSE]: {
+              level: 0,
+            },
+          },
+          [SKILLS_UTILITY]: {
+            [BONUS_GOLD]: {
+              level: 0,
+            },
+            [CHARACTER_SKILL_ATTACK]: {
+              cooldownReductionFlat: 0,
+            },
           },
         },
       },
@@ -124,45 +118,42 @@ const Data = () => {
         level: 1,
         experience: 0,
         isUnlocked: false,
-        upgrades: {
-          [SHOP_UPGRADES_ATTACK]: {
-            [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_FLAT]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_BONUS_DAMAGE_PERCENT]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_CRIT_CHANCE]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_CRIT_DAMAGE]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_BONUS_SPEED]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_ATTACK_DOUBLE_DAMAGE_CHANCE]: {
-              level: 0,
-            },
-          },
-          [SHOP_UPGRADES_DEFENSE]: {
-            [SHOP_UPGRADES_DEFENSE_BONUS_HEALTH]: {
-              level: 0,
-            },
-            [SHOP_UPGRADES_DEFENSE_BONUS_DEFENSE]: {
-              level: 0,
-            },
-          },
-          [SHOP_UPGRADES_UTILITY]: {
-            [SHOP_UPGRADES_UTILITY_BONUS_GOLD]: {
-              level: 0,
-            },
-          },
-        },
         skills: {
-          [CHARACTER_SKILL_ATTACK]: {
-            name: CHARACTER_SKILL_ATTACK,
-            cooldownReductionFlat: 0,
+          [SKILLS_ATTACK]: {
+            [DAMAGE_FLAT]: {
+              level: 0,
+            },
+            [DAMAGE_PERCENT]: {
+              level: 0,
+            },
+            [CRIT_CHANCE]: {
+              level: 0,
+            },
+            [CRIT_DAMAGE]: {
+              level: 0,
+            },
+            [ATTACK_SPEED]: {
+              level: 0,
+            },
+            [DOUBLE_DAMAGE_CHANCE]: {
+              level: 0,
+            },
+          },
+          [SKILLS_DEFENSE]: {
+            [BONUS_HEALTH]: {
+              level: 0,
+            },
+            [BONUS_DEFENSE]: {
+              level: 0,
+            },
+          },
+          [SKILLS_UTILITY]: {
+            [BONUS_GOLD]: {
+              level: 0,
+            },
+            [CHARACTER_SKILL_ATTACK]: {
+              cooldownReductionFlat: 0,
+            },
           },
         },
       },
@@ -207,34 +198,6 @@ const Data = () => {
           }
           this.value -= +amount;
         },
-      },
-    },
-
-    // TODO: remove
-    skills: {
-      [CHARACTER_SKILL_ATTACK]: {
-        name: CHARACTER_SKILL_ATTACK,
-        cooldownReductionFlat: 0,
-      },
-      [CHARACTER_SKILL_HEAL]: {
-        name: CHARACTER_SKILL_HEAL,
-        cooldownReductionFlat: 0,
-      },
-      [CHARACTER_SKILL_DOUBLE_DAMAGE]: {
-        name: CHARACTER_SKILL_DOUBLE_DAMAGE,
-        cooldownReductionFlat: 0,
-      },
-      [CHARACTER_SKILL_AUTO_CAST]: {
-        name: CHARACTER_SKILL_AUTO_CAST,
-        cooldownReductionFlat: 0,
-      },
-      [CHARACTER_SKILL_BACKSTAB]: {
-        name: CHARACTER_SKILL_BACKSTAB,
-        cooldownReductionFlat: 0,
-      },
-      [CHARACTER_SKILL_ASCEND]: {
-        name: CHARACTER_SKILL_ASCEND,
-        cooldownReductionFlat: 0,
       },
     },
   };

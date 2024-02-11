@@ -1,5 +1,5 @@
 import FightLog from '../../components/FightLog';
-import SkillsBar from '../../components/SkillsBar';
+import ActiveSkillsBar from '../../components/ActiveSkillsBar';
 import CharacterResources from '../../components/character/CharacterResources';
 import EnemyAvatar from '../../components/enemy/EnemyAvatar';
 import EnemyResources from '../../components/enemy/EnemyResources';
@@ -25,7 +25,7 @@ const FightScreen = () => {
           <FightLog className={'FightScreen-log'} />
           <EnemyAvatar className={'FightScreen-enemy'} />
           <EnemyResources className={'FightScreen-enemy-res'} />
-          <SkillsBar className={'FightScreen-skills'} />
+          <ActiveSkillsBar className={'FightScreen-skills'} />
         </>
       ) : (
         'Loading...'

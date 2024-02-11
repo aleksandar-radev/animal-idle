@@ -1,13 +1,12 @@
 @import '../../constants/variables.scss';
 
-.ShopUpgradesDefense {
+.ShopSkillsUtility {
   display: flex;
   padding: pix(10);
   border: pix(2) solid black;
   border-radius: pix(10);
   margin: pix(10);
   height: pix(60);
-  background-color: rgba(255, 255, 255, 0.7);
 
   &-icon {
     margin-right: pix(20);

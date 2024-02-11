@@ -1,16 +1,12 @@
 import { CHARACTER_TYPE_BARBARIAN, CHARACTER_TYPE_SORCERESS, CHARACTER_TYPE_DRUID } from '../constants/gameVariables';
-import Barbarian from './characters/barbarian';
-import Druid from './characters/druid';
-import Sorceress from './characters/sorceress';
-import Upgrades from './upgrades/upgrades';
+import BaseCharacter from './characters/base/baseCharacter';
 
 // NOTHING HERE IS PERSISTED. ALL RESETS ON REFRESH
 const Characters = (store) => {
   return {
-    [CHARACTER_TYPE_BARBARIAN]: Barbarian(store),
-    [CHARACTER_TYPE_SORCERESS]: Sorceress(store),
-    [CHARACTER_TYPE_DRUID]: Druid(store),
-    upgrades: Upgrades(store),
+    [CHARACTER_TYPE_BARBARIAN]: BaseCharacter(store, CHARACTER_TYPE_BARBARIAN),
+    [CHARACTER_TYPE_SORCERESS]: BaseCharacter(store, CHARACTER_TYPE_SORCERESS),
+    [CHARACTER_TYPE_DRUID]: BaseCharacter(store, CHARACTER_TYPE_DRUID),
     currentMana: 0,
     currentHealth: 0,
     isAlive: true,
@@ -21,7 +17,7 @@ const Characters = (store) => {
 
     getTotalHealth() {
       let totalHealth = 0;
-      this.getActiveCharacters().forEach((char) => {
+      this.getCharactersInActiveDeck().forEach((char) => {
         totalHealth += char.getHealth();
       });
       return totalHealth;
@@ -33,7 +29,7 @@ const Characters = (store) => {
 
     getTotalMana() {
       let totalMana = 0;
-      this.getActiveCharacters().forEach((char) => {
+      this.getCharactersInActiveDeck().forEach((char) => {
         totalMana += char.getMana();
       });
       return totalMana;
@@ -46,7 +42,7 @@ const Characters = (store) => {
     getTotalDamage() {
       let totalDamage = 0;
 
-      this.getActiveCharacters().forEach((char) => {
+      this.getCharactersInActiveDeck().forEach((char) => {
         totalDamage += char.getTotalDamage();
       });
       return totalDamage;
@@ -54,19 +50,23 @@ const Characters = (store) => {
 
     getActiveCharactersSkills() {
       let activeCharacterSkills = {};
-      this.getActiveCharacters().forEach((char) => {
-        activeCharacterSkills[char.type] = char.getAllSkills();
+      this.getCharactersInActiveDeck().forEach((char) => {
+        activeCharacterSkills[char.type] = char.getActiveSkills();
       });
       return activeCharacterSkills;
     },
 
-    getActiveCharacters() {
+    getCharactersInActiveDeck() {
       let activeCharacters = [];
       Object.values(store.data.decks[store.data.activeDeckIndex]).forEach((charType) => {
         activeCharacters.push(this.getCharacterByType(charType));
       });
 
       return activeCharacters;
+    },
+
+    getActiveCharacter() {
+      return this.getCharacterByType(store.settings.activeCharacter);
     },
 
     getCharacterByType(type) {

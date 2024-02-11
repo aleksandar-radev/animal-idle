@@ -1,4 +1,4 @@
-# Shop Upgrades
+# Shop Passive and Active skills
 
 ### Attack
 
@@ -20,7 +20,7 @@ Flat Damage Reduction: Reduces damage taken by flat amount
 
 Increase Heal Amount: Increases health restores by `Heal` skill
 
-Code logic is as follows:
+# Code logic is as follows:
 
 All getters should be accessed by useStore() hook, which itself calls the getters from the `models` folder. If you need to get the level of the character, you call
 
@@ -33,6 +33,9 @@ All game logic should be there.
 Additionaly, all requests to the database also happen in `hooks` folder. Currently (possibly forever) are 2 files dealing with database. `useDataManager` and `useDataRepo`;
 
 Files in `components` and `screens` folders, MUST NOT contain any game logic, but instead call hooks. They should only contain logic on how things should be rendered.
+
+All default values should be in base[TYPE] files. e.g. baseSkill, baseCharacter
+All info, character default values, skill default (only) values, etc. must be in `/models/info`
 
 ### NOTE
 

@@ -56,8 +56,7 @@ const useDataManager = () => {
         data = {};
       }
 
-      // data has to be first, because others are evaluated based on it
-
+      // !IMPORTANT data has to be first, because others are evaluated based on it
       store.data = new Proxy(mergeObjectsRecursive(Data(store), data), handler);
 
       store.settings = new Proxy({ ...Settings(store) }, handler);

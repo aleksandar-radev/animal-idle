@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import PropTypes from '../externalLibraries/propTypes';
-import './SkillsBar.scss';
+import './ActiveSkillsBar.scss';
 import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';
 import useCharactersSkills from '../hooks/useCharactersSkills';
 import useStore from '../hooks/useStore';
 
-const SkillsBar = ({ className }) => {
+const ActiveSkillsBar = ({ className }) => {
   const { store } = useStore();
   const [activeSkills, setActiveSkills] = useState({});
   const { a } = useCharactersSkills();
@@ -26,11 +26,12 @@ const SkillsBar = ({ className }) => {
 
   return (
     <>
-      <div className={['SkillsBar', className].join(' ')}>
-        <div className={'SkillsBar-row'}>
+      <div className={['ActiveSkillsBar', className].join(' ')}>
+        <div className={'ActiveSkillsBar-row'}>
           {getSkills().map((skill) => {
+            console.log(skill);
             let classes = [
-              'SkillsBar-row-item',
+              'ActiveSkillsBar-row-item',
               activeSkills[skill?.name] ? 'cooldown' : '',
               skill?.manaCost > store.characters.getCurrentMana() ? 'disabled' : '',
             ];
@@ -59,8 +60,8 @@ const SkillsBar = ({ className }) => {
   );
 };
 
-SkillsBar.propTypes = {
+ActiveSkillsBar.propTypes = {
   className: PropTypes.string,
 };
 
-export default SkillsBar;
+export default ActiveSkillsBar;

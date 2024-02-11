@@ -6,7 +6,7 @@ const useCharactersAttack = () => {
   let [isAttacking, setIsAttacking] = useState(false);
   useEffect(() => {
     if (store.enemy.current !== null && !isAttacking) {
-      store.characters.getActiveCharacters().forEach((char) => {
+      store.characters.getCharactersInActiveDeck().forEach((char) => {
         startAttacking(char);
       });
     }

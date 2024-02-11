@@ -5,7 +5,6 @@ const useStore = () => {
 
   return {
     store,
-    getCharacter() {},
   };
 };
 

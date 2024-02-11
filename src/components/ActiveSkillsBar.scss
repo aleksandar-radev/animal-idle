@@ -1,6 +1,6 @@
 @import '../constants/variables.scss';
 
-.SkillsBar {
+.ActiveSkillsBar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,10 +36,7 @@
 
       &::before {
         content: '';
-        background: conic-gradient(
-          rgba(230, 90, 90, 0.7) var(--time-left),
-          rgba(230, 90, 90, 0.1) var(--time-left)
-        );
+        background: conic-gradient(rgba(230, 90, 90, 0.7) var(--time-left), rgba(230, 90, 90, 0.1) var(--time-left));
         position: absolute;
         opacity: 0.8;
         top: 0;

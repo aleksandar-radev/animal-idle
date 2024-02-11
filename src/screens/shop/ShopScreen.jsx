@@ -1,6 +1,6 @@
-import ShopUpgradesAttack from '../../components/shop/ShopUpgradesAttack';
-import ShopUpgradesDefense from '../../components/shop/ShopUpgradesDefense';
-import ShopUpgradesUtility from '../../components/shop/ShopUpgradesUtility';
+import ShopSkillsAttack from '../../components/shop/ShopSkillsAttack';
+import ShopSkillsDefense from '../../components/shop/ShopSkillsDefense';
+import ShopSkillsUtility from '../../components/shop/ShopSkillsUtility';
 import {
   SHOP_SCREEN_ATTACK_TAB,
   SHOP_SCREEN_DEFENSE_TAB,
@@ -19,13 +19,13 @@ const ShopScreen = () => {
   const activeTab = () => {
     switch (store?.settings?.activeShopScreenTab) {
       case SHOP_SCREEN_ATTACK_TAB:
-        return <ShopUpgradesAttack />;
+        return <ShopSkillsAttack />;
       case SHOP_SCREEN_DEFENSE_TAB:
-        return <ShopUpgradesDefense />;
+        return <ShopSkillsDefense />;
       case SHOP_SCREEN_UTILITY_TAB:
-        return <ShopUpgradesUtility />;
+        return <ShopSkillsUtility />;
       default:
-        return <ShopUpgradesAttack />;
+        return <ShopSkillsAttack />;
     }
   };
 
@@ -53,7 +53,7 @@ const ShopScreen = () => {
         </div>
       </div>
 
-      <div className="upgrades">{activeTab()}</div>
+      <div className="skills">{activeTab()}</div>
     </div>
   );
 };

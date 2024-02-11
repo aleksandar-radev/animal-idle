@@ -46,7 +46,7 @@ const CharactersList = () => {
   return (
     <div className="CharactersList">
       {!getActiveCharacter() &&
-        store.characters.getActiveCharacters().map((character) => {
+        store.characters.getCharactersInActiveDeck().map((character) => {
           const isDraggable = store.settings.areCharactersDraggable;
           return (
             <div

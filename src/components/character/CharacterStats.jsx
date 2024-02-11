@@ -5,6 +5,7 @@ import useStore from '../../hooks/useStore';
 const CharacterStats = () => {
   const { store } = useStore();
   const stats = store.characters[store.settings.activeCharacter].getAllStats();
+
   const t = useTranslations();
 
   return (
