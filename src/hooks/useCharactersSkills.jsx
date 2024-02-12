@@ -1,23 +1,30 @@
-import { CURRENCY_GOLD } from '../constants/gameVariables';
+import useCharacterCurrencies from './useCharacterCurrencies';
 import useStore from './useStore';
 
 const useCharactersSkills = () => {
   const { store } = useStore();
-  const chars = store.characters;
+  const charCurrencies = useCharacterCurrencies();
+  // const chars = store.characters;
 
   return {
     buySkill(skill) {
-      console.log(skill);
+      const conditionsReached = true;
+      const currenciesToRemove = {};
+      Object.entries(skill.getCost()).forEach(([type, value]) => {
+        const currency = store.data.currencies[type];
+        if (value > currency.value || value <= 0) {
+          return;
+        }
+        currenciesToRemove[type] = value;
+      });
 
-      // const gold = store.data.currencies[CURRENCY_GOLD];
-      // const cost = this.getCost();
-      // if (cost > gold.value) {
-      //   return;
-      // }
-
-      // store.data.currencies[CURRENCY_GOLD].remove(cost);
-      // this.persistentData.level++;
-      // store.data.renderChange();
+      if (conditionsReached) {
+        Object.entries(currenciesToRemove).forEach(([type, value]) => {
+          charCurrencies.removeCurrency(type, value);
+        });
+        skill.persistentData.level++;
+        store.data.renderChange();
+      }
     },
   };
 };

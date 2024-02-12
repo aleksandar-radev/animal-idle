@@ -2,15 +2,11 @@ import {
   SKILLS_ATTACK,
   DAMAGE_FLAT,
   DAMAGE_PERCENT,
-  ATTACK_SPEED,
   CRIT_CHANCE,
   CRIT_DAMAGE,
   DOUBLE_DAMAGE_CHANCE,
   SKILLS_DEFENSE,
-  BONUS_DEFENSE,
-  BONUS_HEALTH,
   SKILLS_UTILITY,
-  BONUS_GOLD,
 } from '../../../constants/gameVariables';
 import { getRandomNumber } from '../../../helpers/functions';
 import BaseSkill from './baseSkill';
@@ -54,23 +50,12 @@ const BaseCharacter = (store, characterType) => {
       [SKILLS_UTILITY]: createSkills(SKILLS_UTILITY),
     },
 
-    getAllAttackPassiveSkills() {
-      return [
-        this.skills[SKILLS_ATTACK][DAMAGE_FLAT],
-        this.skills[SKILLS_ATTACK][DAMAGE_PERCENT],
-        this.skills[SKILLS_ATTACK][CRIT_CHANCE],
-        this.skills[SKILLS_ATTACK][CRIT_DAMAGE],
-        this.skills[SKILLS_ATTACK][ATTACK_SPEED],
-        this.skills[SKILLS_ATTACK][DOUBLE_DAMAGE_CHANCE],
-      ];
-    },
-
-    getAllDefensePassiveSkills() {
-      return [this.skills[SKILLS_DEFENSE][BONUS_DEFENSE], this.skills[SKILLS_DEFENSE][BONUS_HEALTH]];
-    },
-
-    getAllUtilityPassiveSkills() {
-      return [this.skills[SKILLS_UTILITY][BONUS_GOLD]];
+    getPassiveSkillsByType(type) {
+      return Object.values(this.skills[type])
+        .filter((skill) => {
+          return skill.isPassive();
+        })
+        .sort((a, b) => a > b);
     },
 
     getAllStats() {
@@ -109,7 +94,6 @@ const BaseCharacter = (store, characterType) => {
     getBaseDamage() {
       let damage = this.damage;
 
-      console.log(this.skills);
       // add flat damage
       damage += this.skills[SKILLS_ATTACK][DAMAGE_FLAT].getBonus();
 
@@ -159,12 +143,9 @@ const BaseCharacter = (store, characterType) => {
     },
 
     getActiveSkills() {
-      let x = Object.entries(this.skills[SKILLS_UTILITY]).find(([, skill]) => {
-        console.log(skill);
+      return Object.entries(this.skills[SKILLS_UTILITY]).find(([, skill]) => {
         return skill.isActive() === true;
       });
-      console.log(x);
-      return this.skills;
     },
   };
 };

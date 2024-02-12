@@ -7,9 +7,11 @@ import {
 } from '../../constants/gameVariables';
 import './CharacterScreenMenu.scss';
 import useStore from '../../hooks/useStore';
+import useTranslations from '../../hooks/useTranslations';
 
 const CharacterScreenMenu = () => {
   const { store } = useStore();
+  const t = useTranslations();
 
   const changeView = (view) => {
     store.settings.setActiveCharacterScreenTab(view);
@@ -30,17 +32,17 @@ const CharacterScreenMenu = () => {
       <div
         className={isActiveTab(CHARACTER_SCREEN_STATS_TAB) ? 'active' : ''}
         onClick={() => changeView(CHARACTER_SCREEN_STATS_TAB)}>
-        Stats
+        {t['stats']}
       </div>
       <div
         className={isActiveTab(CHARACTER_SCREEN_SKILLS_TAB) ? 'active' : ''}
         onClick={() => changeView(CHARACTER_SCREEN_SKILLS_TAB)}>
-        Skills
+        {t['skills']}
       </div>
       <div
         className={isActiveTab(CHARACTER_SCREEN_ITEMS_TAB) ? 'active' : ''}
         onClick={() => changeView(CHARACTER_SCREEN_ITEMS_TAB)}>
-        Items
+        {t['items']}
       </div>
     </div>
   );

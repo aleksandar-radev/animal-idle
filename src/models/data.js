@@ -1,11 +1,6 @@
 import {
   CURRENCY_GOLD,
   CHARACTER_SKILL_ATTACK,
-  CHARACTER_SKILL_AUTO_CAST,
-  CHARACTER_SKILL_ASCEND,
-  CHARACTER_SKILL_BACKSTAB,
-  CHARACTER_SKILL_DOUBLE_DAMAGE,
-  CHARACTER_SKILL_HEAL,
   SKILLS_ATTACK,
   DAMAGE_FLAT,
   ATTACK_SPEED,
@@ -21,6 +16,7 @@ import {
   SKILLS_UTILITY,
   BONUS_DEFENSE,
   BONUS_GOLD,
+  CURRENCY_CRYSTAL,
 } from '../constants/gameVariables';
 
 // Do not delete anything from here, only add
@@ -185,19 +181,9 @@ const Data = () => {
     currencies: {
       [CURRENCY_GOLD]: {
         value: 0,
-        add: function (amount) {
-          if (isNaN(amount)) {
-            return;
-          }
-
-          this.value += +amount;
-        },
-        remove: function (amount) {
-          if (isNaN(amount)) {
-            return;
-          }
-          this.value -= +amount;
-        },
+      },
+      [CURRENCY_CRYSTAL]: {
+        value: 0,
       },
     },
   };

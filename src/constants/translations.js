@@ -43,6 +43,22 @@ export const en = {
   critDamage: 'Critical strike damage',
   doubleDamageChance: 'Double damage chance',
 
+  defense: 'Defense',
+  utility: 'Utility',
+  stats: 'Stats',
+  skills: 'Skills',
+  items: 'Items',
+
+  // Others
+  multiplier: {
+    0: 'ALL',
+    1: 'x1',
+    10: 'x10',
+    50: 'x50',
+    100: 'x100',
+    200: 'x200',
+  },
+
   // Misc
   resetProgress: 'Reset Progress',
   logout: 'Logout',

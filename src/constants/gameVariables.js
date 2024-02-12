@@ -35,6 +35,7 @@ export const SHOP_SCREEN_UTILITY_TAB = 'utility';
 
 // CURRENCIES
 export const CURRENCY_GOLD = 'gold';
+export const CURRENCY_CRYSTAL = 'crystal';
 
 // SKILLS
 export const SKILLS_ATTACK = 'attack';

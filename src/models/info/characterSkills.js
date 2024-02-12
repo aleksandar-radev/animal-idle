@@ -8,6 +8,7 @@ import {
   CHARACTER_TYPE_SORCERESS,
   CRIT_CHANCE,
   CRIT_DAMAGE,
+  CURRENCY_GOLD,
   DAMAGE_FLAT,
   DAMAGE_PERCENT,
   DOUBLE_DAMAGE_CHANCE,
@@ -37,35 +38,80 @@ function generateSkillDataForCharacter(baseSkillData, characterSpecificSkills = 
     },
   };
 }
-
+// skill index used only for sorting (lower index appears first)
 const baseSkillData = {
   [SKILLS_ATTACK]: {
     [DAMAGE_FLAT]: {
+      index: 1,
       icon: swordIcon,
       manaCost: 22,
+      requirements: {
+        level: 1,
+      },
+      cost: {
+        [CURRENCY_GOLD]: {
+          type: CURRENCY_GOLD,
+          multiplier: 1.5,
+        },
+      },
     },
     [DAMAGE_PERCENT]: {
+      index: 2,
       icon: swordIcon,
+      requirements: {
+        level: 10,
+      },
     },
     [CRIT_CHANCE]: {
+      index: 3,
       icon: swordIcon,
+      requirements: {
+        level: 1,
+      },
     },
     [CRIT_DAMAGE]: {
+      index: 4,
       icon: swordIcon,
+      requirements: {
+        level: 10,
+      },
     },
     [ATTACK_SPEED]: {
+      index: 5,
       icon: swordIcon,
+      requirements: {
+        level: 1,
+      },
     },
     [DOUBLE_DAMAGE_CHANCE]: {
+      index: 6,
       icon: swordIcon,
+      requirements: {
+        level: 10,
+      },
     },
   },
   [SKILLS_DEFENSE]: {
-    [BONUS_DEFENSE]: {},
-    [BONUS_HEALTH]: {},
+    [BONUS_DEFENSE]: {
+      index: 1,
+      requirements: {
+        level: 1,
+      },
+    },
+    [BONUS_HEALTH]: {
+      index: 2,
+      requirements: {
+        level: 1,
+      },
+    },
   },
   [SKILLS_UTILITY]: {
-    [BONUS_GOLD]: {},
+    [BONUS_GOLD]: {
+      index: 1,
+      requirements: {
+        level: 1,
+      },
+    },
   },
 };
 
