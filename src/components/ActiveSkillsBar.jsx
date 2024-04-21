@@ -29,7 +29,6 @@ const ActiveSkillsBar = ({ className }) => {
       <div className={['ActiveSkillsBar', className].join(' ')}>
         <div className={'ActiveSkillsBar-row'}>
           {getSkills().map((skill) => {
-            console.log(skill);
             let classes = [
               'ActiveSkillsBar-row-item',
               activeSkills[skill?.name] ? 'cooldown' : '',

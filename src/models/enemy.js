@@ -65,7 +65,7 @@ const Enemy = (store) => {
         },
         die() {
           this.currentHealth = null;
-          store.data.currencies[CURRENCY_GOLD].add(1);
+          store.data.currencies[CURRENCY_GOLD].value += 1;
           store.data.enemy.level++;
           store.enemy.current = null;
         },

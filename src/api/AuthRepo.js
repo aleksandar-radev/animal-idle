@@ -3,6 +3,9 @@ import api from './Api.js';
 export const AuthRepo = {
   getUser: async () => {
     const { data } = await api.auth.getSession();
+    if (!data.session) {
+      return false;
+    }
 
     return data.session.user;
   },

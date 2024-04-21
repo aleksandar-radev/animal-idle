@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './CharactersList.scss';
 import CharacterDisplay from './CharacterDisplay';
 import CharacterAvatar from './CharacterAvatar';
@@ -7,6 +7,7 @@ import useStore from '../../hooks/useStore';
 const CharactersList = () => {
   const { store } = useStore();
   const [draggedItem, setDraggedItem] = useState(null);
+  const isDraggable = useMemo(() => store.settings.areCharactersDraggable, []);
 
   const getActiveCharacter = () => {
     return store.settings?.activeCharacter;
@@ -34,7 +35,7 @@ const CharactersList = () => {
   };
 
   const handleDrop = (e, targetItem) => {
-    if (!draggedItem || draggedItem.name === targetItem.name) return;
+    if (!draggedItem || draggedItem.name === targetItem.name || !isDraggable) return;
 
     const draggedIndex = Object.entries(store.data.characters.map).find((key) => key[1] === draggedItem.type);
     const targetIndex = Object.entries(store.data.characters.map).find((key) => key[1] === targetItem.type);
@@ -47,7 +48,6 @@ const CharactersList = () => {
     <div className="CharactersList">
       {!getActiveCharacter() &&
         store.characters.getCharactersInActiveDeck().map((character) => {
-          const isDraggable = store.settings.areCharactersDraggable;
           return (
             <div
               key={character.type}

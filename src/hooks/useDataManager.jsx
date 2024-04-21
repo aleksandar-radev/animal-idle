@@ -49,6 +49,7 @@ const useDataManager = () => {
 
     (async () => {
       const user = await AuthRepo.getUser();
+      if (!user) return;
       let data = await DataRepo.getDataById(user.id);
 
       if (!data) {

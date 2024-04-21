@@ -3,10 +3,7 @@ import api from './Api.js';
 
 export const DataRepo = {
   getAllData: async () => {
-    let { data, error } = await api
-      .from('animal_idle_data')
-      .select('*, users (*)')
-      .order('user_id', 'asc');
+    let { data, error } = await api.from('animal_idle_data').select('*, users (*)').order('user_id', 'asc');
 
     if (error) {
       throw new Error(error);
@@ -23,14 +20,11 @@ export const DataRepo = {
   },
 
   getDataById: async (id) => {
-    let { data, error } = await api
-      .from('animal_idle_data')
-      .select('*')
-      .eq('user_id', id)
-      .limit(1)
-      .maybeSingle();
+    let { data, error } = await api.from('animal_idle_data').select('*').eq('user_id', id).limit(1).maybeSingle();
 
-    if (error) {
+    // https://postgrest.org/en/v12/references/errors.html
+    // don't throw when request returns != 1 rows
+    if (error && error.code !== 'PGRST116') {
       throw new Error(error);
     }
 

@@ -143,8 +143,8 @@ const BaseCharacter = (store, characterType) => {
     },
 
     getActiveSkills() {
-      return Object.entries(this.skills[SKILLS_UTILITY]).find(([, skill]) => {
-        return skill.isActive() === true;
+      return Object.values(this.skills[SKILLS_UTILITY]).filter((skill) => {
+        return skill.isActive();
       });
     },
   };
