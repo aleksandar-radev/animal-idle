@@ -15,9 +15,9 @@ export const AuthRepo = {
    * @returns {Object} session
    */
   getSession: async () => {
-    const { data } = await api.auth.getSession();
+    const data = await api.get('/user/session');
 
-    return data.session;
+    return data;
   },
 
   /**
@@ -35,31 +35,29 @@ export const AuthRepo = {
     return user;
   },
 
-  signInWithPassword: async (email, password) => {
+  login: async (email, password) => {
     try {
-      const { data, error } = await api.auth.signInWithPassword({
+      const data = await api.post('/user/login', {
         email: email,
         password: password,
       });
-      if (error) {
-        throw new Error('Wrong email/password');
-      }
+
       return data;
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.response.data.message);
     }
   },
   signUp: async (email, password) => {
-    const { data, error } = await api.auth.signUp({
-      email: email,
-      password: password,
-    });
+    try {
+      const data = await api.post('/user/register', {
+        email: email,
+        password: password,
+      });
 
-    if (error) {
-      throw new Error('Error while signing up');
+      return data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
     }
-
-    return data;
   },
   signOut: async () => {
     const { error } = await api.auth.signOut();

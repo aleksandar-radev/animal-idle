@@ -1,11 +1,13 @@
-import { createClient } from '@supabase/supabase-js';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
-export const supabase = createClient(
-  import.meta.env.VITE_APP_SUPABASE_URL,
-  import.meta.env.VITE_APP_SUPABASE_KEY,
-);
-
-// esentially just renaming
-const api = supabase;
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: Cookies.get('token'),
+  },
+  withCredentials: true,
+});
 
 export default api;

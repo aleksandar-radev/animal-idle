@@ -15,7 +15,7 @@ export default function LoginScreen() {
 
     try {
       setLoading(true);
-      const { error } = await AuthRepo.signInWithPassword(email, password);
+      const { error } = await AuthRepo.login(email, password);
       if (error) throw new Error(error);
       navigate('/');
     } catch (error) {

@@ -22,6 +22,7 @@ import {
 // Do not delete anything from here, only add
 const Data = () => {
   return {
+    dataVersion: 'v0.1',
     language: 'en',
     characters: {
       [CHARACTER_TYPE_BARBARIAN]: {

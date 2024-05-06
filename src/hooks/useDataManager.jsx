@@ -16,7 +16,7 @@ const useDataManager = () => {
 
   const handler = {
     set(target, property, value) {
-      // console.log(`${property} changed from ${target[property]} to ${value}`);
+      console.log(`${property} changed from ${target[property]} to ${value}`);
       target[property] = value;
       setStore({ ...store });
       return true;
