@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from '../externalLibraries/propTypes';
+import PropTypes from '../helpers/externalLibraries/propTypes';
 import './HealthBar.scss';
 
 const HealthBar = ({ currentHealth, totalHealth }) => {

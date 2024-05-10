@@ -1,4 +1,4 @@
-import PropTypes from '../externalLibraries/propTypes';
+import PropTypes from '../helpers/externalLibraries/propTypes';
 import './ManaBar.scss';
 
 const ManaBar = ({ currentMana, totalMana }) => {

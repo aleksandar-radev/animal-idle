@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CharacterSkill.scss';
-import PropTypes from '../../externalLibraries/propTypes';
+import PropTypes from '../../helpers/externalLibraries/propTypes';
 import { Popper } from '@mui/material';
 import useCharactersSkills from '../../hooks/useCharactersSkills';
 import useTranslations from '../../hooks/useTranslations';

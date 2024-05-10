@@ -1,4 +1,4 @@
-import PropTypes from '../../externalLibraries/propTypes';
+import PropTypes from '../../helpers/externalLibraries/propTypes';
 import HealthBar from '../HealthBar';
 import ManaBar from '../ManaBar';
 import './CharacterResources.scss';

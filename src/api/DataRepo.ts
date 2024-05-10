@@ -1,4 +1,5 @@
-import crypt from '../externalLibraries/encrypt';
+import crypt from '../helpers/externalLibraries/encrypt';
+import { IData } from '../models/interfaces/Idata';
 import api from './Api.js';
 
 export class DataRepo {
@@ -37,12 +38,11 @@ export class DataRepo {
     }
   }
 
-  static async insertDataById(id, newData = {}) {
+  static async insertDataById(id, newData: IData) {
     try {
-      const enemyLevel = newData?.enemy?.level || 0;
       const encryptedData = crypt.encrypt(JSON.stringify(newData));
+      const response = await api.post('/user-data/' + id, { data_json: encryptedData });
 
-      const response = await api.post('/user-data', { data: encryptedData, highest_level: enemyLevel });
       console.log(response);
 
       return response.data;

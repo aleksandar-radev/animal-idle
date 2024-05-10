@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PropTypes from '../externalLibraries/propTypes';
+import PropTypes from '../helpers/externalLibraries/propTypes';
 import './ActiveSkillsBar.scss';
 import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';

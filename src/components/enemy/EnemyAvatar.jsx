@@ -1,4 +1,4 @@
-import PropTypes from '../../externalLibraries/propTypes';
+import PropTypes from '../../helpers/externalLibraries/propTypes';
 import './EnemyAvatar.scss';
 import useStore from '../../hooks/useStore';
 

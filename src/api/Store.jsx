@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from '../externalLibraries/propTypes';
+import PropTypes from '../helpers/externalLibraries/propTypes';
 
 export const State = React.createContext();
 
