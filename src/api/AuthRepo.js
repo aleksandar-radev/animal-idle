@@ -1,41 +1,17 @@
 import api from './Api.js';
 
-export const AuthRepo = {
-  getUser: async () => {
-    const { data } = await api.auth.getSession();
-    if (!data.session) {
+export class AuthRepo {
+  static async getUser() {
+    const response = await api.get('/user/session');
+
+    if (!response?.data?.user) {
       return false;
     }
 
-    return data.session.user;
-  },
+    return response.data.user;
+  }
 
-  /**
-   * Gets the current session of the user + the user
-   * @returns {Object} session
-   */
-  getSession: async () => {
-    const data = await api.get('/user/session');
-
-    return data;
-  },
-
-  /**
-   * Fetches the newest information for the user and returns it
-   * @returns {Object} user
-   */
-  updateUserInfo: async () => {
-    const {
-      data: { user },
-      error,
-    } = await api.auth.getUser();
-    if (error) {
-      throw new Error('No user is logged in');
-    }
-    return user;
-  },
-
-  login: async (email, password) => {
+  static async login(email, password) {
     try {
       const data = await api.post('/user/login', {
         email: email,
@@ -46,8 +22,9 @@ export const AuthRepo = {
     } catch (error) {
       throw new Error(error.response.data.message);
     }
-  },
-  signUp: async (email, password) => {
+  }
+
+  static async signUp(email, password) {
     try {
       const data = await api.post('/user/register', {
         email: email,
@@ -58,12 +35,9 @@ export const AuthRepo = {
     } catch (error) {
       throw new Error(error.response.data.message);
     }
-  },
-  signOut: async () => {
-    const { error } = await api.auth.signOut();
+  }
 
-    if (error) {
-      throw new Error('Error while signing up');
-    }
-  },
-};
+  static async signOut() {
+    await api.post('/user/logout');
+  }
+}

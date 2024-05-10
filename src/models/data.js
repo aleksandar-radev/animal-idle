@@ -168,7 +168,6 @@ const Data = () => {
 
     enemy: {
       level: 0,
-      maxLevel: 0,
     },
 
     renderChanges: 0,
@@ -187,6 +186,12 @@ const Data = () => {
         value: 0,
       },
     },
+    // db props
+    id: 0,
+    highest_level: null,
+    premium: 'no',
+    total_experience: null,
+    total_gold: null,
   };
 };
 

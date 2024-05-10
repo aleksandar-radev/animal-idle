@@ -50,15 +50,13 @@ const useDataManager = () => {
     (async () => {
       const user = await AuthRepo.getUser();
       if (!user) return;
-      let data = await DataRepo.getDataById(user.id);
 
-      if (!data) {
-        await DataRepo.insertDataById(user.id, {});
-        data = {};
-      }
+      let data = await DataRepo.getDataById(user.id);
+      console.log(data);
 
       // !IMPORTANT data has to be first, because others are evaluated based on it
-      store.data = new Proxy(mergeObjectsRecursive(Data(store), data), handler);
+      store.data = new Proxy(mergeObjectsRecursive(Data(store), data || {}), handler);
+      console.log(store.data);
 
       store.settings = new Proxy({ ...Settings(store) }, handler);
 

@@ -4,6 +4,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   base: '/animal-idle',
   plugins: [react()],
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
   define: {
     'process.env': process.env,
   },
