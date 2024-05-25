@@ -1,9 +1,9 @@
 import crypt from '../helpers/externalLibraries/encrypt';
-import { IData } from '../models/interfaces/Idata';
-import api from './Api.js';
+import { prepareDataForApi } from '../helpers/gameFunctions';
+import api from './Api';
 
 export class DataRepo {
-  static async getAllData() {
+  async getAllData() {
     try {
       const response = await api.get('/user-data');
       const data = response.data;
@@ -21,13 +21,14 @@ export class DataRepo {
     }
   }
 
-  static async getDataById(id) {
+  async getDataByUserId(id) {
     try {
       const response = await api.get(`/user-data/${id}`, {
         params: {
           premium: 'no',
         },
       });
+
       const data = response.data;
 
       if (!data) return;
@@ -38,12 +39,10 @@ export class DataRepo {
     }
   }
 
-  static async insertDataById(id, newData: IData) {
+  async insertDataById(id, newData) {
     try {
-      const encryptedData = crypt.encrypt(JSON.stringify(newData));
-      const response = await api.post('/user-data/' + id, { data_json: encryptedData });
-
-      console.log(response);
+      let encryptedData = prepareDataForApi(newData);
+      const response = await api.post(`/user-data/${id}`, encryptedData);
 
       return response.data;
     } catch (error) {
@@ -51,14 +50,11 @@ export class DataRepo {
     }
   }
 
-  static async updateDataById(id, newData = {}) {
+  async updateDataByUserIdAndPremium(id, newData, premium = 'no') {
     try {
-      console.log(newData);
-      console.log(JSON.stringify(newData));
-      const encryptedData = crypt.encrypt(JSON.stringify(newData));
-      console.log(encryptedData);
+      let encryptedData = prepareDataForApi(newData);
 
-      const response = await api.patch('/user-data/' + id, { data_json: encryptedData });
+      const response = await api.patch(`/user-data/${id}`, encryptedData);
 
       return response.data;
     } catch (error) {
@@ -66,9 +62,9 @@ export class DataRepo {
     }
   }
 
-  static async getAllScores() {
+  async getLeaderboard() {
     try {
-      const response = await api.get('/user-data');
+      const response = await api.get('/user-data/leaderboard');
 
       return response.data;
     } catch (error) {

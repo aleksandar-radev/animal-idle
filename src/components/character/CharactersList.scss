@@ -1,7 +1,26 @@
-@import '../../constants/variables.scss';
+@import '../../helpers/constants/variables.scss';
 
 .CharactersList {
-  & .item {
+  .decks {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: pix(7);
+    grid-column: 1 / span 2;
+
+    & > div {
+      background-color: green;
+      width: 100%;
+      margin: pix(10);
+      padding: pix(10);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+
+  & > .item {
     margin: pix(10);
     width: pix(120);
     height: pix(120);
