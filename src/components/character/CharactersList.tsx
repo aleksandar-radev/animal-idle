@@ -7,6 +7,7 @@ import useCharacterMethods from '../../hooks/useCharacterMethods';
 
 const CharactersList = () => {
   const { data, settings } = useStore();
+  q(data);
   const { getCharactersInActiveDeck } = useCharacterMethods();
 
   let characters = data.characters;

@@ -4,25 +4,27 @@ import { MAIN_SCREEN_FIGHT_TAB } from '../helpers/constants/gameVariables';
 import useStore from './useStore';
 
 const useInitFight = () => {
-  const { store } = useStore();
+  const { settings, data } = useStore();
   const { reset } = useCharacterMethods();
   let t = null;
 
   useEffect(() => {
+    console.log(data);
     reset();
-    store.enemy.reset();
+    data.enemy.reset();
 
     t = setTimeout(() => {
-      if (store.settings.activeMainScreenTab === MAIN_SCREEN_FIGHT_TAB) {
-        store.settings.isFightStarted = true;
+      if (settings.activeMainScreenTab === MAIN_SCREEN_FIGHT_TAB) {
+        settings.isFightStarted = true;
       }
     }, 500);
 
     return () => {
       reset();
-      store.enemy.reset();
+
+      data.enemy.reset();
       clearTimeout(t);
-      store.settings.isFightStarted = false;
+      settings.isFightStarted = false;
     };
   }, []);
 

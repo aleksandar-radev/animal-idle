@@ -52,8 +52,10 @@ const useDataManager = () => {
       if (!user) return;
 
       let data = await dataRepo.getDataByUserId(user.id);
+      q(data);
       let formattedData = { ...data, ...data.json_data };
 
+      q(formattedData);
       setData(new Proxy(new Data(formattedData), handler()));
       setSettings(new Proxy(new Settings({}), handler()));
       setGameState(new Proxy(new GameState({}), handler()));

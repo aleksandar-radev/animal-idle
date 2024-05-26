@@ -17,7 +17,6 @@ import useStore from '../hooks/useStore';
 
 const MainScreen = () => {
   const { settings } = useStore();
-  console.log(settings);
 
   const activeTab = () => {
     switch (settings.activeMainScreenTab) {

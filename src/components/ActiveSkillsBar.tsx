@@ -5,14 +5,16 @@ import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';
 import useCharactersSkills from '../hooks/useCharactersSkills';
 import useStore from '../hooks/useStore';
+import useCharacterMethods from '../hooks/useCharacterMethods';
 
 const ActiveSkillsBar = ({ className }) => {
   const { data, assets } = useStore();
+  const { getActiveCharactersSkills } = useCharacterMethods();
   const [activeSkills, setActiveSkills] = useState({});
 
   const getSkills = () => {
     let allSkills = [];
-    let skills = data.characters.getActiveCharactersSkills();
+    let skills = getActiveCharactersSkills();
 
     Object.keys(skills).forEach((skill) => {
       Object.keys(skills[skill]).forEach((skillName) => {

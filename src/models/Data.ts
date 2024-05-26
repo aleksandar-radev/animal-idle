@@ -73,9 +73,7 @@ class Data {
 
     this.charactersMap = charactersMap || {};
 
-    this.enemy = enemy || {
-      level: 0,
-    };
+    this.enemy = enemy || new Enemy({});
 
     this.renderChanges = renderChanges || 0;
 

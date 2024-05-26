@@ -12,7 +12,7 @@ import useStore from '../hooks/useStore';
 import useAuthRepo from '../hooks/useAuthRepo';
 
 const MainMenu = () => {
-  const { store } = useStore();
+  const { settings } = useStore();
   const [currentUser, setCurrentUser] = useState(null);
   const authRepo = useAuthRepo();
 
@@ -25,12 +25,12 @@ const MainMenu = () => {
   }, []);
 
   const changeView = (view) => {
-    store.settings.setActiveCharacter(null);
-    store.settings.setActiveMainScreenTab(view);
+    settings.setActiveCharacter(null);
+    settings.setActiveMainScreenTab(view);
   };
 
   const isActiveTab = (tab) => {
-    return store?.settings?.activeMainScreenTab === tab;
+    return settings.activeMainScreenTab === tab;
   };
 
   return (

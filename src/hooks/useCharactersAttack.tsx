@@ -2,34 +2,34 @@ import { useEffect, useState } from 'react';
 import useStore from './useStore';
 
 const useCharactersAttack = () => {
-  const { store } = useStore();
+  const { data, settings } = useStore();
   let [isAttacking, setIsAttacking] = useState(false);
   useEffect(() => {
-    if (store.enemy.current !== null && !isAttacking) {
-      store.characters.getCharactersInActiveDeck().forEach((char) => {
+    if (data.enemy.current !== null && !isAttacking) {
+      data.characters.getCharactersInActiveDeck().forEach((char) => {
         startAttacking(char);
       });
     }
-  }, [store.enemy.current]);
+  }, [data.enemy.current]);
 
   function startAttacking(char) {
     setIsAttacking(true);
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
-      if (store.enemy.current === null) {
+      if (data.enemy.current === null) {
         setIsAttacking(false);
         return;
       }
-      if (!store.settings.isFightStarted) return;
+      if (settings.isFightStarted) return;
       if (!startTime) {
         startTime = timestamp;
       }
       if (timestamp - startTime < char.attackSpeed) {
         requestAnimationFrame(animateCooldown);
       } else {
-        if (store.enemy.current) {
-          store.enemy.current.takeDamage(char.getTotalDamage());
+        if (data.enemy.current) {
+          data.enemy.current.takeDamage(char.getTotalDamage());
         }
         startAttacking(char);
       }

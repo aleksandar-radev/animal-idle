@@ -11,14 +11,14 @@ import CharacterGrid from '../../components/character/CharacterGrid';
 import useStore from '../../hooks/useStore';
 
 const FightScreen = () => {
-  const { store } = useStore();
+  const { settings } = useStore();
   useInitFight();
   useEnemyAttack();
   useCharactersAttack();
 
   return (
     <div className={'FightScreen'}>
-      {store.settings.isFightStarted ? (
+      {settings.isFightStarted ? (
         <>
           <CharacterGrid className={'FightScreen-self'} />
           <CharacterResources className={'FightScreen-self-res'} />

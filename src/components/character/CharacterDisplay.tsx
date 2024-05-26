@@ -14,12 +14,12 @@ import useStore from '../../hooks/useStore';
 import useCharacterMethods from '../../hooks/useCharacterMethods';
 
 const CharacterDisplay = () => {
-  const { store } = useStore();
+  const { settings } = useStore();
   const { getActiveCharacter } = useCharacterMethods();
   const character = getActiveCharacter();
 
   const activeTab = () => {
-    switch (store?.settings?.activeCharacterScreenTab) {
+    switch (settings.activeCharacterScreenTab) {
       case CHARACTER_SCREEN_STATS_TAB:
         return <CharacterStats />;
       case CHARACTER_SCREEN_ITEMS_TAB:

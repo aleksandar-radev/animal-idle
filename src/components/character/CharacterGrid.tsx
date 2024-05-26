@@ -1,4 +1,3 @@
-import PropTypes from '../../helpers/externalLibraries/propTypes';
 import './CharacterGrid.scss';
 import CharacterAvatar from './CharacterAvatar';
 import useStore from '../../hooks/useStore';
