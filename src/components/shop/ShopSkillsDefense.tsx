@@ -6,7 +6,6 @@ import useStore from '../../hooks/useStore';
 
 const ShopSkillsDefense = () => {
   const { store } = useStore();
-  console.log(store);
   // const skillsKeys = Object.keys(store.data.skills[SKILLS_DEFENSE]);
 
   return (

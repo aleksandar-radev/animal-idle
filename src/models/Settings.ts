@@ -13,7 +13,7 @@ class Settings {
   areCharactersDraggable: boolean;
   isFightStarted: boolean;
 
-  constructor({ }) {
+  constructor({}) {
     this.activeMainScreenTab = MAIN_SCREEN_CHARACTER_TAB;
     this.activeCharacterScreenTab = CHARACTER_SCREEN_STATS_TAB;
     this.activeShopScreenTab = SHOP_SCREEN_ATTACK_TAB;

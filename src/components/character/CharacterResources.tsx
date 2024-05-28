@@ -1,19 +1,17 @@
-import PropTypes from '../../helpers/externalLibraries/propTypes';
 import HealthBar from '../HealthBar';
 import ManaBar from '../ManaBar';
 import './CharacterResources.scss';
 import useStore from '../../hooks/useStore';
+import useCharacterMethods from '../../hooks/useCharacterMethods';
 
 const CharacterResources = ({ className }) => {
-  const { data } = useStore();
+  const characters = useCharacterMethods();
 
   return (
     <div className={['CharacterResources', className].join(' ')}>
-      <HealthBar
-        currentHealth={data.characters.getCurrentHealth()}
-        totalHealth={data.characters.getTotalHealth()}></HealthBar>
+      <HealthBar currentHealth={characters.getCurrentHealth()} totalHealth={characters.getTotalHealth()}></HealthBar>
 
-      <ManaBar currentMana={data.characters.getCurrentMana()} totalMana={data.characters.getTotalMana()}></ManaBar>
+      <ManaBar currentMana={characters.getCurrentMana()} totalMana={characters.getTotalMana()}></ManaBar>
     </div>
   );
 };

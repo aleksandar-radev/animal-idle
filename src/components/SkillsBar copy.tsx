@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { CHARACTER_SKILL_AUTO_CAST } from '../helpers/constants/gameVariables';
-import PropTypes from '../helpers/externalLibraries/propTypes';
 import './SkillsBar.scss';
 import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';

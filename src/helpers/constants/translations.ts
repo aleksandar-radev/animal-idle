@@ -38,10 +38,6 @@ export const en = {
   'double-damage': 'Double damage',
   'auto-cast': 'Auto cast',
   backstab: 'Backstab',
-  attackSpeed: 'Attack speed',
-  critChance: 'Critical strike chance',
-  critDamage: 'Critical strike damage',
-  doubleDamageChance: 'Double damage chance',
 
   defense: 'Defense',
   utility: 'Utility',

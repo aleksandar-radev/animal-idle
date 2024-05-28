@@ -5,18 +5,18 @@ import { loadAssets } from '../helpers/gameFunctions';
 import useDataRepo from './useDataRepo';
 import useAuthRepo from './useAuthRepo';
 import useStore from './useStore';
-import GameState from '../models/GameState';
+import FightState from '../models/FightState';
 
 const useDataManager = () => {
   const dataRepo = useDataRepo();
   const authRepo = useAuthRepo();
   const effectCount = useRef(0);
 
-  const { assets, data, isLoaded, setData, setSettings, setIsLoaded, setGameState, updateState } = useStore();
+  const { assets, data, isLoaded, setData, setSettings, setIsLoaded, setfightState, updateState } = useStore();
 
   const handler = () => ({
     set(target, property, value) {
-      console.log(`${property} changed from ${target[property]} to ${value}`);
+      // console.log(`${property} changed from ${target[property]} to ${value}`);
 
       target[property] = value;
       updateState(property, value);
@@ -52,13 +52,10 @@ const useDataManager = () => {
       if (!user) return;
 
       let data = await dataRepo.getDataByUserId(user.id);
-      q(data);
-      let formattedData = { ...data, ...data.json_data };
-
-      q(formattedData);
+      let formattedData = { ...data.data_json };
       setData(new Proxy(new Data(formattedData), handler()));
       setSettings(new Proxy(new Settings({}), handler()));
-      setGameState(new Proxy(new GameState({}), handler()));
+      setfightState(new Proxy(new FightState({}), handler()));
       setIsLoaded(true);
     })();
   }, []);

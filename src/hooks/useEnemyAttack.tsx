@@ -1,20 +1,22 @@
 import { useEffect } from 'react';
 import useCharacterMethods from './useCharacterMethods';
 import useStore from './useStore';
+import useEnemyMethods from './useEnemyMethods';
 
 const useEnemyAttack = () => {
   const { settings, data } = useStore();
   const chars = useCharacterMethods();
+  const enemy = useEnemyMethods();
 
   useEffect(() => {
-    if (data.enemy.current === null) {
+    if (enemy.getCurrentEnemy() === null) {
       setTimeout(() => {
-        const randomEnemy = data.enemy.getRandomEnemy();
-        data.enemy.current = randomEnemy;
+        const randomEnemy = enemy.getRandomEnemy();
+        enemy.setCurrentEnemy(randomEnemy);
         startAttacking();
       }, 2000);
     }
-  }, [data.enemy.current]);
+  }, [enemy.getCurrentEnemy()]);
 
   function startAttacking() {
     // TODO: add a death screen, during which no fighting will happen
@@ -23,14 +25,14 @@ const useEnemyAttack = () => {
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
-      if (settings.isFightStarted || !data.enemy.current) return;
+      if (settings.isFightStarted || !enemy.getCurrentEnemy()) return;
       if (!startTime) {
         startTime = timestamp;
       }
-      if (timestamp - startTime < data.enemy.current.attackSpeed) {
+      if (timestamp - startTime < enemy.getCurrentEnemy().attackSpeed) {
         requestAnimationFrame(animateCooldown);
       } else {
-        chars.takeDamage(data.enemy.current.getTotalDamage());
+        chars.takeDamage(enemy.getTotalDamage());
         startAttacking();
       }
     };

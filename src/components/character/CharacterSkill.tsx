@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import './CharacterSkill.scss';
-import PropTypes from '../../helpers/externalLibraries/propTypes';
 import { Popper } from '@mui/material';
-import useCharactersSkills from '../../hooks/useCharactersSkills';
+import useCharacterMethods from '../../hooks/useCharacterMethods';
 import useTranslations from '../../hooks/useTranslations';
 
 const CharacterSkill = ({ className, skill, x }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const charSkills = useCharactersSkills();
+  const charSkills = useCharacterMethods();
   const t = useTranslations();
   const open = Boolean(anchorEl);
   const id = open ? 'skill-popper' : undefined;
@@ -21,7 +20,7 @@ const CharacterSkill = ({ className, skill, x }) => {
   };
 
   const buySkill = () => {
-    charSkills.buySkill(skill);
+    // charSkills.buySkill(skill);
   };
 
   return (

@@ -1,27 +1,17 @@
 import { CURRENCY_CRYSTAL, CURRENCY_GOLD } from '../helpers/constants/gameVariables';
 
 class Skill {
-  public name: number;
-  public type: number;
-  public index: number;
-  public level: number;
-  public manaCost: number;
-  public passive: boolean;
-  public icon: any;
-  public requirements: any;
-  public cost: any;
+  name: number;
+  type: number;
+  index: number;
+  level: number;
+  manaCost: number;
+  passive: boolean;
+  icon: any;
+  requirements: any;
+  cost: any;
 
-  constructor({
-    name,
-    type,
-    index,
-    level,
-    manaCost = 0,
-    passive = true,
-    icon = '',
-    requirements = {},
-    cost = {},
-  }) {
+  constructor({ name, type, index, level, manaCost = 0, passive = true, icon = '', requirements = {}, cost = {} }) {
     this.name = name;
     this.type = type;
     this.index = index;

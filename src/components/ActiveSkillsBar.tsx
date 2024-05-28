@@ -1,14 +1,12 @@
 import { useState } from 'react';
-import PropTypes from '../helpers/externalLibraries/propTypes';
 import './ActiveSkillsBar.scss';
 import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';
-import useCharactersSkills from '../hooks/useCharactersSkills';
 import useStore from '../hooks/useStore';
 import useCharacterMethods from '../hooks/useCharacterMethods';
 
 const ActiveSkillsBar = ({ className }) => {
-  const { data, assets } = useStore();
+  const { data, assets, fightState } = useStore();
   const { getActiveCharactersSkills } = useCharacterMethods();
   const [activeSkills, setActiveSkills] = useState({});
 
@@ -33,7 +31,7 @@ const ActiveSkillsBar = ({ className }) => {
             let classes = [
               'ActiveSkillsBar-row-item',
               activeSkills[skill?.name] ? 'cooldown' : '',
-              skill?.manaCost > data.characters.getCurrentMana() ? 'disabled' : '',
+              skill?.manaCost > fightState.getCurrentMana() ? 'disabled' : '',
             ];
 
             return (

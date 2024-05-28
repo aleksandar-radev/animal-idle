@@ -1,17 +1,20 @@
-import PropTypes from '../../helpers/externalLibraries/propTypes';
 import HealthBar from '../HealthBar';
 import './EnemyResources.scss';
 import useStore from '../../hooks/useStore';
+import useEnemyMethods from '../../hooks/useEnemyMethods';
 
 const EnemyResources = ({ className }) => {
   const { data } = useStore();
+  const enemy = useEnemyMethods();
 
   return (
-    <div className={['EnemyResources', className].join(' ')}>
-      <HealthBar
-        currentHealth={data.enemy.current?.getCurrentHealth()}
-        totalHealth={data.enemy.current?.getTotalHealth()}></HealthBar>
-    </div>
+    <>
+      {enemy.getCurrentEnemy() && (
+        <div className={['EnemyResources', className].join(' ')}>
+          <HealthBar currentHealth={enemy.getCurrentHealth()} totalHealth={enemy.getTotalHealth()}></HealthBar>
+        </div>
+      )}
+    </>
   );
 };
 

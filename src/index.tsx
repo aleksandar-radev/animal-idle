@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
-import './globals.d.ts';
 import reportWebVitals from './reportWebVitals';
 
 if (process.env.NODE_ENV === 'production') {

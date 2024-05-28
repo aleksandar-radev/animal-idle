@@ -13,20 +13,19 @@ import { getAllSkillTypes } from '../helpers/gameFunctions';
 import Skill from './Skill';
 
 class Character {
-  public name: string
-  public type: string
-  public level: number
-  public experience: number
-  public health: number
-  public mana: number
-  public damage: number
-  public attackSpeed: number
-  public critChance: number
-  public critDamage: number
-  public doubleDamageChance: number
-  public renderChanges: number
-  public isUnlocked: boolean
-  public skills: { [key: string]: Skill }
+  name: string;
+  type: string;
+  level: number;
+  experience: number;
+  health: number;
+  mana: number;
+  damage: number;
+  attackSpeed: number;
+  critChance: number;
+  critDamage: number;
+  doubleDamageChance: number;
+  isUnlocked: boolean;
+  skills: { [key: string]: Skill };
 
   constructor({
     name,
@@ -40,24 +39,22 @@ class Character {
     critChance = 0,
     critDamage = 0,
     doubleDamageChance = 0,
-    renderChanges = 0,
     isUnlocked = false,
     skills,
   }) {
-    this.name = name
-    this.type = type
-    this.level = level
-    this.experience = experience
-    this.health = health
-    this.mana = mana
-    this.damage = damage
-    this.attackSpeed = attackSpeed
-    this.critChance = critChance
-    this.critDamage = critDamage
-    this.doubleDamageChance = doubleDamageChance
-    this.renderChanges = renderChanges
-    this.isUnlocked = isUnlocked
-    this.skills = skills
+    this.name = name;
+    this.type = type;
+    this.level = level;
+    this.experience = experience;
+    this.health = health;
+    this.mana = mana;
+    this.damage = damage;
+    this.attackSpeed = attackSpeed;
+    this.critChance = critChance;
+    this.critDamage = critDamage;
+    this.doubleDamageChance = doubleDamageChance;
+    this.isUnlocked = isUnlocked;
+    this.skills = skills;
     // this.skills = {
     // let def = characterStats[characterType]; // default values for the current character
 
@@ -70,11 +67,9 @@ class Character {
         index: 0,
         level: 1,
         passive: true,
-
       }),
     };
   }
-
 
   // getPassiveSkillsByType(type) {
   //   return Object.values(this.skills[type])
@@ -167,15 +162,8 @@ class Character {
     return this.critDamage;
   }
 
-  renderChange() {
-    this.renderChanges++;
-    if (this.renderChanges > 1e99) {
-      this.renderChanges = 0;
-    }
-  }
-
   getActiveSkills() {
-    return Object.values(this.skills[SKILLS_UTILITY]).filter((skill) => {
+    return Object.values(this.skills).filter((skill) => {
       return skill.isActive();
     });
   }

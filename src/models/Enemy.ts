@@ -1,80 +1,26 @@
-import {
-  CURRENCY_GOLD
-} from '../helpers/constants/gameVariables';
-import { getAllEnemyStats, getAllEnemyTypes } from '../helpers/gameFunctions';
+import { ENEMY_TYPE_BARBARIAN } from '../helpers/constants/gameVariables'; // Assuming the constant is defined here
+import { getAllEnemyStats } from '../helpers/gameFunctions';
 
 class Enemy {
-  current: any;
-  renderChanges: number;
-  enemyTypes: any;
+  name: string;
+  type: string;
+  health: number;
+  damage: number;
+  attackSpeed: number;
+  mana: number;
+  level: number;
 
-  constructor({
-    current = null,
-  }) {
-    this.current = current;
-    this.renderChanges = 0;
+  constructor({ level = 1, type = ENEMY_TYPE_BARBARIAN }) {
+    const stats = getAllEnemyStats()[type];
+
+    this.level = level;
+    this.name = stats.name;
+    this.type = stats.type;
+    this.health = stats.health;
+    this.damage = stats.damage;
+    this.attackSpeed = stats.attackSpeed;
+    this.mana = stats.mana;
   }
-
-  renderChange() {
-    this.renderChanges++;
-    if (this.renderChanges > 1e99) {
-      this.renderChanges = 0;
-    }
-  }
-
-  reset() {
-    this.current = null;
-  }
-
-  getRandomEnemy() {
-    const keys = getAllEnemyTypes();
-    const randomKey = keys[Math.floor(Math.random() * keys.length)];
-
-    return this.getEnemyByKey(randomKey);
-  }
-
-  getEnemyByKey(key) {
-    return {
-      // ...this.enemyMethods(),
-      ...getAllEnemyStats()[key],
-    };
-  }
-
-  //TODO  move to hook
-  // enemyMethods() {
-  //   return {
-  //     getCurrentHealth() {
-  //       if (!this.currentHealth) {
-  //         this.currentHealth = this.getTotalHealth();
-  //       }
-  //       return this.currentHealth;
-  //     },
-  //     getTotalHealth() {
-  //       let health = this.totalHealth;
-  //       health += Math.ceil((health * store.data.enemy.level) / 100);
-  //       return health;
-  //     },
-  //     getTotalDamage() {
-  //       let damage = this.damage;
-  //       damage += Math.ceil((damage * store.data.enemy.level) / 100);
-  //       return damage;
-  //     },
-  //     takeDamage(damage) {
-  //       if (this.currentHealth - damage <= 0) {
-  //         this.die();
-  //       } else {
-  //         this.currentHealth -= damage;
-  //       }
-  //       store.enemy.renderChange();
-  //     },
-  //     die() {
-  //       this.currentHealth = null;
-  //       store.data.currencies[CURRENCY_GOLD].value += 1;
-  //       store.data.enemy.level++;
-  //       store.enemy.current = null;
-  //     },
-  //   };
-  // }
 }
 
 export default Enemy;

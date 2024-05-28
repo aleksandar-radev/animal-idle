@@ -1,14 +1,15 @@
 import './CharacterGrid.scss';
 import CharacterAvatar from './CharacterAvatar';
 import useStore from '../../hooks/useStore';
+import useCharacterMethods from '../../hooks/useCharacterMethods';
 
 const CharacterGrid = ({ className }) => {
   const { data } = useStore();
-  const characters = data.characters.getCharactersInActiveDeck();
+  const { getCharactersInActiveDeck } = useCharacterMethods();
 
   return (
     <div className={['CharacterGrid', className].join(' ')}>
-      {characters.map((character) => {
+      {Array.from(getCharactersInActiveDeck().values()).map((character) => {
         return (
           <div key={character.type} className="character">
             <CharacterAvatar character={character}></CharacterAvatar>

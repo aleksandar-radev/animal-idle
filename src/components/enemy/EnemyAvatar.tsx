@@ -1,19 +1,23 @@
-import PropTypes from '../../helpers/externalLibraries/propTypes';
 import './EnemyAvatar.scss';
 import useStore from '../../hooks/useStore';
+import useEnemyMethods from '../../hooks/useEnemyMethods';
 
 const EnemyAvatar = ({ className }) => {
-  const { data, assets } = useStore();
-  const avatar = assets[data.enemy.current.name];
+  const { assets } = useStore();
+  const enemy = useEnemyMethods();
   return (
-    <div className={`${className} EnemyAvatar`}>
-      <p className={`EnemyAvatar-text`}>
-        {data.enemy.current.name} Lvl: {data.enemy.level || 0}
-      </p>
-      <div className={`EnemyAvatar-image`}>
-        <img src={avatar} />
-      </div>
-    </div>
+    <>
+      {enemy.getCurrentEnemy() && (
+        <div className={`${className} EnemyAvatar`}>
+          <p className={`EnemyAvatar-text`}>
+            {enemy.getCurrentEnemyName()} Lvl: {enemy.getLevel() || 0}
+          </p>
+          <div className={`EnemyAvatar-image`}>
+            <img src={assets[enemy.getCurrentEnemyName()]} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

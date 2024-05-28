@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import useStore from './useStore';
 
 const useRegenMana = () => {
-  const { store } = useStore();
+  const { data } = useStore();
 
   useEffect(() => {
     regenMana();
@@ -18,7 +18,7 @@ const useRegenMana = () => {
       if (timestamp - startTime < 2000) {
         requestAnimationFrame(animateCooldown);
       } else {
-        store.characters['barbarian'].updateMana(1);
+        data.characters['barbarian'].updateMana(1);
         regenMana();
       }
     };

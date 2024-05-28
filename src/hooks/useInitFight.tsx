@@ -2,16 +2,17 @@ import { useEffect } from 'react';
 import useCharacterMethods from './useCharacterMethods';
 import { MAIN_SCREEN_FIGHT_TAB } from '../helpers/constants/gameVariables';
 import useStore from './useStore';
+import useEnemyMethods from './useEnemyMethods';
 
 const useInitFight = () => {
   const { settings, data } = useStore();
-  const { reset } = useCharacterMethods();
+  const characters = useCharacterMethods();
+  const enemy = useEnemyMethods();
   let t = null;
 
   useEffect(() => {
-    console.log(data);
-    reset();
-    data.enemy.reset();
+    characters.reset();
+    enemy.reset();
 
     t = setTimeout(() => {
       if (settings.activeMainScreenTab === MAIN_SCREEN_FIGHT_TAB) {
@@ -20,9 +21,9 @@ const useInitFight = () => {
     }, 500);
 
     return () => {
-      reset();
+      characters.reset();
 
-      data.enemy.reset();
+      enemy.reset();
       clearTimeout(t);
       settings.isFightStarted = false;
     };

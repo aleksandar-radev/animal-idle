@@ -1,4 +1,3 @@
-import PropTypes from '../helpers/externalLibraries/propTypes';
 import './HealthBar.scss';
 
 const HealthBar = ({ currentHealth, totalHealth }) => {

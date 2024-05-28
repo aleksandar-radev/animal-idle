@@ -21,7 +21,6 @@ import {
   DOUBLE_DAMAGE_CHANCE,
 } from './constants/gameVariables';
 
-
 import crypt from './externalLibraries/encrypt';
 // @ts-ignore
 import swordIcon from '../assets/sword.png';
@@ -54,8 +53,8 @@ export function loadAssets(assets) {
   let converter = USE_BASE64
     ? toDataURL
     : (url, callback) => {
-      callback(url);
-    };
+        callback(url);
+      };
 
   converter(berserkerAvatar, (url) => {
     assets[BARBARIAN_AVATAR] = url;
@@ -104,30 +103,16 @@ export const prepareDataForApi = (data: Data): EncryptedData => {
 };
 
 export const getAllCharacterTypes = (): string[] => {
-  return [
-    CHARACTER_TYPE_BARBARIAN,
-    CHARACTER_TYPE_SORCERESS,
-    CHARACTER_TYPE_DRUID,
-  ] as const;
+  return [CHARACTER_TYPE_BARBARIAN, CHARACTER_TYPE_SORCERESS, CHARACTER_TYPE_DRUID] as const;
 };
 
 export const getAllEnemyTypes = (): string[] => {
-  return [
-    ENEMY_TYPE_BARBARIAN,
-    ENEMY_TYPE_SORCERESS,
-    ENEMY_TYPE_ASSASSIN,
-    ENEMY_TYPE_WARRIOR,
-  ] as const;
+  return [ENEMY_TYPE_BARBARIAN, ENEMY_TYPE_SORCERESS, ENEMY_TYPE_ASSASSIN, ENEMY_TYPE_WARRIOR] as const;
 };
 
 export const getAllSkillTypes = (): string[] => {
-  return [
-    SKILLS_ATTACK,
-    SKILLS_DEFENSE,
-    SKILLS_UTILITY,
-  ] as const;
+  return [SKILLS_ATTACK, SKILLS_DEFENSE, SKILLS_UTILITY] as const;
 };
-
 
 /**
  * THE ONLY REQUIRED PROPS ARE: name, type
@@ -160,42 +145,45 @@ export const getCharacterStats = () => {
       attackSpeed: 1000,
       mana: 50,
     },
-  }
+  };
 };
 
 export const getAllEnemyStats = () => {
   return {
     [ENEMY_TYPE_BARBARIAN]: {
       name: ENEMY_TYPE_BARBARIAN,
-      currentHealth: null,
-      totalHealth: 100,
+      type: ENEMY_TYPE_BARBARIAN,
+      health: 100,
+      mana: 0,
       damage: 5,
       attackSpeed: 3000,
     },
     [ENEMY_TYPE_SORCERESS]: {
       name: ENEMY_TYPE_SORCERESS,
-      currentHealth: null,
-      totalHealth: 60,
+      type: ENEMY_TYPE_SORCERESS,
+      health: 60,
+      mana: 10,
       damage: 20,
       attackSpeed: 4000,
     },
     [ENEMY_TYPE_ASSASSIN]: {
       name: ENEMY_TYPE_ASSASSIN,
-      currentHealth: null,
-      totalHealth: 80,
+      type: ENEMY_TYPE_ASSASSIN,
+      health: 80,
+      mana: 0,
       damage: 10,
       attackSpeed: 2000,
     },
     [ENEMY_TYPE_WARRIOR]: {
       name: ENEMY_TYPE_WARRIOR,
-      currentHealth: null,
-      totalHealth: 150,
+      type: ENEMY_TYPE_WARRIOR,
+      health: 150,
+      mana: 0,
       damage: 5,
       attackSpeed: 4000,
     },
-  }
+  };
 };
-
 
 /**
  * SKILLS IMPLEMENTATION (EFFECT) IS DEFINED IN HOOKS!!!
