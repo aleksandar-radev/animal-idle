@@ -1,7 +1,9 @@
 class Deck {
-  name: string;
-  index: number;
-  characters: { [key: number]: { characterType: string; index: number } };
+  private _name: string;
+  private _index: number;
+  private _characters: { [key: number]: { characterType: string; index: number } };
+
+  static DEFAULT_DECK_NAME = 'default';
 
   constructor({ name = '', index = -1, characters = {} }) {
     this.name = name;
@@ -9,8 +11,29 @@ class Deck {
     this.characters = characters;
   }
 
-  getAllCharacterTypes(): string[] {
-    return Object.keys(this.characters);
+  // Getters and Setters
+  get name(): string {
+    return this._name;
+  }
+
+  set name(value: string) {
+    this._name = value;
+  }
+
+  get index(): number {
+    return this._index;
+  }
+
+  set index(value: number) {
+    this._index = value;
+  }
+
+  get characters(): { [key: number]: { characterType: string; index: number } } {
+    return this._characters;
+  }
+
+  set characters(value: { [key: number]: { characterType: string; index: number } }) {
+    this._characters = value;
   }
 }
 

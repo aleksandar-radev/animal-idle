@@ -1,4 +1,4 @@
-import { CURRENCY_GOLD, CURRENCY_CRYSTAL } from '../helpers/constants/gameVariables';
+import Currency from './Currency';
 
 export class Cost {
   cost: {
@@ -10,13 +10,13 @@ export class Cost {
 
   constructor(data) {
     this.cost = {
-      [CURRENCY_GOLD]: {
-        type: CURRENCY_GOLD,
+      [Currency.CURRENCY_GOLD]: {
+        type: Currency.CURRENCY_GOLD,
         multiplier: 0,
         ...data.cost?.gold,
       },
-      [CURRENCY_CRYSTAL]: {
-        type: CURRENCY_CRYSTAL,
+      [Currency.CURRENCY_CRYSTAL]: {
+        type: Currency.CURRENCY_CRYSTAL,
         multiplier: 0,
         ...data.cost?.crystal,
       },

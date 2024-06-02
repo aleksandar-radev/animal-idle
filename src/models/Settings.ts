@@ -1,41 +1,82 @@
-import {
-  CHARACTER_SCREEN_STATS_TAB,
-  MAIN_SCREEN_CHARACTER_TAB,
-  SHOP_SCREEN_ATTACK_TAB,
-} from '../helpers/constants/gameVariables';
-
-// eslint-disable-next-line no-unused-vars
 class Settings {
-  activeMainScreenTab: string;
-  activeCharacterScreenTab: string;
-  activeShopScreenTab: string;
-  activeCharacter: any;
-  areCharactersDraggable: boolean;
-  isFightStarted: boolean;
+  private _activeMainScreenTab: string;
+  private _activeCharacterScreenTab: string;
+  private _activeShopScreenTab: string;
+  private _activeCharacter: any;
+  private _areCharactersDraggable: boolean;
+  private _isFightStarted: boolean;
 
-  constructor({}) {
-    this.activeMainScreenTab = MAIN_SCREEN_CHARACTER_TAB;
-    this.activeCharacterScreenTab = CHARACTER_SCREEN_STATS_TAB;
-    this.activeShopScreenTab = SHOP_SCREEN_ATTACK_TAB;
+  static MAIN_SCREEN_CHARACTER_TAB = 'character';
+  static MAIN_SCREEN_FIGHT_TAB = 'fight';
+  static MAIN_SCREEN_SHOP_TAB = 'shop';
+  static MAIN_SCREEN_LEADERBOARD_TAB = 'leaderboard';
+  static MAIN_SCREEN_SETTINGS_TAB = 'settings';
+  static MAIN_SCREEN_ADMIN_TAB = 'admin';
+
+  static CHARACTER_SCREEN_STATS_TAB = 'stats';
+  static CHARACTER_SCREEN_SKILLS_TAB = 'skills';
+  static CHARACTER_SCREEN_ITEMS_TAB = 'items';
+
+  static SHOP_SCREEN_ATTACK_TAB = 'attack';
+  static SHOP_SCREEN_DEFENSE_TAB = 'defense';
+  static SHOP_SCREEN_UTILITY_TAB = 'utility';
+
+  constructor() {
+    this.activeMainScreenTab = Settings.MAIN_SCREEN_CHARACTER_TAB;
+    this.activeCharacterScreenTab = Settings.CHARACTER_SCREEN_STATS_TAB;
+    this.activeShopScreenTab = Settings.SHOP_SCREEN_ATTACK_TAB;
     this.activeCharacter = null;
     this.areCharactersDraggable = false;
     this.isFightStarted = false;
   }
 
-  setActiveMainScreenTab(tab) {
-    this.activeMainScreenTab = tab;
+  // Getters and Setters
+  get activeMainScreenTab(): string {
+    return this._activeMainScreenTab;
   }
 
-  setActiveCharacterScreenTab(tab) {
-    this.activeCharacterScreenTab = tab;
+  set activeMainScreenTab(value: string) {
+    this._activeMainScreenTab = value;
   }
 
-  setActiveShopScreenTab(tab) {
-    this.activeShopScreenTab = tab;
+  get activeCharacterScreenTab(): string {
+    return this._activeCharacterScreenTab;
   }
 
-  setActiveCharacter(character) {
-    this.activeCharacter = character;
+  set activeCharacterScreenTab(value: string) {
+    this._activeCharacterScreenTab = value;
+  }
+
+  get activeShopScreenTab(): string {
+    return this._activeShopScreenTab;
+  }
+
+  set activeShopScreenTab(value: string) {
+    this._activeShopScreenTab = value;
+  }
+
+  get activeCharacter(): any {
+    return this._activeCharacter;
+  }
+
+  set activeCharacter(value: any) {
+    this._activeCharacter = value;
+  }
+
+  get areCharactersDraggable(): boolean {
+    return this._areCharactersDraggable;
+  }
+
+  set areCharactersDraggable(value: boolean) {
+    this._areCharactersDraggable = value;
+  }
+
+  get isFightStarted(): boolean {
+    return this._isFightStarted;
+  }
+
+  set isFightStarted(value: boolean) {
+    this._isFightStarted = value;
   }
 }
 

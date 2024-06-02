@@ -1,9 +1,3 @@
-import React from 'react';
-import {
-  CHARACTER_SCREEN_ITEMS_TAB,
-  CHARACTER_SCREEN_SKILLS_TAB,
-  CHARACTER_SCREEN_STATS_TAB,
-} from '../../helpers/constants/gameVariables';
 import CharacterStats from './CharacterStats';
 import CharacterItems from './CharacterItems';
 import CharacterSkills from './CharacterSkills';
@@ -12,19 +6,20 @@ import CharacterAvatar from './CharacterAvatar';
 import './CharacterDisplay.scss';
 import useStore from '../../hooks/useStore';
 import useCharacterMethods from '../../hooks/useCharacterMethods';
+import Settings from '../../models/Settings';
 
 const CharacterDisplay = () => {
   const { settings } = useStore();
-  const { getActiveCharacter } = useCharacterMethods();
-  const character = getActiveCharacter();
+  const cm = useCharacterMethods();
+  const character = cm.getActiveCharacter();
 
   const activeTab = () => {
     switch (settings.activeCharacterScreenTab) {
-      case CHARACTER_SCREEN_STATS_TAB:
+      case Settings.CHARACTER_SCREEN_STATS_TAB:
         return <CharacterStats />;
-      case CHARACTER_SCREEN_ITEMS_TAB:
+      case Settings.CHARACTER_SCREEN_ITEMS_TAB:
         return <CharacterItems />;
-      case CHARACTER_SCREEN_SKILLS_TAB:
+      case Settings.CHARACTER_SCREEN_SKILLS_TAB:
         return <CharacterSkills />;
       default:
         return '';

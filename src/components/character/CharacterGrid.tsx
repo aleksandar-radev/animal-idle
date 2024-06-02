@@ -5,11 +5,11 @@ import useCharacterMethods from '../../hooks/useCharacterMethods';
 
 const CharacterGrid = ({ className }) => {
   const { data } = useStore();
-  const { getCharactersInActiveDeck } = useCharacterMethods();
+  const cm = useCharacterMethods();
 
   return (
     <div className={['CharacterGrid', className].join(' ')}>
-      {Array.from(getCharactersInActiveDeck().values()).map((character) => {
+      {Array.from(cm.getCharactersInActiveDeck().values()).map((character) => {
         return (
           <div key={character.type} className="character">
             <CharacterAvatar character={character}></CharacterAvatar>

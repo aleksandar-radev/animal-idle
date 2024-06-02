@@ -19,7 +19,7 @@ const ShopSkillsDefense = () => {
         return (
           <div className="ShopSkillsDefense" key={skillKey}>
             <div className="ShopSkillsDefense-icon">
-              <img src={skill.getImgUrl()} />
+              <img src={skill.icon} />
             </div>
 
             <div className="ShopSkillsDefense-info">

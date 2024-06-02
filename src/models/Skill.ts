@@ -1,15 +1,26 @@
-import { CURRENCY_CRYSTAL, CURRENCY_GOLD } from '../helpers/constants/gameVariables';
-
 class Skill {
-  name: number;
-  type: number;
-  index: number;
-  level: number;
-  manaCost: number;
-  passive: boolean;
-  icon: any;
-  requirements: any;
-  cost: any;
+  private _name: string;
+  private _type: string;
+  private _index: number;
+  private _level: number;
+  private _manaCost: number;
+  private _passive: boolean;
+  private _icon: any;
+  private _requirements: any;
+  private _cost: any;
+
+  static SKILL_TYPE_ATTACK = 'attack';
+  static SKILL_TYPE_DEFENSE = 'defense';
+  static SKILL_TYPE_UTILITY = 'utility';
+  static SKILL_DAMAGE_FLAT = 'damageFlat';
+  static SKILL_DAMAGE_PERCENT = 'damagePercent';
+  static SKILL_CRIT_CHANCE = 'critChance';
+  static SKILL_CRIT_DAMAGE = 'critDamage';
+  static SKILL_ATTACK_SPEED = 'attackSpeed';
+  static SKILL_DOUBLE_DAMAGE_CHANCE = 'doubleDamageChance';
+  static SKILL_BONUS_HEALTH = 'bonusHealth';
+  static SKILL_BONUS_DEFENSE = 'bonusDefense';
+  static SKILL_BONUS_GOLD = 'bonusGold';
 
   constructor({ name, type, index, level, manaCost = 0, passive = true, icon = '', requirements = {}, cost = {} }) {
     this.name = name;
@@ -21,78 +32,79 @@ class Skill {
     this.icon = icon;
     this.requirements = requirements;
     this.cost = cost;
-
-    // this.cost = {
-    //   [CURRENCY_GOLD]: {
-    //     type: CURRENCY_GOLD,
-    //     multiplier: 0,
-    //     ...data.cost?.gold,
-    //   },
-    //   [CURRENCY_CRYSTAL]: {
-    //     type: CURRENCY_CRYSTAL,
-    //     multiplier: 0,
-    //     ...data.cost?.crystal,
-    //   },
-    // };
-    // this.requirements = {
-    //   level: 1,
-    //   ...data.requirements,
-    // };
   }
 
-  isActive() {
-    return !this.passive;
+  // Getters and Setters
+  get name(): string {
+    return this._name;
   }
 
-  isPassive() {
-    return this.passive;
+  set name(value: string) {
+    this._name = value;
   }
 
-  getName() {
-    return this.name;
+  get type(): string {
+    return this._type;
   }
 
-  getType() {
-    return this.type;
+  set type(value: string) {
+    this._type = value;
   }
 
-  getLevel() {
-    return this.level;
+  get index(): number {
+    return this._index;
   }
 
-  getImgUrl() {
-    return this.icon;
+  set index(value: number) {
+    this._index = value;
   }
 
-  getBonus() {
-    return this.level * 1;
+  get level(): number {
+    return this._level;
   }
 
-  getCost(x = 1) {
-    return {
-      [CURRENCY_GOLD]: this.getCostByType(CURRENCY_GOLD, x),
-      [CURRENCY_CRYSTAL]: this.getCostByType(CURRENCY_CRYSTAL, x),
-    };
+  set level(value: number) {
+    this._level = value;
   }
 
-  // X is how many times you want to get cost. e.g. how many times you want to buy the skill
-  getCostByType(type, x = 1) {
-    const costMultiplier = this.cost[type].multiplier;
-    if (costMultiplier === 0) {
-      return 0;
-    }
-    const a1 = Math.floor((1 + this.level) * costMultiplier);
-    const an = Math.floor((1 + this.level + x - 1) * costMultiplier);
-    const Sn = Math.ceil((x * (a1 + an)) / 2);
-    return Sn;
+  get manaCost(): number {
+    return this._manaCost;
   }
 
-  getRequirements() {
-    return this.requirements;
+  set manaCost(value: number) {
+    this._manaCost = value;
   }
 
-  getLevelRequired() {
-    return this.requirements.level;
+  get passive(): boolean {
+    return this._passive;
+  }
+
+  set passive(value: boolean) {
+    this._passive = value;
+  }
+
+  get icon(): any {
+    return this._icon;
+  }
+
+  set icon(value: any) {
+    this._icon = value;
+  }
+
+  get requirements(): any {
+    return this._requirements;
+  }
+
+  set requirements(value: any) {
+    this._requirements = value;
+  }
+
+  get cost(): any {
+    return this._cost;
+  }
+
+  set cost(value: any) {
+    this._cost = value;
   }
 }
 

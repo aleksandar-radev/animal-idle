@@ -5,13 +5,13 @@ import useEnemyMethods from '../../hooks/useEnemyMethods';
 
 const EnemyResources = ({ className }) => {
   const { data } = useStore();
-  const enemy = useEnemyMethods();
+  const em = useEnemyMethods();
 
   return (
     <>
-      {enemy.getCurrentEnemy() && (
+      {em.getCurrentEnemy() && (
         <div className={['EnemyResources', className].join(' ')}>
-          <HealthBar currentHealth={enemy.getCurrentHealth()} totalHealth={enemy.getTotalHealth()}></HealthBar>
+          <HealthBar currentHealth={em.getCurrentHealth()} totalHealth={em.getTotalHealth()}></HealthBar>
         </div>
       )}
     </>

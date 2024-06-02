@@ -6,23 +6,23 @@ import useEnemyMethods from './useEnemyMethods';
 const useCharactersAttack = () => {
   const { data, settings } = useStore();
   let [isAttacking, setIsAttacking] = useState(false);
-  const { getCharactersInActiveDeck } = useCharacterMethods();
-  const enemy = useEnemyMethods();
+  const cm = useCharacterMethods();
+  const em = useEnemyMethods();
 
   useEffect(() => {
-    if (enemy.getCurrentEnemy() !== null && !isAttacking) {
-      getCharactersInActiveDeck().forEach((char) => {
+    if (em.getCurrentEnemy() !== null && !isAttacking) {
+      cm.getCharactersInActiveDeck().forEach((char) => {
         startAttacking(char);
       });
     }
-  }, [enemy.getCurrentEnemy()]);
+  }, [em.getCurrentEnemy()]);
 
   function startAttacking(char) {
     setIsAttacking(true);
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
-      if (enemy.getCurrentEnemy() === null) {
+      if (em.getCurrentEnemy() === null) {
         setIsAttacking(false);
         return;
       }
@@ -34,8 +34,8 @@ const useCharactersAttack = () => {
       if (timestamp - startTime < char.attackSpeed) {
         requestAnimationFrame(animateCooldown);
       } else {
-        if (enemy.getCurrentEnemy()) {
-          enemy.takeDamage(char.getTotalDamage());
+        if (em.getCurrentEnemy()) {
+          em.takeDamage(char.damage);
         }
         startAttacking(char);
       }

@@ -7,12 +7,12 @@ import useCharacterMethods from '../hooks/useCharacterMethods';
 
 const ActiveSkillsBar = ({ className }) => {
   const { data, assets, fightState } = useStore();
-  const { getActiveCharactersSkills } = useCharacterMethods();
+  const cm = useCharacterMethods();
   const [activeSkills, setActiveSkills] = useState({});
 
   const getSkills = () => {
     let allSkills = [];
-    let skills = getActiveCharactersSkills();
+    let skills = cm.getActiveSkillsOfCharactersInActiveDeck();
 
     Object.keys(skills).forEach((skill) => {
       Object.keys(skills[skill]).forEach((skillName) => {
@@ -31,7 +31,7 @@ const ActiveSkillsBar = ({ className }) => {
             let classes = [
               'ActiveSkillsBar-row-item',
               activeSkills[skill?.name] ? 'cooldown' : '',
-              skill?.manaCost > fightState.getCurrentMana() ? 'disabled' : '',
+              skill?.manaCost > fightState.characterCurrentMana ? 'disabled' : '',
             ];
 
             return (

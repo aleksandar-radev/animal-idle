@@ -5,13 +5,13 @@ import useStore from '../../hooks/useStore';
 import useCharacterMethods from '../../hooks/useCharacterMethods';
 
 const CharacterResources = ({ className }) => {
-  const characters = useCharacterMethods();
+  const cm = useCharacterMethods();
 
   return (
     <div className={['CharacterResources', className].join(' ')}>
-      <HealthBar currentHealth={characters.getCurrentHealth()} totalHealth={characters.getTotalHealth()}></HealthBar>
+      <HealthBar currentHealth={cm.getCurrentHealth()} totalHealth={cm.getTotalHealth()}></HealthBar>
 
-      <ManaBar currentMana={characters.getCurrentMana()} totalMana={characters.getTotalMana()}></ManaBar>
+      <ManaBar currentMana={cm.getCurrentMana()} totalMana={cm.getTotalMana()}></ManaBar>
     </div>
   );
 };

@@ -1,18 +1,29 @@
-import {
-  CHARACTER_TYPE_BARBARIAN,
-  CHARACTER_TYPE_DRUID,
-  CHARACTER_TYPE_SORCERESS,
-} from '../helpers/constants/gameVariables';
+import { useMemo } from 'react';
+import Character from '../models/Character';
 import Deck from '../models/Deck';
-import useCurrencies from './useCurrencies';
 import useStore from './useStore';
 
 const useCharacterMethods = () => {
   const { data, fightState, settings } = useStore();
-  const charCurrencies = useCurrencies();
-  const characters = data.characters;
 
   const methods = {
+    getAllStatsOfActiveCharacter() {
+      const activeCharacter = methods.getActiveCharacter();
+      if (!activeCharacter) {
+        return null;
+      }
+
+      // Create an object with only the selected properties
+      const selectedStats = {};
+      Character.CHARACTER_DISPLAY_PROPS.forEach((prop) => {
+        if (prop in activeCharacter) {
+          selectedStats[prop] = activeCharacter[prop];
+        }
+      });
+
+      return selectedStats;
+    },
+
     getCurrentHealth: () => {
       return fightState.characterCurrentHealth;
     },
@@ -20,7 +31,7 @@ const useCharacterMethods = () => {
     getTotalHealth: () => {
       let totalHealth = 0;
       methods.getCharactersInActiveDeck().forEach((char) => {
-        totalHealth += char.getHealth();
+        totalHealth += char.health;
       });
       return totalHealth;
     },
@@ -32,19 +43,19 @@ const useCharacterMethods = () => {
     getTotalMana: () => {
       let totalMana = 0;
       methods.getCharactersInActiveDeck().forEach((char) => {
-        totalMana += char.getMana();
+        totalMana += char.mana;
       });
       return totalMana;
     },
 
     getCharacterByType: (type) => {
       switch (type) {
-        case CHARACTER_TYPE_BARBARIAN:
-          return characters[CHARACTER_TYPE_BARBARIAN];
-        case CHARACTER_TYPE_SORCERESS:
-          return characters[CHARACTER_TYPE_SORCERESS];
-        case CHARACTER_TYPE_DRUID:
-          return characters[CHARACTER_TYPE_DRUID];
+        case Character.CHARACTER_TYPE_BARBARIAN:
+          return data.characters[Character.CHARACTER_TYPE_BARBARIAN];
+        case Character.CHARACTER_TYPE_SORCERESS:
+          return data.characters[Character.CHARACTER_TYPE_SORCERESS];
+        case Character.CHARACTER_TYPE_DRUID:
+          return data.characters[Character.CHARACTER_TYPE_DRUID];
         default:
           return null;
       }
@@ -52,69 +63,70 @@ const useCharacterMethods = () => {
 
     getAllCharacters: () => {
       return [
-        characters[CHARACTER_TYPE_BARBARIAN],
-        characters[CHARACTER_TYPE_SORCERESS],
-        characters[CHARACTER_TYPE_DRUID],
+        data.characters[Character.CHARACTER_TYPE_BARBARIAN],
+        data.characters[Character.CHARACTER_TYPE_SORCERESS],
+        data.characters[Character.CHARACTER_TYPE_DRUID],
       ];
     },
 
     getTotalDamage: () => {
       let totalDamage = 0;
       methods.getCharactersInActiveDeck().forEach((char) => {
-        totalDamage += char.getTotalDamage();
+        totalDamage += char.damage;
       });
       return totalDamage;
     },
 
-    getActiveCharactersSkills: () => {
+    getActiveSkillsOfCharactersInActiveDeck: () => {
       let activeCharacterSkills = {};
       methods.getCharactersInActiveDeck().forEach((char) => {
-        activeCharacterSkills[char.type] = char.getActiveSkills();
+        activeCharacterSkills[char.type] = []; // char.getActiveSkills
       });
       return activeCharacterSkills;
     },
 
-    getCharactersInActiveDeck: () => {
-      const activeCharacters = new Map();
-      const activeDeckName = data.activeDeckName;
-      const activeDeck: Deck = data.decks[activeDeckName];
-      const characterTypes = activeDeck.getAllCharacterTypes();
-      characterTypes.forEach((charType) => {
-        activeCharacters.set(charType, methods.getCharacterByType(charType));
-      });
-      return activeCharacters;
-    },
+    getCharactersInActiveDeck: useMemo(() => {
+      return (): Map<string, Character> => {
+        const activeCharacters = new Map();
+        const activeDeck: Deck = data.decks[data.activeDeckName];
+        const activeDeckCharacters = Object.keys(activeDeck.characters);
+        activeDeckCharacters.forEach((charType) => {
+          activeCharacters.set(charType, methods.getCharacterByType(charType));
+        });
+        return activeCharacters;
+      };
+    }, [data.activeDeckName, data.decks]),
 
     getActiveCharacter: () => {
       return methods.getCharacterByType(settings.activeCharacter);
     },
 
     levelUp: (charType) => {
-      characters[charType].level++;
+      data.characters[charType].level++;
     },
 
     updateHealth: (bonus) => {
-      const newCurrent = characters.currentHealth + bonus;
+      const newCurrent = data.characters.currentHealth + bonus;
       if (newCurrent >= methods.getTotalHealth()) {
         fightState.characterCurrentHealth = methods.getTotalHealth();
       } else if (newCurrent < 0) {
         throw new Error('Unable to remove mana');
       } else {
-        characters.currentHealth = newCurrent;
+        data.characters.currentHealth = newCurrent;
       }
     },
 
     updateMana: (bonus) => {
-      const newCurrent = characters.currentMana + bonus;
+      const newCurrent = data.characters.currentMana + bonus;
       if (newCurrent >= methods.getTotalMana()) {
         fightState.characterCurrentMana = methods.getTotalMana();
       } else {
-        characters.currentMana = newCurrent;
+        data.characters.currentMana = newCurrent;
       }
     },
 
     takeDamage: (damage) => {
-      if (damage >= characters.currentHealth) {
+      if (damage >= data.characters.currentHealth) {
         fightState.characterCurrentHealth = 0;
         fightState.isAlive = false;
       } else {

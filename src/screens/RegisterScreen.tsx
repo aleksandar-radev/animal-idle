@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { passwordRegex } from '../helpers/constants/jsVariables';
 import './RegisterScreen.scss';
 import useAuthRepo from '../hooks/useAuthRepo';
 
@@ -57,7 +56,7 @@ export default function RegisterScreen() {
               type="password"
               placeholder="Your password"
               value={password}
-              pattern={passwordRegex}
+              pattern={'.{6,}'}
               title="Must contain at least 6 characters"
               required
               onChange={(e) => setPassword(e.target.value)}

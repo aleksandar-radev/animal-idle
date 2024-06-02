@@ -1,119 +1,187 @@
 import {
-  CURRENCY_GOLD,
-  CHARACTER_TYPE_BARBARIAN,
-  CURRENCY_CRYSTAL,
-  DEFAULT_DECK_NAME,
-} from '../helpers/constants/gameVariables';
-import { getAllCharacterTypes } from '../helpers/gameFunctions';
+  defaultCharacterData,
+  defaultCurrencyData,
+  defaultDeckData,
+  getAllCharacterTypes,
+} from '../helpers/gameFunctions';
 import Character from './Character';
 import Currency from './Currency';
 import Deck from './Deck';
-import Enemy from './Enemy';
 
-//! ONLY CLASS THAT IS PERSISTED IN DB
 class Data {
-  dataVersion: string;
-  language: string;
-  characters: { [key in ReturnType<typeof getAllCharacterTypes>[number]]: Character };
-  totalDecks: number;
-  activeDeckName: string;
-  decks: { [key: string]: Deck };
-  currencies: { [key: string]: Currency };
-  id: number;
-  currentLevel: number;
-  highestLevel: number;
-  premium: string;
-  totalExperience: number;
-  totalGold: number;
+  private _dataVersion: string;
+  private _language: string;
+  private _characters: { [key in ReturnType<typeof getAllCharacterTypes>[number]]: Character };
+  private _totalDecks: number;
+  private _activeDeckName: string;
+  private _decks: { [key: string]: Deck };
+  private _currencies: { [key: string]: Currency };
+  private _id: number;
+  private _currentLevel: number;
+  private _highestLevel: number;
+  private _premium: string;
+  private _totalExperience: number;
+  private _totalGold: number;
 
   constructor({
-    dataVersion,
-    language,
-    characters,
-    totalDecks,
-    activeDeckName,
-    decks,
-    currencies,
-    id,
-    currentLevel,
-    highestLevel,
-    premium,
-    totalExperience,
-    totalGold,
+    dataVersion = 'v0.1',
+    language = 'en',
+    characters = {},
+    totalDecks = 1,
+    activeDeckName = Deck.DEFAULT_DECK_NAME,
+    decks = {},
+    currencies = {},
+    id = 0,
+    currentLevel = 0,
+    highestLevel = 0,
+    premium = 'no',
+    totalExperience = 0,
+    totalGold = 0,
   }) {
     this.dataVersion = dataVersion;
     this.language = language;
+    this.characters = characters;
     this.totalDecks = totalDecks;
     this.activeDeckName = activeDeckName;
-
-    this.characters = {};
-    Object.entries(characters).forEach(([characterType, characterData]) => {
-      this.characters[characterType] = new Character(characterData as Character);
-    });
-
-    this.decks = {};
-    Object.entries(decks).forEach(([deckName, deckData]) => {
-      this.decks[deckName] = new Deck(deckData as Deck);
-    });
-
-    this.currencies = currencies || {
-      [CURRENCY_GOLD]: {
-        value: 0,
-      },
-      [CURRENCY_CRYSTAL]: {
-        value: 0,
-      },
-    };
-
-    // db props
-    this.id = id || 0;
-    this.currentLevel = currentLevel || 0;
-    this.highestLevel = highestLevel || 0;
-    this.premium = premium || 'no';
-    this.totalExperience = totalExperience || 0;
-    this.totalGold = totalGold || 0;
+    this.decks = decks;
+    this.currencies = currencies;
+    this.id = id;
+    this.currentLevel = currentLevel;
+    this.highestLevel = highestLevel;
+    this.premium = premium;
+    this.totalExperience = totalExperience;
+    this.totalGold = totalGold;
   }
 
-  static initialData() {
-    const dataVersion = 'v0.1';
-    const language = 'en';
-    const totalDecks = 1;
-    const activeDeckName = DEFAULT_DECK_NAME;
+  // Getters and Setters
+  get dataVersion(): string {
+    return this._dataVersion;
+  }
 
-    const characters = {
-      [CHARACTER_TYPE_BARBARIAN]: new Character({
-        name: 'Barbarian',
-        type: CHARACTER_TYPE_BARBARIAN,
-        level: 1,
-        experience: 0,
-        health: 100,
-        mana: 50,
-        damage: 15,
-        attackSpeed: 1000,
-        critChance: 0,
-        critDamage: 0,
-        doubleDamageChance: 0,
-        isUnlocked: true,
-        skills: {},
-      }),
-    };
+  set dataVersion(value: string) {
+    this._dataVersion = value;
+  }
 
-    const decks = {
-      [DEFAULT_DECK_NAME]: new Deck({
-        name: DEFAULT_DECK_NAME,
-        index: 0,
-        characters: { [CHARACTER_TYPE_BARBARIAN]: { characterType: CHARACTER_TYPE_BARBARIAN, index: 0 } },
-      }),
-    };
+  get language(): string {
+    return this._language;
+  }
 
-    return {
-      dataVersion,
-      language,
-      totalDecks,
-      activeDeckName,
-      characters,
-      decks,
-    };
+  set language(value: string) {
+    this._language = value;
+  }
+
+  get characters(): { [key in ReturnType<typeof getAllCharacterTypes>[number]]: Character } {
+    return this._characters;
+  }
+
+  set characters(value: { [key in ReturnType<typeof getAllCharacterTypes>[number]]: Character }) {
+    if (Object.keys(value).length > 0) {
+      const newCharacters = {};
+      Object.entries(value).forEach(([characterType, characterData]) => {
+        newCharacters[characterType] = new Character(characterData);
+      });
+      this._characters = newCharacters;
+    } else {
+      this._characters = defaultCharacterData;
+    }
+  }
+
+  get totalDecks(): number {
+    return this._totalDecks;
+  }
+
+  set totalDecks(value: number) {
+    this._totalDecks = value;
+  }
+
+  get activeDeckName(): string {
+    return this._activeDeckName;
+  }
+
+  set activeDeckName(value: string) {
+    this._activeDeckName = value;
+  }
+
+  get decks(): { [key: string]: Deck } {
+    return this._decks;
+  }
+
+  set decks(value: { [key: string]: Deck }) {
+    if (Object.keys(value).length > 0) {
+      const newDecks = {};
+      Object.entries(value).forEach(([deckName, deckData]) => {
+        newDecks[deckName] = new Deck(deckData);
+      });
+      this._decks = newDecks;
+    } else {
+      this._decks = {
+        [Deck.DEFAULT_DECK_NAME]: defaultDeckData,
+      };
+    }
+  }
+
+  get currencies(): { [key: string]: Currency } {
+    return this._currencies;
+  }
+
+  set currencies(value: { [key: string]: Currency }) {
+    if (Object.keys(value).length > 0) {
+      const newCharacters = {};
+      Object.entries(value).forEach(([characterType, characterData]) => {
+        newCharacters[characterType] = new Currency(characterData);
+      });
+      this._currencies = newCharacters;
+    } else {
+      this._currencies = defaultCurrencyData;
+    }
+  }
+
+  get id(): number {
+    return this._id;
+  }
+
+  set id(value: number) {
+    this._id = value;
+  }
+
+  get currentLevel(): number {
+    return this._currentLevel;
+  }
+
+  set currentLevel(value: number) {
+    this._currentLevel = value;
+  }
+
+  get highestLevel(): number {
+    return this._highestLevel;
+  }
+
+  set highestLevel(value: number) {
+    this._highestLevel = value;
+  }
+
+  get premium(): string {
+    return this._premium;
+  }
+
+  set premium(value: string) {
+    this._premium = value;
+  }
+
+  get totalExperience(): number {
+    return this._totalExperience;
+  }
+
+  set totalExperience(value: number) {
+    this._totalExperience = value;
+  }
+
+  get totalGold(): number {
+    return this._totalGold;
+  }
+
+  set totalGold(value: number) {
+    this._totalGold = value;
   }
 }
 

@@ -1,5 +1,5 @@
-import { CURRENCY_GOLD } from '../helpers/constants/gameVariables';
 import { getAllEnemyStats, getAllEnemyTypes } from '../helpers/gameFunctions';
+import Currency from '../models/Currency';
 import Enemy from '../models/Enemy';
 import useStore from './useStore';
 
@@ -22,9 +22,6 @@ const useEnemyMethods = () => {
     getCurrentEnemyName() {
       return fightState.enemy.name;
     },
-    getLevel() {
-      return fightState.enemy.level;
-    },
     reset() {
       fightState.enemy = null;
     },
@@ -38,14 +35,14 @@ const useEnemyMethods = () => {
 
     getEnemyByKey(key) {
       const stats = getAllEnemyStats()[key];
-      return new Enemy({ ...stats, level: 1 });
+      return new Enemy({ ...stats });
     },
     getCurrentHealth() {
       return fightState.enemyCurrentHealth;
     },
     getTotalHealth() {
       let health = fightState.enemy.health;
-      health += Math.ceil((health * fightState.enemy.level) / 100);
+      health += Math.ceil((health * fightState.enemyLevel) / 100);
       return health;
     },
     getCurrentMana() {
@@ -60,7 +57,7 @@ const useEnemyMethods = () => {
     },
     getTotalDamage() {
       let damage = fightState.enemy.damage;
-      damage += Math.ceil((damage * fightState.enemy.level) / 100);
+      damage += Math.ceil((damage * fightState.enemyLevel) / 100);
       return damage;
     },
     takeDamage(damage) {
@@ -72,8 +69,7 @@ const useEnemyMethods = () => {
     },
     die() {
       fightState.enemyCurrentHealth = null;
-      data.currencies[CURRENCY_GOLD].value += 1;
-      fightState.enemy.level++;
+      data.currencies[Currency.CURRENCY_GOLD].value += 1;
       fightState.enemy = null;
     },
   };

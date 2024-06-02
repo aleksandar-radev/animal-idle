@@ -1,31 +1,36 @@
-import {
-  SKILLS_ATTACK,
-  DAMAGE_FLAT,
-  DAMAGE_PERCENT,
-  CRIT_CHANCE,
-  CRIT_DAMAGE,
-  DOUBLE_DAMAGE_CHANCE,
-  SKILLS_DEFENSE,
-  SKILLS_UTILITY,
-} from '../helpers/constants/gameVariables';
-import { getRandomNumber } from '../helpers/functions';
-import { getAllSkillTypes } from '../helpers/gameFunctions';
 import Skill from './Skill';
 
 class Character {
-  name: string;
-  type: string;
-  level: number;
-  experience: number;
-  health: number;
-  mana: number;
-  damage: number;
-  attackSpeed: number;
-  critChance: number;
-  critDamage: number;
-  doubleDamageChance: number;
-  isUnlocked: boolean;
-  skills: { [key: string]: Skill };
+  private _name: string;
+  private _type: string;
+  private _level: number;
+  private _experience: number;
+  private _health: number;
+  private _mana: number;
+  private _damage: number;
+  private _attackSpeed: number;
+  private _critChance: number;
+  private _critDamage: number;
+  private _doubleDamageChance: number;
+  private _isUnlocked: boolean;
+  private _skills: { [key: string]: Skill };
+
+  static CHARACTER_TYPE_BARBARIAN = 'barbarian';
+  static CHARACTER_TYPE_SORCERESS = 'sorceress';
+  static CHARACTER_TYPE_DRUID = 'druid';
+
+  static CHARACTER_DISPLAY_PROPS = [
+    'name',
+    'level',
+    'experience',
+    'health',
+    'mana',
+    'damage',
+    'attackSpeed',
+    'critChance',
+    'critDamage',
+    'doubleDamageChance',
+  ];
 
   constructor({
     name,
@@ -55,117 +60,115 @@ class Character {
     this.doubleDamageChance = doubleDamageChance;
     this.isUnlocked = isUnlocked;
     this.skills = skills;
-    // this.skills = {
-    // let def = characterStats[characterType]; // default values for the current character
-
-    // this.persistentData = store.data.characters[def.type];
-
-    this.skills = {
-      [DAMAGE_FLAT]: new Skill({
-        name: DAMAGE_FLAT,
-        type: SKILLS_ATTACK,
-        index: 0,
-        level: 1,
-        passive: true,
-      }),
-    };
   }
 
-  // getPassiveSkillsByType(type) {
-  //   return Object.values(this.skills[type])
-  //     .filter((skill) => {
-  //       return skill.isPassive();
-  //     })
-  //     .sort((a, b) => a > b);
-  // }
-
-  getAllStats() {
-    return {
-      level: this.getLevel(),
-      health: this.getHealth(),
-      mana: this.getMana(),
-      damage: this.getBaseDamage(),
-      attackSpeed: this.getAttackSpeed(),
-      critChance: this.getCritChance(),
-      critDamage: this.getCritDamage(),
-      doubleDamageChance: this.getDoubleDamageChance(),
-    };
+  // Getters and Setters
+  get name(): string {
+    return this._name;
   }
 
-  getLevel() {
-    return this.level;
+  set name(value: string) {
+    this._name = value;
   }
 
-  getExperience() {
-    return this.experience;
+  get type(): string {
+    return this._type;
   }
 
-  getHealth() {
-    let health = this.health;
-    // TODO: add bonuses
-    return health;
+  set type(value: string) {
+    this._type = value;
   }
 
-  getMana() {
-    let mana = this.mana;
-    // TODO: add bonuses
-    return mana;
+  get level(): number {
+    return this._level;
   }
 
-  getBaseDamage() {
-    let damage = this.damage;
-
-    // add flat damage
-    damage += this.skills[DAMAGE_FLAT].getBonus();
-
-    // add percent damage
-    // damage *= 1 + this.skills[SKILLS_ATTACK][DAMAGE_PERCENT].getBonus() / 100;
-
-    return damage;
+  set level(value: number) {
+    this._level = value;
   }
 
-  getTotalDamage() {
-    let damage = this.getBaseDamage();
-    // CRIT
-    if (getRandomNumber(1, 100) < this.getCritChance()) {
-      damage *= 1 + this.getCritDamage() / 100;
-    }
-
-    // DOUBLE DAMAGE
-    if (getRandomNumber(1, 100) < this.getDoubleDamageChance()) {
-      damage *= 2;
-    }
-
-    return damage;
+  get experience(): number {
+    return this._experience;
   }
 
-  getAttackSpeed() {
-    return this.attackSpeed;
+  set experience(value: number) {
+    this._experience = value;
   }
 
-  getCritChance() {
-    let critChance = this.critChance;
-    const bonus = this.skills?.[SKILLS_ATTACK]?.[CRIT_CHANCE].getBonus();
-    if (bonus) {
-      critChance += bonus;
-    }
-    return critChance;
+  get health(): number {
+    return this._health;
   }
 
-  getDoubleDamageChance() {
-    // this.skills[SKILLS_ATTACK][DOUBLE_DAMAGE_CHANCE].getBonus();
-    return this.doubleDamageChance;
+  set health(value: number) {
+    this._health = value;
   }
 
-  getCritDamage() {
-    // this.skills[SKILLS_ATTACK][CRIT_DAMAGE].getBonus();
-    return this.critDamage;
+  get mana(): number {
+    return this._mana;
   }
 
-  getActiveSkills() {
-    return Object.values(this.skills).filter((skill) => {
-      return skill.isActive();
+  set mana(value: number) {
+    this._mana = value;
+  }
+
+  get damage(): number {
+    return this._damage;
+  }
+
+  set damage(value: number) {
+    this._damage = value;
+  }
+
+  get attackSpeed(): number {
+    return this._attackSpeed;
+  }
+
+  set attackSpeed(value: number) {
+    this._attackSpeed = value;
+  }
+
+  get critChance(): number {
+    return this._critChance;
+  }
+
+  set critChance(value: number) {
+    this._critChance = value;
+  }
+
+  get critDamage(): number {
+    return this._critDamage;
+  }
+
+  set critDamage(value: number) {
+    this._critDamage = value;
+  }
+
+  get doubleDamageChance(): number {
+    return this._doubleDamageChance;
+  }
+
+  set doubleDamageChance(value: number) {
+    this._doubleDamageChance = value;
+  }
+
+  get isUnlocked(): boolean {
+    return this._isUnlocked;
+  }
+
+  set isUnlocked(value: boolean) {
+    this._isUnlocked = value;
+  }
+
+  get skills(): { [key: string]: Skill } {
+    return this._skills;
+  }
+
+  set skills(value: { [key: string]: Skill }) {
+    const newSkills = {};
+    Object.entries(value).forEach(([skillName, skillData]) => {
+      newSkills[skillName] = new Skill(skillData);
     });
+    this._skills = newSkills;
   }
 }
 

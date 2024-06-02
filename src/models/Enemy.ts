@@ -1,25 +1,71 @@
-import { ENEMY_TYPE_BARBARIAN } from '../helpers/constants/gameVariables'; // Assuming the constant is defined here
-import { getAllEnemyStats } from '../helpers/gameFunctions';
-
 class Enemy {
-  name: string;
-  type: string;
-  health: number;
-  damage: number;
-  attackSpeed: number;
-  mana: number;
-  level: number;
+  private _name: string;
+  private _type: string;
+  private _health: number;
+  private _damage: number;
+  private _attackSpeed: number;
+  private _mana: number;
 
-  constructor({ level = 1, type = ENEMY_TYPE_BARBARIAN }) {
-    const stats = getAllEnemyStats()[type];
+  static ENEMY_TYPE_BARBARIAN = 'barbarian';
+  static ENEMY_TYPE_SORCERESS = 'sorceress';
+  static ENEMY_TYPE_ASSASSIN = 'assassin';
+  static ENEMY_TYPE_WARRIOR = 'warrior';
 
-    this.level = level;
-    this.name = stats.name;
-    this.type = stats.type;
-    this.health = stats.health;
-    this.damage = stats.damage;
-    this.attackSpeed = stats.attackSpeed;
-    this.mana = stats.mana;
+  constructor({ name, type, health, damage, attackSpeed, mana }) {
+    this.name = name;
+    this.type = type;
+    this.health = health;
+    this.damage = damage;
+    this.attackSpeed = attackSpeed;
+    this.mana = mana;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  set name(value: string) {
+    this._name = value;
+  }
+
+  get type(): string {
+    return this._type;
+  }
+
+  set type(value: string) {
+    this._type = value;
+  }
+
+  get health(): number {
+    return this._health;
+  }
+
+  set health(value: number) {
+    this._health = value;
+  }
+
+  get damage(): number {
+    return this._damage;
+  }
+
+  set damage(value: number) {
+    this._damage = value;
+  }
+
+  get attackSpeed(): number {
+    return this._attackSpeed;
+  }
+
+  set attackSpeed(value: number) {
+    this._attackSpeed = value;
+  }
+
+  get mana(): number {
+    return this._mana;
+  }
+
+  set mana(value: number) {
+    this._mana = value;
   }
 }
 

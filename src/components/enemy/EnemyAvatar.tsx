@@ -3,17 +3,17 @@ import useStore from '../../hooks/useStore';
 import useEnemyMethods from '../../hooks/useEnemyMethods';
 
 const EnemyAvatar = ({ className }) => {
-  const { assets } = useStore();
-  const enemy = useEnemyMethods();
+  const { assets, fightState } = useStore();
+  const em = useEnemyMethods();
   return (
     <>
-      {enemy.getCurrentEnemy() && (
+      {em.getCurrentEnemy() && (
         <div className={`${className} EnemyAvatar`}>
           <p className={`EnemyAvatar-text`}>
-            {enemy.getCurrentEnemyName()} Lvl: {enemy.getLevel() || 0}
+            {em.getCurrentEnemyName()} Lvl: {fightState.enemyLevel}
           </p>
           <div className={`EnemyAvatar-image`}>
-            <img src={assets[enemy.getCurrentEnemyName()]} />
+            <img src={assets[em.getCurrentEnemyName()]} />
           </div>
         </div>
       )}

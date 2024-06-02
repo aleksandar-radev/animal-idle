@@ -1,12 +1,14 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import './CharacterSkills.scss';
 import useStore from '../../hooks/useStore';
 import CharacterSkill from './CharacterSkill';
-import { SKILLS_ATTACK, SKILLS_DEFENSE, SKILLS_UTILITY } from '../../helpers/constants/gameVariables';
 import useTranslations from '../../hooks/useTranslations';
+import useCharacterMethods from '../../hooks/useCharacterMethods';
+import Skill from '../../models/Skill';
 
 const CharacterSkills = () => {
-  const { store } = useStore();
+  const { data } = useStore();
+  const cm = useCharacterMethods();
   const t = useTranslations();
   const possibleMultipliers = [1]; // TODO: add more values
   // const possibleMultipliers = [0, 1, 10, 50, 200];
@@ -14,14 +16,21 @@ const CharacterSkills = () => {
   const [defenseMultiplier, setDefenseMultiplier] = useState(1);
   const [utilityMultiplier, setUtilityMultiplier] = useState(1);
 
-  const activeCharacter = store.characters.getActiveCharacter();
-  const attackSkills = activeCharacter.getPassiveSkillsByType(SKILLS_ATTACK);
-  const defenseSkills = activeCharacter.getPassiveSkillsByType(SKILLS_DEFENSE);
-  const utilitySkills = activeCharacter.getPassiveSkillsByType(SKILLS_UTILITY);
+  const activeCharacter = cm.getActiveCharacter();
+
+  const getSkillsByType = (type: string) => {
+    return Object.values(activeCharacter.skills)
+      .filter((skill) => skill.type === type)
+      .sort((a, b) => a.index - b.index);
+  };
+
+  const attackSkills = useMemo(() => getSkillsByType(Skill.SKILL_TYPE_ATTACK), [activeCharacter.skills]);
+  const defenseSkills = useMemo(() => getSkillsByType(Skill.SKILL_TYPE_DEFENSE), [activeCharacter.skills]);
+  const utilitySkills = useMemo(() => getSkillsByType(Skill.SKILL_TYPE_UTILITY), [activeCharacter.skills]);
 
   const groupSkillsByLevelRequired = (skills) => {
     return skills.reduce((acc, skill) => {
-      const levelRequired = skill.getLevelRequired();
+      const levelRequired = 0;
       if (!acc[levelRequired]) {
         acc[levelRequired] = [];
       }
@@ -44,7 +53,7 @@ const CharacterSkills = () => {
       return (
         <div className="group" key={level}>
           {skills.map((skill) => (
-            <CharacterSkill className="skill" key={skill.getName()} skill={skill} x={attackMultiplier} />
+            <CharacterSkill className="skill" key={skill.name} skill={skill} x={attackMultiplier} />
           ))}
         </div>
       );
@@ -65,15 +74,15 @@ const CharacterSkills = () => {
   return (
     <div className="CharacterSkills">
       <div className="attack section">
-        {renderTitle(SKILLS_ATTACK, attackMultiplier, setAttackMultiplier)}
+        {renderTitle(Skill.SKILL_TYPE_ATTACK, attackMultiplier, setAttackMultiplier)}
         {renderSkillGroups(groupedAttackSkills)}
       </div>
       <div className="defense section">
-        {renderTitle(SKILLS_DEFENSE, defenseMultiplier, setDefenseMultiplier)}
+        {renderTitle(Skill.SKILL_TYPE_DEFENSE, defenseMultiplier, setDefenseMultiplier)}
         {renderSkillGroups(groupedDefenseSkills)}
       </div>
       <div className="utility section">
-        {renderTitle(SKILLS_UTILITY, utilityMultiplier, setUtilityMultiplier)}
+        {renderTitle(Skill.SKILL_TYPE_UTILITY, utilityMultiplier, setUtilityMultiplier)}
         {renderSkillGroups(groupedUtilitySkills)}
       </div>
     </div>

@@ -1,51 +1,15 @@
-import {
-  ENEMY_TYPE_BARBARIAN,
-  ENEMY_TYPE_SORCERESS,
-  ENEMY_TYPE_ASSASSIN,
-  ENEMY_TYPE_WARRIOR,
-  CHARACTER_TYPE_BARBARIAN,
-  CHARACTER_TYPE_SORCERESS,
-  CHARACTER_TYPE_DRUID,
-  SKILLS_ATTACK,
-  SKILLS_DEFENSE,
-  SKILLS_UTILITY,
-  ATTACK_SPEED,
-  BONUS_DEFENSE,
-  BONUS_GOLD,
-  BONUS_HEALTH,
-  CRIT_CHANCE,
-  CRIT_DAMAGE,
-  CURRENCY_GOLD,
-  DAMAGE_FLAT,
-  DAMAGE_PERCENT,
-  DOUBLE_DAMAGE_CHANCE,
-} from './constants/gameVariables';
-
 import crypt from './externalLibraries/encrypt';
-// @ts-ignore
 import swordIcon from '../assets/sword.png';
-// @ts-ignore
 import berserkerAvatar from '../assets/berserker-avatar.jpg';
-// @ts-ignore
 import sorceressAvatar from '../assets/sorceress-avatar.jpg';
-// @ts-ignore
 import assassinAvatar from '../assets/assassin-avatar.jpg';
-// @ts-ignore
 import warriorAvatar from '../assets/warrior-avatar.jpg';
-// @ts-ignore
-import attackSkill from '../assets/attack-skill.png';
-// @ts-ignore
-import healSkill from '../assets/heal-skill.png';
-
-import {
-  ASSASSIN_AVATAR,
-  BARBARIAN_AVATAR,
-  SORCERESS_AVATAR,
-  WARRIOR_AVATAR,
-  ATTACK_SKILL_IMG,
-  HEAL_SKILL_IMG,
-} from './constants/gameVariables';
 import { toDataURL } from '../helpers/functions';
+import Deck from '../models/Deck';
+import Character from '../models/Character';
+import Enemy from '../models/Enemy';
+import Currency from '../models/Currency';
+import Skill from '../models/Skill';
 
 const USE_BASE64 = false;
 
@@ -57,34 +21,28 @@ export function loadAssets(assets) {
       };
 
   converter(berserkerAvatar, (url) => {
-    assets[BARBARIAN_AVATAR] = url;
+    assets[Character.CHARACTER_TYPE_BARBARIAN] = url;
   });
   converter(sorceressAvatar, (url) => {
-    assets[SORCERESS_AVATAR] = url;
+    assets[Character.CHARACTER_TYPE_SORCERESS] = url;
   });
   converter(assassinAvatar, (url) => {
-    assets[ASSASSIN_AVATAR] = url;
+    assets[Enemy.ENEMY_TYPE_ASSASSIN] = url;
   });
   converter(warriorAvatar, (url) => {
-    assets[WARRIOR_AVATAR] = url;
-  });
-  converter(attackSkill, (url) => {
-    assets[ATTACK_SKILL_IMG] = url;
-  });
-  converter(healSkill, (url) => {
-    assets[HEAL_SKILL_IMG] = url;
+    assets[Enemy.ENEMY_TYPE_WARRIOR] = url;
   });
 }
 
 export const getEnemyAvatarImage = (enemyName) => {
   switch (enemyName) {
-    case ENEMY_TYPE_BARBARIAN:
+    case Enemy.ENEMY_TYPE_BARBARIAN:
       return berserkerAvatar;
-    case ENEMY_TYPE_SORCERESS:
+    case Enemy.ENEMY_TYPE_SORCERESS:
       return sorceressAvatar;
-    case ENEMY_TYPE_ASSASSIN:
+    case Enemy.ENEMY_TYPE_ASSASSIN:
       return assassinAvatar;
-    case ENEMY_TYPE_WARRIOR:
+    case Enemy.ENEMY_TYPE_WARRIOR:
       return warriorAvatar;
   }
 };
@@ -93,9 +51,22 @@ interface EncryptedData {
   data_json: string;
 }
 
+function stripUnderscores(obj: any): any {
+  if (Array.isArray(obj)) {
+    return obj.map(stripUnderscores);
+  } else if (obj !== null && typeof obj === 'object') {
+    return Object.keys(obj).reduce((acc, key) => {
+      const newKey = key.startsWith('_') ? key.slice(1) : key;
+      acc[newKey] = stripUnderscores(obj[key]);
+      return acc;
+    }, {} as any);
+  }
+  return obj;
+}
+
 //@ts-ignore TODO: fix
 export const prepareDataForApi = (data: Data): EncryptedData => {
-  let newData = { ...data };
+  let newData = stripUnderscores({ ...data });
   delete newData.data_json;
 
   const encryptedData = crypt.encrypt(JSON.stringify(newData));
@@ -103,15 +74,24 @@ export const prepareDataForApi = (data: Data): EncryptedData => {
 };
 
 export const getAllCharacterTypes = (): string[] => {
-  return [CHARACTER_TYPE_BARBARIAN, CHARACTER_TYPE_SORCERESS, CHARACTER_TYPE_DRUID] as const;
+  return [
+    Character.CHARACTER_TYPE_BARBARIAN,
+    Character.CHARACTER_TYPE_SORCERESS,
+    Character.CHARACTER_TYPE_DRUID,
+  ] as const;
 };
 
 export const getAllEnemyTypes = (): string[] => {
-  return [ENEMY_TYPE_BARBARIAN, ENEMY_TYPE_SORCERESS, ENEMY_TYPE_ASSASSIN, ENEMY_TYPE_WARRIOR] as const;
+  return [
+    Enemy.ENEMY_TYPE_BARBARIAN,
+    Enemy.ENEMY_TYPE_SORCERESS,
+    Enemy.ENEMY_TYPE_ASSASSIN,
+    Enemy.ENEMY_TYPE_WARRIOR,
+  ] as const;
 };
 
 export const getAllSkillTypes = (): string[] => {
-  return [SKILLS_ATTACK, SKILLS_DEFENSE, SKILLS_UTILITY] as const;
+  return [Skill.SKILL_TYPE_ATTACK, Skill.SKILL_TYPE_DEFENSE, Skill.SKILL_TYPE_UTILITY] as const;
 };
 
 /**
@@ -121,25 +101,25 @@ export const getAllSkillTypes = (): string[] => {
  */
 export const getCharacterStats = () => {
   return {
-    [CHARACTER_TYPE_BARBARIAN]: {
+    [Character.CHARACTER_TYPE_BARBARIAN]: {
       name: 'Barbarian',
-      type: CHARACTER_TYPE_BARBARIAN,
+      type: Character.CHARACTER_TYPE_BARBARIAN,
       health: 200,
       damage: 7,
       attackSpeed: 1000,
       mana: 0,
     },
-    [CHARACTER_TYPE_SORCERESS]: {
+    [Character.CHARACTER_TYPE_SORCERESS]: {
       name: 'Sorceress',
-      type: CHARACTER_TYPE_SORCERESS,
+      type: Character.CHARACTER_TYPE_SORCERESS,
       health: 75,
       damage: 11,
       attackSpeed: 1000,
       mana: 100,
     },
-    [CHARACTER_TYPE_DRUID]: {
+    [Character.CHARACTER_TYPE_DRUID]: {
       name: 'Druid',
-      type: CHARACTER_TYPE_DRUID,
+      type: Character.CHARACTER_TYPE_DRUID,
       health: 150,
       damage: 8,
       attackSpeed: 1000,
@@ -150,33 +130,33 @@ export const getCharacterStats = () => {
 
 export const getAllEnemyStats = () => {
   return {
-    [ENEMY_TYPE_BARBARIAN]: {
-      name: ENEMY_TYPE_BARBARIAN,
-      type: ENEMY_TYPE_BARBARIAN,
+    [Enemy.ENEMY_TYPE_BARBARIAN]: {
+      name: Enemy.ENEMY_TYPE_BARBARIAN,
+      type: Enemy.ENEMY_TYPE_BARBARIAN,
       health: 100,
       mana: 0,
       damage: 5,
       attackSpeed: 3000,
     },
-    [ENEMY_TYPE_SORCERESS]: {
-      name: ENEMY_TYPE_SORCERESS,
-      type: ENEMY_TYPE_SORCERESS,
+    [Enemy.ENEMY_TYPE_SORCERESS]: {
+      name: Enemy.ENEMY_TYPE_SORCERESS,
+      type: Enemy.ENEMY_TYPE_SORCERESS,
       health: 60,
       mana: 10,
       damage: 20,
       attackSpeed: 4000,
     },
-    [ENEMY_TYPE_ASSASSIN]: {
-      name: ENEMY_TYPE_ASSASSIN,
-      type: ENEMY_TYPE_ASSASSIN,
+    [Enemy.ENEMY_TYPE_ASSASSIN]: {
+      name: Enemy.ENEMY_TYPE_ASSASSIN,
+      type: Enemy.ENEMY_TYPE_ASSASSIN,
       health: 80,
       mana: 0,
       damage: 10,
       attackSpeed: 2000,
     },
-    [ENEMY_TYPE_WARRIOR]: {
-      name: ENEMY_TYPE_WARRIOR,
-      type: ENEMY_TYPE_WARRIOR,
+    [Enemy.ENEMY_TYPE_WARRIOR]: {
+      name: Enemy.ENEMY_TYPE_WARRIOR,
+      type: Enemy.ENEMY_TYPE_WARRIOR,
       health: 150,
       mana: 0,
       damage: 5,
@@ -185,29 +165,10 @@ export const getAllEnemyStats = () => {
   };
 };
 
-/**
- * SKILLS IMPLEMENTATION (EFFECT) IS DEFINED IN HOOKS!!!
- */
-function generateSkillDataForCharacter(baseSkillData, characterSpecificSkills = {}) {
-  return {
-    [SKILLS_ATTACK]: {
-      ...baseSkillData[SKILLS_ATTACK],
-      ...(characterSpecificSkills[SKILLS_ATTACK] || {}),
-    },
-    [SKILLS_DEFENSE]: {
-      ...baseSkillData[SKILLS_DEFENSE],
-      ...(characterSpecificSkills[SKILLS_DEFENSE] || {}),
-    },
-    [SKILLS_UTILITY]: {
-      ...baseSkillData[SKILLS_UTILITY],
-      ...(characterSpecificSkills[SKILLS_UTILITY] || {}),
-    },
-  };
-}
 // skill index used only for sorting (lower index appears first)
 const baseSkillData = {
-  [SKILLS_ATTACK]: {
-    [DAMAGE_FLAT]: {
+  [Skill.SKILL_TYPE_ATTACK]: {
+    [Skill.SKILL_DAMAGE_FLAT]: {
       index: 1,
       icon: swordIcon,
       manaCost: 22,
@@ -215,41 +176,41 @@ const baseSkillData = {
         level: 1,
       },
       cost: {
-        [CURRENCY_GOLD]: {
-          type: CURRENCY_GOLD,
+        [Currency.CURRENCY_GOLD]: {
+          type: Currency.CURRENCY_GOLD,
           multiplier: 1.5,
         },
       },
     },
-    [DAMAGE_PERCENT]: {
+    [Skill.SKILL_DAMAGE_PERCENT]: {
       index: 2,
       icon: swordIcon,
       requirements: {
         level: 10,
       },
     },
-    [CRIT_CHANCE]: {
+    [Skill.SKILL_CRIT_CHANCE]: {
       index: 3,
       icon: swordIcon,
       requirements: {
         level: 1,
       },
     },
-    [CRIT_DAMAGE]: {
+    [Skill.SKILL_CRIT_DAMAGE]: {
       index: 4,
       icon: swordIcon,
       requirements: {
         level: 10,
       },
     },
-    [ATTACK_SPEED]: {
+    [Skill.SKILL_ATTACK_SPEED]: {
       index: 5,
       icon: swordIcon,
       requirements: {
         level: 1,
       },
     },
-    [DOUBLE_DAMAGE_CHANCE]: {
+    [Skill.SKILL_DOUBLE_DAMAGE_CHANCE]: {
       index: 6,
       icon: swordIcon,
       requirements: {
@@ -257,22 +218,22 @@ const baseSkillData = {
       },
     },
   },
-  [SKILLS_DEFENSE]: {
-    [BONUS_DEFENSE]: {
+  [Skill.SKILL_TYPE_DEFENSE]: {
+    [Skill.SKILL_BONUS_DEFENSE]: {
       index: 1,
       requirements: {
         level: 1,
       },
     },
-    [BONUS_HEALTH]: {
+    [Skill.SKILL_BONUS_HEALTH]: {
       index: 2,
       requirements: {
         level: 1,
       },
     },
   },
-  [SKILLS_UTILITY]: {
-    [BONUS_GOLD]: {
+  [Skill.SKILL_TYPE_UTILITY]: {
+    [Skill.SKILL_BONUS_GOLD]: {
       index: 1,
       requirements: {
         level: 1,
@@ -281,23 +242,39 @@ const baseSkillData = {
   },
 };
 
-export const skillData = {
-  [CHARACTER_TYPE_BARBARIAN]: generateSkillDataForCharacter(baseSkillData, {
-    // Define character-specific skills
-    [SKILLS_ATTACK]: {},
-    [SKILLS_DEFENSE]: {},
-    [SKILLS_UTILITY]: {},
+export const defaultDeckData = new Deck({
+  name: Deck.DEFAULT_DECK_NAME,
+  index: 0,
+  characters: { [Character.CHARACTER_TYPE_BARBARIAN]: { characterType: Character.CHARACTER_TYPE_BARBARIAN, index: 0 } }, // remove default char
+});
+
+export const defaultCharacterData = {
+  [Character.CHARACTER_TYPE_BARBARIAN]: new Character({
+    name: 'Barbarian',
+    type: Character.CHARACTER_TYPE_BARBARIAN,
+    level: 1,
+    experience: 0,
+    health: 100,
+    mana: 50,
+    damage: 15,
+    attackSpeed: 1000,
+    critChance: 0,
+    critDamage: 0,
+    doubleDamageChance: 0,
+    isUnlocked: true,
+    skills: {},
   }),
-  [CHARACTER_TYPE_SORCERESS]: generateSkillDataForCharacter(baseSkillData, {
-    // Define character-specific skills
-    [SKILLS_ATTACK]: {},
-    [SKILLS_DEFENSE]: {},
-    [SKILLS_UTILITY]: {},
+};
+
+export const defaultCurrencyData = {
+  [Currency.CURRENCY_GOLD]: new Currency({
+    name: 'Gold',
+    index: 0,
+    value: 0,
   }),
-  [CHARACTER_TYPE_DRUID]: generateSkillDataForCharacter(baseSkillData, {
-    // Define character-specific skills
-    [SKILLS_ATTACK]: {},
-    [SKILLS_DEFENSE]: {},
-    [SKILLS_UTILITY]: {},
+  [Currency.CURRENCY_CRYSTAL]: new Currency({
+    name: 'Crystal',
+    index: 0,
+    value: 0,
   }),
 };

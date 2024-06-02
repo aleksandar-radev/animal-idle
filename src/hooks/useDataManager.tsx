@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react';
 import Data from '../models/Data';
 import Settings from '../models/Settings';
-import { loadAssets } from '../helpers/gameFunctions';
+// import { loadAssets } from '../helpers/gameFunctions';
 import useDataRepo from './useDataRepo';
 import useAuthRepo from './useAuthRepo';
 import useStore from './useStore';
 import FightState from '../models/FightState';
+import { loadAssets } from '../helpers/gameFunctions';
 
 const useDataManager = () => {
   const dataRepo = useDataRepo();
@@ -51,10 +52,11 @@ const useDataManager = () => {
       const user = await authRepo.getUser();
       if (!user) return;
 
-      let data = await dataRepo.getDataByUserId(user.id);
-      let formattedData = { ...data.data_json };
+      let userData = await dataRepo.getDataByUserId(user.id);
+      let formattedData = { ...userData.data_json };
+
       setData(new Proxy(new Data(formattedData), handler()));
-      setSettings(new Proxy(new Settings({}), handler()));
+      setSettings(new Proxy(new Settings(), handler()));
       setfightState(new Proxy(new FightState({}), handler()));
       setIsLoaded(true);
     })();

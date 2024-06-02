@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import saveButton from '../assets/save-button.png';
-import { CURRENCY_GOLD } from '../helpers/constants/gameVariables';
 import './CurrenciesBar.scss';
 import useStore from '../hooks/useStore';
 import useDataRepo from '../hooks/useDataRepo';
 import useAuthRepo from '../hooks/useAuthRepo';
+import Currency from '../models/Currency';
 
 const CurrenciesBar = () => {
   const { data } = useStore();
@@ -24,7 +24,7 @@ const CurrenciesBar = () => {
   };
 
   const getGold = () => {
-    return data.currencies[CURRENCY_GOLD].value;
+    return data.currencies[Currency.CURRENCY_GOLD].value;
   };
 
   return (

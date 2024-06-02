@@ -1,24 +1,30 @@
-class Currency {
+class Requirement {
   private _name: string;
+  private _type: string;
   private _index: number;
   private _value: number;
 
-  static CURRENCY_GOLD = 'gold';
-  static CURRENCY_CRYSTAL = 'crystal';
-
-  constructor({ name = '', index = -1, value = 0 }) {
+  constructor({ name = '', type, index = -1, value = 0 }) {
     this.name = name;
+    this.type = type;
     this.index = index;
     this.value = value;
   }
 
-  // Getters and Setters
   get name(): string {
     return this._name;
   }
 
   set name(value: string) {
     this._name = value;
+  }
+
+  get type(): string {
+    return this._type;
+  }
+
+  set type(value: string) {
+    this._type = value;
   }
 
   get index(): number {
@@ -38,4 +44,4 @@ class Currency {
   }
 }
 
-export default Currency;
+export default Requirement;

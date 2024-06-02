@@ -7,9 +7,7 @@ import useCharacterMethods from '../../hooks/useCharacterMethods';
 
 const CharactersList = () => {
   const { data, settings } = useStore();
-  const { getCharactersInActiveDeck } = useCharacterMethods();
-
-  let characters = data.characters;
+  const cm = useCharacterMethods();
   const [draggedItem, setDraggedItem] = useState(null);
   const isDraggable = useMemo(() => settings.areCharactersDraggable, []);
 
@@ -22,12 +20,7 @@ const CharactersList = () => {
   };
 
   const setActiveCharacter = (character) => {
-    settings.setActiveCharacter(character);
-  };
-
-  const getCharacterById = (id) => {
-    const mappedCharacter = data.characters.map[id];
-    return characters[mappedCharacter];
+    settings.activeCharacter = character;
   };
 
   const handleDragStart = (e, item) => {
@@ -65,7 +58,7 @@ const CharactersList = () => {
         </div>
       )}
       {!getActiveCharacter() &&
-        Array.from(getCharactersInActiveDeck().values()).map((character) => {
+        Array.from(cm.getCharactersInActiveDeck().values()).map((character) => {
           return (
             <div
               key={character.type}

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import './CharacterSkill.scss';
 import { Popper } from '@mui/material';
-import useCharacterMethods from '../../hooks/useCharacterMethods';
 import useTranslations from '../../hooks/useTranslations';
 
 const CharacterSkill = ({ className, skill, x }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const charSkills = useCharacterMethods();
   const t = useTranslations();
   const open = Boolean(anchorEl);
   const id = open ? 'skill-popper' : undefined;
@@ -29,15 +27,15 @@ const CharacterSkill = ({ className, skill, x }) => {
       onMouseLeave={handleMouseLeave}
       onClick={buySkill}
       className={['CharacterSkill', className].join(' ')}>
-      <img src={skill.getImgUrl()} alt={skill.getName()} />
+      <img src={skill.icon} alt={skill.name} />
       <Popper id={id} open={open} anchorEl={anchorEl} placement="top" className="CharacterSkill-tooltip">
         <div className="tooltip">
           <div>
-            {t['level']}: {skill.getLevel()} {' -> '} {skill.getLevel() + x}
+            {t['level']}: {skill.level} {' -> '} {skill.level + x}
           </div>
           <div>
             Cost:{' '}
-            {Object.entries(skill.getCost(x)).map(([currency, value]) => {
+            {Object.entries(skill.cost).map(([currency, value]) => {
               return (
                 <div key={currency}>
                   {currency} {value}
@@ -45,8 +43,8 @@ const CharacterSkill = ({ className, skill, x }) => {
               );
             })}
           </div>
-          <div>{skill.isPassive() ? 'passive' : 'active'}</div>
-          <div>{skill.getName()}</div>
+          <div>{skill.passive ? 'passive' : 'active'}</div>
+          <div>{skill.name}</div>
         </div>
       </Popper>
     </div>

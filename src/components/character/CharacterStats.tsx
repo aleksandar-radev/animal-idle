@@ -1,12 +1,11 @@
 import './CharacterStats.scss';
 import useTranslations from '../../hooks/useTranslations';
-import useStore from '../../hooks/useStore';
 import useCharacterMethods from '../../hooks/useCharacterMethods';
 
 const CharacterStats = () => {
-  const { store } = useStore();
-  const { getActiveCharacter } = useCharacterMethods();
-  const stats = getActiveCharacter().getAllStats();
+  const cm = useCharacterMethods();
+  const stats = cm.getAllStatsOfActiveCharacter();
+  console.log(stats);
 
   const t = useTranslations();
 

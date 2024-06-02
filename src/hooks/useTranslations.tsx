@@ -1,4 +1,4 @@
-import { translations } from '../helpers/constants/translations';
+import { translations } from '../helpers/translations/translations';
 import useStore from './useStore';
 
 const useTranslations = () => {

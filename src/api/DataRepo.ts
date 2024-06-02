@@ -12,8 +12,8 @@ export class DataRepo {
 
       return data.map((d) => {
         return {
-          user: { email: d.users.user_email, id: d.users.user_id },
-          data: crypt.decrypt(d.data),
+          user: { email: d.user.email, id: d.user.id },
+          data: d.data_json,
         };
       });
     } catch (error) {
@@ -34,17 +34,6 @@ export class DataRepo {
       if (!data) return;
 
       return data;
-    } catch (error) {
-      throw new Error(error.response.data.message);
-    }
-  }
-
-  async insertDataById(id, newData) {
-    try {
-      let encryptedData = prepareDataForApi(newData);
-      const response = await api.post(`/user-data/${id}`, encryptedData);
-
-      return response.data;
     } catch (error) {
       throw new Error(error.response.data.message);
     }
