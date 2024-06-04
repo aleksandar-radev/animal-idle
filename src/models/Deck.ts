@@ -5,7 +5,7 @@ class Deck {
 
   static DEFAULT_DECK_NAME = 'default';
 
-  constructor({ name = '', index = -1, characters = {} }) {
+  constructor({ name = '', index = 0, characters = {} }) {
     this.name = name;
     this.index = index;
     this.characters = characters;

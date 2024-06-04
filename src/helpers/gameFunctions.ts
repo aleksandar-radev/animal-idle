@@ -10,6 +10,8 @@ import Character from '../models/Character';
 import Enemy from '../models/Enemy';
 import Currency from '../models/Currency';
 import Skill from '../models/Skill';
+import Data from '../models/Data';
+import Requirement from '../models/Requirement';
 
 const USE_BASE64 = false;
 
@@ -34,23 +36,6 @@ export function loadAssets(assets) {
   });
 }
 
-export const getEnemyAvatarImage = (enemyName) => {
-  switch (enemyName) {
-    case Enemy.ENEMY_TYPE_BARBARIAN:
-      return berserkerAvatar;
-    case Enemy.ENEMY_TYPE_SORCERESS:
-      return sorceressAvatar;
-    case Enemy.ENEMY_TYPE_ASSASSIN:
-      return assassinAvatar;
-    case Enemy.ENEMY_TYPE_WARRIOR:
-      return warriorAvatar;
-  }
-};
-
-interface EncryptedData {
-  data_json: string;
-}
-
 function stripUnderscores(obj: any): any {
   if (Array.isArray(obj)) {
     return obj.map(stripUnderscores);
@@ -64,8 +49,7 @@ function stripUnderscores(obj: any): any {
   return obj;
 }
 
-//@ts-ignore TODO: fix
-export const prepareDataForApi = (data: Data): EncryptedData => {
+export const prepareDataForApi = (data: Data) => {
   let newData = stripUnderscores({ ...data });
   delete newData.data_json;
 
@@ -91,7 +75,17 @@ export const getAllEnemyTypes = (): string[] => {
 };
 
 export const getAllSkillTypes = (): string[] => {
-  return [Skill.SKILL_TYPE_ATTACK, Skill.SKILL_TYPE_DEFENSE, Skill.SKILL_TYPE_UTILITY] as const;
+  return [Skill.SKILL_CATEGORY_ATTACK, Skill.SKILL_CATEGORY_DEFENSE, Skill.SKILL_CATEGORY_UTILITY] as const;
+};
+
+export const getRequirementTypes = () => {
+  return [
+    Requirement.REQUIREMENT_TYPE_LEVEL,
+    Requirement.REQUIREMENT_TYPE_CURRENCY,
+    Requirement.REQUIREMENT_TYPE_SKILL,
+    Requirement.REQUIREMENT_TYPE_CHARACTER_UNLOCKED,
+    Requirement.REQUIREMENT_TYPE_UPGRADE,
+  ] as const;
 };
 
 /**
@@ -102,28 +96,34 @@ export const getAllSkillTypes = (): string[] => {
 export const getCharacterStats = () => {
   return {
     [Character.CHARACTER_TYPE_BARBARIAN]: {
-      name: 'Barbarian',
       type: Character.CHARACTER_TYPE_BARBARIAN,
       health: 200,
       damage: 7,
       attackSpeed: 1000,
-      mana: 0,
+      mana: 10,
+      critChance: 0,
+      critDamage: 0,
+      doubleDamageChance: 0,
     },
     [Character.CHARACTER_TYPE_SORCERESS]: {
-      name: 'Sorceress',
       type: Character.CHARACTER_TYPE_SORCERESS,
       health: 75,
       damage: 11,
       attackSpeed: 1000,
       mana: 100,
+      critChance: 0,
+      critDamage: 0,
+      doubleDamageChance: 0,
     },
     [Character.CHARACTER_TYPE_DRUID]: {
-      name: 'Druid',
       type: Character.CHARACTER_TYPE_DRUID,
       health: 150,
       damage: 8,
       attackSpeed: 1000,
       mana: 50,
+      critChance: 0,
+      critDamage: 0,
+      doubleDamageChance: 0,
     },
   };
 };
@@ -165,88 +165,225 @@ export const getAllEnemyStats = () => {
   };
 };
 
-// skill index used only for sorting (lower index appears first)
-const baseSkillData = {
-  [Skill.SKILL_TYPE_ATTACK]: {
-    [Skill.SKILL_DAMAGE_FLAT]: {
+export const getSkillStats = (): { [key: string]: Skill } => {
+  return {
+    [Skill.SKILL_TYPE_DAMAGE_FLAT]: {
+      name: 'Flat Damage',
+      type: Skill.SKILL_TYPE_DAMAGE_FLAT,
+      category: Skill.SKILL_CATEGORY_ATTACK,
       index: 1,
       icon: swordIcon,
-      manaCost: 22,
-      requirements: {
-        level: 1,
-      },
-      cost: {
-        [Currency.CURRENCY_GOLD]: {
-          type: Currency.CURRENCY_GOLD,
-          multiplier: 1.5,
-        },
-      },
-    },
-    [Skill.SKILL_DAMAGE_PERCENT]: {
-      index: 2,
-      icon: swordIcon,
-      requirements: {
-        level: 10,
-      },
-    },
-    [Skill.SKILL_CRIT_CHANCE]: {
-      index: 3,
-      icon: swordIcon,
-      requirements: {
-        level: 1,
-      },
-    },
-    [Skill.SKILL_CRIT_DAMAGE]: {
-      index: 4,
-      icon: swordIcon,
-      requirements: {
-        level: 10,
-      },
-    },
-    [Skill.SKILL_ATTACK_SPEED]: {
-      index: 5,
-      icon: swordIcon,
-      requirements: {
-        level: 1,
-      },
-    },
-    [Skill.SKILL_DOUBLE_DAMAGE_CHANCE]: {
-      index: 6,
-      icon: swordIcon,
-      requirements: {
-        level: 10,
-      },
-    },
-  },
-  [Skill.SKILL_TYPE_DEFENSE]: {
-    [Skill.SKILL_BONUS_DEFENSE]: {
+      passive: true,
+      requirements: [
+        new Requirement({
+          type: Requirement.REQUIREMENT_TYPE_LEVEL,
+          value: 1,
+        }),
+        new Requirement({
+          type: Requirement.REQUIREMENT_TYPE_CURRENCY,
+          innerType: Currency.CURRENCY_TYPE_GOLD,
+          value: 1,
+        }),
+      ],
+    } as Skill,
+    [Skill.SKILL_TYPE_RAGE]: {
+      name: 'Rage',
+      type: Skill.SKILL_TYPE_RAGE,
+      category: Skill.SKILL_CATEGORY_ATTACK,
       index: 1,
-      requirements: {
-        level: 1,
-      },
-    },
-    [Skill.SKILL_BONUS_HEALTH]: {
-      index: 2,
-      requirements: {
-        level: 1,
-      },
-    },
-  },
-  [Skill.SKILL_TYPE_UTILITY]: {
-    [Skill.SKILL_BONUS_GOLD]: {
-      index: 1,
-      requirements: {
-        level: 1,
-      },
-    },
-  },
+      icon: swordIcon,
+      passive: false,
+      requirements: [
+        new Requirement({
+          type: Requirement.REQUIREMENT_TYPE_LEVEL,
+          value: 1,
+        }),
+        new Requirement({
+          type: Requirement.REQUIREMENT_TYPE_CURRENCY,
+          innerType: Currency.CURRENCY_TYPE_GOLD,
+          value: 1,
+        }),
+        new Requirement({
+          type: Requirement.REQUIREMENT_TYPE_CHARACTER_TYPE,
+          innerType: Character.CHARACTER_TYPE_BARBARIAN,
+          value: 1,
+        }),
+      ],
+    } as Skill,
+  };
 };
 
-export const defaultDeckData = new Deck({
-  name: Deck.DEFAULT_DECK_NAME,
-  index: 0,
-  characters: { [Character.CHARACTER_TYPE_BARBARIAN]: { characterType: Character.CHARACTER_TYPE_BARBARIAN, index: 0 } }, // remove default char
-});
+// SKILLS
+// skill index used only for sorting (lower index appears first)
+// export const baseCharacterSkills = {
+//   [Skill.SKILL_TYPE_DAMAGE_FLAT]: new Skill({
+//     name: Skill.SKILL_TYPE_DAMAGE_FLAT,
+//     type: Skill.SKILL_CATEGORY_ATTACK,
+//     index: 1,
+//     icon: swordIcon,
+//     requirements: {
+//       level: 1,
+//     },
+//     cost: {
+//       [Currency.CURRENCY_TYPE_GOLD]: {
+//         type: Currency.CURRENCY_TYPE_GOLD,
+//         multiplier: 1.5,
+//       },
+//     },
+//   }),
+//   [Skill.SKILL_TYPE_DAMAGE_PERCENT]: new Skill({
+//     name: Skill.SKILL_TYPE_DAMAGE_PERCENT,
+//     type: Skill.SKILL_CATEGORY_ATTACK,
+//     index: 2,
+//     icon: swordIcon,
+//     requirements: {
+//       level: 1,
+//     },
+//     cost: {
+//       [Currency.CURRENCY_TYPE_GOLD]: {
+//         type: Currency.CURRENCY_TYPE_GOLD,
+//         multiplier: 1.5,
+//       },
+//     },
+//   }),
+//   [Skill.SKILL_TYPE_CRIT_CHANCE]: new Skill({
+//     name: Skill.SKILL_TYPE_CRIT_CHANCE,
+//     type: Skill.SKILL_CATEGORY_ATTACK,
+//     index: 3,
+//     icon: swordIcon,
+//     requirements: {
+//       level: 1,
+//     },
+//     cost: {
+//       [Currency.CURRENCY_TYPE_GOLD]: {
+//         type: Currency.CURRENCY_TYPE_GOLD,
+//         multiplier: 1.5,
+//       },
+//     },
+//   }),
+//   [Skill.SKILL_TYPE_CRIT_DAMAGE]: new Skill({
+//     name: Skill.SKILL_TYPE_CRIT_DAMAGE,
+//     type: Skill.SKILL_CATEGORY_ATTACK,
+//     index: 4,
+//     icon: swordIcon,
+//     requirements: {
+//       level: 1,
+//     },
+//     cost: {
+//       [Currency.CURRENCY_TYPE_GOLD]: {
+//         type: Currency.CURRENCY_TYPE_GOLD,
+//         multiplier: 1.5,
+//       },
+//     },
+//   }),
+//   [Skill.SKILL_TYPE_ATTACK_SPEED]: new Skill({
+//     name: Skill.SKILL_TYPE_ATTACK_SPEED,
+//     type: Skill.SKILL_CATEGORY_ATTACK,
+//     index: 5,
+//     icon: swordIcon,
+//     requirements: {
+//       level: 1,
+//     },
+//     cost: {
+//       [Currency.CURRENCY_TYPE_GOLD]: {
+//         type: Currency.CURRENCY_TYPE_GOLD,
+//         multiplier: 1.5,
+//       },
+//     },
+//   }),
+//   [Skill.SKILL_TYPE_DOUBLE_DAMAGE_CHANCE]: new Skill({
+//     name: Skill.SKILL_TYPE_DOUBLE_DAMAGE_CHANCE,
+//     type: Skill.SKILL_CATEGORY_ATTACK,
+//     index: 6,
+//     icon: swordIcon,
+//     requirements: {
+//       level: 1,
+//     },
+//     cost: {
+//       [Currency.CURRENCY_TYPE_GOLD]: {
+//         type: Currency.CURRENCY_TYPE_GOLD,
+//         multiplier: 1.5,
+//       },
+//     },
+//   }),
+//   [Skill.SKILL_BONUS_DEFENSE]: new Skill({
+//     name: Skill.SKILL_BONUS_DEFENSE,
+//     type: Skill.SKILL_CATEGORY_DEFENSE,
+//     index: 7,
+//     icon: swordIcon,
+//     requirements: {
+//       level: 1,
+//     },
+//     cost: {
+//       [Currency.CURRENCY_TYPE_GOLD]: {
+//         type: Currency.CURRENCY_TYPE_GOLD,
+//         multiplier: 1.5,
+//       },
+//     },
+//   }),
+//   [Skill.SKILL_TYPE_BONUS_HEALTH]: new Skill({
+//     name: Skill.SKILL_TYPE_BONUS_HEALTH,
+//     type: Skill.SKILL_CATEGORY_DEFENSE,
+//     index: 8,
+//     icon: swordIcon,
+//     requirements: {
+//       level: 1,
+//     },
+//     cost: {
+//       [Currency.CURRENCY_TYPE_GOLD]: {
+//         type: Currency.CURRENCY_TYPE_GOLD,
+//         multiplier: 1.5,
+//       },
+//     },
+//   }),
+//   [Skill.SKILL_TYPE_BONUS_GOLD]: new Skill({
+//     name: Skill.SKILL_TYPE_BONUS_GOLD,
+//     type: Skill.SKILL_CATEGORY_UTILITY,
+//     index: 9,
+//     icon: swordIcon,
+//     requirements: {
+//       level: 1,
+//     },
+//     cost: {
+//       [Currency.CURRENCY_TYPE_GOLD]: {
+//         type: Currency.CURRENCY_TYPE_GOLD,
+//         multiplier: 1.5,
+//       },
+//     },
+//   }),
+// };
+
+// export const baseCharacterSpecificSkills = {
+//   [Character.CHARACTER_TYPE_BARBARIAN]: {
+//     [Skill.SKILL_TYPE_RAGE]: new Skill({
+//       type: Skill.SKILL_TYPE_RAGE,
+//       category: Skill.SKILL_CATEGORY_ATTACK,
+//       index: 1,
+//       icon: swordIcon,
+//       passive: false,
+//       manaCost: 5,
+//       requirements: {
+//         level: 1,
+//       },
+//       cost: {
+//         [Currency.CURRENCY_TYPE_GOLD]: {
+//           type: Currency.CURRENCY_TYPE_GOLD,
+//         },
+//       },
+//     }),
+//   },
+// };
+
+// DEFAULTS
+export const defaultDeckData = {
+  [Deck.DEFAULT_DECK_NAME]: new Deck({
+    name: Deck.DEFAULT_DECK_NAME,
+    index: 0,
+    characters: {
+      [Character.CHARACTER_TYPE_BARBARIAN]: { characterType: Character.CHARACTER_TYPE_BARBARIAN, index: 0 },
+    }, // remove default char
+  }),
+};
 
 export const defaultCharacterData = {
   [Character.CHARACTER_TYPE_BARBARIAN]: new Character({
@@ -267,12 +404,12 @@ export const defaultCharacterData = {
 };
 
 export const defaultCurrencyData = {
-  [Currency.CURRENCY_GOLD]: new Currency({
+  [Currency.CURRENCY_TYPE_GOLD]: new Currency({
     name: 'Gold',
     index: 0,
     value: 0,
   }),
-  [Currency.CURRENCY_CRYSTAL]: new Currency({
+  [Currency.CURRENCY_TYPE_CRYSTAL]: new Currency({
     name: 'Crystal',
     index: 0,
     value: 0,

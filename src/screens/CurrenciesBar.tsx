@@ -24,7 +24,7 @@ const CurrenciesBar = () => {
   };
 
   const getGold = () => {
-    return data.currencies[Currency.CURRENCY_GOLD].value;
+    return data.currencies[Currency.CURRENCY_TYPE_GOLD].value;
   };
 
   return (

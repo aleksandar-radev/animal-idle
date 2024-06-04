@@ -1,13 +1,11 @@
 import { useMemo, useState } from 'react';
 import './CharacterSkills.scss';
-import useStore from '../../hooks/useStore';
 import CharacterSkill from './CharacterSkill';
 import useTranslations from '../../hooks/useTranslations';
 import useCharacterMethods from '../../hooks/useCharacterMethods';
 import Skill from '../../models/Skill';
 
 const CharacterSkills = () => {
-  const { data } = useStore();
   const cm = useCharacterMethods();
   const t = useTranslations();
   const possibleMultipliers = [1]; // TODO: add more values
@@ -17,18 +15,19 @@ const CharacterSkills = () => {
   const [utilityMultiplier, setUtilityMultiplier] = useState(1);
 
   const activeCharacter = cm.getActiveCharacter();
+  const characterSkills = cm.getAllSkillsForCharacter(activeCharacter.type);
 
-  const getSkillsByType = (type: string) => {
-    return Object.values(activeCharacter.skills)
-      .filter((skill) => skill.type === type)
+  const getSkillsByCategory = (category: string): Skill[] => {
+    return Object.values(characterSkills)
+      .filter((skill) => skill.category === category)
       .sort((a, b) => a.index - b.index);
   };
 
-  const attackSkills = useMemo(() => getSkillsByType(Skill.SKILL_TYPE_ATTACK), [activeCharacter.skills]);
-  const defenseSkills = useMemo(() => getSkillsByType(Skill.SKILL_TYPE_DEFENSE), [activeCharacter.skills]);
-  const utilitySkills = useMemo(() => getSkillsByType(Skill.SKILL_TYPE_UTILITY), [activeCharacter.skills]);
+  const characterAttackSkills = useMemo(() => getSkillsByCategory(Skill.SKILL_CATEGORY_ATTACK), [characterSkills]);
+  const characterDefenseSkills = useMemo(() => getSkillsByCategory(Skill.SKILL_CATEGORY_DEFENSE), [characterSkills]);
+  const characterUtilitySkills = useMemo(() => getSkillsByCategory(Skill.SKILL_CATEGORY_UTILITY), [characterSkills]);
 
-  const groupSkillsByLevelRequired = (skills) => {
+  const groupSkillsByLevelRequired = (skills: Skill[]): { [key: number]: Skill[] } => {
     return skills.reduce((acc, skill) => {
       const levelRequired = 0;
       if (!acc[levelRequired]) {
@@ -44,11 +43,17 @@ const CharacterSkills = () => {
     setter(possibleMultipliers[nextIndex]);
   };
 
-  const groupedAttackSkills = useMemo(() => groupSkillsByLevelRequired(attackSkills), [attackSkills]);
-  const groupedDefenseSkills = useMemo(() => groupSkillsByLevelRequired(defenseSkills), [defenseSkills]);
-  const groupedUtilitySkills = useMemo(() => groupSkillsByLevelRequired(utilitySkills), [utilitySkills]);
+  const groupedAttackSkills = useMemo(() => groupSkillsByLevelRequired(characterAttackSkills), [characterAttackSkills]);
+  const groupedDefenseSkills = useMemo(
+    () => groupSkillsByLevelRequired(characterDefenseSkills),
+    [characterDefenseSkills],
+  );
+  const groupedUtilitySkills = useMemo(
+    () => groupSkillsByLevelRequired(characterUtilitySkills),
+    [characterUtilitySkills],
+  );
 
-  const renderSkillGroups = (groupedSkills) => {
+  const renderSkillGroups = (groupedSkills: { [key: number]: Skill[] }) => {
     return Object.entries(groupedSkills).map(([level, skills]) => {
       return (
         <div className="group" key={level}>
@@ -74,15 +79,15 @@ const CharacterSkills = () => {
   return (
     <div className="CharacterSkills">
       <div className="attack section">
-        {renderTitle(Skill.SKILL_TYPE_ATTACK, attackMultiplier, setAttackMultiplier)}
+        {renderTitle(Skill.SKILL_CATEGORY_ATTACK, attackMultiplier, setAttackMultiplier)}
         {renderSkillGroups(groupedAttackSkills)}
       </div>
       <div className="defense section">
-        {renderTitle(Skill.SKILL_TYPE_DEFENSE, defenseMultiplier, setDefenseMultiplier)}
+        {renderTitle(Skill.SKILL_CATEGORY_DEFENSE, defenseMultiplier, setDefenseMultiplier)}
         {renderSkillGroups(groupedDefenseSkills)}
       </div>
       <div className="utility section">
-        {renderTitle(Skill.SKILL_TYPE_UTILITY, utilityMultiplier, setUtilityMultiplier)}
+        {renderTitle(Skill.SKILL_CATEGORY_UTILITY, utilityMultiplier, setUtilityMultiplier)}
         {renderSkillGroups(groupedUtilitySkills)}
       </div>
     </div>

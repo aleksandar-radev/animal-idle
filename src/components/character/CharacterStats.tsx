@@ -4,10 +4,8 @@ import useCharacterMethods from '../../hooks/useCharacterMethods';
 
 const CharacterStats = () => {
   const cm = useCharacterMethods();
-  const stats = cm.getAllStatsOfActiveCharacter();
-  console.log(stats);
-
   const t = useTranslations();
+  const stats = cm.getAllStatsOfActiveCharacter();
 
   return (
     <div className="CharacterStats">

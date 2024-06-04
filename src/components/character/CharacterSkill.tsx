@@ -2,12 +2,22 @@ import React, { useState } from 'react';
 import './CharacterSkill.scss';
 import { Popper } from '@mui/material';
 import useTranslations from '../../hooks/useTranslations';
+import Skill from '../../models/Skill';
+import Requirement from '../../models/Requirement';
 
-const CharacterSkill = ({ className, skill, x }) => {
+interface CharacterSkillProps {
+  className?: string;
+  skill: Skill; // Define the skill prop type as Skill
+  x: number;
+}
+
+const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const t = useTranslations();
   const open = Boolean(anchorEl);
   const id = open ? 'skill-popper' : undefined;
+
+  const skillLevel = skill.level || 0;
 
   const handleMouseEnter = (event) => {
     setAnchorEl(event.currentTarget);
@@ -31,16 +41,18 @@ const CharacterSkill = ({ className, skill, x }) => {
       <Popper id={id} open={open} anchorEl={anchorEl} placement="top" className="CharacterSkill-tooltip">
         <div className="tooltip">
           <div>
-            {t['level']}: {skill.level} {' -> '} {skill.level + x}
+            {t['level']}: {skillLevel} {' -> '} {skillLevel + x}
           </div>
           <div>
             Cost:{' '}
-            {Object.entries(skill.cost).map(([currency, value]) => {
-              return (
-                <div key={currency}>
-                  {currency} {value}
-                </div>
-              );
+            {skill.requirements.map((req) => {
+              if (req.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
+                return (
+                  <div key={req.type}>
+                    {req.innerType} {req.value}
+                  </div>
+                );
+              }
             })}
           </div>
           <div>{skill.passive ? 'passive' : 'active'}</div>

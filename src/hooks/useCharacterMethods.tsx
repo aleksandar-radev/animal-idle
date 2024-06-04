@@ -2,11 +2,39 @@ import { useMemo } from 'react';
 import Character from '../models/Character';
 import Deck from '../models/Deck';
 import useStore from './useStore';
+import { getSkillStats } from '../helpers/gameFunctions';
+import Requirement from '../models/Requirement';
+import Skill from '../models/Skill';
 
 const useCharacterMethods = () => {
   const { data, fightState, settings } = useStore();
 
   const methods = {
+    getAllSkillsForCharacter(characterType: string): { [key: string]: Skill } {
+      // filter by requirement type character (if no such requirement, still add it)
+      const allSkills = getSkillStats();
+      const filteredSkills = {};
+
+      Object.entries(allSkills).forEach(([skillType, skillData]) => {
+        let isCharacterSpecific = false;
+        let specificCharacterType = null;
+        skillData.requirements.forEach((requirementData) => {
+          if (
+            requirementData.type === Requirement.REQUIREMENT_TYPE_CHARACTER_TYPE &&
+            characterType !== requirementData.innerType
+          ) {
+            isCharacterSpecific = true;
+            specificCharacterType = requirementData.innerType;
+            return;
+          }
+        });
+        if (isCharacterSpecific && specificCharacterType !== characterType) return;
+        filteredSkills[skillType] = skillData;
+      });
+
+      return { ...filteredSkills };
+    },
+
     getAllStatsOfActiveCharacter() {
       const activeCharacter = methods.getActiveCharacter();
       if (!activeCharacter) {

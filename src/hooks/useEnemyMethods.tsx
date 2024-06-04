@@ -69,7 +69,7 @@ const useEnemyMethods = () => {
     },
     die() {
       fightState.enemyCurrentHealth = null;
-      data.currencies[Currency.CURRENCY_GOLD].value += 1;
+      data.currencies[Currency.CURRENCY_TYPE_GOLD].value += 1;
       fightState.enemy = null;
     },
   };

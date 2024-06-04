@@ -1,13 +1,25 @@
+import { getRequirementTypes } from '../helpers/gameFunctions';
+
 class Requirement {
   private _name: string;
-  private _type: string;
+  private _type: ReturnType<typeof getRequirementTypes>[number];
+  private _modifier: number;
+  private _innerType: string;
   private _index: number;
   private _value: number;
 
-  constructor({ name = '', type, index = -1, value = 0 }) {
-    this.name = name;
-    this.type = type;
-    this.index = index;
+  static REQUIREMENT_TYPE_LEVEL = 'level';
+  static REQUIREMENT_TYPE_CURRENCY = 'currency';
+  static REQUIREMENT_TYPE_SKILL = 'skill';
+  static REQUIREMENT_TYPE_CHARACTER_UNLOCKED = 'character-unlocked';
+  static REQUIREMENT_TYPE_CHARACTER_TYPE = 'character-type';
+  static REQUIREMENT_TYPE_UPGRADE = 'upgrade';
+
+  constructor({ name = '', type, innerType = '', index = 0, value = 0 }) {
+    this._name = name;
+    this._type = type;
+    this._innerType = innerType;
+    this._index = index;
     this.value = value;
   }
 
@@ -15,16 +27,12 @@ class Requirement {
     return this._name;
   }
 
-  set name(value: string) {
-    this._name = value;
-  }
-
   get type(): string {
     return this._type;
   }
 
-  set type(value: string) {
-    this._type = value;
+  get innerType(): string {
+    return this._innerType;
   }
 
   get index(): number {

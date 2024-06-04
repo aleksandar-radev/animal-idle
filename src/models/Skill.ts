@@ -1,37 +1,51 @@
+import { getSkillStats } from '../helpers/gameFunctions';
+import Requirement from './Requirement';
+
 class Skill {
   private _name: string;
   private _type: string;
+  private _category: string;
   private _index: number;
   private _level: number;
-  private _manaCost: number;
+  private _manaCost?: number;
   private _passive: boolean;
   private _icon: any;
-  private _requirements: any;
-  private _cost: any;
+  private _requirements: Requirement[];
+  private _cooldown?: number;
 
-  static SKILL_TYPE_ATTACK = 'attack';
-  static SKILL_TYPE_DEFENSE = 'defense';
-  static SKILL_TYPE_UTILITY = 'utility';
-  static SKILL_DAMAGE_FLAT = 'damageFlat';
-  static SKILL_DAMAGE_PERCENT = 'damagePercent';
-  static SKILL_CRIT_CHANCE = 'critChance';
-  static SKILL_CRIT_DAMAGE = 'critDamage';
-  static SKILL_ATTACK_SPEED = 'attackSpeed';
-  static SKILL_DOUBLE_DAMAGE_CHANCE = 'doubleDamageChance';
-  static SKILL_BONUS_HEALTH = 'bonusHealth';
-  static SKILL_BONUS_DEFENSE = 'bonusDefense';
-  static SKILL_BONUS_GOLD = 'bonusGold';
+  static SKILL_CATEGORY_ATTACK = 'attack';
+  static SKILL_CATEGORY_DEFENSE = 'defense';
+  static SKILL_CATEGORY_UTILITY = 'utility';
 
-  constructor({ name, type, index, level, manaCost = 0, passive = true, icon = '', requirements = {}, cost = {} }) {
-    this.name = name;
-    this.type = type;
+  static SKILL_TYPE_DAMAGE_FLAT = 'damageFlat';
+  static SKILL_TYPE_DAMAGE_PERCENT = 'damagePercent';
+  static SKILL_TYPE_CRIT_CHANCE = 'critChance';
+  static SKILL_TYPE_CRIT_DAMAGE = 'critDamage';
+  static SKILL_TYPE_ATTACK_SPEED = 'attackSpeed';
+  static SKILL_TYPE_DOUBLE_DAMAGE_CHANCE = 'doubleDamageChance';
+  static SKILL_TYPE_BONUS_HEALTH = 'bonusHealth';
+  static SKILL_TYPE_BONUS_DEFENSE = 'bonusDefense';
+  static SKILL_TYPE_BONUS_GOLD = 'bonusGold';
+
+  // Barbarian Specific Skills
+  static SKILL_TYPE_RAGE = 'rage';
+
+  constructor({ name, type, category, index, level = 0, passive = true, icon = '', requirements = [] }) {
+    const stats = getSkillStats()[type];
+    console.log('asdf');
+
+    this._name = name;
+    this._type = type;
+    this._category = category;
     this.index = index;
     this.level = level;
-    this.manaCost = manaCost;
-    this.passive = passive;
-    this.icon = icon;
+    this._passive = stats.passive;
+    this._icon = icon;
     this.requirements = requirements;
-    this.cost = cost;
+    if (!stats.passive) {
+      this._manaCost = stats.manaCost;
+      this._cooldown = stats.cooldown;
+    }
   }
 
   // Getters and Setters
@@ -39,16 +53,12 @@ class Skill {
     return this._name;
   }
 
-  set name(value: string) {
-    this._name = value;
-  }
-
   get type(): string {
     return this._type;
   }
 
-  set type(value: string) {
-    this._type = value;
+  get category(): string {
+    return this._category;
   }
 
   get index(): number {
@@ -71,40 +81,30 @@ class Skill {
     return this._manaCost;
   }
 
-  set manaCost(value: number) {
-    this._manaCost = value;
-  }
-
   get passive(): boolean {
     return this._passive;
-  }
-
-  set passive(value: boolean) {
-    this._passive = value;
   }
 
   get icon(): any {
     return this._icon;
   }
 
-  set icon(value: any) {
-    this._icon = value;
-  }
-
-  get requirements(): any {
+  get requirements(): Requirement[] {
     return this._requirements;
   }
 
   set requirements(value: any) {
-    this._requirements = value;
+    const { requirements } = getSkillStats()[this.type];
+    const newRequirements = [];
+    console.log(requirements);
+    requirements.forEach((requirementData) => {
+      newRequirements.push(requirementData); // TODO fix
+    });
+    this._requirements = newRequirements;
   }
 
-  get cost(): any {
-    return this._cost;
-  }
-
-  set cost(value: any) {
-    this._cost = value;
+  get cooldown(): number {
+    return this._cooldown;
   }
 }
 

@@ -114,9 +114,7 @@ class Data {
       });
       this._decks = newDecks;
     } else {
-      this._decks = {
-        [Deck.DEFAULT_DECK_NAME]: defaultDeckData,
-      };
+      this._decks = defaultDeckData;
     }
   }
 

@@ -1,3 +1,4 @@
+import { getCharacterStats } from '../helpers/gameFunctions';
 import Skill from './Skill';
 
 class Character {
@@ -32,32 +33,19 @@ class Character {
     'doubleDamageChance',
   ];
 
-  constructor({
-    name,
-    type,
-    level = 1,
-    experience = 1,
-    health = 100,
-    mana = 50,
-    damage = 15,
-    attackSpeed = 1000,
-    critChance = 0,
-    critDamage = 0,
-    doubleDamageChance = 0,
-    isUnlocked = false,
-    skills,
-  }) {
-    this.name = name;
-    this.type = type;
+  constructor({ name, type, level = 1, experience = 1, isUnlocked = false, skills = {} }) {
+    const stats = getCharacterStats()[type];
+    this._name = name;
+    this._type = type;
     this.level = level;
     this.experience = experience;
-    this.health = health;
-    this.mana = mana;
-    this.damage = damage;
-    this.attackSpeed = attackSpeed;
-    this.critChance = critChance;
-    this.critDamage = critDamage;
-    this.doubleDamageChance = doubleDamageChance;
+    this._health = stats.health;
+    this._mana = stats.mana;
+    this._damage = stats.damage;
+    this._attackSpeed = stats.attackSpeed;
+    this._critChance = stats.critChance;
+    this._critDamage = stats.critDamage;
+    this._doubleDamageChance = stats.doubleDamageChance;
     this.isUnlocked = isUnlocked;
     this.skills = skills;
   }
@@ -67,16 +55,8 @@ class Character {
     return this._name;
   }
 
-  set name(value: string) {
-    this._name = value;
-  }
-
   get type(): string {
     return this._type;
-  }
-
-  set type(value: string) {
-    this._type = value;
   }
 
   get level(): number {
@@ -99,56 +79,28 @@ class Character {
     return this._health;
   }
 
-  set health(value: number) {
-    this._health = value;
-  }
-
   get mana(): number {
     return this._mana;
-  }
-
-  set mana(value: number) {
-    this._mana = value;
   }
 
   get damage(): number {
     return this._damage;
   }
 
-  set damage(value: number) {
-    this._damage = value;
-  }
-
   get attackSpeed(): number {
     return this._attackSpeed;
-  }
-
-  set attackSpeed(value: number) {
-    this._attackSpeed = value;
   }
 
   get critChance(): number {
     return this._critChance;
   }
 
-  set critChance(value: number) {
-    this._critChance = value;
-  }
-
   get critDamage(): number {
     return this._critDamage;
   }
 
-  set critDamage(value: number) {
-    this._critDamage = value;
-  }
-
   get doubleDamageChance(): number {
     return this._doubleDamageChance;
-  }
-
-  set doubleDamageChance(value: number) {
-    this._doubleDamageChance = value;
   }
 
   get isUnlocked(): boolean {
@@ -165,8 +117,8 @@ class Character {
 
   set skills(value: { [key: string]: Skill }) {
     const newSkills = {};
-    Object.entries(value).forEach(([skillName, skillData]) => {
-      newSkills[skillName] = new Skill(skillData);
+    Object.entries(value).forEach(([skillType, skillData]) => {
+      newSkills[skillType] = new Skill(skillData);
     });
     this._skills = newSkills;
   }
