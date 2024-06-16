@@ -4,16 +4,17 @@ import CharacterDisplay from './CharacterDisplay';
 import CharacterAvatar from './CharacterAvatar';
 import useStore from '../../hooks/useStore';
 import useCharacterMethods from '../../hooks/useCharacterMethods';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import CharactersSelection from './CharactersSelection';
+import useTranslations from '../../hooks/useTranslations';
 
 const CharactersList = () => {
   const { data, settings } = useStore();
   const cm = useCharacterMethods();
+  const t = useTranslations();
   const [draggedItem, setDraggedItem] = useState(null);
   const isDraggable = useMemo(() => settings.areCharactersDraggable, []);
-
-  const getDecks = () => {
-    return Object.keys(data.decks);
-  };
+  const [characterSelectionOpen, setCharacterSelectionOpen] = useState(false);
 
   const getActiveCharacter = () => {
     return settings.activeCharacter;
@@ -45,36 +46,51 @@ const CharactersList = () => {
     data.characters.map[targetIndex[0]] = draggedItem.type;
   };
 
+  const handleCharacterSelectionOpen = () => {
+    setCharacterSelectionOpen(true);
+  };
+
+  const handleCharacterSelectionClose = () => {
+    setCharacterSelectionOpen(false);
+  };
+
   return (
     <div className="CharactersList">
       {!getActiveCharacter() && (
-        <div className="decks">
-          {!getActiveCharacter() &&
-            getDecks().map((deck) => (
-              <div key={deck} className="deck">
-                {deck}
+        <div className="characters">
+          <div className="item new" onClick={handleCharacterSelectionOpen}>
+            +
+          </div>
+
+          {Array.from(cm.getCharactersInActiveDeck().values()).map((character) => {
+            return (
+              <div
+                key={character.type}
+                className="item"
+                draggable={isDraggable}
+                onClick={() => setActiveCharacter(character.type)}
+                onDragStart={(e) => handleDragStart(e, character)}
+                onDragEnd={handleDragEnd}
+                onDragOver={handleDragOver}
+                onDrop={(e) => handleDrop(e, character)}>
+                <CharacterAvatar characterType={character.type}></CharacterAvatar>
               </div>
-            ))}
+            );
+          })}
         </div>
       )}
-      {!getActiveCharacter() &&
-        Array.from(cm.getCharactersInActiveDeck().values()).map((character) => {
-          return (
-            <div
-              key={character.type}
-              className="item"
-              draggable={isDraggable}
-              onClick={() => setActiveCharacter(character.type)}
-              onDragStart={(e) => handleDragStart(e, character)}
-              onDragEnd={handleDragEnd}
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDrop(e, character)}>
-              <CharacterAvatar character={character}></CharacterAvatar>
-            </div>
-          );
-        })}
-
       {getActiveCharacter() && <CharacterDisplay></CharacterDisplay>}
+
+      <Dialog
+        className="CharacterSelection-dialog"
+        open={characterSelectionOpen}
+        onClose={handleCharacterSelectionClose}
+        aria-labelledby="draggable-dialog-title">
+        <DialogTitle id="draggable-dialog-title">{t['charactersSelectionTitle']}</DialogTitle>
+        <DialogContent>
+          <CharactersSelection></CharactersSelection>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

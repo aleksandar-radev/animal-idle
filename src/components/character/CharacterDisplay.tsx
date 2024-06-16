@@ -30,7 +30,7 @@ const CharacterDisplay = () => {
       <div className="CharacterDisplay">
         <CharacterScreenMenu></CharacterScreenMenu>
         <div className="avatar">
-          <CharacterAvatar character={character}></CharacterAvatar>
+          <CharacterAvatar characterType={character.type}></CharacterAvatar>
         </div>
         {activeTab()}
       </div>

@@ -1,4 +1,5 @@
 import { getCharacterStats } from '../helpers/gameFunctions';
+import Requirement from './Requirement';
 import Skill from './Skill';
 
 class Character {
@@ -14,6 +15,7 @@ class Character {
   private _critDamage: number;
   private _doubleDamageChance: number;
   private _isUnlocked: boolean;
+  private _requirements: Requirement[];
   private _skills: { [key: string]: Skill };
 
   static CHARACTER_TYPE_BARBARIAN = 'barbarian';
@@ -33,7 +35,7 @@ class Character {
     'doubleDamageChance',
   ];
 
-  constructor({ name, type, level = 1, experience = 1, isUnlocked = false, skills = {} }) {
+  constructor({ name, type, level = 1, experience = 1, isUnlocked = false, skills = {}, requirements = [] }) {
     const stats = getCharacterStats()[type];
     this._name = name;
     this._type = type;
@@ -48,6 +50,7 @@ class Character {
     this._doubleDamageChance = stats.doubleDamageChance;
     this.isUnlocked = isUnlocked;
     this.skills = skills;
+    this.requirements = requirements;
   }
 
   // Getters and Setters
@@ -121,6 +124,20 @@ class Character {
       newSkills[skillType] = new Skill(skillData);
     });
     this._skills = newSkills;
+  }
+
+  get requirements(): Requirement[] {
+    return this._requirements;
+  }
+
+  set requirements(value: any) {
+    const { requirements } = getCharacterStats()[this.type];
+    const newRequirements = [];
+    console.log(requirements);
+    requirements.forEach((requirementData) => {
+      newRequirements.push(requirementData); // TODO fix
+    });
+    this._requirements = newRequirements;
   }
 }
 

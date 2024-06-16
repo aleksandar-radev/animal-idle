@@ -40,18 +40,18 @@ export default function RegisterScreen() {
         'Creating an account...'
       ) : (
         <div className="RegisterScreen">
-          <form onSubmit={handleSignUp} className="RegisterScreen-form">
-            <div className="RegisterScreen-form-title">Register</div>
-            <label className="RegisterScreen-form-label">Email</label>
+          <form onSubmit={handleSignUp} className="form">
+            <div className="form-title">Register</div>
+            <label className="form-label">Email</label>
             <input
               type="email"
               placeholder="Your email"
               value={email}
               required
               onChange={(e) => setEmail(e.target.value)}
-              className="RegisterScreen-form-input"
+              className="form-input"
             />
-            <label className="RegisterScreen-form-label">Password</label>
+            <label className="form-label">Password</label>
             <input
               type="password"
               placeholder="Your password"
@@ -60,22 +60,22 @@ export default function RegisterScreen() {
               title="Must contain at least 6 characters"
               required
               onChange={(e) => setPassword(e.target.value)}
-              className="RegisterScreen-form-input"
+              className="form-input"
             />
-            <label className="RegisterScreen-form-label">Confirm Password</label>
+            <label className="form-label">Confirm Password</label>
             <input
               type="password"
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="RegisterScreen-form-input"
+              className="form-input"
             />
-            {errorMessage && <span className="RegisterScreen-form-error">{errorMessage}</span>}
-            <button className="RegisterScreen-form-button">Register</button>
+            {errorMessage && <span className="form-error">{errorMessage}</span>}
+            <button className="form-button">Register</button>
           </form>
-          <div className="RegisterScreen-message">
+          <div className="message">
             Already have an account ? Sign in{' '}
-            <span onClick={goToLogin} className="RegisterScreen-message-button">
+            <span onClick={goToLogin} className="message-button">
               HERE
             </span>
           </div>

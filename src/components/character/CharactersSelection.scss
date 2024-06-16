@@ -1,0 +1,12 @@
+@import '../../helpers/variables.scss';
+
+.CharactersSelection {
+  height: pix(300);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(pix(100), 1fr));
+  overflow-y: auto;
+  > .item {
+    width: pix(100);
+    height: pix(100);
+  }
+}

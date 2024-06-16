@@ -1,10 +1,10 @@
 @import '../../helpers/variables.scss';
 
-.CharactersList {
+.ShopCharactersList {
   .characters {
     display: grid;
     overflow-y: auto;
-    height: pix(380);
+    height: pix(350);
     grid-template-columns: repeat(auto-fill, minmax(pix(120), 1fr));
     > .item {
       cursor: pointer;

@@ -17,14 +17,14 @@ class Settings {
   static CHARACTER_SCREEN_SKILLS_TAB = 'skills';
   static CHARACTER_SCREEN_ITEMS_TAB = 'items';
 
-  static SHOP_SCREEN_ATTACK_TAB = 'attack';
-  static SHOP_SCREEN_DEFENSE_TAB = 'defense';
+  static SHOP_SCREEN_CHARACTERS_TAB = 'charactersTab';
+  static SHOP_SCREEN_DECKS_TAB = 'decksTab';
   static SHOP_SCREEN_UTILITY_TAB = 'utility';
 
   constructor() {
     this.activeMainScreenTab = Settings.MAIN_SCREEN_CHARACTER_TAB;
     this.activeCharacterScreenTab = Settings.CHARACTER_SCREEN_STATS_TAB;
-    this.activeShopScreenTab = Settings.SHOP_SCREEN_ATTACK_TAB;
+    this.activeShopScreenTab = Settings.SHOP_SCREEN_CHARACTERS_TAB;
     this.activeCharacter = null;
     this.areCharactersDraggable = false;
     this.isFightStarted = false;

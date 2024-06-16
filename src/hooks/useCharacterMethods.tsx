@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import Character from '../models/Character';
 import Deck from '../models/Deck';
 import useStore from './useStore';
-import { getSkillStats } from '../helpers/gameFunctions';
+import { getAllCharacterTypes, getCharacterStats, getSkillStats } from '../helpers/gameFunctions';
 import Requirement from '../models/Requirement';
 import Skill from '../models/Skill';
 
@@ -76,25 +76,18 @@ const useCharacterMethods = () => {
       return totalMana;
     },
 
-    getCharacterByType: (type) => {
-      switch (type) {
-        case Character.CHARACTER_TYPE_BARBARIAN:
-          return data.characters[Character.CHARACTER_TYPE_BARBARIAN];
-        case Character.CHARACTER_TYPE_SORCERESS:
-          return data.characters[Character.CHARACTER_TYPE_SORCERESS];
-        case Character.CHARACTER_TYPE_DRUID:
-          return data.characters[Character.CHARACTER_TYPE_DRUID];
-        default:
-          return null;
-      }
+    getActiveCharacterByType: (type: ReturnType<typeof getAllCharacterTypes>[number]) => {
+      const character = data.characters[type];
+      return character ? character : null;
+    },
+
+    getCharacterByType: (type: ReturnType<typeof getAllCharacterTypes>[number]) => {
+      const character = getCharacterStats()[type];
+      return character ? character : null;
     },
 
     getAllCharacters: () => {
-      return [
-        data.characters[Character.CHARACTER_TYPE_BARBARIAN],
-        data.characters[Character.CHARACTER_TYPE_SORCERESS],
-        data.characters[Character.CHARACTER_TYPE_DRUID],
-      ];
+      return getAllCharacterTypes();
     },
 
     getTotalDamage: () => {
@@ -119,14 +112,14 @@ const useCharacterMethods = () => {
         const activeDeck: Deck = data.decks[data.activeDeckName];
         const activeDeckCharacters = Object.keys(activeDeck.characters);
         activeDeckCharacters.forEach((charType) => {
-          activeCharacters.set(charType, methods.getCharacterByType(charType));
+          activeCharacters.set(charType, methods.getActiveCharacterByType(charType));
         });
         return activeCharacters;
       };
     }, [data.activeDeckName, data.decks]),
 
     getActiveCharacter: () => {
-      return methods.getCharacterByType(settings.activeCharacter);
+      return methods.getActiveCharacterByType(settings.activeCharacter);
     },
 
     levelUp: (charType) => {

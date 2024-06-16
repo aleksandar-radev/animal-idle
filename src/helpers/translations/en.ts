@@ -57,4 +57,9 @@ export const en = {
   // Misc
   resetProgress: 'Reset Progress',
   logout: 'Logout',
+
+  //
+  charactersSelectionTitle: 'Character Selection',
+  characters: 'Characters',
+  decks: 'Decks',
 };

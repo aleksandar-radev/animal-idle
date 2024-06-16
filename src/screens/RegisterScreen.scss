@@ -5,14 +5,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  &-form {
+  .form {
     display: flex;
     flex-direction: column;
     width: pix(300);
     margin: pix(10) auto;
     padding: pix(10);
 
-    &-title {
+    .title {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -20,13 +20,13 @@
       margin-bottom: pix(30);
     }
 
-    &-label {
+    .label {
       display: block;
       font-size: pix(20);
       margin-bottom: pix(5);
     }
 
-    &-input {
+    .input {
       display: block;
       width: 100%;
       height: pix(10);
@@ -36,12 +36,12 @@
       font-size: pix(20);
     }
 
-    &-error {
+    .error {
       font-size: pix(20);
       color: red;
     }
 
-    &-button {
+    .button {
       display: block;
       width: 100%;
       height: pix(40);
@@ -58,10 +58,10 @@
       }
     }
   }
-  &-message {
+  .message {
     font-size: pix(18);
 
-    &-button {
+    .button {
       color: blue;
       cursor: pointer;
     }

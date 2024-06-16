@@ -32,7 +32,6 @@ class Skill {
 
   constructor({ name, type, category, index, level = 0, passive = true, icon = '', requirements = [] }) {
     const stats = getSkillStats()[type];
-    console.log('asdf');
 
     this._name = name;
     this._type = type;

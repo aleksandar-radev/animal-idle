@@ -1,6 +1,7 @@
 import crypt from './externalLibraries/encrypt';
 import swordIcon from '../assets/sword.png';
 import berserkerAvatar from '../assets/berserker-avatar.jpg';
+import druidAvatar from '../assets/druid-avatar.png';
 import sorceressAvatar from '../assets/sorceress-avatar.jpg';
 import assassinAvatar from '../assets/assassin-avatar.jpg';
 import warriorAvatar from '../assets/warrior-avatar.jpg';
@@ -27,6 +28,9 @@ export function loadAssets(assets) {
   });
   converter(sorceressAvatar, (url) => {
     assets[Character.CHARACTER_TYPE_SORCERESS] = url;
+  });
+  converter(druidAvatar, (url) => {
+    assets[Character.CHARACTER_TYPE_DRUID] = url;
   });
   converter(assassinAvatar, (url) => {
     assets[Enemy.ENEMY_TYPE_ASSASSIN] = url;
@@ -104,6 +108,13 @@ export const getCharacterStats = () => {
       critChance: 0,
       critDamage: 0,
       doubleDamageChance: 0,
+      requirements: [
+        new Requirement({
+          type: Requirement.REQUIREMENT_TYPE_CURRENCY,
+          innerType: Currency.CURRENCY_TYPE_GOLD,
+          value: 1,
+        }),
+      ],
     },
     [Character.CHARACTER_TYPE_SORCERESS]: {
       type: Character.CHARACTER_TYPE_SORCERESS,
@@ -114,6 +125,13 @@ export const getCharacterStats = () => {
       critChance: 0,
       critDamage: 0,
       doubleDamageChance: 0,
+      requirements: [
+        new Requirement({
+          type: Requirement.REQUIREMENT_TYPE_CURRENCY,
+          innerType: Currency.CURRENCY_TYPE_GOLD,
+          value: 1,
+        }),
+      ],
     },
     [Character.CHARACTER_TYPE_DRUID]: {
       type: Character.CHARACTER_TYPE_DRUID,
@@ -124,6 +142,13 @@ export const getCharacterStats = () => {
       critChance: 0,
       critDamage: 0,
       doubleDamageChance: 0,
+      requirements: [
+        new Requirement({
+          type: Requirement.REQUIREMENT_TYPE_CURRENCY,
+          innerType: Currency.CURRENCY_TYPE_GOLD,
+          value: 1,
+        }),
+      ],
     },
   };
 };
@@ -391,13 +416,6 @@ export const defaultCharacterData = {
     type: Character.CHARACTER_TYPE_BARBARIAN,
     level: 1,
     experience: 0,
-    health: 100,
-    mana: 50,
-    damage: 15,
-    attackSpeed: 1000,
-    critChance: 0,
-    critDamage: 0,
-    doubleDamageChance: 0,
     isUnlocked: true,
     skills: {},
   }),
@@ -405,11 +423,13 @@ export const defaultCharacterData = {
 
 export const defaultCurrencyData = {
   [Currency.CURRENCY_TYPE_GOLD]: new Currency({
+    type: Currency.CURRENCY_TYPE_GOLD,
     name: 'Gold',
     index: 0,
     value: 0,
   }),
   [Currency.CURRENCY_TYPE_CRYSTAL]: new Currency({
+    type: Currency.CURRENCY_TYPE_CRYSTAL,
     name: 'Crystal',
     index: 0,
     value: 0,

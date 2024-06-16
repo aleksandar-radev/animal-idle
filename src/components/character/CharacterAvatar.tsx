@@ -1,9 +1,9 @@
 import './CharacterAvatar.scss';
 import useStore from '../../hooks/useStore';
 
-const CharacterAvatar = ({ className = '', character }) => {
+const CharacterAvatar = ({ className = '', characterType }) => {
   const { assets } = useStore();
-  const avatar = assets[character.type];
+  const avatar = assets[characterType]; // when character is a string
 
   return (
     <div className="CharacterAvatar">
