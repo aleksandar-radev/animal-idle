@@ -19,9 +19,6 @@ const ShopCharactersList = () => {
   };
 
   const handleCharacterSelectionOpen = (type) => {
-    console.log(type);
-    console.log(cm.getCharacterByType(type));
-
     setSelectedCharacter(cm.getCharacterByType(type));
   };
 
@@ -32,25 +29,33 @@ const ShopCharactersList = () => {
   return (
     <div className="ShopCharactersList">
       <div className="characters">
-        {Array.from(cm.getCharactersInActiveDeck().values()).map((character) => {
+        {Array.from(cm.getAllCharacterTypes().values()).map((characterType) => {
+          const character = cm.getCharacterByType(characterType);
+          const activeCharacter = cm.getActiveCharacterByType(character.type);
+          const isUnlocked = activeCharacter && activeCharacter.isUnlocked ? true : false;
           return (
-            <div key={character.type} className="item" onClick={() => handleCharacterSelectionOpen(character.type)}>
+            <div
+              key={character.type}
+              className={`item ${isUnlocked ? '' : 'locked'}`}
+              onClick={() => handleCharacterSelectionOpen(character.type)}>
               <CharacterAvatar characterType={character.type}></CharacterAvatar>
             </div>
           );
         })}
       </div>
 
-      <Dialog
-        className="CharacterSelection-dialog"
-        open={isCharacterSelected()}
-        onClose={handleCharacterSelectionClose}
-        aria-labelledby="draggable-dialog-title">
-        <DialogTitle id="draggable-dialog-title"></DialogTitle>
-        <DialogContent>
-          <ShopCharacterUnlockMenu character={selectedCharacter}></ShopCharacterUnlockMenu>
-        </DialogContent>
-      </Dialog>
+      {isCharacterSelected() && (
+        <Dialog
+          className="CharacterSelection-dialog"
+          open={isCharacterSelected()}
+          onClose={handleCharacterSelectionClose}
+          aria-labelledby="draggable-dialog-title">
+          <DialogTitle id="draggable-dialog-title"></DialogTitle>
+          <DialogContent>
+            <ShopCharacterUnlockMenu character={selectedCharacter}></ShopCharacterUnlockMenu>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };

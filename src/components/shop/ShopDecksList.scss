@@ -1,0 +1,38 @@
+@import '../../helpers/variables.scss';
+
+.ShopDecksList {
+  display: flex;
+  padding: pix(5) pix(10);
+
+  .decks {
+    display: flex;
+    flex-direction: column;
+    background-color: #e6e68f;
+    width: pix(100);
+    padding: pix(5) pix(10);
+    .deck {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: pix(5) pix(5);
+      background-color: #929220;
+      margin: pix(5) 0;
+      &.new {
+        background-color: green;
+      }
+      &.active {
+        background-color: red;
+      }
+      &:disabled {
+        background-color: rgb(61, 61, 61);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .deck-characters {
+    height: pix(350);
+    width: pix(700);
+  }
+}

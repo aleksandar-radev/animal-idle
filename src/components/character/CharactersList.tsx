@@ -1,11 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import './CharactersList.scss';
 import CharacterDisplay from './CharacterDisplay';
 import CharacterAvatar from './CharacterAvatar';
 import useStore from '../../hooks/useStore';
 import useCharacterMethods from '../../hooks/useCharacterMethods';
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
-import CharactersSelection from './CharactersSelection';
 import useTranslations from '../../hooks/useTranslations';
 
 const CharactersList = () => {
@@ -14,7 +12,6 @@ const CharactersList = () => {
   const t = useTranslations();
   const [draggedItem, setDraggedItem] = useState(null);
   const isDraggable = useMemo(() => settings.areCharactersDraggable, []);
-  const [characterSelectionOpen, setCharacterSelectionOpen] = useState(false);
 
   const getActiveCharacter = () => {
     return settings.activeCharacter;
@@ -46,22 +43,10 @@ const CharactersList = () => {
     data.characters.map[targetIndex[0]] = draggedItem.type;
   };
 
-  const handleCharacterSelectionOpen = () => {
-    setCharacterSelectionOpen(true);
-  };
-
-  const handleCharacterSelectionClose = () => {
-    setCharacterSelectionOpen(false);
-  };
-
   return (
     <div className="CharactersList">
       {!getActiveCharacter() && (
         <div className="characters">
-          <div className="item new" onClick={handleCharacterSelectionOpen}>
-            +
-          </div>
-
           {Array.from(cm.getCharactersInActiveDeck().values()).map((character) => {
             return (
               <div
@@ -80,17 +65,6 @@ const CharactersList = () => {
         </div>
       )}
       {getActiveCharacter() && <CharacterDisplay></CharacterDisplay>}
-
-      <Dialog
-        className="CharacterSelection-dialog"
-        open={characterSelectionOpen}
-        onClose={handleCharacterSelectionClose}
-        aria-labelledby="draggable-dialog-title">
-        <DialogTitle id="draggable-dialog-title">{t['charactersSelectionTitle']}</DialogTitle>
-        <DialogContent>
-          <CharactersSelection></CharactersSelection>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };

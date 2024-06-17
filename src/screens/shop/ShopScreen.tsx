@@ -1,10 +1,10 @@
 import ShopCharacters from '../../components/shop/ShopCharacters';
-import ShopSkillsDefense from '../../components/shop/ShopSkillsDefense';
-import ShopSkillsUtility from '../../components/shop/ShopSkillsUtility';
+import ShopUtility from '../../components/shop/ShopUtility';
 import './ShopScreen.scss';
 import useStore from '../../hooks/useStore';
 import Settings from '../../models/Settings';
 import useTranslations from '../../hooks/useTranslations';
+import ShopDecksList from '../../components/shop/ShopDecksList';
 
 const ShopScreen = () => {
   const { settings } = useStore();
@@ -19,9 +19,9 @@ const ShopScreen = () => {
       case Settings.SHOP_SCREEN_CHARACTERS_TAB:
         return <ShopCharacters />;
       case Settings.SHOP_SCREEN_DECKS_TAB:
-        return <ShopSkillsDefense />;
+        return <ShopDecksList />;
       case Settings.SHOP_SCREEN_UTILITY_TAB:
-        return <ShopSkillsUtility />;
+        return <ShopUtility />;
       default:
         return '';
     }

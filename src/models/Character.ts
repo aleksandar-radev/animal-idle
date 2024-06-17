@@ -133,7 +133,6 @@ class Character {
   set requirements(value: any) {
     const { requirements } = getCharacterStats()[this.type];
     const newRequirements = [];
-    console.log(requirements);
     requirements.forEach((requirementData) => {
       newRequirements.push(requirementData); // TODO fix
     });

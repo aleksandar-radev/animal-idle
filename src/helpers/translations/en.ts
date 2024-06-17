@@ -62,4 +62,5 @@ export const en = {
   charactersSelectionTitle: 'Character Selection',
   characters: 'Characters',
   decks: 'Decks',
+  cost: 'Cost',
 };

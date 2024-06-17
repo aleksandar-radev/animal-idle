@@ -44,7 +44,7 @@ const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) 
             {t['level']}: {skillLevel} {' -> '} {skillLevel + x}
           </div>
           <div>
-            Cost:{' '}
+            {t['cost']}:{' '}
             {skill.requirements.map((req) => {
               if (req.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
                 return (

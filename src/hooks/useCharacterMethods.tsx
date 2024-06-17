@@ -5,6 +5,8 @@ import useStore from './useStore';
 import { getAllCharacterTypes, getCharacterStats, getSkillStats } from '../helpers/gameFunctions';
 import Requirement from '../models/Requirement';
 import Skill from '../models/Skill';
+import Currency from '../models/Currency';
+import { get } from 'http';
 
 const useCharacterMethods = () => {
   const { data, fightState, settings } = useStore();
@@ -86,7 +88,7 @@ const useCharacterMethods = () => {
       return character ? character : null;
     },
 
-    getAllCharacters: () => {
+    getAllCharacterTypes: () => {
       return getAllCharacterTypes();
     },
 
@@ -106,6 +108,20 @@ const useCharacterMethods = () => {
       return activeCharacterSkills;
     },
 
+    getCharactersInDeck: (deckName: string): Map<string, Character> => {
+      const charactersInDeck = new Map();
+      const deck: Deck = data.decks[deckName];
+      const deckCharacters = Object.keys(deck.characters);
+      deckCharacters.forEach((charType) => {
+        charactersInDeck.set(charType, methods.getActiveCharacterByType(charType));
+      });
+      return charactersInDeck;
+    },
+
+    addCharacterToDeck: (deckName: string, characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
+      data.decks[deckName].characters[characterType] = data.characters[characterType];
+    },
+
     getCharactersInActiveDeck: useMemo(() => {
       return (): Map<string, Character> => {
         const activeCharacters = new Map();
@@ -117,6 +133,61 @@ const useCharacterMethods = () => {
         return activeCharacters;
       };
     }, [data.activeDeckName, data.decks]),
+
+    getDeckByName: (deckName: string) => {
+      return data.decks[deckName];
+    },
+
+    getAllDecks: () => {
+      return data.decks;
+    },
+
+    getDeckCost: () => {
+      const costs = {
+        '1': 100,
+        '2': 2000,
+        '3': 25000,
+        '4': 100000,
+        '5': 1000000,
+      };
+      return costs[data.totalDecks] || Number.POSITIVE_INFINITY;
+    },
+
+    getCanBuyDeck: () => {
+      const currentGold = data.currencies[Currency.CURRENCY_TYPE_GOLD].value;
+      const deckCost = methods.getDeckCost();
+
+      return currentGold > deckCost;
+    },
+
+    buyDeck: () => {
+      if (!methods.getCanBuyDeck()) {
+        throw new Error('Not enough gold to buy deck');
+      }
+
+      data.totalDecks++;
+      const newDeck = new Deck({
+        name: 'New Deck ' + data.totalDecks,
+        index: data.totalDecks,
+        characters: {},
+      });
+      data.decks[newDeck.name] = newDeck;
+      return data.decks;
+    },
+
+    buyCharacter: (characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
+      const character = new Character({
+        name: characterType,
+        type: characterType,
+        isUnlocked: true,
+      });
+      data.characters[characterType] = character;
+      console.log(data);
+
+      if (!character) {
+        throw new Error('Character does not exist');
+      }
+    },
 
     getActiveCharacter: () => {
       return methods.getActiveCharacterByType(settings.activeCharacter);
