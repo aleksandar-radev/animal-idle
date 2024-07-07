@@ -4,7 +4,7 @@ import useStore from './useStore';
 import useEnemyMethods from './useEnemyMethods';
 
 const useEnemyAttack = () => {
-  const { settings, data } = useStore();
+  const { settings, data, fightState } = useStore();
   const cm = useCharacterMethods();
   const em = useEnemyMethods();
 
@@ -25,7 +25,8 @@ const useEnemyAttack = () => {
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
-      if (!settings.isFightStarted || !em.getCurrentEnemy()) return;
+      if (!settings.isFightStarted || !em.getCurrentEnemy() || !fightState.isAlive) return;
+
       if (!startTime) {
         startTime = timestamp;
       }

@@ -401,7 +401,7 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 
 // DEFAULTS
 export const defaultDeckData = {
-  [Deck.DEFAULT_DECK_NAME]: new Deck({
+  '0': new Deck({
     name: Deck.DEFAULT_DECK_NAME,
     index: 0,
     characters: {
@@ -431,7 +431,7 @@ export const defaultCurrencyData = {
   [Currency.CURRENCY_TYPE_CRYSTAL]: new Currency({
     type: Currency.CURRENCY_TYPE_CRYSTAL,
     name: 'Crystal',
-    index: 0,
+    index: 1,
     value: 0,
   }),
 };

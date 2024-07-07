@@ -8,14 +8,14 @@ import useTranslations from '../../hooks/useTranslations';
 import CharacterAvatar from '../character/CharacterAvatar';
 import CharactersSelection from '../character/CharactersSelection';
 
-const ShopDeckCharacters = ({ deckName }) => {
+const ShopDeckCharacters = ({ deckIndex }) => {
   const { data, settings } = useStore();
   const cm = useCharacterMethods();
   const t = useTranslations();
   const [characterSelectionOpen, setCharacterSelectionOpen] = useState(false);
   const [updateTrigger, setUpdateTrigger] = useState(0);
 
-  const charactersInDeck = useMemo(() => Array.from(cm.getCharactersInDeck(deckName)), [cm, deckName]);
+  const charactersInDeck = useMemo(() => Array.from(cm.getCharactersInDeck(deckIndex)), [cm, deckIndex]);
 
   const getAvailableCharacters = useMemo(() => {
     const allCharacters = Object.values(data.characters);
@@ -24,17 +24,17 @@ const ShopDeckCharacters = ({ deckName }) => {
 
   const handleSelectCharacter = useCallback(
     (characterType) => {
-      cm.addCharacterToDeck(deckName, characterType);
+      cm.addCharacterToDeck(deckIndex, characterType);
     },
-    [cm, deckName],
+    [cm, deckIndex],
   );
 
   const removeSelectedCharacterFromDeck = useCallback(
     (characterType) => {
-      cm.removeCharacterFromDeck(deckName, characterType);
+      cm.removeCharacterFromDeck(deckIndex, characterType);
       setUpdateTrigger((prev) => prev + 1);
     },
-    [cm, deckName],
+    [cm, deckIndex],
   );
 
   const handleCharacterSelectionOpen = useCallback(() => {

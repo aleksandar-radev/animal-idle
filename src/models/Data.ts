@@ -109,8 +109,8 @@ class Data {
   set decks(value: { [key: string]: Deck }) {
     if (Object.keys(value).length > 0) {
       const newDecks = {};
-      Object.entries(value).forEach(([deckName, deckData]) => {
-        newDecks[deckName] = new Deck(deckData);
+      Object.entries(value).forEach(([deckIndex, deckData]) => {
+        newDecks[deckIndex] = new Deck(deckData);
       });
       this._decks = newDecks;
     } else {

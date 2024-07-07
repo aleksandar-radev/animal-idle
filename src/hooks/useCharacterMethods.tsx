@@ -7,6 +7,7 @@ import Requirement from '../models/Requirement';
 import Skill from '../models/Skill';
 import Currency from '../models/Currency';
 import { get } from 'http';
+import DeckCharacter from '../models/DeckCharacter';
 
 const useCharacterMethods = () => {
   const { data, fightState, settings } = useStore();
@@ -121,17 +122,6 @@ const useCharacterMethods = () => {
       data.characters[charType].level++;
     },
 
-    updateHealth: (bonus) => {
-      const newCurrent = data.characters.currentHealth + bonus;
-      if (newCurrent >= methods.getTotalHealth()) {
-        fightState.characterCurrentHealth = methods.getTotalHealth();
-      } else if (newCurrent < 0) {
-        throw new Error('Unable to remove mana');
-      } else {
-        data.characters.currentHealth = newCurrent;
-      }
-    },
-
     updateMana: (bonus) => {
       const newCurrent = data.characters.currentMana + bonus;
       if (newCurrent >= methods.getTotalMana()) {
@@ -186,9 +176,9 @@ const useCharacterMethods = () => {
       return activeCharacterSkills;
     },
 
-    getCharactersInDeck: (deckName: string): Map<string, Character> => {
+    getCharactersInDeck: (deckIndex: string): Map<string, Character> => {
       const charactersInDeck = new Map();
-      const deck: Deck = data.decks[deckName];
+      const deck: Deck = data.decks[deckIndex];
       const deckCharacters = Object.keys(deck.characters);
       deckCharacters.forEach((charType) => {
         charactersInDeck.set(charType, methods.getActiveCharacterByType(charType));
@@ -196,36 +186,55 @@ const useCharacterMethods = () => {
       return charactersInDeck;
     },
 
-    getCountOfCharactersInDeck: (deckName: string): number => {
-      const deck: Deck = data.decks[deckName];
+    getCountOfCharactersInDeck: (deckIndex: string): number => {
+      const deck: Deck = data.decks[deckIndex];
       const deckCharacters = Object.keys(deck.characters);
       return deckCharacters.length;
     },
 
-    addCharacterToDeck: (deckName: string, characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
-      if (!(deckName in data.decks)) {
+    addCharacterToDeck: (deckIndex: string, characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
+      if (!(deckIndex in data.decks)) {
         throw new Error("Adding character to Deck failed. Deck doesn't exist.");
       }
       if (!(characterType in data.characters)) {
         throw new Error('Cannot add character. Character not available.');
       }
-      data.decks[deckName].characters[characterType] = data.characters[characterType];
+      data.decks[deckIndex].characters[characterType] = new DeckCharacter({
+        type: characterType,
+        index: deckMethods.getLastCharacterIndexFromDeck(deckIndex) + 1,
+      });
     },
 
-    removeCharacterFromDeck: (deckName: string, characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
-      if (!(deckName in data.decks)) {
+    getLastCharacterIndexFromDeck: (deckIndex: string): number => {
+      let highestIndex = -1;
+      const deck: Deck = data.decks[deckIndex];
+
+      Object.values(deck.characters).forEach((char) => {
+        if (char.index > highestIndex) {
+          highestIndex = char.index;
+        }
+      });
+
+      return highestIndex;
+    },
+
+    removeCharacterFromDeck: (deckIndex: string, characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
+      if (!(deckIndex in data.decks)) {
         throw new Error("Removing character from Deck failed. Deck doesn't exist.");
       }
-      if (!(characterType in data.decks[deckName].characters)) {
+      if (!(characterType in data.decks[deckIndex].characters)) {
         throw new Error("Cannot remove character. Character doesn't exist.");
       }
-      delete data.decks[deckName].characters[characterType];
+      delete data.decks[deckIndex].characters[characterType];
     },
 
     getCharactersInActiveDeck: useMemo(() => {
       return (): Map<string, Character> => {
         const activeCharacters = new Map();
         const activeDeck: Deck = data.decks[data.activeDeckIndex];
+        if (!activeDeck) {
+          return new Map();
+        }
         const activeDeckCharacters = Object.keys(activeDeck.characters);
         activeDeckCharacters.forEach((charType) => {
           activeCharacters.set(charType, methods.getActiveCharacterByType(charType));
@@ -234,8 +243,8 @@ const useCharacterMethods = () => {
       };
     }, [data.activeDeckIndex, data.decks]),
 
-    getDeckByName: (deckName: string) => {
-      return data.decks[deckName];
+    getDeckByName: (deckIndex: string) => {
+      return data.decks[deckIndex];
     },
 
     getAllDecks: () => {

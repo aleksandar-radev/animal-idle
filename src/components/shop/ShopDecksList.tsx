@@ -3,15 +3,11 @@ import './ShopDecksList.scss';
 import useStore from '../../hooks/useStore';
 import useCharacterMethods from '../../hooks/useCharacterMethods';
 import useTranslations from '../../hooks/useTranslations';
-import CharactersList from '../character/CharactersList';
-import ShopCharactersList from './ShopCharactersList';
 import { Add } from '@mui/icons-material';
 import ShopDeckCharacters from './ShopDeckCharacters';
-import Deck from '../../models/Deck';
 
 const ShopDecksList = () => {
-  const { data, settings } = useStore();
-  const [selectedDeck, setSelectedDeck] = useState(Deck.DEFAULT_DECK_NAME);
+  const [selectedDeckIndex, setSelectedDeckIndex] = useState('0');
   const cm = useCharacterMethods();
   const t = useTranslations();
 
@@ -21,9 +17,9 @@ const ShopDecksList = () => {
         {Object.values(cm.getAllDecks()).map((deck) => {
           return (
             <button
-              className={`deck ${deck.name === selectedDeck ? 'active' : ''}`}
+              className={`deck ${'' + deck.index === selectedDeckIndex ? 'active' : ''}`}
               key={deck.name}
-              onClick={() => setSelectedDeck(deck.name)}>
+              onClick={() => setSelectedDeckIndex('' + deck.index)}>
               <div className="deck-name">{deck.name} </div>
             </button>
           );
@@ -33,7 +29,7 @@ const ShopDecksList = () => {
         </button>
       </div>
       <div className="deck-characters">
-        <ShopDeckCharacters deckName={selectedDeck}></ShopDeckCharacters>
+        <ShopDeckCharacters deckIndex={selectedDeckIndex}></ShopDeckCharacters>
       </div>
     </div>
   );

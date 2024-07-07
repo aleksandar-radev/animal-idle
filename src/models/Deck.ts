@@ -1,7 +1,9 @@
+import DeckCharacter from './DeckCharacter';
+
 class Deck {
   private _name: string;
   private _index: number;
-  private _characters: { [key: number]: { characterType: string; index: number } };
+  private _characters: { [key: string]: DeckCharacter };
 
   static DEFAULT_DECK_NAME = 'default';
 
@@ -28,11 +30,11 @@ class Deck {
     this._index = value;
   }
 
-  get characters(): { [key: number]: { characterType: string; index: number } } {
+  get characters(): { [key: string]: DeckCharacter } {
     return this._characters;
   }
 
-  set characters(value: { [key: number]: { characterType: string; index: number } }) {
+  set characters(value: { [key: string]: DeckCharacter }) {
     this._characters = value;
   }
 }

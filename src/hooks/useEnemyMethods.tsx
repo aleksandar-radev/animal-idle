@@ -24,13 +24,14 @@ const useEnemyMethods = () => {
     },
     reset() {
       fightState.enemy = null;
+      fightState.enemyLevel = 1;
     },
 
     getRandomEnemy(): Enemy {
       const keys = getAllEnemyTypes();
       const randomKey = keys[Math.floor(Math.random() * keys.length)];
 
-      return this.getEnemyByKey(randomKey);
+      return methods.getEnemyByKey(randomKey);
     },
 
     getEnemyByKey(key) {
@@ -62,7 +63,7 @@ const useEnemyMethods = () => {
     },
     takeDamage(damage) {
       if (fightState.enemyCurrentHealth - damage <= 0) {
-        this.die();
+        methods.die();
       } else {
         fightState.enemyCurrentHealth -= damage;
       }
@@ -71,6 +72,7 @@ const useEnemyMethods = () => {
       fightState.enemyCurrentHealth = null;
       data.currencies[Currency.CURRENCY_TYPE_GOLD].value += 1;
       fightState.enemy = null;
+      fightState.enemyLevel++;
     },
   };
 

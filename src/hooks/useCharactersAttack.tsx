@@ -4,7 +4,7 @@ import useCharacterMethods from './useCharacterMethods';
 import useEnemyMethods from './useEnemyMethods';
 
 const useCharactersAttack = () => {
-  const { data, settings } = useStore();
+  const { data, settings, fightState } = useStore();
   let [isAttacking, setIsAttacking] = useState(false);
   const cm = useCharacterMethods();
   const em = useEnemyMethods();
@@ -27,7 +27,7 @@ const useCharactersAttack = () => {
         return;
       }
 
-      if (!settings.isFightStarted) return;
+      if (!settings.isFightStarted || !fightState.isAlive) return;
       if (!startTime) {
         startTime = timestamp;
       }
