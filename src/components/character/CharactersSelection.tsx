@@ -1,21 +1,26 @@
 import './CharactersSelection.scss';
-import useTranslations from '../../hooks/useTranslations';
-import useCharacterMethods from '../../hooks/useCharacterMethods';
 import CharacterAvatar from './CharacterAvatar';
+import { useState } from 'react';
 
-const CharactersSelection = ({ setSelectedCharacter }) => {
-  const cm = useCharacterMethods();
-  const t = useTranslations();
+const CharactersSelection = ({ onSelectCharacter, availableCharacters }) => {
+  const [remainingCharacters, setRemainingCharacters] = useState([...availableCharacters]);
+
+  const handleCharacterSelect = (character, index) => {
+    onSelectCharacter(character.type);
+    setRemainingCharacters((prevCharacters) => {
+      const updatedCharacters = [...prevCharacters];
+      updatedCharacters.splice(index, 1);
+      return updatedCharacters;
+    });
+  };
 
   return (
     <div className="CharactersSelection">
-      {cm.getAllCharacterTypes().map((characterType) => {
-        return (
-          <div key={characterType} className="item" onClick={() => setSelectedCharacter(characterType)}>
-            <CharacterAvatar characterType={characterType}></CharacterAvatar>
-          </div>
-        );
-      })}
+      {remainingCharacters.map((character, index) => (
+        <div key={character.type} onClick={() => handleCharacterSelect(character, index)}>
+          <CharacterAvatar characterType={character.type} />
+        </div>
+      ))}
     </div>
   );
 };

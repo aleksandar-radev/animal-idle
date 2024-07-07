@@ -118,8 +118,30 @@ const useCharacterMethods = () => {
       return charactersInDeck;
     },
 
+    getCountOfCharactersInDeck: (deckName: string): number => {
+      const deck: Deck = data.decks[deckName];
+      const deckCharacters = Object.keys(deck.characters);
+      return deckCharacters.length;
+    },
+
     addCharacterToDeck: (deckName: string, characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
+      if (!(deckName in data.decks)) {
+        throw new Error("Adding character to Deck failed. Deck doesn't exist.");
+      }
+      if (!(characterType in data.characters)) {
+        throw new Error('Cannot add character. Character not available.');
+      }
       data.decks[deckName].characters[characterType] = data.characters[characterType];
+    },
+
+    removeCharacterFromDeck: (deckName: string, characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
+      if (!(deckName in data.decks)) {
+        throw new Error("Removing character from Deck failed. Deck doesn't exist.");
+      }
+      if (!(characterType in data.decks[deckName].characters)) {
+        throw new Error("Cannot remove character. Character doesn't exist.");
+      }
+      delete data.decks[deckName].characters[characterType];
     },
 
     getCharactersInActiveDeck: useMemo(() => {
@@ -253,7 +275,7 @@ const useCharacterMethods = () => {
     // },
   };
 
-  return methods;
+  return { ...methods };
 };
 
 export default useCharacterMethods;
