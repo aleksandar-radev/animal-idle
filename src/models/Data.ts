@@ -13,7 +13,7 @@ class Data {
   private _language: string;
   private _characters: { [key in ReturnType<typeof getAllCharacterTypes>[number]]: Character };
   private _totalDecks: number;
-  private _activeDeckName: string;
+  private _activeDeckIndex: number;
   private _decks: { [key: string]: Deck };
   private _currencies: { [key: string]: Currency };
   private _id: number;
@@ -28,7 +28,7 @@ class Data {
     language = 'en',
     characters = {},
     totalDecks = 1,
-    activeDeckName = Deck.DEFAULT_DECK_NAME,
+    activeDeckIndex = 0,
     decks = {},
     currencies = {},
     id = 0,
@@ -42,7 +42,7 @@ class Data {
     this.language = language;
     this.characters = characters;
     this.totalDecks = totalDecks;
-    this.activeDeckName = activeDeckName;
+    this.activeDeckIndex = activeDeckIndex;
     this.decks = decks;
     this.currencies = currencies;
     this.id = id;
@@ -94,12 +94,12 @@ class Data {
     this._totalDecks = value;
   }
 
-  get activeDeckName(): string {
-    return this._activeDeckName;
+  get activeDeckIndex(): number {
+    return this._activeDeckIndex;
   }
 
-  set activeDeckName(value: string) {
-    this._activeDeckName = value;
+  set activeDeckIndex(value: number) {
+    this._activeDeckIndex = value;
   }
 
   get decks(): { [key: string]: Deck } {

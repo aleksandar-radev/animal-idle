@@ -1,16 +1,18 @@
 import './CharacterScreen.scss';
 import CharactersList from '../../components/character/CharactersList';
 import useStore from '../../hooks/useStore';
+import useCharacterMethods from '../../hooks/useCharacterMethods';
 
 const CharacterScreen = () => {
   const { data, settings } = useStore();
-
-  const getDecks = () => {
-    return Object.keys(data.decks);
-  };
+  const cm = useCharacterMethods();
 
   const getActiveCharacter = () => {
     return settings.activeCharacter;
+  };
+
+  const handleSelectDeck = (deckIndex: number) => () => {
+    cm.setActiveDeck(deckIndex);
   };
 
   return (
@@ -18,9 +20,12 @@ const CharacterScreen = () => {
       {!getActiveCharacter() && (
         <div className="decks">
           {!getActiveCharacter() &&
-            getDecks().map((deck) => (
-              <div key={deck} className="deck">
-                {deck}
+            cm.getAllDecks().map((deck) => (
+              <div
+                key={deck.index}
+                className={`deck ${data.activeDeckIndex === deck.index ? 'selected' : ''}`}
+                onClick={handleSelectDeck(deck.index)}>
+                {deck.name}
               </div>
             ))}
         </div>

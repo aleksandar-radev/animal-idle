@@ -8,7 +8,6 @@
     grid-template-columns: repeat(auto-fill, minmax(pix(120), 1fr));
     > .item {
       cursor: pointer;
-      background-color: green;
       margin: pix(10);
       width: pix(120);
       height: pix(120);
