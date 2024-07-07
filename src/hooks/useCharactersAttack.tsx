@@ -43,7 +43,7 @@ const useCharactersAttack = () => {
     requestAnimationFrame(animateCooldown);
   }
 
-  return;
+  return { isAttacking, setIsAttacking };
 };
 
 export default useCharactersAttack;

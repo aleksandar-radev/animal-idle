@@ -132,7 +132,7 @@ const useCharacterMethods = () => {
     },
 
     takeDamage: (damage) => {
-      if (damage >= data.characters.currentHealth) {
+      if (damage >= fightState.characterCurrentHealth) {
         fightState.characterCurrentHealth = 0;
         fightState.isAlive = false;
       } else {

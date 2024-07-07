@@ -10,9 +10,13 @@ const useInitFight = () => {
   const em = useEnemyMethods();
   let t = null;
 
-  useEffect(() => {
+  const resetStats = () => {
     cm.reset();
     em.reset();
+  };
+
+  useEffect(() => {
+    resetStats();
 
     t = setTimeout(() => {
       if (settings.activeMainScreenTab === Settings.MAIN_SCREEN_FIGHT_TAB) {
@@ -21,15 +25,14 @@ const useInitFight = () => {
     }, 500);
 
     return () => {
-      cm.reset();
+      resetStats();
 
-      em.reset();
       clearTimeout(t);
       settings.isFightStarted = false;
     };
   }, []);
 
-  return;
+  return { resetStats };
 };
 
 export default useInitFight;

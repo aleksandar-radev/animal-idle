@@ -19,9 +19,6 @@ const useEnemyAttack = () => {
   }, [em.getCurrentEnemy()]);
 
   function startAttacking() {
-    // TODO: add a death screen, during which no fighting will happen
-    // TODO: start atacking after an enemy gets chosen.
-
     let startTime = null;
 
     const animateCooldown = (timestamp) => {
