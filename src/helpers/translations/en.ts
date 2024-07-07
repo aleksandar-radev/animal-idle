@@ -1,6 +1,6 @@
 import Skill from '../../models/Skill';
 
-export const en = {
+const skills = {
   // Attack
   [Skill.SKILL_TYPE_DAMAGE_FLAT]: 'Bonus Flat Damage',
   [Skill.SKILL_TYPE_DAMAGE_FLAT + '-description']: (amount) => `Increases your damage by ${amount}`,
@@ -22,7 +22,33 @@ export const en = {
 
   // Utility
   //
+};
 
+const misc = {
+  // Misc
+  resetProgress: 'Reset Progress',
+  logout: 'Logout',
+  charactersSelectionTitle: 'Character Selection',
+  characters: 'Characters',
+  decks: 'Decks',
+  cost: 'Cost',
+  back: 'Back',
+  fight: 'Fight',
+  shop: 'Shop',
+  leaderboard: 'Leaderboard',
+  settings: 'Settings',
+  admin: 'Admin',
+  cancel: 'Cancel',
+  'exit-fight': 'Exit Fight',
+  'exit-fight-confirm': 'Are you sure you want to exit the fight? Your progress will be lost.',
+  defense: 'Defense',
+  utility: 'Utility',
+  stats: 'Stats',
+  skills: 'Skills',
+  items: 'Items',
+};
+
+const character = {
   name: 'Name',
   experience: 'Experience',
   level: 'Level',
@@ -34,15 +60,12 @@ export const en = {
   damage: 'Damage',
   attack: 'Attack',
   heal: 'Heal',
-  'double-damage': 'Double damage',
-  'auto-cast': 'Auto cast',
-  backstab: 'Backstab',
+};
 
-  defense: 'Defense',
-  utility: 'Utility',
-  stats: 'Stats',
-  skills: 'Skills',
-  items: 'Items',
+export const en = {
+  ...skills,
+  ...misc,
+  ...character,
 
   // Others
   multiplier: {
@@ -53,14 +76,4 @@ export const en = {
     100: 'x100',
     200: 'x200',
   },
-
-  // Misc
-  resetProgress: 'Reset Progress',
-  logout: 'Logout',
-
-  //
-  charactersSelectionTitle: 'Character Selection',
-  characters: 'Characters',
-  decks: 'Decks',
-  cost: 'Cost',
 };

@@ -22,7 +22,7 @@ const CharacterScreenMenu = () => {
 
   return (
     <div className={'CharacterScreenMenu'}>
-      <div onClick={() => handleBack(Settings.MAIN_SCREEN_CHARACTER_TAB)}>Back</div>
+      <div onClick={() => handleBack(Settings.MAIN_SCREEN_CHARACTER_TAB)}>{t['back']}</div>
       <div
         className={isActiveTab(Settings.CHARACTER_SCREEN_STATS_TAB) ? 'active' : ''}
         onClick={() => changeView(Settings.CHARACTER_SCREEN_STATS_TAB)}>
