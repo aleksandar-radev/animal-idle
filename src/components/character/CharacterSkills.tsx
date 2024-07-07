@@ -70,7 +70,7 @@ const CharacterSkills = () => {
       <div className="title">
         <span>{t[type]}</span>
         <span className="multiplier" onClick={() => nextMultiplier(multiplier, setMultiplier)}>
-          {t.multiplier[multiplier]}
+          {t['multiplier'][multiplier]}
         </span>
       </div>
     );

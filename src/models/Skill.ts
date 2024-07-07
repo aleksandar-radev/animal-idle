@@ -9,7 +9,6 @@ class Skill {
   private _level: number;
   private _manaCost?: number;
   private _passive: boolean;
-  private _icon: any;
   private _requirements: Requirement[];
   private _cooldown?: number;
 
@@ -30,7 +29,7 @@ class Skill {
   // Barbarian Specific Skills
   static SKILL_TYPE_RAGE = 'rage';
 
-  constructor({ name, type, category, index, level = 0, passive = true, icon = '', requirements = [] }) {
+  constructor({ name, type, category, index, level = 1, requirements = [] }) {
     const stats = getSkillStats()[type];
 
     this._name = name;
@@ -39,7 +38,6 @@ class Skill {
     this.index = index;
     this.level = level;
     this._passive = stats.passive;
-    this._icon = icon;
     this.requirements = requirements;
     if (!stats.passive) {
       this._manaCost = stats.manaCost;
@@ -84,10 +82,6 @@ class Skill {
     return this._passive;
   }
 
-  get icon(): any {
-    return this._icon;
-  }
-
   get requirements(): Requirement[] {
     return this._requirements;
   }
@@ -95,7 +89,6 @@ class Skill {
   set requirements(value: any) {
     const { requirements } = getSkillStats()[this.type];
     const newRequirements = [];
-    console.log(requirements);
     requirements.forEach((requirementData) => {
       newRequirements.push(requirementData); // TODO fix
     });

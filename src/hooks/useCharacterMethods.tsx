@@ -6,36 +6,53 @@ import { getAllCharacterTypes, getCharacterStats, getSkillStats } from '../helpe
 import Requirement from '../models/Requirement';
 import Skill from '../models/Skill';
 import Currency from '../models/Currency';
-import { get } from 'http';
 import DeckCharacter from '../models/DeckCharacter';
 
 const useCharacterMethods = () => {
   const { data, fightState, settings } = useStore();
 
+  const skillMethods = {
+    [Skill.SKILL_TYPE_DAMAGE_FLAT](character: Character) {
+      if (!character.skills[Skill.SKILL_TYPE_DAMAGE_FLAT]) {
+        return 0;
+      }
+      return character.skills[Skill.SKILL_TYPE_DAMAGE_FLAT].level;
+    },
+  };
+
+  // methods format:
+  // get<Prop>ByCharacterType
+  const characterMethods = {
+    getDamageByCharacterType(characterType: string) {
+      let bonus = 0;
+      const character = data.characters[characterType];
+
+      if (character.skills[Skill.SKILL_TYPE_DAMAGE_FLAT]) {
+        bonus += skillMethods[Skill.SKILL_TYPE_DAMAGE_FLAT](character);
+      }
+
+      return data.characters[characterType].damage + bonus;
+    },
+  };
+
   const methods = {
     getAllSkillsForCharacter(characterType: string): { [key: string]: Skill } {
-      // filter by requirement type character (if no such requirement, still add it)
       const allSkills = getSkillStats();
-      const filteredSkills = {};
 
-      Object.entries(allSkills).forEach(([skillType, skillData]) => {
-        let isCharacterSpecific = false;
-        let specificCharacterType = null;
-        skillData.requirements.forEach((requirementData) => {
-          if (
-            requirementData.type === Requirement.REQUIREMENT_TYPE_CHARACTER_TYPE &&
-            characterType !== requirementData.innerType
-          ) {
-            isCharacterSpecific = true;
-            specificCharacterType = requirementData.innerType;
-            return;
-          }
-        });
-        if (isCharacterSpecific && specificCharacterType !== characterType) return;
-        filteredSkills[skillType] = skillData;
-      });
+      return Object.entries(allSkills).reduce((filteredSkills, [skillType, skillData]) => {
+        const characterSpecificRequirement = skillData.requirements.find(
+          (req) => req.type === Requirement.REQUIREMENT_TYPE_CHARACTER_TYPE,
+        );
 
-      return { ...filteredSkills };
+        const isSkillApplicable =
+          !characterSpecificRequirement || characterSpecificRequirement.innerType === characterType;
+
+        if (isSkillApplicable) {
+          filteredSkills[skillType] = skillData;
+        }
+
+        return filteredSkills;
+      }, {});
     },
 
     getAllStatsOfActiveCharacter() {
@@ -48,7 +65,12 @@ const useCharacterMethods = () => {
       const selectedStats = {};
       Character.CHARACTER_DISPLAY_PROPS.forEach((prop) => {
         if (prop in activeCharacter) {
-          selectedStats[prop] = activeCharacter[prop];
+          const methodName = `get${prop.charAt(0).toUpperCase() + prop.slice(1)}ByCharacterType`;
+          if (typeof characterMethods[methodName] === 'function') {
+            selectedStats[prop] = characterMethods[methodName](activeCharacter.type);
+          } else {
+            selectedStats[prop] = activeCharacter[prop];
+          }
         }
       });
 
@@ -96,7 +118,7 @@ const useCharacterMethods = () => {
     getTotalDamage: () => {
       let totalDamage = 0;
       deckMethods.getCharactersInActiveDeck().forEach((char) => {
-        totalDamage += char.damage;
+        totalDamage += characterMethods.getDamageByCharacterType(char.type);
       });
       return totalDamage;
     },
@@ -147,24 +169,43 @@ const useCharacterMethods = () => {
       fightState.characterTotalHealth = methods.getTotalHealth();
       fightState.characterTotalMana = methods.getTotalMana();
     },
-    // buySkill(skill) {
-    //   const conditionsReached = true;
-    //   const currenciesToRemove = {};
-    //   Object.entries(skill.getCost()).forEach(([type, value]) => {
-    //     const currency = data.currencies[type];
-    //     if (value > currency.value || (typeof value === 'number' && value <= 0)) {
-    //       return;
-    //     }
-    //     currenciesToRemove[type] = value;
-    //   });
 
-    //   if (conditionsReached) {
-    //     Object.entries(currenciesToRemove).forEach(([type, value]) => {
-    //       charCurrencies.removeCurrency(type, value);
-    //     });
-    //     skill.persistentData.level++;
-    //   }
-    // },
+    skillRequirementsMet(skill: Skill): boolean {
+      let requirementsMet = true;
+      skill.requirements.forEach((requirement: Requirement) => {
+        if (requirement.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
+          if (requirement.value > data.currencies[requirement.innerType].value) {
+            requirementsMet = false;
+          }
+        }
+        if (requirement.type === Requirement.REQUIREMENT_TYPE_LEVEL) {
+          if (requirement.value > data.characters[requirement.innerType].level) {
+            requirementsMet = false;
+          }
+        }
+      });
+      return requirementsMet;
+    },
+
+    buySkill(character: Character, skill: Skill): void {
+      const skillCopy: Skill = new Skill(skill);
+
+      // check if conditions are reached
+      const areRequirementsMet = methods.skillRequirementsMet(skill);
+      console.log(character);
+      console.log(skill);
+      console.log(areRequirementsMet);
+
+      if (!areRequirementsMet) {
+        throw new Error('Requirements not met');
+      }
+
+      if (character.skills[skill.type]) {
+        character.skills[skill.type].level++;
+      } else {
+        character.skills[skill.type] = skillCopy;
+      }
+    },
   };
 
   const deckMethods = {
@@ -289,7 +330,7 @@ const useCharacterMethods = () => {
     },
   };
 
-  return { ...methods, ...deckMethods };
+  return { ...methods, ...deckMethods, ...characterMethods, ...skillMethods };
 };
 
 export default useCharacterMethods;

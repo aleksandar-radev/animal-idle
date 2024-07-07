@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useStore from './useStore';
 import useCharacterMethods from './useCharacterMethods';
 import useEnemyMethods from './useEnemyMethods';
+import Character from '../models/Character';
 
 const useCharactersAttack = () => {
   const { data, settings, fightState } = useStore();
@@ -17,7 +18,7 @@ const useCharactersAttack = () => {
     }
   }, [em.getCurrentEnemy()]);
 
-  function startAttacking(char) {
+  function startAttacking(char: Character) {
     setIsAttacking(true);
     let startTime = null;
 
@@ -35,7 +36,7 @@ const useCharactersAttack = () => {
         requestAnimationFrame(animateCooldown);
       } else {
         if (em.getCurrentEnemy()) {
-          em.takeDamage(char.damage);
+          em.takeDamage(cm.getDamageByCharacterType(char.type));
         }
         startAttacking(char);
       }

@@ -1,6 +1,7 @@
 import crypt from './externalLibraries/encrypt';
-import swordIcon from '../assets/sword.png';
 import berserkerAvatar from '../assets/berserker-avatar.jpg';
+import swordIcon from '../assets/sword.png';
+import rageIcon from '../assets/rage.png';
 import druidAvatar from '../assets/druid-avatar.png';
 import sorceressAvatar from '../assets/sorceress-avatar.jpg';
 import assassinAvatar from '../assets/assassin-avatar.jpg';
@@ -23,20 +24,26 @@ export function loadAssets(assets) {
         callback(url);
       };
 
-  converter(berserkerAvatar, (url) => {
+  converter(berserkerAvatar, (url: string) => {
     assets[Character.CHARACTER_TYPE_BARBARIAN] = url;
   });
-  converter(sorceressAvatar, (url) => {
+  converter(sorceressAvatar, (url: string) => {
     assets[Character.CHARACTER_TYPE_SORCERESS] = url;
   });
-  converter(druidAvatar, (url) => {
+  converter(druidAvatar, (url: string) => {
     assets[Character.CHARACTER_TYPE_DRUID] = url;
   });
-  converter(assassinAvatar, (url) => {
+  converter(assassinAvatar, (url: string) => {
     assets[Enemy.ENEMY_TYPE_ASSASSIN] = url;
   });
-  converter(warriorAvatar, (url) => {
+  converter(warriorAvatar, (url: string) => {
     assets[Enemy.ENEMY_TYPE_WARRIOR] = url;
+  });
+  converter(swordIcon, (url: string) => {
+    assets[Skill.SKILL_TYPE_DAMAGE_FLAT] = url;
+  });
+  converter(rageIcon, (url: string) => {
+    assets[Skill.SKILL_TYPE_RAGE] = url;
   });
 }
 
@@ -197,11 +204,11 @@ export const getSkillStats = (): { [key: string]: Skill } => {
       type: Skill.SKILL_TYPE_DAMAGE_FLAT,
       category: Skill.SKILL_CATEGORY_ATTACK,
       index: 1,
-      icon: swordIcon,
       passive: true,
       requirements: [
         new Requirement({
           type: Requirement.REQUIREMENT_TYPE_LEVEL,
+          innerType: Character.CHARACTER_TYPE_BARBARIAN,
           value: 1,
         }),
         new Requirement({
@@ -216,11 +223,11 @@ export const getSkillStats = (): { [key: string]: Skill } => {
       type: Skill.SKILL_TYPE_RAGE,
       category: Skill.SKILL_CATEGORY_ATTACK,
       index: 1,
-      icon: swordIcon,
       passive: false,
       requirements: [
         new Requirement({
           type: Requirement.REQUIREMENT_TYPE_LEVEL,
+          innerType: Character.CHARACTER_TYPE_BARBARIAN,
           value: 1,
         }),
         new Requirement({
@@ -245,7 +252,6 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 //     name: Skill.SKILL_TYPE_DAMAGE_FLAT,
 //     type: Skill.SKILL_CATEGORY_ATTACK,
 //     index: 1,
-//     icon: swordIcon,
 //     requirements: {
 //       level: 1,
 //     },
@@ -260,7 +266,6 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 //     name: Skill.SKILL_TYPE_DAMAGE_PERCENT,
 //     type: Skill.SKILL_CATEGORY_ATTACK,
 //     index: 2,
-//     icon: swordIcon,
 //     requirements: {
 //       level: 1,
 //     },
@@ -275,7 +280,6 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 //     name: Skill.SKILL_TYPE_CRIT_CHANCE,
 //     type: Skill.SKILL_CATEGORY_ATTACK,
 //     index: 3,
-//     icon: swordIcon,
 //     requirements: {
 //       level: 1,
 //     },
@@ -290,7 +294,6 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 //     name: Skill.SKILL_TYPE_CRIT_DAMAGE,
 //     type: Skill.SKILL_CATEGORY_ATTACK,
 //     index: 4,
-//     icon: swordIcon,
 //     requirements: {
 //       level: 1,
 //     },
@@ -305,7 +308,6 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 //     name: Skill.SKILL_TYPE_ATTACK_SPEED,
 //     type: Skill.SKILL_CATEGORY_ATTACK,
 //     index: 5,
-//     icon: swordIcon,
 //     requirements: {
 //       level: 1,
 //     },
@@ -320,7 +322,6 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 //     name: Skill.SKILL_TYPE_DOUBLE_DAMAGE_CHANCE,
 //     type: Skill.SKILL_CATEGORY_ATTACK,
 //     index: 6,
-//     icon: swordIcon,
 //     requirements: {
 //       level: 1,
 //     },
@@ -335,7 +336,6 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 //     name: Skill.SKILL_BONUS_DEFENSE,
 //     type: Skill.SKILL_CATEGORY_DEFENSE,
 //     index: 7,
-//     icon: swordIcon,
 //     requirements: {
 //       level: 1,
 //     },
@@ -350,7 +350,6 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 //     name: Skill.SKILL_TYPE_BONUS_HEALTH,
 //     type: Skill.SKILL_CATEGORY_DEFENSE,
 //     index: 8,
-//     icon: swordIcon,
 //     requirements: {
 //       level: 1,
 //     },
@@ -365,7 +364,6 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 //     name: Skill.SKILL_TYPE_BONUS_GOLD,
 //     type: Skill.SKILL_CATEGORY_UTILITY,
 //     index: 9,
-//     icon: swordIcon,
 //     requirements: {
 //       level: 1,
 //     },
@@ -384,7 +382,6 @@ export const getSkillStats = (): { [key: string]: Skill } => {
 //       type: Skill.SKILL_TYPE_RAGE,
 //       category: Skill.SKILL_CATEGORY_ATTACK,
 //       index: 1,
-//       icon: swordIcon,
 //       passive: false,
 //       manaCost: 5,
 //       requirements: {
