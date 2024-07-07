@@ -12,7 +12,7 @@ const CharacterGrid = ({ className }) => {
       {Array.from(cm.getCharactersInActiveDeck().values()).map((character) => {
         return (
           <div key={character.type} className="character">
-            <CharacterAvatar character={character}></CharacterAvatar>
+            <CharacterAvatar characterType={character.type}></CharacterAvatar>
           </div>
         );
       })}
