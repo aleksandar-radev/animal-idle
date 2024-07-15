@@ -15,6 +15,18 @@ const useDataManager = () => {
 
   const { assets, data, isLoaded, setData, setSettings, setIsLoaded, setfightState, updateState } = useStore();
 
+  const deepProxy = (obj, handler) => {
+    if (typeof obj !== 'object' || obj === null) return obj;
+
+    for (let key in obj) {
+      if (typeof obj[key] === 'object' && obj[key] !== null) {
+        obj[key] = deepProxy(obj[key], handler);
+      }
+    }
+
+    return new Proxy(obj, handler);
+  };
+
   const handler = () => ({
     set(target, property, value) {
       // console.log(`${property} changed from ${target[property]} to ${value}`);
@@ -26,20 +38,20 @@ const useDataManager = () => {
   });
 
   useEffect(() => {
-    const handleVisibilityChange = async () => {
+    const handleDatabaseUpdate = async () => {
       if (document.visibilityState === 'visible') {
         const user = await authRepo.getUser();
-        dataRepo.updateDataByUserIdAndPremium(user.id, data);
+        dataRepo.updateDataByUserId(user.id, data);
       }
     };
 
-    const interval = setInterval(handleVisibilityChange, 60 * 1000);
+    const interval = setInterval(handleDatabaseUpdate, 60 * 1000);
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener('visibilitychange', handleDatabaseUpdate);
 
     return () => {
       clearInterval(interval);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('visibilitychange', handleDatabaseUpdate);
     };
   }, [authRepo, dataRepo, data]);
 
@@ -55,9 +67,9 @@ const useDataManager = () => {
       let userData = await dataRepo.getDataByUserId(user.id);
       let formattedData = { ...userData.data_json };
 
-      setData(new Proxy(new Data(formattedData), handler()));
-      setSettings(new Proxy(new Settings(), handler()));
-      setfightState(new Proxy(new FightState({}), handler()));
+      setData(deepProxy(new Data(formattedData), handler()));
+      setSettings(deepProxy(new Settings(), handler()));
+      setfightState(deepProxy(new FightState({}), handler()));
       setIsLoaded(true);
     })();
   }, []);

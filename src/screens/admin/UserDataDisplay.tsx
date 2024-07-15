@@ -7,7 +7,7 @@ const UserDataDisplay = (item) => {
   const dataRepo = useDataRepo();
 
   const handleSave = () => {
-    dataRepo.updateDataByUserIdAndPremium(item.user.id, JSON.parse(areaVal.current.value || '{}'));
+    dataRepo.updateDataByUserId(item.user.id, JSON.parse(areaVal.current.value || '{}'));
   };
 
   return (

@@ -4,7 +4,10 @@
   cursor: pointer;
   &-tooltip {
     .tooltip {
-      background-color: gray;
+      display: flex;
+      flex-direction: column;
+      padding: pix(5);
+      background-color: lightgray;
     }
   }
 }

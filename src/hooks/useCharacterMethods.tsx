@@ -187,18 +187,25 @@ const useCharacterMethods = () => {
       return requirementsMet;
     },
 
+    removeRequirementResources(skill: Skill) {
+      skill.requirements.forEach((requirement: Requirement) => {
+        if (requirement.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
+          data.currencies[requirement.innerType].value -= requirement.value;
+        }
+      });
+    },
+
     buySkill(character: Character, skill: Skill): void {
       const skillCopy: Skill = new Skill(skill);
 
       // check if conditions are reached
       const areRequirementsMet = methods.skillRequirementsMet(skill);
-      console.log(character);
-      console.log(skill);
-      console.log(areRequirementsMet);
 
       if (!areRequirementsMet) {
         throw new Error('Requirements not met');
       }
+
+      methods.removeRequirementResources(skill);
 
       if (character.skills[skill.type]) {
         character.skills[skill.type].level++;

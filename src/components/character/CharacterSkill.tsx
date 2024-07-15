@@ -51,22 +51,27 @@ const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) 
       <Popper id={id} open={open} anchorEl={anchorEl} placement="top" className="CharacterSkill-tooltip">
         <div className="tooltip">
           <div>
-            {t['level']}: {skillLevel} {' -> '} {skillLevel + x}
+            {skill.name} ({skill.passive ? 'passive' : 'active'})
           </div>
           <div>
-            {t['cost']}:{' '}
+            {t['level']}: {skillLevel} {' -> '} {skillLevel + x}
+          </div>
+          <div></div>
+          <div>
+            {t['requirements']}:{' '}
             {skill.requirements.map((req) => {
               if (req.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
                 return (
                   <div key={req.type}>
-                    {req.innerType} {req.value}
+                    {t[req.innerType]}: {req.value}
                   </div>
                 );
               }
+              if (req.type === Requirement.REQUIREMENT_TYPE_LEVEL) {
+                return <div key={req.type}>Required Level: {req.value}</div>;
+              }
             })}
           </div>
-          <div>{skill.passive ? 'passive' : 'active'}</div>
-          <div>{skill.name}</div>
         </div>
       </Popper>
     </div>

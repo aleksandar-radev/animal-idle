@@ -16,7 +16,7 @@ const SettingsScreen = () => {
   };
   const resetProgress = async () => {
     const user = await authRepo.getUser();
-    await dataRepo.updateDataByUserIdAndPremium(user.id, {});
+    await dataRepo.updateDataByUserId(user.id, {});
   };
 
   return (

@@ -32,6 +32,7 @@ const misc = {
   characters: 'Characters',
   decks: 'Decks',
   cost: 'Cost',
+  requirements: 'Requirements',
   back: 'Back',
   fight: 'Fight',
   shop: 'Shop',
@@ -46,6 +47,7 @@ const misc = {
   stats: 'Stats',
   skills: 'Skills',
   items: 'Items',
+  gold: 'Gold',
 };
 
 const character = {

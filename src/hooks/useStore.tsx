@@ -29,17 +29,22 @@ const useStore = create<AllState>((set) => ({
   setfightState: (fightState) => set({ fightState }),
   setSettings: (settings) => set((s) => ({ ...s, settings })),
   setIsLoaded: (isLoaded) => set({ isLoaded }),
-  updateState: (path, value) =>
+  updateState: (path, value) => {
     set(
       produce((state) => {
         const keys = path.split('.');
         let obj = state;
         while (keys.length > 1) {
-          obj = obj[keys.shift()];
+          const key = keys.shift();
+          if (!obj[key]) {
+            obj[key] = {}; // Ensure the key exists in the state
+          }
+          obj = obj[key];
         }
         obj[keys[0]] = value;
       }),
-    ),
+    );
+  },
 }));
 
 export default useStore;

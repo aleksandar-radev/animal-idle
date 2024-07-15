@@ -3,6 +3,9 @@ import useStore from './useStore';
 const useCurrencies = () => {
   const { data } = useStore();
   const methods = {
+    getCurrency(type: string) {
+      return data.currencies[type].value;
+    },
     addCurrency(type, amount: number) {
       if (Number.isNaN(amount)) {
         return;

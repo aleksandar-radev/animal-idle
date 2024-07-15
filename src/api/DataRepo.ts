@@ -39,7 +39,7 @@ export class DataRepo {
     }
   }
 
-  async updateDataByUserIdAndPremium(id, newData, premium = 'no') {
+  async updateDataByUserId(id, newData) {
     try {
       let encryptedData = prepareDataForApi(newData);
 
