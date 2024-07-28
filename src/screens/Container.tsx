@@ -16,12 +16,13 @@ const Container = () => {
 
   useEffect(() => {
     (async () => {
-      const user = await authRepo.getUser();
-      if (!user) {
+      try {
+        const user = await authRepo.getUser();
+        setUser(user);
+      } catch (error) {
         navigate('/login');
         return;
       }
-      setUser(user);
     })();
   }, []);
 
