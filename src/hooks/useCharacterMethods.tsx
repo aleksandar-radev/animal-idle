@@ -213,6 +213,10 @@ const useCharacterMethods = () => {
         character.skills[skill.type] = skillCopy;
       }
     },
+    addExperience: (characterType: ReturnType<typeof getAllCharacterTypes>[number], experience: number) => {
+      let character = methods.getActiveCharacterByType(characterType);
+      character.experience += experience;
+    },
   };
 
   const deckMethods = {

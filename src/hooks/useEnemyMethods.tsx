@@ -1,10 +1,12 @@
 import { getAllEnemyStats, getAllEnemyTypes } from '../helpers/gameFunctions';
 import Currency from '../models/Currency';
 import Enemy from '../models/Enemy';
+import useCharacterMethods from './useCharacterMethods';
 import useStore from './useStore';
 
 const useEnemyMethods = () => {
   const { data, fightState } = useStore();
+  const cm = useCharacterMethods();
 
   const methods = {
     getCurrentEnemy() {
@@ -73,6 +75,10 @@ const useEnemyMethods = () => {
       data.currencies[Currency.CURRENCY_TYPE_GOLD].value += 1;
       fightState.enemy = null;
       fightState.enemyLevel++;
+
+      cm.getCharactersInActiveDeck().forEach((char) => {
+        cm.addExperience(char.type, 10);
+      });
     },
   };
 
