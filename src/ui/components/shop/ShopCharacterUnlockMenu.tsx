@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import './ShopCharacterUnlockMenu.scss';
-import useStore from '@/hooks/useStore';
+import useGameStore from '@/hooks/general/useGameStore';
 import Character from '@/models/Character';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 import CharacterAvatar from '@/ui/components/character/CharacterAvatar';
 
 const ShopCharacterUnlockMenu = ({ character }) => {

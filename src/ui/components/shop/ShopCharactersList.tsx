@@ -1,14 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import './ShopCharactersList.scss';
-import useStore from '@/hooks/useStore';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
+import useGameStore from '@/hooks/general/useGameStore';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
-import useTranslations from '@/hooks/useTranslations';
+import useTranslations from '@/hooks/general/useTranslations';
 import ShopCharacterUnlockMenu from './ShopCharacterUnlockMenu';
 import CharacterAvatar from '@/ui/components/character/CharacterAvatar';
 
 const ShopCharactersList = () => {
-  const { data, settings } = useStore();
+  const { data, settings } = useGameStore();
   const cm = useCharacterMethods();
   const t = useTranslations();
   const [selectedCharacter, setSelectedCharacter] = useState(null);

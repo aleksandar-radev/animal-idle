@@ -1,10 +1,10 @@
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
+import useEnemyMethods from '@/hooks/gameMethods/useEnemyMethods';
+import useGameStore from '@/hooks/general/useGameStore';
 import { useEffect } from 'react';
-import useCharacterMethods from './useCharacterMethods';
-import useStore from './useStore';
-import useEnemyMethods from './useEnemyMethods';
 
 const useEnemyAttack = () => {
-  const { settings, data, fightState } = useStore();
+  const { settings, data, fightState } = useGameStore();
   const cm = useCharacterMethods();
   const em = useEnemyMethods();
 

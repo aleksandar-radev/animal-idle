@@ -3,11 +3,11 @@ import { CHARACTER_SKILL_AUTO_CAST } from '@/helpers/constants/gameVariables';
 import './SkillsBar.scss';
 import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';
-import useTranslations from '@/hooks/useTranslations';
-import useStore from '@/hooks/useStore';
+import useTranslations from '@/hooks/general/useTranslations';
+import useGameStore from '@/hooks/general/useGameStore';
 
 const SkillsBar = ({ className }) => {
-  const { store } = useStore();
+  const { store } = useGameStore();
   const t = useTranslations();
   const [activeSkills, setActiveSkills] = useState({});
   const skillShouldStop = useRef(false);

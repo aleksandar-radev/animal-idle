@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './LeaderboardScreen.scss';
-import useTranslations from '@/hooks/useTranslations';
-import useDataRepo from '@/hooks/useDataRepo';
+import useTranslations from '@/hooks/general/useTranslations';
+import useDataRepo from '@/hooks/general/useDataRepo';
 
 const LeaderboardScreen = () => {
   const [allData, setAllData] = useState([]);

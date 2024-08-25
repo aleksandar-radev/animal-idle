@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import Character from '@/models/Character';
 import Deck from '@/models/Deck';
-import useStore from './useStore';
+import useGameStore from '../general/useGameStore';
 import Requirement from '@/models/Requirement';
 import Skill from '@/models/Skill';
 import Currency from '@/models/Currency';
@@ -10,7 +10,7 @@ import { getAllCharacterTypes, getCharacterStats } from '@/utils/game/characterD
 import { getSkillStats } from '@/utils/game/skillData';
 
 const useCharacterMethods = () => {
-  const { data, fightState, settings } = useStore();
+  const { data, fightState, settings } = useGameStore();
 
   const skillMethods = {
     [Skill.SKILL_TYPE_DAMAGE_FLAT](character: Character) {
@@ -171,9 +171,9 @@ const useCharacterMethods = () => {
       fightState.characterTotalMana = methods.getTotalMana();
     },
 
-    skillRequirementsMet(skill: Skill): boolean {
+    areRequirementsMet(requirements: Requirement[]): boolean {
       let requirementsMet = true;
-      skill.requirements.forEach((requirement: Requirement) => {
+      requirements.forEach((requirement: Requirement) => {
         if (requirement.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
           if (requirement.value > data.currencies[requirement.innerType].value) {
             requirementsMet = false;
@@ -200,7 +200,7 @@ const useCharacterMethods = () => {
       const skillCopy: Skill = new Skill(skill);
 
       // check if conditions are reached
-      const areRequirementsMet = methods.skillRequirementsMet(skill);
+      const areRequirementsMet = methods.areRequirementsMet(skill.requirements);
 
       if (!areRequirementsMet) {
         throw new Error('Requirements not met');

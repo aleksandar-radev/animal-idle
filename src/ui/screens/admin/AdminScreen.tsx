@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './AdminScreen.scss';
 import UserDataDisplay from './UserDataDisplay';
-import useDataRepo from '@/hooks/useDataRepo';
+import useDataRepo from '@/hooks/general/useDataRepo';
 
 const AdminScreen = () => {
   const [allData, setAllData] = useState([]);

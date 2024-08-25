@@ -1,10 +1,10 @@
 import './EnemyResources.scss';
-import useStore from '@/hooks/useStore';
-import useEnemyMethods from '@/hooks/useEnemyMethods';
+import useEnemyMethods from '@/hooks/gameMethods/useEnemyMethods';
+import useGameStore from '@/hooks/general/useGameStore';
 import HealthBar from '@/ui/components/HealthBar';
 
 const EnemyResources = ({ className }) => {
-  const { data } = useStore();
+  const { data } = useGameStore();
   const em = useEnemyMethods();
 
   return (

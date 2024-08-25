@@ -1,13 +1,13 @@
 import './ShopScreen.scss';
-import useStore from '@/hooks/useStore';
+import useGameStore from '@/hooks/general/useGameStore';
 import Settings from '@/models/Settings';
-import useTranslations from '@/hooks/useTranslations';
+import useTranslations from '@/hooks/general/useTranslations';
 import ShopCharacters from '@/ui/components/shop/ShopCharacters';
 import ShopUtility from '@/ui/components/shop/ShopUtility';
 import ShopDecksList from '@/ui/components/shop/ShopDecksList';
 
 const ShopScreen = () => {
-  const { settings } = useStore();
+  const { settings } = useGameStore();
   const t = useTranslations();
 
   const changeView = (view: string) => {

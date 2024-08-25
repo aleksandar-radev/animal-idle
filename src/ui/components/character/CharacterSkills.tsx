@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
 import './CharacterSkills.scss';
 import CharacterSkill from './CharacterSkill';
-import useTranslations from '@/hooks/useTranslations';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
+import useTranslations from '@/hooks/general/useTranslations';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 import Skill from '@/models/Skill';
 
 const CharacterSkills = () => {

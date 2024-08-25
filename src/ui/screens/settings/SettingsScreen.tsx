@@ -1,8 +1,8 @@
 import './SettingsScreen.scss';
-import useTranslations from '@/hooks/useTranslations';
+import useTranslations from '@/hooks/general/useTranslations';
 import { useNavigate } from 'react-router-dom';
-import useDataRepo from '@/hooks/useDataRepo';
-import useAuthRepo from '@/hooks/useAuthRepo';
+import useDataRepo from '@/hooks/general/useDataRepo';
+import useAuthRepo from '@/hooks/general/useAuthRepo';
 
 const SettingsScreen = () => {
   const navigate = useNavigate();

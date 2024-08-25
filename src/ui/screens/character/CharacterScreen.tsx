@@ -1,10 +1,10 @@
 import './CharacterScreen.scss';
 import CharactersList from '@/ui/components/character/CharactersList';
-import useStore from '@/hooks/useStore';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
+import useGameStore from '@/hooks/general/useGameStore';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 
 const CharacterScreen = () => {
-  const { data, settings } = useStore();
+  const { data, settings } = useGameStore();
   const cm = useCharacterMethods();
 
   const getActiveCharacter = () => {

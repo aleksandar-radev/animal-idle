@@ -1,7 +1,7 @@
-import useStore from './useStore';
+import useGameStore from '../general/useGameStore';
 
 const useCurrencies = () => {
-  const { data } = useStore();
+  const { data } = useGameStore();
   const methods = {
     getCurrency(type: string) {
       return data.currencies[type].value;

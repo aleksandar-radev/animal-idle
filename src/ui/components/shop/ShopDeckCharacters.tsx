@@ -1,15 +1,15 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import './ShopDeckCharacters.scss';
-import useStore from '@/hooks/useStore';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
+import useGameStore from '@/hooks/general/useGameStore';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import useTranslations from '@/hooks/useTranslations';
+import useTranslations from '@/hooks/general/useTranslations';
 import CharacterAvatar from '@/ui/components/character/CharacterAvatar';
 import CharactersSelection from '@/ui/components/character/CharactersSelection';
 
 const ShopDeckCharacters = ({ deckIndex }) => {
-  const { data, settings } = useStore();
+  const { data, settings } = useGameStore();
   const cm = useCharacterMethods();
   const t = useTranslations();
   const [characterSelectionOpen, setCharacterSelectionOpen] = useState(false);

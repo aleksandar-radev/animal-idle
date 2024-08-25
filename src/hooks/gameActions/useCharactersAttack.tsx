@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import useStore from './useStore';
-import useCharacterMethods from './useCharacterMethods';
-import useEnemyMethods from './useEnemyMethods';
+
 import Character from '@/models/Character';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
+import useEnemyMethods from '@/hooks/gameMethods/useEnemyMethods';
+import useGameStore from '@/hooks/general/useGameStore';
 
 const useCharactersAttack = () => {
-  const { data, settings, fightState } = useStore();
+  const { data, settings, fightState } = useGameStore();
   let [isAttacking, setIsAttacking] = useState(false);
   const cm = useCharacterMethods();
   const em = useEnemyMethods();

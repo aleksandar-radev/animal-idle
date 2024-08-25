@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import './ShopCharacters.scss';
-import useStore from '@/hooks/useStore';
+import useGameStore from '@/hooks/general/useGameStore';
 import ShopCharactersList from './ShopCharactersList';
 
 const ShopCharacters = () => {
-  const store = useStore();
+  const store = useGameStore();
 
   return (
     <>

@@ -2,19 +2,19 @@ import CharacterResources from '@/ui/components/character/CharacterResources';
 import EnemyAvatar from '@/ui/components/enemy/EnemyAvatar';
 import EnemyResources from '@/ui/components/enemy/EnemyResources';
 import './FightScreen.scss';
-import useEnemyAttack from '@/hooks/useEnemyAttack';
-import useInitFight from '@/hooks/useInitFight';
-import useCharactersAttack from '@/hooks/useCharactersAttack';
+import useEnemyAttack from '@/hooks/gameActions/useEnemyAttack';
+import useInitFight from '@/hooks/gameActions/useInitFight';
 import CharacterGrid from '@/ui/components/character/CharacterGrid';
-import useStore from '@/hooks/useStore';
+import useGameStore from '@/hooks/general/useGameStore';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Settings from '@/models/Settings';
 import FightLog from '@/ui/components/FightLog';
 import ActiveSkillsBar from '@/ui/components/ActiveSkillsBar';
+import useCharactersAttack from '@/hooks/gameActions/useCharactersAttack';
 
 const FightScreen = () => {
-  const { settings, fightState } = useStore();
+  const { settings, fightState } = useGameStore();
   const [isDeathDialogOpen, setIsDeathDialogOpen] = useState(false);
   const { resetStats } = useInitFight();
   useEnemyAttack();

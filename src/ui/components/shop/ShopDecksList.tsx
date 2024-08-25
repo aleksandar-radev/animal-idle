@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import './ShopDecksList.scss';
-import useStore from '@/hooks/useStore';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
-import useTranslations from '@/hooks/useTranslations';
+import useGameStore from '@/hooks/general/useGameStore';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
+import useTranslations from '@/hooks/general/useTranslations';
 import { Add } from '@mui/icons-material';
 import ShopDeckCharacters from './ShopDeckCharacters';
 

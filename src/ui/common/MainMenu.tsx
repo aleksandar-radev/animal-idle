@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import './MainMenu.scss';
-import useStore from '@/hooks/useStore';
-import useAuthRepo from '@/hooks/useAuthRepo';
+import useGameStore from '@/hooks/general/useGameStore';
+import useAuthRepo from '@/hooks/general/useAuthRepo';
 import Settings from '@/models/Settings';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import useTranslations from '@/hooks/useTranslations';
+import useTranslations from '@/hooks/general/useTranslations';
 
 const MainMenu = () => {
-  const { settings } = useStore();
+  const { settings } = useGameStore();
   const [currentUser, setCurrentUser] = useState(null);
   const authRepo = useAuthRepo();
   const [openExitDialog, setOpenExitDialog] = useState(false);

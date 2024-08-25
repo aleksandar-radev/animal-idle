@@ -1,9 +1,9 @@
+import useEnemyMethods from '@/hooks/gameMethods/useEnemyMethods';
 import './EnemyAvatar.scss';
-import useStore from '@/hooks/useStore';
-import useEnemyMethods from '@/hooks/useEnemyMethods';
+import useGameStore from '@/hooks/general/useGameStore';
 
 const EnemyAvatar = ({ className }) => {
-  const { assets, fightState } = useStore();
+  const { assets, fightState } = useGameStore();
   const em = useEnemyMethods();
   return (
     <>

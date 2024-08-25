@@ -1,5 +1,5 @@
 import './CharacterResources.scss';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 import HealthBar from '@/ui/components/HealthBar';
 import ManaBar from '@/ui/components/ManaBar';
 

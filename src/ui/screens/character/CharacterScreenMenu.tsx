@@ -1,10 +1,10 @@
 import './CharacterScreenMenu.scss';
-import useStore from '@/hooks/useStore';
-import useTranslations from '@/hooks/useTranslations';
+import useGameStore from '@/hooks/general/useGameStore';
+import useTranslations from '@/hooks/general/useTranslations';
 import Settings from '@/models/Settings';
 
 const CharacterScreenMenu = () => {
-  const { data, settings } = useStore();
+  const { data, settings } = useGameStore();
   const t = useTranslations();
 
   const changeView = (view) => {

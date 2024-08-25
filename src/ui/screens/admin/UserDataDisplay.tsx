@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import './UserDataDisplay.scss';
-import useDataRepo from '@/hooks/useDataRepo';
+import useDataRepo from '@/hooks/general/useDataRepo';
 
 const UserDataDisplay = (item) => {
   const areaVal = useRef(null);

@@ -1,8 +1,8 @@
+import useGameStore from '@/hooks/general/useGameStore';
 import { useEffect } from 'react';
-import useStore from './useStore';
 
 const useRegenMana = () => {
-  const { data } = useStore();
+  const { data } = useGameStore();
 
   useEffect(() => {
     regenMana();

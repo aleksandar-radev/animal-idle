@@ -3,7 +3,7 @@ import Data from '@/models/Data';
 import Settings from '@/models/Settings';
 import useDataRepo from './useDataRepo';
 import useAuthRepo from './useAuthRepo';
-import useStore from './useStore';
+import useGameStore from './useGameStore';
 import FightState from '@/models/FightState';
 import { loadAssets } from '@/utils/generalData';
 
@@ -12,7 +12,7 @@ const useDataManager = () => {
   const authRepo = useAuthRepo();
   const effectCount = useRef(0);
 
-  const { assets, data, isLoaded, setData, setSettings, setIsLoaded, setfightState, updateState } = useStore();
+  const { assets, data, isLoaded, setData, setSettings, setIsLoaded, setfightState, updateState } = useGameStore();
 
   const deepProxy = (obj, handler) => {
     if (typeof obj !== 'object' || obj === null) return obj;

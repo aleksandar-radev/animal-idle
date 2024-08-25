@@ -5,11 +5,11 @@ import ShopScreen from '@/ui/screens/shop/ShopScreen';
 import LeaderboardScreen from '@/ui/screens/leaderboard/LeaderboardScreen';
 import AdminScreen from '@/ui/screens/admin/AdminScreen';
 import SettingsScreen from '@/ui/screens/settings/SettingsScreen';
-import useStore from '@/hooks/useStore';
+import useGameStore from '@/hooks/general/useGameStore';
 import Settings from '@/models/Settings';
 
 const MainScreen = () => {
-  const { settings } = useStore();
+  const { settings } = useGameStore();
 
   const activeTab = () => {
     switch (settings.activeMainScreenTab) {

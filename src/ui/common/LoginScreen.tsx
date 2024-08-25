@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginScreen.scss';
-import useAuthRepo from '@/hooks/useAuthRepo';
+import useAuthRepo from '@/hooks/general/useAuthRepo';
 
 export default function LoginScreen() {
   const [loading, setLoading] = useState(false);

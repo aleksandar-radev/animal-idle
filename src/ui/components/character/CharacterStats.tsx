@@ -1,6 +1,6 @@
 import './CharacterStats.scss';
-import useTranslations from '@/hooks/useTranslations';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
+import useTranslations from '@/hooks/general/useTranslations';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 
 const CharacterStats = () => {
   const cm = useCharacterMethods();

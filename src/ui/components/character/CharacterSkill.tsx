@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import './CharacterSkill.scss';
 import { Popper } from '@mui/material';
-import useTranslations from '@/hooks/useTranslations';
+import useTranslations from '@/hooks/general/useTranslations';
 import Skill from '@/models/Skill';
 import Requirement from '@/models/Requirement';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
-import useStore from '@/hooks/useStore';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
+import useGameStore from '@/hooks/general/useGameStore';
 
 interface CharacterSkillProps {
   className?: string;
@@ -14,7 +14,7 @@ interface CharacterSkillProps {
 }
 
 const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) => {
-  const { assets } = useStore();
+  const { assets } = useGameStore();
   const [anchorEl, setAnchorEl] = useState(null);
   const [u, setU] = useState(0);
   const cm = useCharacterMethods();

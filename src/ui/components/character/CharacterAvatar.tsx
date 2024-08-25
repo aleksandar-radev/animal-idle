@@ -1,8 +1,8 @@
 import './CharacterAvatar.scss';
-import useStore from '@/hooks/useStore';
+import useGameStore from '@/hooks/general/useGameStore';
 
 const CharacterAvatar = ({ className = '', characterType }) => {
-  const { assets } = useStore();
+  const { assets } = useGameStore();
   const avatar = assets[characterType]; // when character is a string
 
   return (

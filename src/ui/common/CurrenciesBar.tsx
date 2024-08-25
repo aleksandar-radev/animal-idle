@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import saveButton from '@/assets/save-button.png';
 import './CurrenciesBar.scss';
-import useStore from '@/hooks/useStore';
-import useDataRepo from '@/hooks/useDataRepo';
-import useAuthRepo from '@/hooks/useAuthRepo';
+import useGameStore from '@/hooks/general/useGameStore';
+import useDataRepo from '@/hooks/general/useDataRepo';
+import useAuthRepo from '@/hooks/general/useAuthRepo';
 import Currency from '@/models/Currency';
-import useCurrencies from '@/hooks/useCurrencies';
+import useCurrencies from '@/hooks/gameMethods/useCurrencies';
 
 const CurrenciesBar = () => {
-  const { data } = useStore();
+  const { data } = useGameStore();
   const dataRepo = useDataRepo();
   const [loading, setLoading] = useState(false);
   const authRepo = useAuthRepo();

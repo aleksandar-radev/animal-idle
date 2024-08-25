@@ -4,12 +4,12 @@ import CharacterSkills from './CharacterSkills';
 import CharacterScreenMenu from '@/ui/screens/character/CharacterScreenMenu';
 import CharacterAvatar from './CharacterAvatar';
 import './CharacterDisplay.scss';
-import useStore from '@/hooks/useStore';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
+import useGameStore from '@/hooks/general/useGameStore';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 import Settings from '@/models/Settings';
 
 const CharacterDisplay = () => {
-  const { settings } = useStore();
+  const { settings } = useGameStore();
   const cm = useCharacterMethods();
   const character = cm.getActiveCharacter();
 

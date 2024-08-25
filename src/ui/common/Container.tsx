@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useDataManager from '@/hooks/useDataManager';
+import useDataManager from '@/hooks/general/useDataManager';
 import './Container.scss';
-import useAuthRepo from '@/hooks/useAuthRepo';
+import useAuthRepo from '@/hooks/general/useAuthRepo';
 import CurrenciesBar from '@/ui/common/CurrenciesBar';
 import MainMenu from '@/ui/common/MainMenu';
 import MainScreen from '@/ui/common/MainScreen';

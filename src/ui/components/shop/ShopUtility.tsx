@@ -1,5 +1,5 @@
 import './ShopUtility.scss';
-import useStore from '@/hooks/useStore';
+import useGameStore from '@/hooks/general/useGameStore';
 
 const ShopUtility = () => {
   // const { store } = useStore();

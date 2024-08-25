@@ -1,10 +1,10 @@
 import './CharacterGrid.scss';
 import CharacterAvatar from './CharacterAvatar';
-import useStore from '@/hooks/useStore';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
+import useGameStore from '@/hooks/general/useGameStore';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 
 const CharacterGrid = ({ className }) => {
-  const { data } = useStore();
+  const { data } = useGameStore();
   const cm = useCharacterMethods();
 
   return (

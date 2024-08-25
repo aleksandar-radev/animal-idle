@@ -2,12 +2,12 @@ import { useMemo, useState } from 'react';
 import './CharactersList.scss';
 import CharacterDisplay from './CharacterDisplay';
 import CharacterAvatar from './CharacterAvatar';
-import useStore from '@/hooks/useStore';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
-import useTranslations from '@/hooks/useTranslations';
+import useGameStore from '@/hooks/general/useGameStore';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
+import useTranslations from '@/hooks/general/useTranslations';
 
 const CharactersList = () => {
-  const { data, settings } = useStore();
+  const { data, settings } = useGameStore();
   const cm = useCharacterMethods();
   const t = useTranslations();
   const [draggedItem, setDraggedItem] = useState(null);

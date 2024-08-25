@@ -2,12 +2,12 @@ import { useMemo, useState, useEffect } from 'react';
 import './ActiveSkillsBar.scss';
 import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';
-import useStore from '@/hooks/useStore';
-import useCharacterMethods from '@/hooks/useCharacterMethods';
-import useEnemyMethods from '@/hooks/useEnemyMethods';
+import useGameStore from '@/hooks/general/useGameStore';
+import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
+import useEnemyMethods from '@/hooks/gameMethods/useEnemyMethods';
 
 const ActiveSkillsBar = ({ className }) => {
-  const { data, assets, fightState } = useStore();
+  const { data, assets, fightState } = useGameStore();
   const cm = useCharacterMethods();
   const em = useEnemyMethods();
   const [activeSkills, setActiveSkills] = useState({});

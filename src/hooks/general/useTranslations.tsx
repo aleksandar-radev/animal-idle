@@ -1,8 +1,8 @@
 import { translations } from '@/utils/translations/translations';
-import useStore from './useStore';
+import useGameStore from './useGameStore';
 
 const useTranslations = () => {
-  const { data } = useStore();
+  const { data } = useGameStore();
   const language = data.language || 'en';
 
   return new Proxy(

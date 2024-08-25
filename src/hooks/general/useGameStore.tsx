@@ -18,7 +18,7 @@ interface AllState {
   updateState: (path: any, value: any) => void;
 }
 
-const useStore = create<AllState>((set) => ({
+const useGameStore = create<AllState>((set) => ({
   assets: {},
   data: null,
   fightState: null,
@@ -47,4 +47,4 @@ const useStore = create<AllState>((set) => ({
   },
 }));
 
-export default useStore;
+export default useGameStore;
