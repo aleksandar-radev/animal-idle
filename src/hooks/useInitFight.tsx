@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import useCharacterMethods from './useCharacterMethods';
 import useStore from './useStore';
 import useEnemyMethods from './useEnemyMethods';
-import Settings from '../models/Settings';
+import Settings from '@/models/Settings';
 
 const useInitFight = () => {
   const { settings, data } = useStore();

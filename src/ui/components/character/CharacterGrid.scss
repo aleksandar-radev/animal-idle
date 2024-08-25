@@ -1,0 +1,13 @@
+.CharacterGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  .character {
+    display: flex;
+    margin: 0.5%;
+    width: 31%;
+    height: 33%;
+  }
+}

@@ -4,6 +4,8 @@ import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
+(window as any).log = console.log;
+
 if (process.env.NODE_ENV === 'production') {
   console.log = () => {};
   console.error = () => {};

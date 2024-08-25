@@ -1,8 +1,8 @@
 import { create } from 'zustand';
-import Settings from '../models/Settings';
+import Settings from '@/models/Settings';
 import { produce } from 'immer';
-import Data from '../models/Data';
-import FightState from '../models/FightState';
+import Data from '@/models/Data';
+import FightState from '@/models/FightState';
 
 interface AllState {
   assets: any;

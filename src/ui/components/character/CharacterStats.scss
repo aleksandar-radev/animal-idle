@@ -1,0 +1,24 @@
+.CharacterStats {
+  display: flex;
+  font-size: pix(10);
+  .panel {
+    display: flex;
+    width: 49%;
+    height: 99%;
+    // background-color: green;
+    background-color: rgba($color: #ffffff, $alpha: 0.6);
+    flex-direction: column;
+
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      padding: pix(5) pix(10);
+      border-bottom: 1px solid black;
+      height: pix(10);
+    }
+  }
+
+  .left {
+    border-right: pix(1) solid black;
+  }
+}

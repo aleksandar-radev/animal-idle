@@ -1,0 +1,11 @@
+.CharacterSkill {
+  cursor: pointer;
+  &-tooltip {
+    .tooltip {
+      display: flex;
+      flex-direction: column;
+      padding: pix(5);
+      background-color: lightgray;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { AuthRepo } from '../api/AuthRepo';
+import { AuthRepo } from '@/utils/api/AuthRepo';
 
 const authRepoInstance = new AuthRepo();
 

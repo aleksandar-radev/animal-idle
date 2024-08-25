@@ -1,4 +1,4 @@
-import { getCharacterStats } from '../helpers/gameFunctions';
+import { getCharacterStats } from '@/utils/game/characterData';
 import Requirement from './Requirement';
 import Skill from './Skill';
 

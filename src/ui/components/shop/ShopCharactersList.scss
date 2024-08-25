@@ -1,0 +1,31 @@
+.ShopCharactersList {
+  .characters {
+    display: grid;
+    overflow-y: auto;
+    height: pix(350);
+    grid-template-columns: repeat(auto-fill, minmax(pix(120), 1fr));
+    > .item {
+      cursor: pointer;
+      background-color: green;
+      margin: pix(10);
+      width: pix(120);
+      height: pix(120);
+
+      &.locked {
+        filter: brightness(33%);
+      }
+    }
+    > .item.new {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: pix(150);
+    }
+  }
+}
+
+.CharacterSelection-dialog {
+  .MuiDialog-paper {
+    min-width: pix(400);
+  }
+}

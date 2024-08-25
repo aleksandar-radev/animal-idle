@@ -1,4 +1,4 @@
-import { DataRepo } from '../api/DataRepo';
+import { DataRepo } from '@/utils/api/DataRepo';
 
 const dataRepoInstance = new DataRepo();
 

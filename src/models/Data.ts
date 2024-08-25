@@ -1,12 +1,9 @@
-import {
-  defaultCharacterData,
-  defaultCurrencyData,
-  defaultDeckData,
-  getAllCharacterTypes,
-} from '../helpers/gameFunctions';
+import { defaultCharacterData, getAllCharacterTypes } from '@/utils/game/characterData';
 import Character from './Character';
 import Currency from './Currency';
 import Deck from './Deck';
+import { defaultDeckData } from '@/utils/game/deckData';
+import { defaultCurrencyData } from '@/utils/game/currencyData';
 
 class Data {
   private _dataVersion: string;

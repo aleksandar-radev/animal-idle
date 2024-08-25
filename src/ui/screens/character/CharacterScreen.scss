@@ -1,0 +1,25 @@
+.CharacterScreen {
+  .decks {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: pix(7);
+    grid-column: 1 / span 2;
+
+    & > div {
+      background-color: rgb(105, 190, 105);
+      opacity: 50%;
+      width: 100%;
+      margin: pix(10);
+      padding: pix(10);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .deck.selected {
+      opacity: 100%;
+    }
+  }
+}

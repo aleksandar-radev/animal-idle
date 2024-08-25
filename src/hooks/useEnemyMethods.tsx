@@ -1,8 +1,8 @@
-import { getAllEnemyStats, getAllEnemyTypes } from '../helpers/gameFunctions';
-import Currency from '../models/Currency';
-import Enemy from '../models/Enemy';
+import Currency from '@/models/Currency';
+import Enemy from '@/models/Enemy';
 import useCharacterMethods from './useCharacterMethods';
 import useStore from './useStore';
+import { getAllEnemyStats, getAllEnemyTypes } from '@/utils/game/enemyData';
 
 const useEnemyMethods = () => {
   const { data, fightState } = useStore();

@@ -1,4 +1,4 @@
-import { getRequirementTypes } from '../helpers/gameFunctions';
+import { getRequirementTypes } from '@/utils/generalData';
 
 class Requirement {
   private _name: string;

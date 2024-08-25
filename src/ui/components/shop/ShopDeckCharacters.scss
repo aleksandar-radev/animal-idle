@@ -1,0 +1,47 @@
+.ShopDeckCharacters {
+  .characters {
+    display: grid;
+    overflow-y: auto;
+    height: pix(350);
+    grid-template-columns: repeat(auto-fill, minmax(pix(120), 1fr));
+    > .item {
+      position: relative;
+      margin: pix(10);
+      width: pix(120);
+      height: pix(120);
+
+      &.locked {
+        filter: brightness(33%);
+      }
+
+      .remove-char {
+        position: absolute;
+        cursor: pointer;
+        right: pix(3);
+        top: pix(3);
+        svg {
+          width: pix(15);
+          height: pix(15);
+        }
+        &:hover {
+          border-radius: 50%;
+          background-color: #575757;
+        }
+      }
+    }
+    > .item.new {
+      display: flex;
+      background-color: green;
+      border-radius: pix(75);
+      align-items: center;
+      justify-content: center;
+      font-size: pix(150);
+    }
+  }
+}
+
+.CharacterSelection-dialog {
+  .MuiDialog-paper {
+    min-width: pix(400);
+  }
+}

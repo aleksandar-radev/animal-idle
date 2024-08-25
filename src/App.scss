@@ -1,4 +1,10 @@
-@import './helpers/variables.scss';
+$pixelWidth: var(--pixelWidth);
+$pixelHeight: calc(var(--pixelWidth) / 2.1);
+
+@function pix($base) {
+  $result: calc(var(--pixelWidth) * $base / 1000);
+  @return $result;
+}
 
 * {
   font-family: 'Almendra SC';
@@ -7,19 +13,49 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  // background-color: black;
-  background-image: url('./assets/background.jpg');
   background-size: cover;
   height: 100vh;
   min-height: $pixelHeight;
   font-family: 'Almendra SC';
   font-size: pix(20);
+  background-image: url('@/assets/background4.png');
+  // animation: changeBackground 130s infinite; /* Total duration: 120s for images + 10s for transitions */
+  transition: background-image 3s ease-in-out;
 }
+
+// @keyframes changeBackground {
+//   0% {
+//     background-image: url('./assets/background1.png');
+//   }
+//   22% {
+//     background-image: url('./assets/background1.png');
+//   }
+//   25% {
+//     background-image: url('./assets/background2.png');
+//   }
+//   47% {
+//     background-image: url('./assets/background2.png');
+//   }
+//   50% {
+//     background-image: url('./assets/background3.png');
+//   }
+//   72% {
+//     background-image: url('./assets/background3.png');
+//   }
+//   75% {
+//     background-image: url('./assets/background4.png');
+//   }
+//   97% {
+//     background-image: url('./assets/background4.png');
+//   }
+//   100% {
+//     background-image: url('./assets/background1.png');
+//   }
+// }
 
 #root {
   display: flex;
   width: $pixelWidth;
   height: $pixelHeight;
-  // background-color: silver;
   justify-content: center;
 }

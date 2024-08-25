@@ -1,0 +1,39 @@
+.CurrenciesBar {
+  display: flex;
+  font-size: pix(20);
+  color: white;
+  background-color: rgba(0, 0, 0, 0.1);
+  grid-column: 1 / span 2;
+  justify-content: space-between;
+
+  &-save {
+    display: flex;
+    flex-direction: column;
+    padding: pix(8);
+    user-select: none;
+
+    &-button {
+      cursor: pointer;
+      height: pix(32);
+    }
+
+    &-loading {
+      cursor: crosshair;
+      border: pix(5) solid rgba(0, 0, 0, 0.1);
+      border-top: pix(5) solid #333;
+      border-radius: 50%;
+      width: pix(25);
+      height: pix(25);
+      animation: spin 1s linear infinite;
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+}

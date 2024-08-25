@@ -1,12 +1,13 @@
 import { useMemo } from 'react';
-import Character from '../models/Character';
-import Deck from '../models/Deck';
+import Character from '@/models/Character';
+import Deck from '@/models/Deck';
 import useStore from './useStore';
-import { getAllCharacterTypes, getCharacterStats, getSkillStats } from '../helpers/gameFunctions';
-import Requirement from '../models/Requirement';
-import Skill from '../models/Skill';
-import Currency from '../models/Currency';
-import DeckCharacter from '../models/DeckCharacter';
+import Requirement from '@/models/Requirement';
+import Skill from '@/models/Skill';
+import Currency from '@/models/Currency';
+import DeckCharacter from '@/models/DeckCharacter';
+import { getAllCharacterTypes, getCharacterStats } from '@/utils/game/characterData';
+import { getSkillStats } from '@/utils/game/skillData';
 
 const useCharacterMethods = () => {
   const { data, fightState, settings } = useStore();
@@ -223,7 +224,7 @@ const useCharacterMethods = () => {
     getActiveSkillsOfCharactersInActiveDeck: () => {
       let activeCharacterSkills = {};
       deckMethods.getCharactersInActiveDeck().forEach((char) => {
-        activeCharacterSkills[char.type] = []; // char.getActiveSkills
+        activeCharacterSkills[char.type] = Object.values(char.skills).filter((skill) => !skill.passive); // char.getActiveSkills
       });
       return activeCharacterSkills;
     },

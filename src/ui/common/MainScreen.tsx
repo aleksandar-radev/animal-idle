@@ -1,0 +1,36 @@
+import './MainScreen.scss';
+import CharacterScreen from '@/ui/screens/character/CharacterScreen';
+import FightScreen from '@/ui/screens/fight/FightScreen';
+import ShopScreen from '@/ui/screens/shop/ShopScreen';
+import LeaderboardScreen from '@/ui/screens/leaderboard/LeaderboardScreen';
+import AdminScreen from '@/ui/screens/admin/AdminScreen';
+import SettingsScreen from '@/ui/screens/settings/SettingsScreen';
+import useStore from '@/hooks/useStore';
+import Settings from '@/models/Settings';
+
+const MainScreen = () => {
+  const { settings } = useStore();
+
+  const activeTab = () => {
+    switch (settings.activeMainScreenTab) {
+      case Settings.MAIN_SCREEN_FIGHT_TAB:
+        return <FightScreen />;
+      case Settings.MAIN_SCREEN_SHOP_TAB:
+        return <ShopScreen />;
+      case Settings.MAIN_SCREEN_CHARACTER_TAB:
+        return <CharacterScreen />;
+      case Settings.MAIN_SCREEN_LEADERBOARD_TAB:
+        return <LeaderboardScreen />;
+      case Settings.MAIN_SCREEN_SETTINGS_TAB:
+        return <SettingsScreen />;
+      case Settings.MAIN_SCREEN_ADMIN_TAB:
+        return <AdminScreen />;
+      default:
+        return '';
+    }
+  };
+
+  return <div className={'MainScreen'}>{activeTab()}</div>;
+};
+
+export default MainScreen;

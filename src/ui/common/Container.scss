@@ -1,0 +1,13 @@
+.Container {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  &-auth {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: 10% 90%;
+    // background-color: silver;
+  }
+}

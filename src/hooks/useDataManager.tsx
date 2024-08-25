@@ -1,12 +1,11 @@
 import { useEffect, useRef } from 'react';
-import Data from '../models/Data';
-import Settings from '../models/Settings';
-// import { loadAssets } from '../helpers/gameFunctions';
+import Data from '@/models/Data';
+import Settings from '@/models/Settings';
 import useDataRepo from './useDataRepo';
 import useAuthRepo from './useAuthRepo';
 import useStore from './useStore';
-import FightState from '../models/FightState';
-import { loadAssets } from '../helpers/gameFunctions';
+import FightState from '@/models/FightState';
+import { loadAssets } from '@/utils/generalData';
 
 const useDataManager = () => {
   const dataRepo = useDataRepo();

@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -6,6 +7,9 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
   },
   define: {
     'process.env': process.env,
@@ -28,6 +32,13 @@ export default defineConfig({
     rollupOptions: {
       output: {
         format: 'esm',
+      },
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./src/App.scss";`,
       },
     },
   },

@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
-import './App.scss';
-import Container from './screens/Container';
-import LoginScreen from './screens/LoginScreen';
-import RegisterScreen from './screens/RegisterScreen';
+import Container from './ui/common/Container';
+import LoginScreen from './ui/common/LoginScreen';
+import RegisterScreen from './ui/common/RegisterScreen';
 
 function App() {
   useEffect(() => {
