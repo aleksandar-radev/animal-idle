@@ -1,16 +1,14 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import './ActiveSkillsBar.scss';
 import { Tooltip } from '@mui/material';
 import SkillTooltip from './SkillTooltip';
 import useGameStore from '@/hooks/general/useGameStore';
 import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
-import useEnemyMethods from '@/hooks/gameMethods/useEnemyMethods';
 
 const ActiveSkillsBar = ({ className }) => {
-  const { data, assets, fightState } = useGameStore();
+  const { assets, fightState } = useGameStore();
   const cm = useCharacterMethods();
-  const em = useEnemyMethods();
-  const [activeSkills, setActiveSkills] = useState({});
+  const [activatedSkills, setActivatedSkills] = useState({});
 
   const skills = useMemo(() => {
     let allSkills = [];
@@ -25,20 +23,41 @@ const ActiveSkillsBar = ({ className }) => {
     return allSkills;
   }, []);
 
-  const activateSkill = (skill) => {
-    log('Activating skill', skill);
-    if (activeSkills[skill.name] || skill.manaCost > fightState.characterCurrentMana) {
-      return;
-    }
-    log('Activating skill', fightState.characterCurrentMana);
+  const activateSkill = useCallback(
+    (skill) => {
+      if (activatedSkills[skill.name] || skill.manaCost > fightState.characterCurrentMana) {
+        return;
+      }
 
-    setActiveSkills((prev) => ({ ...prev, [skill.name]: true }));
+      log('Activating skill', skill);
+      setActivatedSkills((prev) => ({ ...prev, [skill.name]: true }));
 
-    // Start cooldown animation
-    setTimeout(() => {
-      setActiveSkills((prev) => ({ ...prev, [skill.name]: false }));
-    }, skill.cooldown);
-  };
+      // Start cooldown animation
+      setTimeout(() => {
+        log('Deactivating skill', skill);
+        setActivatedSkills((prev) => ({ ...prev, [skill.name]: false }));
+      }, skill.cooldown);
+    },
+    [activatedSkills, fightState.characterCurrentMana],
+  );
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      const key = event.key;
+      if (key >= '1' && key <= '9') {
+        const index = parseInt(key) - 1;
+        if (index < skills.length) {
+          activateSkill(skills[index]);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [skills, activateSkill]);
 
   return (
     <div className={['ActiveSkillsBar', className].join(' ')}>
@@ -46,7 +65,7 @@ const ActiveSkillsBar = ({ className }) => {
         {skills.map((skill) => {
           let classes = [
             'ActiveSkillsBar-row-item',
-            activeSkills[skill?.name] ? 'cooldown' : '',
+            activatedSkills[skill?.name] ? 'cooldown' : '',
             skill?.manaCost > fightState.characterCurrentMana ? 'disabled' : '',
           ];
 
@@ -64,7 +83,10 @@ const ActiveSkillsBar = ({ className }) => {
                 }}
                 data-skill={skill?.name}
                 onClick={() => activateSkill(skill)}>
-                {activeSkills[skill?.name] && <div className="cooldown-overlay" />}
+                {Object.keys(activatedSkills).length}
+                {activatedSkills[skill?.name] && (
+                  <div className="cooldown-overlay" style={{ animationDuration: `${skill.cooldown}ms` }} />
+                )}
               </div>
             </Tooltip>
           );

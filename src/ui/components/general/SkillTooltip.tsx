@@ -1,4 +1,3 @@
-import { PropTypes } from 'prop-types';
 import './SkillTooltip.scss';
 
 const SkillTooltip = ({ name, cooldown }) => {

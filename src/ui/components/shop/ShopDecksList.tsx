@@ -5,6 +5,7 @@ import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 import useTranslations from '@/hooks/general/useTranslations';
 import { Add } from '@mui/icons-material';
 import ShopDeckCharacters from './ShopDeckCharacters';
+import { Tooltip } from '@mui/material';
 
 const ShopDecksList = () => {
   const [selectedDeckIndex, setSelectedDeckIndex] = useState('0');
@@ -24,9 +25,11 @@ const ShopDecksList = () => {
             </button>
           );
         })}
-        <button className="deck new" onClick={() => cm.buyDeck()} disabled={!cm.getCanBuyDeck()}>
-          <Add />
-        </button>
+        <Tooltip placement="top" title={<div>Cost: {cm.getDeckCost()} gold</div>}>
+          <button className="deck new" onClick={() => cm.buyDeck()} disabled={!cm.getCanBuyDeck()}>
+            <Add />
+          </button>
+        </Tooltip>
       </div>
       <div className="deck-characters">
         <ShopDeckCharacters deckIndex={selectedDeckIndex}></ShopDeckCharacters>

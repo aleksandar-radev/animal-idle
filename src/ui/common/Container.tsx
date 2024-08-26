@@ -7,11 +7,14 @@ import CurrenciesBar from '@/ui/common/CurrenciesBar';
 import MainMenu from '@/ui/common/MainMenu';
 import MainScreen from '@/ui/common/MainScreen';
 import LoginScreen from '@/ui/common/LoginScreen';
+import useSettings from '@/hooks/general/useSettings';
+import Settings from '@/models/Settings';
 
 const Container = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const isLoaded = useDataManager();
+  const settings = useSettings();
   const authRepo = useAuthRepo();
 
   useEffect(() => {
@@ -25,6 +28,14 @@ const Container = () => {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        settings.activeMainScreenTab = Settings.MAIN_SCREEN_CHARACTER_TAB;
+      } catch (error) {}
+    })();
+  }, [isLoaded]);
 
   const isAuthenticated = () => {
     return !!user;

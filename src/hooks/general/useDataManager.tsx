@@ -57,7 +57,10 @@ const useDataManager = () => {
   useEffect(() => {
     if (effectCount.current > 0) return;
     effectCount.current++;
-    loadAssets(assets);
+
+    if (!isLoaded) {
+      loadAssets(assets);
+    }
 
     (async () => {
       const user = await authRepo.getUser();
