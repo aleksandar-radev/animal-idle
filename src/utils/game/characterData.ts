@@ -18,13 +18,7 @@ export const getCharacterStats = () => {
       critChance: 0,
       critDamage: 0,
       doubleDamageChance: 0,
-      requirements: [
-        new Requirement({
-          type: Requirement.REQUIREMENT_TYPE_CURRENCY,
-          innerType: Currency.CURRENCY_TYPE_GOLD,
-          value: 1,
-        }),
-      ],
+      requirements: [],
     },
     [Character.CHARACTER_TYPE_SORCERESS]: {
       type: Character.CHARACTER_TYPE_SORCERESS,
@@ -39,7 +33,7 @@ export const getCharacterStats = () => {
         new Requirement({
           type: Requirement.REQUIREMENT_TYPE_CURRENCY,
           innerType: Currency.CURRENCY_TYPE_GOLD,
-          value: 1,
+          value: 100,
         }),
       ],
     },
@@ -56,7 +50,7 @@ export const getCharacterStats = () => {
         new Requirement({
           type: Requirement.REQUIREMENT_TYPE_CURRENCY,
           innerType: Currency.CURRENCY_TYPE_GOLD,
-          value: 1,
+          value: 300,
         }),
       ],
     },

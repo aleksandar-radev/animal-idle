@@ -1,11 +1,3 @@
-$pixelWidth: var(--pixelWidth);
-$pixelHeight: calc(var(--pixelWidth) / 2.1);
-
-@function pix($base) {
-  $result: calc(var(--pixelWidth) * $base / 1000);
-  @return $result;
-}
-
 * {
   font-family: 'Almendra SC';
 }
@@ -18,7 +10,7 @@ body {
   min-height: $pixelHeight;
   font-family: 'Almendra SC';
   font-size: pix(20);
-  background-image: url('@/assets/background4.png');
+  background-image: url('@/assets/bg5.webp');
   // animation: changeBackground 130s infinite; /* Total duration: 120s for images + 10s for transitions */
   transition: background-image 3s ease-in-out;
 }

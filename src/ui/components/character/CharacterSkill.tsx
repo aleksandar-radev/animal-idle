@@ -6,6 +6,7 @@ import Skill from '@/models/Skill';
 import Requirement from '@/models/Requirement';
 import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 import useGameStore from '@/hooks/general/useGameStore';
+import RequirementsView from '@/ui/components/general/RequirementsView';
 
 interface CharacterSkillProps {
   className?: string;
@@ -57,21 +58,7 @@ const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) 
             {t['level']}: {skillLevel} {' -> '} {skillLevel + x}
           </div>
           <div></div>
-          <div>
-            {t['requirements']}:{' '}
-            {skill.requirements.map((req) => {
-              if (req.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
-                return (
-                  <div key={req.type}>
-                    {t[req.innerType]}: {req.value}
-                  </div>
-                );
-              }
-              if (req.type === Requirement.REQUIREMENT_TYPE_LEVEL) {
-                return <div key={req.type}>Required Level: {req.value}</div>;
-              }
-            })}
-          </div>
+          <RequirementsView requirements={skill.requirements} />
         </div>
       </Popper>
     </div>

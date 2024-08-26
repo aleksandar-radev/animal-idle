@@ -3,6 +3,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import Container from './ui/common/Container';
 import LoginScreen from './ui/common/LoginScreen';
 import RegisterScreen from './ui/common/RegisterScreen';
+import './App.scss';
 
 function App() {
   useEffect(() => {

@@ -1,3 +1,4 @@
+import { getAllCurrencyTypes } from '@/utils/game/currencyData';
 import useGameStore from '../general/useGameStore';
 
 const useCurrencies = () => {
@@ -6,19 +7,22 @@ const useCurrencies = () => {
     getCurrency(type: string) {
       return data.currencies[type].value;
     },
-    addCurrency(type, amount: number) {
+    addCurrency(currencyType: ReturnType<typeof getAllCurrencyTypes>[number], amount: number) {
       if (Number.isNaN(amount)) {
         return;
       }
 
-      data.currencies[type].value += +amount;
+      data.currencies[currencyType].value += +amount;
     },
-    removeCurrency(type, amount: number) {
+    removeCurrency(currencyType: ReturnType<typeof getAllCurrencyTypes>[number], amount: number) {
       if (Number.isNaN(amount)) {
-        return;
+        throw new Error('Amount must be a number');
+      }
+      if (data.currencies[currencyType].value < amount) {
+        throw new Error('Not enough currency');
       }
 
-      data.currencies[type].value -= +amount;
+      data.currencies[currencyType].value -= +amount;
     },
   };
 

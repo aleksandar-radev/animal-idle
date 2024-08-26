@@ -9,8 +9,8 @@ import useGameStore from '@/hooks/general/useGameStore';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Settings from '@/models/Settings';
-import FightLog from '@/ui/components/FightLog';
-import ActiveSkillsBar from '@/ui/components/ActiveSkillsBar';
+import FightLog from '@/ui/components/general/FightLog';
+import ActiveSkillsBar from '@/ui/components/general/ActiveSkillsBar';
 import useCharactersAttack from '@/hooks/gameActions/useCharactersAttack';
 
 const FightScreen = () => {

@@ -8,9 +8,11 @@ import Currency from '@/models/Currency';
 import DeckCharacter from '@/models/DeckCharacter';
 import { getAllCharacterTypes, getCharacterStats } from '@/utils/game/characterData';
 import { getSkillStats } from '@/utils/game/skillData';
+import useCurrencies from '@/hooks/gameMethods/useCurrencies';
 
 const useCharacterMethods = () => {
   const { data, fightState, settings } = useGameStore();
+  const curr = useCurrencies();
 
   const skillMethods = {
     [Skill.SKILL_TYPE_DAMAGE_FLAT](character: Character) {
@@ -125,6 +127,9 @@ const useCharacterMethods = () => {
     },
 
     buyCharacter: (characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
+      if (!methods.areRequirementsMet(getCharacterStats()[characterType].requirements)) {
+        return;
+      }
       const character = new Character({
         name: characterType,
         type: characterType,
@@ -214,6 +219,7 @@ const useCharacterMethods = () => {
         character.skills[skill.type] = skillCopy;
       }
     },
+
     addExperience: (characterType: ReturnType<typeof getAllCharacterTypes>[number], experience: number) => {
       let character = methods.getActiveCharacterByType(characterType);
       character.experience += experience;
@@ -326,6 +332,8 @@ const useCharacterMethods = () => {
       if (!deckMethods.getCanBuyDeck()) {
         throw new Error('Not enough gold to buy deck');
       }
+
+      curr.removeCurrency(Currency.CURRENCY_TYPE_GOLD, deckMethods.getDeckCost());
 
       data.totalDecks++;
       const newDeck = new Deck({

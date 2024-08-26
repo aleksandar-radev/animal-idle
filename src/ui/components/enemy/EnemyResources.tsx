@@ -1,7 +1,7 @@
 import './EnemyResources.scss';
 import useEnemyMethods from '@/hooks/gameMethods/useEnemyMethods';
 import useGameStore from '@/hooks/general/useGameStore';
-import HealthBar from '@/ui/components/HealthBar';
+import HealthBar from '@/ui/components/general/HealthBar';
 
 const EnemyResources = ({ className }) => {
   const { data } = useGameStore();

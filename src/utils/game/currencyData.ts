@@ -14,3 +14,7 @@ export const defaultCurrencyData = {
     value: 0,
   }),
 };
+
+export const getAllCurrencyTypes = (): string[] => {
+  return [Currency.CURRENCY_TYPE_GOLD, Currency.CURRENCY_TYPE_CRYSTAL] as const;
+};
