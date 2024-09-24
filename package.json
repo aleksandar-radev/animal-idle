@@ -2,7 +2,7 @@
   "name": "asdf2",
   "version": "0.1.1",
   "private": true,
-  "homepage": "https://aleksandar-radev.github.io/animal-idle",
+  "homepage": "https://ghost-team.top",
   "scripts": {
     "deploy": "vite build --mode production && gh-pages -d dist",
     "dev": "vite",
