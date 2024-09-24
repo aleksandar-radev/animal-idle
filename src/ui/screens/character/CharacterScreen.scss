@@ -10,12 +10,14 @@
       background-color: rgb(105, 190, 105);
       opacity: 50%;
       width: 100%;
-      margin: pix(10);
-      padding: pix(10);
+      margin: pix(5);
+      padding: pix(5);
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      font-size: pix(14);
+      border-radius: 20px;
     }
 
     .deck.selected {

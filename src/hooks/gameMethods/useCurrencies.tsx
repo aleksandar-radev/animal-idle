@@ -5,7 +5,7 @@ const useCurrencies = () => {
   const { data } = useGameStore();
   const methods = {
     getCurrency(type: string) {
-      return data.currencies[type].value;
+      return data.currencies[type];
     },
     addCurrency(currencyType: ReturnType<typeof getAllCurrencyTypes>[number], amount: number) {
       if (Number.isNaN(amount)) {

@@ -1,2 +1,9 @@
 .RequirementsView {
+  .requirement-met {
+    color: green;
+  }
+
+  .requirement-not-met {
+    color: red;
+  }
 }

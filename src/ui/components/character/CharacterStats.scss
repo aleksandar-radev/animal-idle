@@ -5,8 +5,8 @@
     display: flex;
     width: 49%;
     height: 99%;
-    // background-color: green;
-    background-color: rgba($color: #ffffff, $alpha: 0.6);
+    color: white;
+    background-color: rgba($color: #5c5c5c, $alpha: 0.8);
     flex-direction: column;
 
     .stat {
@@ -16,9 +16,68 @@
       border-bottom: 1px solid black;
       height: pix(10);
     }
+    .level {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .current {
+        width: pix(15);
+        height: pix(15);
+        border-radius: 10px;
+        background-color: orange;
+      }
+      .progress {
+        width: 100%;
+        .line {
+          width: 100%;
+          height: pix(10);
+          background-color: rgb(212, 212, 212);
+          > span {
+            background-color: rgb(136, 46, 139);
+          }
+        }
+      }
+      .percentage {
+        position: absolute;
+        font-size: pix(8);
+        color: white;
+        text-shadow: 1px 1px 2px black;
+      }
+      .next {
+        width: pix(15);
+        height: pix(15);
+        border-radius: 10px;
+        background-color: orange;
+      }
+    }
   }
 
   .left {
     border-right: pix(1) solid black;
+  }
+  .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: pix(15);
+  }
+}
+
+.CharacterStats-tooltip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: pix(1) pix(5);
+  border-radius: 5px;
+  background-color: rgb(196, 196, 196);
+  .progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

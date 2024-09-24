@@ -6,7 +6,8 @@ class Character {
   private _name: string;
   private _type: string;
   private _level: number;
-  private _experience: number;
+  private _currentExperience: number;
+  private _totalExperience: number;
   private _health: number;
   private _mana: number;
   private _damage: number;
@@ -25,7 +26,6 @@ class Character {
   static CHARACTER_DISPLAY_PROPS = [
     'name',
     'level',
-    'experience',
     'health',
     'mana',
     'damage',
@@ -35,12 +35,22 @@ class Character {
     'doubleDamageChance',
   ];
 
-  constructor({ name, type, level = 1, experience = 1, isUnlocked = false, skills = {}, requirements = [] }) {
+  constructor({
+    name,
+    type,
+    level = 1,
+    currentExperience = 0,
+    totalExperience = 0,
+    isUnlocked = false,
+    skills = {},
+    requirements = [],
+  }) {
     const stats = getCharacterStats()[type];
     this._name = name;
     this._type = type;
     this.level = level;
-    this.experience = experience;
+    this.currentExperience = currentExperience;
+    this.totalExperience = totalExperience;
     this._health = stats.health;
     this._mana = stats.mana;
     this._damage = stats.damage;
@@ -70,12 +80,20 @@ class Character {
     this._level = value;
   }
 
-  get experience(): number {
-    return this._experience;
+  get currentExperience(): number {
+    return this._currentExperience;
   }
 
-  set experience(value: number) {
-    this._experience = value;
+  set currentExperience(value: number) {
+    this._currentExperience = value;
+  }
+
+  get totalExperience(): number {
+    return this._totalExperience;
+  }
+
+  set totalExperience(value: number) {
+    this._totalExperience = value;
   }
 
   get health(): number {

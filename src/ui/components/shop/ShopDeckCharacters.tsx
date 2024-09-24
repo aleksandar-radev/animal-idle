@@ -76,7 +76,7 @@ const ShopDeckCharacters = ({ deckIndex }) => {
       </div>
 
       <Dialog
-        className="CharacterSelection-dialog"
+        className="ShopDeckCharacters-dialog"
         open={characterSelectionOpen}
         onClose={handleCharacterSelectionClose}
         aria-labelledby="draggable-dialog-title">

@@ -2,11 +2,10 @@
   display: grid;
   grid-template-columns: 31% 31% 31%;
   justify-content: space-evenly;
-  border: pix(1) solid black;
 
   .section {
     margin: pix(3);
-    background-color: bisque;
+    background-color: rgba(255, 228, 196, 0.9);
 
     .group {
       display: flex;
@@ -30,11 +29,10 @@
 
   .title {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: pix(1);
     font-size: pix(14);
-    border: 1px solid red;
   }
 
   .multiplier {

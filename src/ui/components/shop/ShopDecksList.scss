@@ -22,7 +22,7 @@
       &.active {
         background-color: red;
       }
-      &:disabled {
+      &.disabled {
         background-color: rgb(61, 61, 61);
         cursor: not-allowed;
       }
@@ -32,5 +32,13 @@
   .deck-characters {
     height: pix(350);
     width: pix(700);
+  }
+}
+
+.ShopDecksList-new-desk-tooltip {
+  font-size: pix(15);
+  .new-deck-container {
+    display: flex;
+    width: 500px;
   }
 }

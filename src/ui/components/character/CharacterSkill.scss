@@ -8,4 +8,9 @@
       background-color: lightgray;
     }
   }
+
+  &.disabled {
+    filter: brightness(0.7);
+    cursor: not-allowed;
+  }
 }

@@ -25,10 +25,14 @@ const ShopDecksList = () => {
             </button>
           );
         })}
-        <Tooltip placement="top" title={<div>Cost: {cm.getDeckCost()} gold</div>}>
-          <button className="deck new" onClick={() => cm.buyDeck()} disabled={!cm.getCanBuyDeck()}>
+        <Tooltip
+          placement="right"
+          title={<div className="ShopDecksList-new-desk-tooltip">Cost: {cm.getDeckCost()} gold</div>}>
+          <div
+            className={`deck new ${!cm.getCanBuyDeck() ? 'disabled' : ''}`}
+            onClick={() => cm.getCanBuyDeck() && cm.buyDeck()}>
             <Add />
-          </button>
+          </div>
         </Tooltip>
       </div>
       <div className="deck-characters">
