@@ -27,8 +27,10 @@ export class AuthRepo {
   async signUp(email, password) {
     try {
       const data = await api.post('/user/register', {
+        username: email,
         email: email,
         password: password,
+        confirmPassword: password,
       });
 
       return data;
