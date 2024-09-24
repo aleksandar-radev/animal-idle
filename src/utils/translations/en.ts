@@ -64,10 +64,21 @@ const character = {
   heal: 'Heal',
 };
 
+const tooltips = {
+  'characters-tooltip': 'Characters',
+  'fight-tooltip': 'Battle',
+  'shop-tooltip': 'Shop',
+  'leaderboard-tooltip': 'Leaderboard',
+  'settings-tooltip': 'Settings',
+  'admin-tooltip': 'Admin Panel',
+  'exit-tooltip': 'Exit the fight',
+};
+
 export const en = {
   ...skills,
   ...misc,
   ...character,
+  ...tooltips,
 
   // Others
   multiplier: {

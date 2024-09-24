@@ -20,7 +20,8 @@ export const getSkillStats = (): { [key: string]: Skill } => {
         new Requirement({
           type: Requirement.REQUIREMENT_TYPE_CURRENCY,
           innerType: Currency.CURRENCY_TYPE_GOLD,
-          value: 1,
+          value: 5,
+          modifier: 5,
         }),
       ],
     } as Skill,

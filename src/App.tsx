@@ -4,6 +4,18 @@ import Container from './ui/common/Container';
 import LoginScreen from './ui/common/LoginScreen';
 import RegisterScreen from './ui/common/RegisterScreen';
 import './App.scss';
+import { createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#E3D026',
+      light: '#E9DB5D',
+      dark: '#A29415',
+      contrastText: '#242105',
+    },
+  },
+});
 
 function App() {
   useEffect(() => {

@@ -27,7 +27,7 @@ const CurrenciesBar = () => {
 
   return (
     <div className={'CurrenciesBar'}>
-      <div className="Random">Gold: {currencies.getCurrency(Currency.CURRENCY_TYPE_GOLD)}</div>
+      <div className="Random">Gold: {currencies.getCurrency(Currency.CURRENCY_TYPE_GOLD).value}</div>
 
       <div className="CurrenciesBar-save" onClick={saveProgress}>
         {loading ? (

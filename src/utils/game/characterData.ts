@@ -70,8 +70,11 @@ export const defaultCharacterData = {
     name: 'Barbarian',
     type: Character.CHARACTER_TYPE_BARBARIAN,
     level: 1,
-    experience: 0,
     isUnlocked: true,
     skills: {},
   }),
 };
+
+export const EXP_REQUIREMENT_INITIAL = 500;
+export const EXP_REQUIREMENT_INCREASE_PER_LEVEL = 20;
+export const EXP_REQUIREMENT_CAP = 2480;

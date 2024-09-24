@@ -17,31 +17,35 @@
       .remove-char {
         position: absolute;
         cursor: pointer;
-        right: pix(3);
-        top: pix(3);
+        right: pix(0);
+        top: pix(0);
+        background-color: #ffffff;
+        border-radius: 50%;
         svg {
-          width: pix(15);
-          height: pix(15);
+          width: pix(20);
+          height: pix(20);
         }
         &:hover {
           border-radius: 50%;
-          background-color: #575757;
+          background-color: #ffaeae;
         }
       }
     }
     > .item.new {
       display: flex;
+      font-family: 'Courier New', Courier, monospace;
       background-color: green;
       border-radius: pix(75);
       align-items: center;
       justify-content: center;
       font-size: pix(150);
+      cursor: pointer;
     }
   }
 }
 
-.CharacterSelection-dialog {
+.ShopDeckCharacters-dialog {
   .MuiDialog-paper {
-    min-width: pix(400);
+    min-width: pix(500);
   }
 }

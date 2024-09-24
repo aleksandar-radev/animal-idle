@@ -9,6 +9,7 @@ export const getAllEnemyStats = () => {
       mana: 0,
       damage: 5,
       attackSpeed: 3000,
+      experienceReward: 10,
     },
     [Enemy.ENEMY_TYPE_SORCERESS]: {
       name: Enemy.ENEMY_TYPE_SORCERESS,
@@ -17,6 +18,7 @@ export const getAllEnemyStats = () => {
       mana: 10,
       damage: 20,
       attackSpeed: 4000,
+      experienceReward: 10,
     },
     [Enemy.ENEMY_TYPE_ASSASSIN]: {
       name: Enemy.ENEMY_TYPE_ASSASSIN,
@@ -25,6 +27,7 @@ export const getAllEnemyStats = () => {
       mana: 0,
       damage: 10,
       attackSpeed: 2000,
+      experienceReward: 10,
     },
     [Enemy.ENEMY_TYPE_WARRIOR]: {
       name: Enemy.ENEMY_TYPE_WARRIOR,
@@ -33,6 +36,7 @@ export const getAllEnemyStats = () => {
       mana: 0,
       damage: 5,
       attackSpeed: 4000,
+      experienceReward: 10,
     },
   };
 };

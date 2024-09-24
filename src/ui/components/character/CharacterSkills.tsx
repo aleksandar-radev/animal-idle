@@ -8,7 +8,7 @@ import Skill from '@/models/Skill';
 const CharacterSkills = () => {
   const cm = useCharacterMethods();
   const t = useTranslations();
-  const possibleMultipliers = [1]; // TODO: add more values
+  // const possibleMultipliers = [1]; // TODO: add more values
   // const possibleMultipliers = [0, 1, 10, 50, 200];
   const [attackMultiplier, setAttackMultiplier] = useState(1);
   const [defenseMultiplier, setDefenseMultiplier] = useState(1);
@@ -38,10 +38,10 @@ const CharacterSkills = () => {
     }, {});
   };
 
-  const nextMultiplier = (multiplier, setter) => {
-    const nextIndex = (possibleMultipliers.indexOf(multiplier) + 1) % possibleMultipliers.length;
-    setter(possibleMultipliers[nextIndex]);
-  };
+  // const nextMultiplier = (multiplier, setter) => {
+  //   const nextIndex = (possibleMultipliers.indexOf(multiplier) + 1) % possibleMultipliers.length;
+  //   setter(possibleMultipliers[nextIndex]);
+  // };
 
   const groupedAttackSkills = useMemo(() => groupSkillsByLevelRequired(characterAttackSkills), [characterAttackSkills]);
   const groupedDefenseSkills = useMemo(
@@ -69,9 +69,9 @@ const CharacterSkills = () => {
     return (
       <div className="title">
         <span>{t[type]}</span>
-        <span className="multiplier" onClick={() => nextMultiplier(multiplier, setMultiplier)}>
+        {/* <span className="multiplier" onClick={() => nextMultiplier(multiplier, setMultiplier)}>
           {t['multiplier'][multiplier]}
-        </span>
+        </span> */}
       </div>
     );
   };

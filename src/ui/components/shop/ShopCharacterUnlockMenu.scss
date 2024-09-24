@@ -1,6 +1,7 @@
 .ShopCharacterUnlockMenu {
   display: flex;
   height: 100%;
+  font-size: pix(13);
   .avatar {
     width: pix(150);
   }
@@ -9,9 +10,32 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    margin: 0 pix(20);
 
     button {
-      // align-self: flex-end;
+      font-size: pix(13);
+      padding: pix(4);
+      border-radius: pix(4);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      // Enabled state
+      background-color: #4caf50;
+      color: white;
+
+      &:hover:not(:disabled) {
+        background-color: #45a049;
+      }
+
+      &:disabled {
+        background-color: #cccccc;
+        color: #666666;
+        cursor: not-allowed;
+      }
     }
+  }
+  .stats {
+    margin: 0 pix(10);
   }
 }

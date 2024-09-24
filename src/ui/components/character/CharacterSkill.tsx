@@ -13,7 +13,6 @@ interface CharacterSkillProps {
   skill: Skill;
   x: number;
 }
-
 const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) => {
   const { assets } = useGameStore();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -22,7 +21,6 @@ const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) 
   const t = useTranslations();
   const activeCharacter = cm.getActiveCharacter();
   const open = Boolean(anchorEl);
-  const id = open ? 'skill-popper' : undefined;
 
   const skillLevel = useMemo(
     () => activeCharacter.skills[skill.type]?.level || 0,
@@ -42,14 +40,20 @@ const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) 
     cm.buySkill(activeCharacter, skill);
   };
 
+  const canBuySkill = cm.areRequirementsMet(skill.requirements);
+  log(skill);
+
   return (
     <div
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={buySkill}
-      className={['CharacterSkill', className].join(' ')}>
-      <img src={assets[skill.type]} alt={skill.name} />
-      <Popper id={id} open={open} anchorEl={anchorEl} placement="top" className="CharacterSkill-tooltip">
+      className={['CharacterSkill', className, !canBuySkill ? 'disabled' : ''].join(' ')}
+      onClick={canBuySkill ? buySkill : undefined}>
+      <img src={assets[skill.type]} alt={skill.name} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
+      <Popper
+        open={open}
+        anchorEl={anchorEl}
+        placement="top"
+        className="CharacterSkill-tooltip"
+        onMouseLeave={handleMouseLeave}>
         <div className="tooltip">
           <div>
             {skill.name} ({skill.passive ? 'passive' : 'active'})
@@ -64,5 +68,4 @@ const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) 
     </div>
   );
 };
-
 export default CharacterSkill;

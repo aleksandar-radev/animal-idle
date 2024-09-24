@@ -6,13 +6,19 @@ import Requirement from '@/models/Requirement';
 import Skill from '@/models/Skill';
 import Currency from '@/models/Currency';
 import DeckCharacter from '@/models/DeckCharacter';
-import { getAllCharacterTypes, getCharacterStats } from '@/utils/game/characterData';
+import {
+  EXP_REQUIREMENT_CAP,
+  EXP_REQUIREMENT_INCREASE_PER_LEVEL,
+  EXP_REQUIREMENT_INITIAL,
+  getAllCharacterTypes,
+  getCharacterStats,
+} from '@/utils/game/characterData';
 import { getSkillStats } from '@/utils/game/skillData';
 import useCurrencies from '@/hooks/gameMethods/useCurrencies';
 
 const useCharacterMethods = () => {
   const { data, fightState, settings } = useGameStore();
-  const curr = useCurrencies();
+  const currencies = useCurrencies();
 
   const skillMethods = {
     [Skill.SKILL_TYPE_DAMAGE_FLAT](character: Character) {
@@ -130,16 +136,19 @@ const useCharacterMethods = () => {
       if (!methods.areRequirementsMet(getCharacterStats()[characterType].requirements)) {
         return;
       }
+
       const character = new Character({
         name: characterType,
         type: characterType,
         isUnlocked: true,
       });
-      data.characters[characterType] = character;
 
       if (!character) {
         throw new Error('Character does not exist');
       }
+
+      methods.removeRequirementResources(getCharacterStats()[characterType].requirements);
+      data.characters[characterType] = character;
     },
 
     getActiveCharacter: () => {
@@ -176,16 +185,17 @@ const useCharacterMethods = () => {
       fightState.characterTotalMana = methods.getTotalMana();
     },
 
-    areRequirementsMet(requirements: Requirement[]): boolean {
+    areRequirementsMet(requirements: Requirement[], modifierLevel: number = 0): boolean {
       let requirementsMet = true;
       requirements.forEach((requirement: Requirement) => {
+        let totalRequirement = requirement.value + Math.floor(requirement.value * requirement.modifier * modifierLevel);
         if (requirement.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
-          if (requirement.value > data.currencies[requirement.innerType].value) {
+          if (totalRequirement > data.currencies[requirement.innerType].value) {
             requirementsMet = false;
           }
         }
         if (requirement.type === Requirement.REQUIREMENT_TYPE_LEVEL) {
-          if (requirement.value > data.characters[requirement.innerType].level) {
+          if (totalRequirement > data.characters[requirement.innerType].level) {
             requirementsMet = false;
           }
         }
@@ -193,8 +203,8 @@ const useCharacterMethods = () => {
       return requirementsMet;
     },
 
-    removeRequirementResources(skill: Skill) {
-      skill.requirements.forEach((requirement: Requirement) => {
+    removeRequirementResources(requirements: Requirement[], modifierLevel: number = 0) {
+      requirements.forEach((requirement: Requirement) => {
         if (requirement.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
           data.currencies[requirement.innerType].value -= requirement.value;
         }
@@ -203,6 +213,7 @@ const useCharacterMethods = () => {
 
     buySkill(character: Character, skill: Skill): void {
       const skillCopy: Skill = new Skill(skill);
+      log(skillCopy);
 
       // check if conditions are reached
       const areRequirementsMet = methods.areRequirementsMet(skill.requirements);
@@ -211,7 +222,7 @@ const useCharacterMethods = () => {
         throw new Error('Requirements not met');
       }
 
-      methods.removeRequirementResources(skill);
+      methods.removeRequirementResources(skill.requirements);
 
       if (character.skills[skill.type]) {
         character.skills[skill.type].level++;
@@ -222,7 +233,22 @@ const useCharacterMethods = () => {
 
     addExperience: (characterType: ReturnType<typeof getAllCharacterTypes>[number], experience: number) => {
       let character = methods.getActiveCharacterByType(characterType);
-      character.experience += experience;
+      character.currentExperience += experience;
+      character.totalExperience += experience;
+
+      if (character.currentExperience >= methods.requiredExperienceForNextLevel(characterType)) {
+        character.level++;
+        character.currentExperience = 0;
+      }
+    },
+    requiredExperienceForNextLevel: (characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
+      let character = methods.getActiveCharacterByType(characterType);
+      return Math.min(
+        EXP_REQUIREMENT_INITIAL -
+          EXP_REQUIREMENT_INCREASE_PER_LEVEL +
+          character.level * EXP_REQUIREMENT_INCREASE_PER_LEVEL,
+        EXP_REQUIREMENT_CAP,
+      );
     },
   };
 
@@ -333,7 +359,7 @@ const useCharacterMethods = () => {
         throw new Error('Not enough gold to buy deck');
       }
 
-      curr.removeCurrency(Currency.CURRENCY_TYPE_GOLD, deckMethods.getDeckCost());
+      currencies.removeCurrency(Currency.CURRENCY_TYPE_GOLD, deckMethods.getDeckCost());
 
       data.totalDecks++;
       const newDeck = new Deck({

@@ -46,7 +46,7 @@ const ShopCharactersList = () => {
 
       {isCharacterSelected() && (
         <Dialog
-          className="CharacterSelection-dialog"
+          className="ShopCharactersList-dialog"
           open={isCharacterSelected()}
           onClose={handleCharacterSelectionClose}
           aria-labelledby="draggable-dialog-title">

@@ -3,7 +3,7 @@ import { getRequirementTypes } from '@/utils/generalData';
 class Requirement {
   private _name: string;
   private _type: ReturnType<typeof getRequirementTypes>[number];
-  private _modifier: number;
+  private _modifier: number; // the increase per level
   private _innerType: string;
   private _index: number;
   private _value: number;
@@ -15,12 +15,13 @@ class Requirement {
   static REQUIREMENT_TYPE_CHARACTER_TYPE = 'character-type';
   static REQUIREMENT_TYPE_UPGRADE = 'upgrade';
 
-  constructor({ name = '', type, innerType = '', index = 0, value = 0 }) {
+  constructor({ name = '', type, innerType = '', index = 0, value = 0, modifier = 0 }) {
     this._name = name;
     this._type = type;
     this._innerType = innerType;
     this._index = index;
     this.value = value;
+    this._modifier = modifier;
   }
 
   get name(): string {
@@ -49,6 +50,14 @@ class Requirement {
 
   set value(value: number) {
     this._value = value;
+  }
+
+  get modifier(): number {
+    return this._modifier;
+  }
+
+  set modifier(value: number) {
+    this._modifier = value;
   }
 }
 

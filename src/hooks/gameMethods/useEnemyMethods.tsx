@@ -73,12 +73,13 @@ const useEnemyMethods = () => {
     die() {
       fightState.enemyCurrentHealth = null;
       data.currencies[Currency.CURRENCY_TYPE_GOLD].value += 1;
-      fightState.enemy = null;
-      fightState.enemyLevel++;
 
       cm.getCharactersInActiveDeck().forEach((char) => {
-        cm.addExperience(char.type, 10);
+        cm.addExperience(char.type, fightState.enemy.experienceReward);
       });
+
+      fightState.enemy = null;
+      fightState.enemyLevel++;
     },
   };
 
