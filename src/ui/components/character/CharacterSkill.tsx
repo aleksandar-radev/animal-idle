@@ -3,28 +3,29 @@ import './CharacterSkill.scss';
 import { Popper } from '@mui/material';
 import useTranslations from '@/hooks/general/useTranslations';
 import Skill from '@/models/Skill';
-import Requirement from '@/models/Requirement';
 import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 import useGameStore from '@/hooks/general/useGameStore';
 import RequirementsView from '@/ui/components/general/RequirementsView';
+import useRequirementMethods from '@/hooks/gameMethods/useRequirementMethods';
 
 interface CharacterSkillProps {
   className?: string;
-  skill: Skill;
+  skillData: Skill;
   x: number;
 }
-const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) => {
+const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skillData, x }) => {
   const { assets } = useGameStore();
   const [anchorEl, setAnchorEl] = useState(null);
   const [u, setU] = useState(0);
   const cm = useCharacterMethods();
+  const requirements = useRequirementMethods();
   const t = useTranslations();
   const activeCharacter = cm.getActiveCharacter();
   const open = Boolean(anchorEl);
 
-  const skillLevel = useMemo(
-    () => activeCharacter.skills[skill.type]?.level || 0,
-    [activeCharacter.skills[skill.type]?.level, activeCharacter.skills[skill.type]],
+  const skill = useMemo(
+    () => activeCharacter.skills[skillData.type] || new Skill(skillData),
+    [activeCharacter.skills[skillData.type]],
   );
 
   const handleMouseEnter = (event) => {
@@ -40,8 +41,7 @@ const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) 
     cm.buySkill(activeCharacter, skill);
   };
 
-  const canBuySkill = cm.areRequirementsMet(skill.requirements);
-  log(skill);
+  const canBuySkill = requirements.areRequirementsMet(skill);
 
   return (
     <div
@@ -59,10 +59,15 @@ const CharacterSkill: React.FC<CharacterSkillProps> = ({ className, skill, x }) 
             {skill.name} ({skill.passive ? 'passive' : 'active'})
           </div>
           <div>
-            {t['level']}: {skillLevel} {' -> '} {skillLevel + x}
+            {typeof t[skill.type + '-description'] === 'function'
+              ? t[skill.type + '-description'](skill.level)
+              : t[skill.type + '-description'] || 'Description not available'}
+          </div>
+          <div>
+            {t['level']}: {skill.level} {' -> '} {skill.level + x}
           </div>
           <div></div>
-          <RequirementsView requirements={skill.requirements} />
+          <RequirementsView resource={skill} />
         </div>
       </Popper>
     </div>

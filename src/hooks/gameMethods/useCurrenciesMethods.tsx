@@ -1,7 +1,7 @@
 import { getAllCurrencyTypes } from '@/utils/game/currencyData';
 import useGameStore from '../general/useGameStore';
 
-const useCurrencies = () => {
+const useCurrenciesMethods = () => {
   const { data } = useGameStore();
   const methods = {
     getCurrency(type: string) {
@@ -29,4 +29,4 @@ const useCurrencies = () => {
   return methods;
 };
 
-export default useCurrencies;
+export default useCurrenciesMethods;

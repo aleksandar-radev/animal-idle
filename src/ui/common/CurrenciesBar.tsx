@@ -5,14 +5,14 @@ import useGameStore from '@/hooks/general/useGameStore';
 import useDataRepo from '@/hooks/general/useDataRepo';
 import useAuthRepo from '@/hooks/general/useAuthRepo';
 import Currency from '@/models/Currency';
-import useCurrencies from '@/hooks/gameMethods/useCurrencies';
+import useCurrenciesMethods from '@/hooks/gameMethods/useCurrenciesMethods';
 
 const CurrenciesBar = () => {
   const { data } = useGameStore();
   const dataRepo = useDataRepo();
   const [loading, setLoading] = useState(false);
   const authRepo = useAuthRepo();
-  const currencies = useCurrencies();
+  const currencies = useCurrenciesMethods();
 
   const saveProgress = async () => {
     if (loading) return;

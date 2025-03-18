@@ -1,3 +1,4 @@
+import useRequirementMethods from '@/hooks/gameMethods/useRequirementMethods';
 import './ShopCharacterUnlockMenu.scss';
 import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
 import useTranslations from '@/hooks/general/useTranslations';
@@ -6,8 +7,9 @@ import RequirementsView from '@/ui/components/general/RequirementsView';
 
 const ShopCharacterUnlockMenu = ({ character }) => {
   const cm = useCharacterMethods();
+  const requirements = useRequirementMethods();
   const t = useTranslations();
-  const isUnlockable = cm.areRequirementsMet(character.requirements);
+  const isUnlockable = requirements.areRequirementsMet(character);
   const characterStats = cm.getCharacterByType(character.type);
 
   return (
@@ -16,7 +18,7 @@ const ShopCharacterUnlockMenu = ({ character }) => {
         <CharacterAvatar className="avatar" characterType={character.type} />
         {cm.getActiveCharacterByType(character.type) == null ? (
           <div className="details">
-            <RequirementsView requirements={character.requirements} />
+            <RequirementsView resource={character} />
             <button onClick={() => cm.buyCharacter(character.type)} disabled={!isUnlockable}>
               Buy
             </button>

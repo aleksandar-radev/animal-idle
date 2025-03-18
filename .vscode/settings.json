@@ -31,5 +31,11 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "cody.codebase": "https://github.com/aleksandar-radev/animal-idle"
+  "cody.codebase": "https://github.com/aleksandar-radev/animal-idle",
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[nginx]": {
+    "editor.defaultFormatter": "ahmadalli.vscode-nginx-conf"
+  }
 }

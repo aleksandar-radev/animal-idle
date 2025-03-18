@@ -5,13 +5,14 @@ import useAuthRepo from '@/hooks/general/useAuthRepo';
 import Settings from '@/models/Settings';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Popper } from '@mui/material';
 import useTranslations from '@/hooks/general/useTranslations';
-import shopMenu from '@/assets/shop-menu.png';
-import characterMenu from '@/assets/character-menu.png';
-import battleMenu from '@/assets/battle-menu.png';
-import leaderboardMenu from '@/assets/leaderboard-menu.png';
-import settingsMenu from '@/assets/settings-menu.png';
-import adminMenu from '@/assets/admin-menu.png';
-import exitDoor from '@/assets/exit-door.png';
+import shopMenuIcon from '@/assets/shop-menu.png';
+import characterMenuIcon from '@/assets/character-menu.png';
+import battleMenuIcon from '@/assets/battle-menu.png';
+import leaderboardMenuIcon from '@/assets/leaderboard-menu.png';
+import settingsMenuIcon from '@/assets/settings-menu.png';
+import adminMenuIcon from '@/assets/admin-menu.png';
+import docsIcon from '@/assets/docs.png';
+import exitDoorIcon from '@/assets/exit-door.png';
 
 const MainMenu = () => {
   const { settings } = useGameStore();
@@ -76,12 +77,13 @@ const MainMenu = () => {
     <div className={'MainMenu'}>
       {!settings.isFightStarted && (
         <>
-          {renderTab('characters', Settings.MAIN_SCREEN_CHARACTER_TAB, characterMenu)}
-          {renderTab('fight', Settings.MAIN_SCREEN_FIGHT_TAB, battleMenu)}
-          {renderTab('shop', Settings.MAIN_SCREEN_SHOP_TAB, shopMenu)}
-          {renderTab('leaderboard', Settings.MAIN_SCREEN_LEADERBOARD_TAB, leaderboardMenu)}
-          {renderTab('settings', Settings.MAIN_SCREEN_SETTINGS_TAB, settingsMenu)}
-          {currentUser?.role === 'admin' && renderTab('admin', Settings.MAIN_SCREEN_ADMIN_TAB, adminMenu)}
+          {renderTab('characters', Settings.MAIN_SCREEN_CHARACTER_TAB, characterMenuIcon)}
+          {renderTab('fight', Settings.MAIN_SCREEN_FIGHT_TAB, battleMenuIcon)}
+          {renderTab('shop', Settings.MAIN_SCREEN_SHOP_TAB, shopMenuIcon)}
+          {renderTab('leaderboard', Settings.MAIN_SCREEN_LEADERBOARD_TAB, leaderboardMenuIcon)}
+          {renderTab('settings', Settings.MAIN_SCREEN_SETTINGS_TAB, settingsMenuIcon)}
+          {renderTab('docs', Settings.MAIN_SCREEN_DOCS_TAB, docsIcon)}
+          {currentUser?.role === 'admin' && renderTab('admin', Settings.MAIN_SCREEN_ADMIN_TAB, adminMenuIcon)}
         </>
       )}
       {settings.isFightStarted && (
@@ -91,12 +93,12 @@ const MainMenu = () => {
             onClick={handleExitFightClick}
             onMouseEnter={(e) => handleMouseEnter(e, 'exit')}
             onMouseLeave={handleMouseLeave}>
-            <img className="menu-icon" src={exitDoor} alt={''} />
+            <img className="menu-icon" src={exitDoorIcon} alt={''} />
           </div>
         </>
       )}
-      <Popper open={Boolean(anchorEl)} anchorEl={anchorEl} placement="right" disablePortal>
-        <div className="tooltip">{t[`${activeTooltip}-tooltip`]}</div>
+      <Popper className="tooltip" open={Boolean(anchorEl)} anchorEl={anchorEl} placement="right" disablePortal>
+        <div>{t[`${activeTooltip}-tooltip`]}</div>
       </Popper>
       <Dialog
         open={openExitDialog}

@@ -14,12 +14,15 @@ import {
   getCharacterStats,
 } from '@/utils/game/characterData';
 import { getSkillStats } from '@/utils/game/skillData';
-import useCurrencies from '@/hooks/gameMethods/useCurrencies';
+import useCurrenciesMethods from '@/hooks/gameMethods/useCurrenciesMethods';
+import useRequirementMethods from '@/hooks/gameMethods/useRequirementMethods';
 
 const useCharacterMethods = () => {
   const { data, fightState, settings } = useGameStore();
-  const currencies = useCurrencies();
+  const currencies = useCurrenciesMethods();
+  const requirements = useRequirementMethods();
 
+  // returns the bonus of the skill
   const skillMethods = {
     [Skill.SKILL_TYPE_DAMAGE_FLAT](character: Character) {
       if (!character.skills[Skill.SKILL_TYPE_DAMAGE_FLAT]) {
@@ -117,7 +120,11 @@ const useCharacterMethods = () => {
 
     getCharacterByType: (type: ReturnType<typeof getAllCharacterTypes>[number]) => {
       const character = getCharacterStats()[type];
-      return character ? character : null;
+      const characterCopy = new Character({
+        name: type,
+        type: type,
+      });
+      return character ? characterCopy : null;
     },
 
     getAllCharacterTypes: () => {
@@ -133,21 +140,18 @@ const useCharacterMethods = () => {
     },
 
     buyCharacter: (characterType: ReturnType<typeof getAllCharacterTypes>[number]) => {
-      if (!methods.areRequirementsMet(getCharacterStats()[characterType].requirements)) {
+      const character = methods.getCharacterByType(characterType);
+
+      if (!requirements.areRequirementsMet(character)) {
         return;
       }
-
-      const character = new Character({
-        name: characterType,
-        type: characterType,
-        isUnlocked: true,
-      });
 
       if (!character) {
         throw new Error('Character does not exist');
       }
 
-      methods.removeRequirementResources(getCharacterStats()[characterType].requirements);
+      requirements.removeRequirementResources(getCharacterStats()[characterType]);
+      character.isUnlocked = true;
       data.characters[characterType] = character;
     },
 
@@ -185,44 +189,15 @@ const useCharacterMethods = () => {
       fightState.characterTotalMana = methods.getTotalMana();
     },
 
-    areRequirementsMet(requirements: Requirement[], modifierLevel: number = 0): boolean {
-      let requirementsMet = true;
-      requirements.forEach((requirement: Requirement) => {
-        let totalRequirement = requirement.value + Math.floor(requirement.value * requirement.modifier * modifierLevel);
-        if (requirement.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
-          if (totalRequirement > data.currencies[requirement.innerType].value) {
-            requirementsMet = false;
-          }
-        }
-        if (requirement.type === Requirement.REQUIREMENT_TYPE_LEVEL) {
-          if (totalRequirement > data.characters[requirement.innerType].level) {
-            requirementsMet = false;
-          }
-        }
-      });
-      return requirementsMet;
-    },
-
-    removeRequirementResources(requirements: Requirement[], modifierLevel: number = 0) {
-      requirements.forEach((requirement: Requirement) => {
-        if (requirement.type === Requirement.REQUIREMENT_TYPE_CURRENCY) {
-          data.currencies[requirement.innerType].value -= requirement.value;
-        }
-      });
-    },
-
     buySkill(character: Character, skill: Skill): void {
       const skillCopy: Skill = new Skill(skill);
-      log(skillCopy);
 
       // check if conditions are reached
-      const areRequirementsMet = methods.areRequirementsMet(skill.requirements);
-
-      if (!areRequirementsMet) {
+      if (!requirements.areRequirementsMet(skillCopy)) {
         throw new Error('Requirements not met');
       }
 
-      methods.removeRequirementResources(skill.requirements);
+      requirements.removeRequirementResources(skillCopy);
 
       if (character.skills[skill.type]) {
         character.skills[skill.type].level++;

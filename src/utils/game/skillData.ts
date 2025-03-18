@@ -22,6 +22,7 @@ export const getSkillStats = (): { [key: string]: Skill } => {
           innerType: Currency.CURRENCY_TYPE_GOLD,
           value: 5,
           modifier: 5,
+          modifierType: Requirement.REQUIREMENT_MODIFIER_TYPE_LEVEL,
         }),
       ],
     } as Skill,
@@ -45,6 +46,7 @@ export const getSkillStats = (): { [key: string]: Skill } => {
           value: 1,
         }),
         new Requirement({
+          name: '',
           type: Requirement.REQUIREMENT_TYPE_CHARACTER_TYPE,
           innerType: Character.CHARACTER_TYPE_BARBARIAN,
           value: 1,

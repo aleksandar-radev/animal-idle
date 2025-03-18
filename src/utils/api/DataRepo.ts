@@ -4,7 +4,7 @@ import api from './Api';
 export class DataRepo {
   async getAllData() {
     try {
-      const response = await api.get('/user-data');
+      const response = await api.get('/game-data');
       const data = response.data;
 
       if (!data) return;
@@ -22,7 +22,7 @@ export class DataRepo {
 
   async getDataByUserId(id) {
     try {
-      const response = await api.get(`/user-data/${id}`, {
+      const response = await api.get(`/game-data/${id}`, {
         params: {
           premium: 'no',
         },
@@ -42,7 +42,7 @@ export class DataRepo {
     try {
       let encryptedData = prepareDataForApi(newData);
 
-      const response = await api.patch(`/user-data/${id}`, encryptedData);
+      const response = await api.patch(`/game-data/${id}`, encryptedData);
 
       return response.data;
     } catch (error) {
@@ -52,7 +52,7 @@ export class DataRepo {
 
   async getLeaderboard() {
     try {
-      const response = await api.get('/user-data/leaderboard');
+      const response = await api.get('/game-data/leaderboard');
 
       return response.data;
     } catch (error) {

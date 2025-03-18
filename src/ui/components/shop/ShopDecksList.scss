@@ -5,7 +5,8 @@
   .decks {
     display: flex;
     flex-direction: column;
-    background-color: #e6e68f;
+    background-color: rgba(196, 196, 187, 0.8);
+    border-radius: pix(20);
     width: pix(100);
     padding: pix(5) pix(10);
     .deck {
@@ -14,13 +15,14 @@
       justify-content: center;
       cursor: pointer;
       padding: pix(5) pix(5);
-      background-color: #929220;
+      background-color: rgba(142, 154, 156, 0.8);
       margin: pix(5) 0;
+      font-size: pix(10);
       &.new {
         background-color: green;
       }
       &.active {
-        background-color: red;
+        background-color: rgba(125, 210, 231, 0.8);
       }
       &.disabled {
         background-color: rgb(61, 61, 61);

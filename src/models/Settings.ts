@@ -12,6 +12,7 @@ class Settings {
   static MAIN_SCREEN_LEADERBOARD_TAB = 'leaderboard';
   static MAIN_SCREEN_SETTINGS_TAB = 'settings';
   static MAIN_SCREEN_ADMIN_TAB = 'admin';
+  static MAIN_SCREEN_DOCS_TAB = 'docs';
 
   static CHARACTER_SCREEN_STATS_TAB = 'stats';
   static CHARACTER_SCREEN_SKILLS_TAB = 'skills';

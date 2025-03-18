@@ -58,7 +58,7 @@ const CharacterSkills = () => {
       return (
         <div className="group" key={level}>
           {skills.map((skill) => (
-            <CharacterSkill className="skill" key={skill.name} skill={skill} x={attackMultiplier} />
+            <CharacterSkill className="skill" key={skill.name} skillData={skill} x={attackMultiplier} />
           ))}
         </div>
       );

@@ -12,7 +12,7 @@ const useDataManager = () => {
   const authRepo = useAuthRepo();
   const effectCount = useRef(0);
 
-  const { assets, data, isLoaded, setData, setSettings, setIsLoaded, setfightState, updateState } = useGameStore();
+  const { assets, data, isLoaded, setData, setSettings, setIsLoaded, setFightState, updateState } = useGameStore();
 
   const deepProxy = (obj, handler) => {
     if (typeof obj !== 'object' || obj === null) return obj;
@@ -71,7 +71,7 @@ const useDataManager = () => {
 
       setData(deepProxy(new Data(formattedData), handler()));
       setSettings(deepProxy(new Settings(), handler()));
-      setfightState(deepProxy(new FightState({}), handler()));
+      setFightState(deepProxy(new FightState({}), handler()));
       setIsLoaded(true);
     })();
   }, []);

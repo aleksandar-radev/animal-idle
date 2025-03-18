@@ -2,13 +2,16 @@ import Requirement from '@/models/Requirement';
 import './RequirementsView.scss';
 import useTranslations from '@/hooks/general/useTranslations';
 import useCharacterMethods from '@/hooks/gameMethods/useCharacterMethods';
-import useCurrencies from '@/hooks/gameMethods/useCurrencies';
+import useCurrenciesMethods from '@/hooks/gameMethods/useCurrenciesMethods';
+import useRequirementMethods from '@/hooks/gameMethods/useRequirementMethods';
 
-const RequirementsView = ({ requirements }) => {
+const RequirementsView = ({ resource }) => {
   const t = useTranslations();
   const cm = useCharacterMethods();
-  const currencies = useCurrencies();
+  const currencies = useCurrenciesMethods();
   const activeCharacter = cm.getActiveCharacter();
+  const requirementMethods = useRequirementMethods();
+  const requirements = resource.requirements;
 
   const isRequirementMet = (req: Requirement) => {
     switch (req.type) {
@@ -32,6 +35,27 @@ const RequirementsView = ({ requirements }) => {
     }
   };
 
+  const renderRequirement = (req, t) => {
+    const totalValue = requirementMethods.getRequirementValue(req, resource);
+    switch (req.type) {
+      case Requirement.REQUIREMENT_TYPE_LEVEL:
+        return `${t['level']}: ${totalValue}`;
+      case Requirement.REQUIREMENT_TYPE_CURRENCY:
+        return `${t[req.innerType]}: ${totalValue}`;
+      case Requirement.REQUIREMENT_TYPE_SKILL:
+        return `${t['skill']} ${req.innerType}: ${totalValue}`;
+      case Requirement.REQUIREMENT_TYPE_CHARACTER_UNLOCKED:
+        return `${t['character_unlocked']}: ${req.innerType}`;
+      case Requirement.REQUIREMENT_TYPE_CHARACTER_TYPE:
+        // Character type is not visible for the user, it is only used internally
+        return ``;
+      case Requirement.REQUIREMENT_TYPE_UPGRADE:
+        return `${t['upgrade']}: ${req.innerType} ${totalValue}`;
+      default:
+        return `${req.type}: ${totalValue}`;
+    }
+  };
+
   return (
     <div className="RequirementsView">
       {t['requirements']}:
@@ -47,23 +71,4 @@ const RequirementsView = ({ requirements }) => {
   );
 };
 
-const renderRequirement = (req, t) => {
-  switch (req.type) {
-    case Requirement.REQUIREMENT_TYPE_LEVEL:
-      return `${t['level']}: ${req.value}`;
-    case Requirement.REQUIREMENT_TYPE_CURRENCY:
-      return `${t[req.innerType]}: ${req.value}`;
-    case Requirement.REQUIREMENT_TYPE_SKILL:
-      return `${t['skill']} ${req.innerType}: ${req.value}`;
-    case Requirement.REQUIREMENT_TYPE_CHARACTER_UNLOCKED:
-      return `${t['character_unlocked']}: ${req.innerType}`;
-    case Requirement.REQUIREMENT_TYPE_CHARACTER_TYPE:
-      // Character type is not visible for the user, it is only used internally
-      return ``;
-    case Requirement.REQUIREMENT_TYPE_UPGRADE:
-      return `${t['upgrade']}: ${req.innerType} ${req.value}`;
-    default:
-      return `${req.type}: ${req.value}`;
-  }
-};
 export default RequirementsView;

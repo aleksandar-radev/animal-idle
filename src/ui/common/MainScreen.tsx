@@ -7,6 +7,7 @@ import AdminScreen from '@/ui/screens/admin/AdminScreen';
 import SettingsScreen from '@/ui/screens/settings/SettingsScreen';
 import useGameStore from '@/hooks/general/useGameStore';
 import Settings from '@/models/Settings';
+import DocsScreen from '@/ui/screens/docs/DocsScreen';
 
 const MainScreen = () => {
   const { settings } = useGameStore();
@@ -25,6 +26,8 @@ const MainScreen = () => {
         return <SettingsScreen />;
       case Settings.MAIN_SCREEN_ADMIN_TAB:
         return <AdminScreen />;
+      case Settings.MAIN_SCREEN_DOCS_TAB:
+        return <DocsScreen />;
       default:
         return '';
     }
