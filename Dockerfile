@@ -3,19 +3,18 @@ FROM node:22-alpine as builder
 
 WORKDIR /usr/src/app
 
-# Copy package.json and yarn.lock files
-COPY ["package.json", "yarn.lock", ".yarnrc.yml", ".env", "./"]
+# Copy package.json
+COPY ["package.json", "pnpm-lock.yaml", ".env", "./"]
 
-# Enable yarn
-RUN corepack enable
-RUN yarn set version stable
-RUN yarn install
+# Install pnpm
+RUN npm install -g pnpm
+RUN pnpm install
 
 # Copy the rest of your application code
 COPY . .
 
 # Build the application
-RUN yarn build
+RUN pnpm build
 
 # Stage 2: Serve the application with Nginx
 FROM nginx:alpine

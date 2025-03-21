@@ -1,14 +1,14 @@
-### `yarn dev`
+### `pnpm dev`
 
 starts a local development server [http://localhost:5173]
 
-### `yarn build`
+### `pnpm build`
 
 Builds the app for production to the `dist` folder.
 
 ### Deployment
 
-### `yarn deploy`
+### `pnpm deploy`
 
 -
 
