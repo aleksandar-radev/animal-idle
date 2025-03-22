@@ -18,7 +18,7 @@ const theme = createTheme({
 });
 
 // Get the base path from environment variables or default to '/'
-const basePath = import.meta.env.VITE_BASE_PATH || '/';
+const basePath = '/animal-idle/';
 console.log('basePath', basePath);
 
 function App() {
