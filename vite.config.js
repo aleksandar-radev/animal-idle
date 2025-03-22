@@ -38,7 +38,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "./src/utils/variables.scss";`,
+        silenceDeprecations: ['legacy-js-api'],
+        additionalData: `@use "./src/utils/variables.scss" as *;`,
       },
     },
   },

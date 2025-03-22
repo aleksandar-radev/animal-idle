@@ -38,10 +38,20 @@ function App() {
     ),
     {
       basename: '/',
+      future: {
+        v7_relativeSplatPath: true,
+      },
     },
   );
 
-  return <RouterProvider router={router} />;
+  return (
+    <RouterProvider
+      router={router}
+      future={{
+        v7_startTransition: true,
+      }}
+    />
+  );
 }
 
 export default App;
