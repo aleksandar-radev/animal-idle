@@ -17,6 +17,9 @@ const theme = createTheme({
   },
 });
 
+// Get the base path from environment variables or default to '/'
+const basePath = import.meta.env.VITE_BASE_PATH || '/';
+
 function App() {
   useEffect(() => {
     function setScale() {
@@ -37,7 +40,7 @@ function App() {
       </>,
     ),
     {
-      basename: '/',
+      basename: basePath, // Use the environment variable here
       future: {
         v7_relativeSplatPath: true,
       },
