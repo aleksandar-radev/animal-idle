@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   console.log('Base path:', env.VITE_BASE_PATH);
 
   return {
-    base: process.env.VITE_BASE_PATH || '/',
+    base: env.VITE_BASE_PATH || '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
