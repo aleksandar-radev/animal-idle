@@ -1,39 +1,106 @@
 .CurrenciesBar {
+  grid-area: currencies;
   display: flex;
-  font-size: pix(20);
-  color: white;
-  background-color: rgba(0, 0, 0, 0.1);
-  grid-column: 1 / span 2;
+  align-items: center;
   justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.5rem;
+  background-color: rgba(25, 23, 15, 0.75);
+  color: #fff;
+  border-radius: 1.25rem;
+  backdrop-filter: blur(4px);
+}
 
-  &-save {
-    display: flex;
-    flex-direction: column;
-    padding: pix(8);
-    user-select: none;
+.CurrenciesBar-currencies {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
 
-    &-button {
-      cursor: pointer;
-      height: pix(32);
-    }
+.CurrenciesBar-currency {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 1rem;
+  white-space: nowrap;
+}
 
-    &-loading {
-      cursor: crosshair;
-      border: pix(5) solid rgba(0, 0, 0, 0.1);
-      border-top: pix(5) solid #333;
-      border-radius: 50%;
-      width: pix(25);
-      height: pix(25);
-      animation: spin 1s linear infinite;
+.CurrenciesBar-currency-name {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
 
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    }
+.CurrenciesBar-currency-value {
+  font-variant-numeric: tabular-nums;
+  font-size: 1.05rem;
+}
+
+.CurrenciesBar-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, rgba(227, 208, 38, 0.95), rgba(169, 142, 12, 0.95));
+  border-radius: 999px;
+  border: none;
+  color: #2f2300;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  min-width: 7rem;
+}
+
+.CurrenciesBar-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.CurrenciesBar-save:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.CurrenciesBar-save-button {
+  width: 2rem;
+  height: 2rem;
+}
+
+.CurrenciesBar-save-loading {
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-top: 3px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  width: 1.75rem;
+  height: 1.75rem;
+  animation: spin 1s linear infinite;
+}
+
+.CurrenciesBar-save-label {
+  font-size: 0.85rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .CurrenciesBar {
+    padding: 0.85rem 1rem;
+    gap: 1rem;
+  }
+
+  .CurrenciesBar-save {
+    margin-left: auto;
   }
 }

@@ -6,6 +6,7 @@ class Currency {
 
   static CURRENCY_TYPE_GOLD = 'gold';
   static CURRENCY_TYPE_CRYSTAL = 'crystal';
+  static CURRENCY_TYPE_ESSENCE = 'essence';
 
   constructor({ name, type, index = 0, value = 0 }) {
     this.name = name;

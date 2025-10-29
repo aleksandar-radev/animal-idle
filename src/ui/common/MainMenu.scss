@@ -1,44 +1,87 @@
 .MainMenu {
+  grid-area: menu;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: pix(30);
-  background-color: rgba(201, 201, 201, 0.8);
-  border-radius: pix(50);
-  box-shadow: 0 pix(3) 0 transparent;
+  gap: 0.75rem;
+  padding: 1.25rem 1rem;
+  background-color: rgba(214, 206, 186, 0.85);
+  border-radius: 1.5rem;
+  box-shadow: 0 12px 32px rgba(22, 16, 7, 0.25);
+  backdrop-filter: blur(6px);
+}
 
-  & .tab {
-    position: relative;
-    padding: pix(0) pix(10);
-    margin: pix(5) 0;
-    user-select: none;
-    cursor: pointer;
-    border-radius: pix(10);
+.MainMenu .tab {
+  position: relative;
+  width: 3.4rem;
+  height: 3.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+}
 
-    &:hover {
-      opacity: 0.5;
-    }
-    &.active {
-      box-shadow: 0 pix(3) 0 rgb(255, 255, 208);
-      color: white;
-    }
-    &.exit-fight {
-      margin-top: 85%;
-    }
+.MainMenu .tab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(35, 25, 10, 0.25);
+}
+
+.MainMenu .tab.active {
+  border-color: rgba(227, 208, 38, 0.85);
+  box-shadow: 0 10px 18px rgba(171, 140, 14, 0.35);
+  background: linear-gradient(135deg, rgba(255, 249, 210, 0.95), rgba(230, 213, 122, 0.95));
+}
+
+.MainMenu .tab.exit-fight {
+  background: rgba(207, 69, 69, 0.9);
+  border-color: rgba(140, 24, 24, 0.7);
+}
+
+.MainMenu .tab.exit-fight:hover {
+  box-shadow: 0 10px 20px rgba(140, 24, 24, 0.35);
+}
+
+.MainMenu .menu-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.MainMenu .tooltip {
+  border-radius: 0.75rem;
+  background-color: rgba(22, 16, 7, 0.85);
+  color: #fef6d7;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.85rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (max-width: 900px) {
+  .MainMenu {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
   }
-  .menu-icon {
-    width: pix(33);
-    height: pix(33);
-  }
 
-  .tooltip {
-    border-radius: 10px;
-    background-color: rgba(201, 201, 201, 0.8);
-    pointer-events: none;
-    z-index: 1;
+  .MainMenu .tab {
+    width: 3rem;
+    height: 3rem;
   }
 }
 
-.exit-fight-dialog {
-  // display: flex; // add to left side of screen
+@media (max-width: 600px) {
+  .MainMenu {
+    gap: 0.5rem;
+  }
+
+  .MainMenu .tab {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
 }

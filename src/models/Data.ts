@@ -24,7 +24,7 @@ class Data {
     dataVersion = 'v0.1',
     language = 'en',
     characters = {},
-    totalDecks = 1,
+    totalDecks = Object.keys(defaultDeckData).length,
     activeDeckIndex = 0,
     decks = {},
     currencies = {},

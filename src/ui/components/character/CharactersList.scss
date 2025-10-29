@@ -1,20 +1,50 @@
 .CharactersList {
-  .characters {
-    display: grid;
-    overflow-y: auto;
-    height: pix(380);
-    grid-template-columns: repeat(auto-fill, minmax(pix(120), 1fr));
-    > .item {
-      cursor: pointer;
-      margin: pix(10);
-      width: pix(120);
-      height: pix(120);
-    }
-    > .item.new {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: pix(150);
-    }
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.CharactersList .characters {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  padding: 0.5rem;
+  overflow-y: auto;
+  max-height: 24rem;
+}
+
+.CharactersList .characters > .item {
+  cursor: pointer;
+  padding: 0.35rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 6px 12px rgba(32, 24, 9, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+}
+
+.CharactersList .characters > .item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(32, 24, 9, 0.25);
+}
+
+.CharactersList .characters > .item.new {
+  font-size: 3rem;
+  color: rgba(32, 24, 9, 0.35);
+}
+
+@media (max-width: 900px) {
+  .CharactersList .characters {
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .CharactersList .characters {
+    grid-template-columns: repeat(auto-fit, minmax(5.5rem, 1fr));
+    gap: 0.75rem;
   }
 }

@@ -1,18 +1,16 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import saveButton from '@/assets/save-button.png';
 import './CurrenciesBar.scss';
 import useGameStore from '@/hooks/general/useGameStore';
 import useDataRepo from '@/hooks/general/useDataRepo';
 import useAuthRepo from '@/hooks/general/useAuthRepo';
 import Currency from '@/models/Currency';
-import useCurrenciesMethods from '@/hooks/gameMethods/useCurrenciesMethods';
 
 const CurrenciesBar = () => {
   const { data } = useGameStore();
   const dataRepo = useDataRepo();
   const [loading, setLoading] = useState(false);
   const authRepo = useAuthRepo();
-  const currencies = useCurrenciesMethods();
 
   const saveProgress = async () => {
     if (loading) return;
@@ -25,17 +23,29 @@ const CurrenciesBar = () => {
     }, 1000 * 5);
   };
 
+  const currencyList = useMemo<Currency[]>(() => {
+    return (Object.values(data.currencies || {}) as Currency[]).sort((a, b) => a.index - b.index);
+  }, [data.currencies]);
+
   return (
     <div className={'CurrenciesBar'}>
-      <div className="Random">Gold: {currencies.getCurrency(Currency.CURRENCY_TYPE_GOLD).value}</div>
+      <div className="CurrenciesBar-currencies">
+        {currencyList.map((currency) => (
+          <div key={currency.type} className="CurrenciesBar-currency">
+            <span className="CurrenciesBar-currency-name">{currency.name}</span>
+            <span className="CurrenciesBar-currency-value">{currency.value.toLocaleString()}</span>
+          </div>
+        ))}
+      </div>
 
-      <div className="CurrenciesBar-save" onClick={saveProgress}>
+      <button className="CurrenciesBar-save" onClick={saveProgress} disabled={loading} type="button">
         {loading ? (
           <div className="CurrenciesBar-save-loading"></div>
         ) : (
-          <img className="CurrenciesBar-save-button" src={saveButton} />
+          <img className="CurrenciesBar-save-button" src={saveButton} alt="Save progress" />
         )}
-      </div>
+        <span className="CurrenciesBar-save-label">Save</span>
+      </button>
     </div>
   );
 };

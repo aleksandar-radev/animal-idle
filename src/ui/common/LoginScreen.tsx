@@ -55,8 +55,10 @@ export default function LoginScreen() {
               onChange={(e) => setPassword(e.target.value)}
               className="LoginScreen-form-input"
             />
-            {errorMessage && <span className="RegisterScreen-form-error">{errorMessage}</span>}
-            <button className="LoginScreen-form-button">Log in</button>
+            {errorMessage && <span className="LoginScreen-form-error">{errorMessage}</span>}
+            <button className="LoginScreen-form-button" type="submit">
+              Log in
+            </button>
           </form>
           <div className="LoginScreen-message">
             Don&apos;t have an account ? Sign up{' '}

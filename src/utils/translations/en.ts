@@ -48,6 +48,8 @@ const misc = {
   skills: 'Skills',
   items: 'Items',
   gold: 'Gold',
+  crystal: 'Crystals',
+  essence: 'Essence',
 };
 
 const character = {
@@ -71,6 +73,7 @@ const tooltips = {
   'leaderboard-tooltip': 'Leaderboard',
   'settings-tooltip': 'Settings',
   'admin-tooltip': 'Admin Panel',
+  'docs-tooltip': 'Codex',
   'exit-tooltip': 'Exit the fight',
 };
 

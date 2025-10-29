@@ -1,53 +1,41 @@
-* {
-  font-family: 'Almendra SC';
+:root {
+  font-family: 'Almendra SC', serif;
+  color: #1d160b;
 }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  margin: 0;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background-size: cover;
-  height: 100vh;
-  min-height: $pixelHeight;
-  font-family: 'Almendra SC';
-  font-size: pix(20);
+  align-items: stretch;
+  padding: 2rem 1.5rem;
   background-image: url('@/assets/bg5.webp');
-  // animation: changeBackground 130s infinite; /* Total duration: 120s for images + 10s for transitions */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   transition: background-image 3s ease-in-out;
 }
 
-// @keyframes changeBackground {
-//   0% {
-//     background-image: url('./assets/background1.png');
-//   }
-//   22% {
-//     background-image: url('./assets/background1.png');
-//   }
-//   25% {
-//     background-image: url('./assets/background2.png');
-//   }
-//   47% {
-//     background-image: url('./assets/background2.png');
-//   }
-//   50% {
-//     background-image: url('./assets/background3.png');
-//   }
-//   72% {
-//     background-image: url('./assets/background3.png');
-//   }
-//   75% {
-//     background-image: url('./assets/background4.png');
-//   }
-//   97% {
-//     background-image: url('./assets/background4.png');
-//   }
-//   100% {
-//     background-image: url('./assets/background1.png');
-//   }
-// }
-
 #root {
+  flex: 1;
   display: flex;
-  width: $pixelWidth;
-  height: $pixelHeight;
   justify-content: center;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 1rem 0.75rem;
+  }
 }

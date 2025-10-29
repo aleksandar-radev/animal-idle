@@ -1,14 +1,29 @@
 .MainScreen {
-  &-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10%;
-    width: 15%;
-    font-size: pix(10);
-    // background-color: greenyellow;
-    text-align: center;
-    border-radius: 50%;
-    user-select: none;
+  grid-area: main;
+  background-color: rgba(255, 253, 244, 0.9);
+  border-radius: 1.5rem;
+  box-shadow: 0 18px 30px rgba(32, 24, 9, 0.2);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.MainScreen > * {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+@media (max-width: 768px) {
+  .MainScreen {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .MainScreen {
+    padding: 0.85rem;
   }
 }

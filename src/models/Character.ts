@@ -22,6 +22,8 @@ class Character {
   static CHARACTER_TYPE_BARBARIAN = 'barbarian';
   static CHARACTER_TYPE_SORCERESS = 'sorceress';
   static CHARACTER_TYPE_DRUID = 'druid';
+  static CHARACTER_TYPE_ASSASSIN = 'assassin';
+  static CHARACTER_TYPE_WARRIOR = 'warrior';
 
   static CHARACTER_DISPLAY_PROPS = [
     'name',

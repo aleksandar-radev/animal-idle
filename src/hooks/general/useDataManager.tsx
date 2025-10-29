@@ -40,7 +40,11 @@ const useDataManager = () => {
     const handleDatabaseUpdate = async () => {
       if (document.visibilityState === 'visible') {
         const user = await authRepo.getUser();
-        dataRepo.updateDataByUserId(user.id, data);
+        try {
+          await dataRepo.updateDataByUserId(user.id, data);
+        } catch (error) {
+          console.error('Failed to persist game data.', error);
+        }
       }
     };
 
@@ -66,8 +70,14 @@ const useDataManager = () => {
       const user = await authRepo.getUser();
       if (!user) return;
 
-      let userData = await dataRepo.getDataByUserId(user.id);
-      let formattedData = { ...userData.data_json };
+      let formattedData: any = {};
+
+      try {
+        const userData = await dataRepo.getDataByUserId(user.id);
+        formattedData = { ...(userData?.data_json ?? {}) };
+      } catch (error) {
+        console.error('Failed to load user data. Using defaults.', error);
+      }
 
       setData(deepProxy(new Data(formattedData), handler()));
       setSettings(deepProxy(new Settings(), handler()));

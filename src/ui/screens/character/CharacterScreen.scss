@@ -1,27 +1,47 @@
 .CharacterScreen {
-  .decks {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: pix(7);
-    grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
 
-    & > div {
-      background-color: rgb(105, 190, 105);
-      opacity: 50%;
-      width: 100%;
-      margin: pix(5);
-      padding: pix(5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      font-size: pix(14);
-      border-radius: 20px;
-    }
+.CharacterScreen .decks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
 
-    .deck.selected {
-      opacity: 100%;
-    }
+.CharacterScreen .decks > div {
+  padding: 0.5rem 1rem;
+  background: rgba(73, 135, 73, 0.85);
+  color: #fff;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  min-width: 8.5rem;
+  text-align: center;
+}
+
+.CharacterScreen .decks > div:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.CharacterScreen .deck.selected {
+  background: rgba(35, 94, 35, 0.95);
+  box-shadow: 0 6px 12px rgba(31, 75, 31, 0.35);
+}
+
+@media (max-width: 600px) {
+  .CharacterScreen {
+    gap: 1rem;
+  }
+
+  .CharacterScreen .decks > div {
+    min-width: 6.5rem;
+    font-size: 0.85rem;
   }
 }

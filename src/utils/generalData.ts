@@ -6,6 +6,14 @@ import druidAvatar from '@/assets/druid-avatar.png';
 import sorceressAvatar from '@/assets/sorceress-avatar.jpg';
 import assassinAvatar from '@/assets/assassin-avatar.jpg';
 import warriorAvatar from '@/assets/warrior-avatar.jpg';
+import attackSkillIcon from '@/assets/attack-skill.png';
+import swingIcon from '@/assets/swing.png';
+import doubleStrikeIcon from '@/assets/double-strike.png';
+import doubleCastIcon from '@/assets/double-cast.png';
+import powerUpIcon from '@/assets/power-up.png';
+import healSkillIcon from '@/assets/heal-skill.png';
+import shieldIcon from '@/assets/shield.png';
+import goldBarIcon from '@/assets/gold-bar.png';
 import Enemy from '@/models/Enemy';
 import Skill from '@/models/Skill';
 import Data from '@/models/Data';
@@ -31,9 +39,11 @@ export function loadAssets(assets) {
     assets[Character.CHARACTER_TYPE_DRUID] = url;
   });
   converter(assassinAvatar, (url: string) => {
+    assets[Character.CHARACTER_TYPE_ASSASSIN] = url;
     assets[Enemy.ENEMY_TYPE_ASSASSIN] = url;
   });
   converter(warriorAvatar, (url: string) => {
+    assets[Character.CHARACTER_TYPE_WARRIOR] = url;
     assets[Enemy.ENEMY_TYPE_WARRIOR] = url;
   });
   converter(swordIcon, (url: string) => {
@@ -41,6 +51,30 @@ export function loadAssets(assets) {
   });
   converter(rageIcon, (url: string) => {
     assets[Skill.SKILL_TYPE_RAGE] = url;
+  });
+  converter(attackSkillIcon, (url: string) => {
+    assets[Skill.SKILL_TYPE_DAMAGE_PERCENT] = url;
+  });
+  converter(swingIcon, (url: string) => {
+    assets[Skill.SKILL_TYPE_CRIT_CHANCE] = url;
+  });
+  converter(doubleStrikeIcon, (url: string) => {
+    assets[Skill.SKILL_TYPE_CRIT_DAMAGE] = url;
+  });
+  converter(powerUpIcon, (url: string) => {
+    assets[Skill.SKILL_TYPE_ATTACK_SPEED] = url;
+  });
+  converter(doubleCastIcon, (url: string) => {
+    assets[Skill.SKILL_TYPE_DOUBLE_DAMAGE_CHANCE] = url;
+  });
+  converter(healSkillIcon, (url: string) => {
+    assets[Skill.SKILL_TYPE_BONUS_HEALTH] = url;
+  });
+  converter(shieldIcon, (url: string) => {
+    assets[Skill.SKILL_TYPE_BONUS_DEFENSE] = url;
+  });
+  converter(goldBarIcon, (url: string) => {
+    assets[Skill.SKILL_TYPE_BONUS_GOLD] = url;
   });
 }
 
